@@ -1,0 +1,31 @@
+<html>
+<body>
+<h2>Progame!</h2>
+
+<div id="categoria">
+	<h3>Teste Vue.js</h3>
+</div>
+
+<script src="resources/js/vue.js"></script>
+<script src="resources/js/axios.min.js"></script>
+
+<script>
+let aut = new Vue(
+		{
+			el : '#categoria',
+			created : function() {
+				const vm = this;
+				this.inicia();
+			},
+			methods : {
+				inicia : function() {
+					axios.get('rs/callservice/calls').then(function(response) {
+						console.log(response.data);					
+					});
+				}
+			}
+		});
+</script>
+
+</body>
+</html>
