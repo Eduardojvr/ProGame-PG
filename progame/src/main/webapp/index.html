@@ -1,31 +1,74 @@
-<html>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <title>ProGame</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <meta property="og:title" content="">
+  <meta property="og:image" content="">
+  <meta property="og:url" content="">
+  <meta property="og:site_name" content="">
+  <meta property="og:description" content="">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="">
+  <meta name="twitter:title" content="">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:image" content="">
+
+  <link href="favicon.ico" rel="shortcut icon">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
+
+  <link href="resources/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="resources/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="resources/lib/animate-css/animate.min.css" rel="stylesheet">
+
+  <link href="resources/css/style.css" rel="stylesheet">
+
+</head>
+
 <body>
-<h2>Progame!</h2>
+  <div id="preloader"></div>
+  <section id="hero">
+    <div class="hero-container">
+      <div class="wow fadeIn">
+        <div class="hero-logo">
+          <img class="" src="resources/img/logo.png" alt="Imperial">
+        </div>
 
-<div id="categoria">
-	<h3>Teste Vue.js</h3>
-</div>
+        <h1>Junte-se à batalha</h1>
+        <h2>Torne-se <span class="rotating">uma lenda!, um mito!, o melhor!</span></h2>
+        <div class="actions">
+          <a href="#about" class="btn-get-started">Jogar</a>
+          <a href="#services" class="btn-services">Sobre</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<script src="resources/js/vue.js"></script>
-<script src="resources/js/axios.min.js"></script>
 
-<script>
-let aut = new Vue(
-		{
-			el : '#categoria',
-			created : function() {
-				const vm = this;
-				this.inicia();
-			},
-			methods : {
-				inicia : function() {
-					axios.get('rs/callservice/calls').then(function(response) {
-						console.log(response.data);					
-					});
-				}
-			}
-		});
-</script>
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+  <script src="resources/lib/jquery/jquery.min.js"></script>
+  <script src="resources/lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="resources/lib/superfish/hoverIntent.js"></script>
+  <script src="resources/lib/superfish/superfish.min.js"></script>
+  <script src="resources/lib/morphext/morphext.min.js"></script>
+  <script src="resources/lib/wow/wow.min.js"></script>
+  <script src="resources/lib/stickyjs/sticky.js"></script>
+  <script src="resources/lib/easing/easing.js"></script>
+
+  <script src="resources/js/custom.js"></script>
+
+  <script src="contactform/contactform.js"></script>
+
 
 </body>
+
 </html>
