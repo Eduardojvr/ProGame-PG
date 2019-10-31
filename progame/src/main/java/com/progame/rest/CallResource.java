@@ -25,9 +25,9 @@ public class CallResource {
 		try {
 			CategoriaDAO gerenciador = new CategoriaDAO();
 			List todas = new ArrayList <Categoria>();
-			todas.add(c1);
-			todas.add(c2);
-			//todas = gerenciador.todasCategorias();
+			//todas.add(c1);
+			//todas.add(c2);
+			todas = gerenciador.todasCategorias();
 			return todas;
 		}catch(Exception e) {
 			return null;	
