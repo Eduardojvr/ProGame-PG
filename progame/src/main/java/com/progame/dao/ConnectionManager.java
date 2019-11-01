@@ -11,17 +11,11 @@ public class ConnectionManager implements Serializable {
 	/*
 	 * * ######## PRODUÇÃO #########################################################
 	 * *
-	 */ private static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/banco?serverTimezone=America/Sao_Paulo&useSSL=false";
+	 */ private static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/progame?serverTimezone=America/Sao_Paulo&useSSL=false";
 	private static final String DB_USER = "adm";
 	private static final String DB_PASSWORD = "adm";
-	/*
-	 * * ######## HOMOLOGAÇÃO
-	 * ######################################################### private static
-	 * final String DB_CONNECTION =
-	 * "jdbc:mysql://localhost:3306/heptaauditoria?serverTimezone=America/Sao_Paulo&useSSL=false";
-	 * private static final String DB_USER = "root"; private static final String
-	 * DB_PASSWORD = "root";
-	 */ Connection dbConnection = null;
+
+	Connection dbConnection = null;
 
 	public static Connection getDBConnection() throws Exception {
 		return getDBConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);

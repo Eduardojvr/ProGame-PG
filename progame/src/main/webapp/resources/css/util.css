@@ -2988,10 +2988,7 @@
 	left: 60%;
 }
 
-
-
-
-
-
-
-
+.pos-desc {
+	position: relative;
+	left: 10%;
+}
