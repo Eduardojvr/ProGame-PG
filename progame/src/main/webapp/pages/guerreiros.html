@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="icon" type="image/png" href="../resources/img/icons/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="../resources/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../resources/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="../resources/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="../resources/vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="../resources/vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="../resources/vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="../resources/vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="../resources/css/util.css">
+	<link rel="stylesheet" type="text/css" href="../resources/css/main.css">
+</head>
+<body>
+        <audio loop src="../resources/sons/musicaSuspense.mp3"></audio>
+
+	<div class="limiter">
+
+        <div class="container-login100" style="background-image: url('../resources/img/fundoNarrativa.jpg');">
+
+			<div class="wrap-login100 p-t-30 p-b-50">
+
+				<span class="login100-form-title p-b-41">
+                        <h4>Escolha seu personagem</h4>
+                        <div id="carouselExampleIndicators" class="carousel" data-ride="carousel" data-interval="false">
+                                <div class="carousel-inner">
+                                  <div class="carousel-item active posicao">
+                                        <div class="card" style="width: 18rem;">
+                                                <img class="card-img-top" src="../resources/img/jogadores/aisha.png" style="height: 300; width: 250;" alt="Imagem de capa do card">
+                                                <div class="card-body">
+                                                  <h5 class="card-title">Aisha</h5>
+                                                  <p class="card-text">Meu nome é Aisha, meus ancestrais lutaram durante a primeira invasão e muitos deles foram mortos.
+                                                        Hoje luto para honrar suas memórias.</p>
+                                                  <a href="#" class="btn btn-primary">Selecionar</a>
+                                                </div>
+                                              </div>
+                                </div>
+                                  <div class="carousel-item posicao">
+                                        <div class="card" style="width: 18rem;">
+                                                <img class="card-img-top" src="../resources/img/jogadores/amazona.png" style="height: 1000; width: 250;" alt="Imagem de capa do card">
+                                                <div class="card-body">
+                                                  <h5 class="card-title">Amazona</h5>
+                                                  <p class="card-text">Olá, eu sou a guerreira Amazona. Vamos batalhar?</p>
+                                                  <a href="#" class="btn btn-primary">Selecionar</a>
+                                                </div>
+                                              </div>                                  
+                                    </div>
+                                  
+                                    <div class="carousel-item posicao">
+                                            <div class="card" style="width: 18rem;">
+                                                    <img class="card-img-top" src="../resources/img/jogadores/Lince.png" style="height: 300; width: 250;" alt="Imagem de capa do card">
+                                                    <div class="card-body">
+                                                      <h5 class="card-title">Lince</h5>
+                                                      <p class="card-text">Saudações meu companheiros, meu nome é Lince. Vamos à batalha?</p>
+                                                      <a href="#" class="btn btn-primary">Selecionar</a>
+                                                    </div>
+                                                  </div>                                  
+                                        </div>
+
+                                        <div class="carousel-item posicao">
+                                                <div class="card" style="width: 18rem;">
+                                                        <img class="card-img-top" src="../resources/img/jogadores/Scar.png" style="height: 300; width: 250;" alt="Imagem de capa do card">
+                                                        <div class="card-body">
+                                                          <h5 class="card-title">Scar</h5>
+                                                          <p class="card-text">Meu nome é Scar, derrotarei todos os invasores e vingarei a morte da minha esposa. Vamos à batalha?</p>
+                                                          <a href="#" class="btn btn-primary">Selecionar</a>
+                                                        </div>
+                                                      </div>                                  
+                                            </div>
+
+                                            <div class="carousel-item posicao">
+                                                    <div class="card" style="width: 18rem;">
+                                                            <img class="card-img-top" src="../resources/img/jogadores/Tymer.png" style="height: 300; width: 250;" alt="Imagem de capa do card">
+                                                            <div class="card-body">
+                                                              <h5 class="card-title">Tymer</h5>
+                                                              <p class="card-text">Meu nome é Tymer, vamos expulsar todos esse malditos?.</p>
+                                                              <a href="#" class="btn btn-primary">Selecionar</a>
+                                                            </div>
+                                                          </div>                                  
+                                                </div>
+
+                                                <div class="carousel-item posicao">
+                                                        <div class="card" style="width: 18rem;">
+                                                                <img class="card-img-top" src="../resources/img/jogadores/Voxter.png" style="height: 300; width: 250;" alt="Imagem de capa do card">
+                                                                <div class="card-body">
+                                                                  <h5 class="card-title">Voxter</h5>
+                                                                  <p class="card-text">Olá, eu sou o Voxter, preciso da ajuda de vocês para impedir que esses vermes matem meu povo. Vamos à batalha?</p>
+                                                                  <a href="#" class="btn btn-primary">Selecionar</a>
+                                                                </div>
+                                                              </div>                                  
+                                                    </div>
+                                                
+                                </div>
+                                <ol class="carousel-indicators">
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="3" class="active"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+                                        
+                                      </ol>
+                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                  <span class="sr-only">Anterior</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                  <span class="sr-only">Próximo</span>
+                                </a>
+                                
+                              </div>
+        
+                  
+                </span>
+                
+            </div>
+        </div>
+        
+        </div>
+    </div>
+
+
+	<div id="dropDownSelect1"></div>
+	
+	<script src="../resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="../resources/vendor/animsition/js/animsition.min.js"></script>
+	<script src="../resources/vendor/bootstrap/js/popper.js"></script>
+	<script src="../resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../resources/vendor/select2/select2.min.js"></script>
+	<script src="../resources/vendor/daterangepicker/moment.min.js"></script>
+	<script src="../resources/vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="../resources/vendor/countdowntime/countdowntime.js"></script>
+	<script src="../resources/js/main.js"></script>
+
+
+<script>
+function fundoMusical(){
+        const audio = document.querySelector('audio');
+        audio.play();
+}
+
+fundoMusical();
+
+</script>
+
+
+</body>
+</html>

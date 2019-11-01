@@ -2992,3 +2992,21 @@
 	position: relative;
 	left: 10%;
 }
+
+.btn-custom {
+	padding: 3px 3px 3px 3px;
+	border-radius: 50px;
+}
+
+.btn-icon {
+	padding: 8px;
+	background: #ffffff;
+}
+
+.botao
+{
+background: url('/src/main/webapp/resources/img/icons/setaDireita.png')  no-repeat;
+width: 100px; 
+height: 100px; 
+border: none;
+}
