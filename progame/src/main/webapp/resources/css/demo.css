@@ -826,3 +826,27 @@
 .documentation .dropdown .dropdown-menu.show {
     transform: translate3d(0, 39px, 0) !important;
 }
+
+.tabela{
+    position: relative;
+    padding-top: 5%;
+    padding-left: 40%;
+    padding-right: 16%;
+}
+
+.perfil{
+    padding-top: 80px;
+    padding-left: 20%;
+}
+
+.progresso{
+    position: relative;
+    padding-left: 5%;
+    padding-right: 50%;
+}
+
+#posicao{
+    padding-top: 20px;
+    padding-right: -50px;
+    padding-left: 80px;
+}
