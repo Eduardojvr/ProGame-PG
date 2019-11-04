@@ -13,9 +13,11 @@ let login = new Vue({
              }
             
             axios.post('/progame/rs/user/login', obj).then(function(response) {
-                console.log(response);
-                sessionStorage.setItem('isLogado', true);	
-                alert("Login realizado com sucesso!");
+                sessionStorage.setItem('nomeUsuario', response.data["nomeUsuario"]);
+                sessionStorage.setItem('matricula', response.data["matricula"]);
+                sessionStorage.setItem('idTipoPerfil', response.data["idTipoPerfil"]);
+                sessionStorage.setItem('idPersonagem', response.data["idPersonagem"]);
+                sessionStorage.setItem('email', response.data["email"]);
                 window.location.href = "pages/perfil.html";
             }).catch(function (error){
                 sessionStorage.setItem('isLogado', false);

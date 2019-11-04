@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+    <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
+    <script src="Quiz_arquivos/jquery-1.js"></script>
+
+
+    <link rel="stylesheet" href="Quiz_arquivos/bootstrap.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="Quiz_arquivos/jquery-3.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="Quiz_arquivos/popper.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="Quiz_arquivos/bootstrap.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>        
+    <link rel="stylesheet" type="text/css" href="Quiz_arquivos/util.css">
+    <link rel="stylesheet" href="Quiz_arquivos/font-awesome.css">
+
+</head>
+<body>
+        <div class="container-fluid">
+            <br><br> <br><br><br>
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <h3><span class="label label-warning" id="qid">2</span> A linguagem C é orientada à objetos.</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-xs-3 col-xs-offset-5">
+                           <div id="loadbar" style="display: none;">
+                              <div class="blockG" id="rotateG_01"></div>
+                              <div class="blockG" id="rotateG_02"></div>
+                              <div class="blockG" id="rotateG_03"></div>
+                              <div class="blockG" id="rotateG_04"></div>
+                              <div class="blockG" id="rotateG_05"></div>
+                              <div class="blockG" id="rotateG_06"></div>
+                              <div class="blockG" id="rotateG_07"></div>
+                              <div class="blockG" id="rotateG_08"></div>
+                          </div>
+                      </div>
+            
+                      <div class="quiz" id="quiz">
+                       <label class="element-animation1 btn btn-lg btn-primary btn-block"><input type="radio" onclick="teste(value)" name="q_answer" value="v" style="display: none;">Verdadeiro</label>
+                       <label class="element-animation2 btn btn-lg btn-primary btn-block"><input type="radio" onclick="teste(value)" name="q_answer" value="f" style="display: none;" checked="checked">Falso</label>
+                   </div>
+               </div>
+               <div class="modal-footer text-muted">
+                <span id="answer"></span>
+            </div>
+            </div>
+            </div>
+
+            </div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      ...
+    </div>
+  </div>
+</div>
+            <script src="Quiz_arquivos/axios.js"></script>
+            <script src="Quiz_arquivos/vue.js"></script>
+            <script src="Quiz_arquivos/quiz.css"></script>
+            <script src="Quiz_arquivos/quiz.js"></script>
+            
+<script>
+
+  function abreModal(){
+    $("#modal").modal("show");
+
+  }
+function teste(value){
+  if(value == 'f'){
+    abreModal();
+  }
+  else {
+   alert('Errou!');
+  }
+}
+
+</script>
+
+
+</body></html>

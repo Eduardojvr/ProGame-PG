@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-	<title>Login</title>
+	<title>Modo Narrativa</title>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	
@@ -53,7 +53,7 @@
 
 <script>
     var div = document.getElementById('narrativa');
-    var texto = 'A cerca de mil anos atrás, sua aldeia foi invadida por forças misteriosas que dizimaram metade de sua população. Hoje, essas mesmas forças retornam querendo causar mais dor e sofrimento. Você foi selecionado entre milhares de guerreiros para impedir que isso aconteça. Vença os desafios e livre sua aldeia da destruição.';
+    var texto = 'A cerca de mil anos atrás, sua aldeia foi invadida por guerreiros Orcs que dizimaram metade de sua população. Hoje, eles retornam para escravizar seu povo e matar aqueles que se rebelarem. Você foi selecionado entre milhares de guerreiros para impedir essa invasão. Vença os desafios e livre sua aldeia da dominação.';
 
 
 	function redireciona(){
@@ -79,6 +79,7 @@
         document.getElementById("botao").style.display="block";
     }
 
+    // setTimeout(mostraBotao, 30800);
     setTimeout(mostraBotao, 30800);
     audioNarrativa();
     escrever(texto, div);

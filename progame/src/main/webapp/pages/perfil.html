@@ -69,6 +69,18 @@
                                 <p>Desafios</p>
                             </a>
                         </li>
+                        <li>
+                            <a class="nav-link" href="narrativa.html">
+                                <i class="nc-icon nc-atom"></i>
+                                <p>Modo progressivo</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="narrativa.html">
+                                <i class="nc-icon nc-atom"></i>
+                                <p>Notificações</p>
+                            </a>
+                        </li>
     
                     </ul>
                     <div id="login">
@@ -83,21 +95,23 @@
                                 <div class="well well-sm">
                                     <div class="row">
                                         <div class="col-sm-6 col-md-4">
-                                            <img src="../resources/img/aisha.png"  style="height: 300px; width: 250;" alt="" class="img-rounded img-responsive" />
+                                            <img src="../resources/img/persona.png"  style="height: 300px; width: 300;" alt="" class="img-rounded img-responsive" />
                                         </div>
                                         <div class="col-sm-2 col-md-8">
                                             </i></cite></small>
                                             <p>
                                                 <br><br><br>
-                                                <i class="glyphicon glyphicon-envelope"></i>Nome: Eduardo Júnio Veloso
+                                                <i class="glyphicon glyphicon-envelope"></i>Nome: <a id="nome"></a>
                                                 <br>
-                                                <i class="glyphicon glyphicon-envelope"></i>Email: eduardo@gmail.com
+                                                <i class="glyphicon glyphicon-envelope"></i>Email: <a id="email"></a>
                                                 <br />
-                                                <i class="glyphicon glyphicon-gift"></i>Matrícula: 14/0168192
+                                                <i class="glyphicon glyphicon-gift"></i>Matrícula: <a id="matricula"></a>
                                                 <br />
-                                                <i class="glyphicon glyphicon-gift"></i>Pontos: 100 bravos
+                                                <i class="glyphicon glyphicon-gift"></i>Pontos: <a id="pontos"></a>
                                                 <br />
-                                                <i class="glyphicon glyphicon-gift"></i>Personagem: n/a
+                                                <i class="glyphicon glyphicon-gift"></i>Personagem: <a id="personagem"></a>
+                                                 <br />
+                                                <i class="glyphicon glyphicon-gift"></i>Level: <a id="level"></a>
                                             </p>
                                         </div>
                                     </div>
@@ -156,52 +170,7 @@
  <script src="../resources/js/demo.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+ <script src="../resources/js/pages/perfil.js"></script>
 
-
-
-
- <script>
-     $(document).ready(function() {
-         // Javascript method's body can be found in assets/js/demos.js
-         demo.initDashboardPageCharts();
- 
-         demo.showNotification();
- 
-     });
-
-     function redireciona(){
-         window.location.assign('../index.html');
-     }
-     
-     var ctx = document.getElementById('myChart');  
-    var myChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-        labels: ['Derrotas', 'Vitórias'],
-        datasets: [{
-            label: ['sa', 'asd'],
-            data: [25,75],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    }
-});
- </script>
- 
  </html>
  

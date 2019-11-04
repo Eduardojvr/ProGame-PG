@@ -53,7 +53,8 @@ public class RESTUsuario {
 	@POST
 	@Path("/login")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response login(Usuario usuario) {
+	@Produces(MediaType.APPLICATION_JSON)
+	public Usuario login(Usuario usuario) {
 		UsuarioDAO dao = new UsuarioDAO();
 
 		try {
@@ -62,17 +63,15 @@ public class RESTUsuario {
 			if (login != null) {
 				request.getSession().setAttribute("logado", true);
 				request.getSession().setAttribute("usuario", login);
-				return Response.ok().build();
-			} else {
-				return Response.status(Status.FORBIDDEN).build();
+				return login;
 			}
-
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			// e.printStackTrace();
 			// System.out.println("Erro RESTUsuario");
-			return Response.status(Status.FORBIDDEN).entity("Error class RESTUsuario").build();
+			return null;
 		}
+		return null;
 
 	}
 
