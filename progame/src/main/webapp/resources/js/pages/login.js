@@ -18,6 +18,12 @@ let login = new Vue({
                 sessionStorage.setItem('idTipoPerfil', response.data["idTipoPerfil"]);
                 sessionStorage.setItem('idPersonagem', response.data["idPersonagem"]);
                 sessionStorage.setItem('email', response.data["email"]);
+
+                // gambiarra :(
+                sessionStorage.setItem('imgPersonagem', '../resources/img/persona.png');
+                if(sessionStorage.getItem('idPersonagem') != 2) {
+                    sessionStorage.setItem('login', 1);
+                }           
                 window.location.href = "pages/perfil.html";
             }).catch(function (error){
                 sessionStorage.setItem('isLogado', false);
@@ -28,6 +34,7 @@ let login = new Vue({
             axios.post('/progame/rs/user/logout').then(function(response) {
                 console.log(response);
                 alert("Logout realizado com sucesso!");
+                sessionStorage.clear();
                 window.location.href = "../index.html";
             }).catch(function (error){
                 alert("Erro ao realizar logout!");
