@@ -31,54 +31,7 @@
 <body>
         <div class="wrapper">
             
-        <div class="sidebar" data-color="black" data-image="../resources/img/hero-bg.jpg">
-            
-           <!-- data-color="blue | azure | green | orange | red | purple".  -->
-            <div class="sidebar-wrapper">
-                <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
-                        Pro Game
-                    </a>
-                </div>
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="perfil.html">
-                            <i class="nc-icon nc-chart-pie-35"></i>
-                            <p>Perfil</p>
-                        </a>
-                    </li>
-                    <li class="active">
-                        <a class="nav-link" href="ranking.html">
-                            <i class="nc-icon nc-circle-09"></i>
-                            <p>Ranking</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="narrativa.html">
-                            <i class="nc-icon nc-notes"></i>
-                            <p>Modo Narrativa</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="narrativa.html">
-                            <i class="nc-icon nc-paper-2"></i>
-                            <p>1 VS 1</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="narrativa.html">
-                            <i class="nc-icon nc-atom"></i>
-                            <p>Desafios</p>
-                        </a>
-                    </li>
-
-                </ul>
-               <input type="image" src="../resources/img/icons/sair.png" style="width: 30px; height: 40px;" onclick="redireciona()">  
-                
-            </div>
-           
-          
-        </div>
+        <div id="menu"></div>
        
         <div class="tabela">
                 <h5> Pontos: 100 bravos</h5>
@@ -146,5 +99,11 @@
   <script src="../resources/js/demo.js"></script>
 
 </body>
+
+<script> 
+        $(function(){
+          $("#menu").load("base.html"); // incluir conteúdo do menu.html na div com id #includedContent
+        });
+</script> 
 
 </html>

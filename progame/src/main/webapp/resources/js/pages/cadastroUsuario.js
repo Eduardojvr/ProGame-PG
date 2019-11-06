@@ -21,8 +21,13 @@ let usuario = new Vue({
                 email : vm.email
             }
 			axios.post('/progame/rs/user/insert', obj).then(function(response) {
-				console.log(response);
-			});
+				if(response.status == 200){
+					alert("Usuário cadastrado com sucesso!");
+					window.location.href = 'login.html';
+				} 
+			}).catch(function (error){
+                alert("Erro, não foi possível cadastrar usuário!");
+            });
 		}
 	}
 });

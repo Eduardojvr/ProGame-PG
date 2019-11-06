@@ -121,68 +121,74 @@
      
 
      <div class="wrapper">
-         <div class="sidebar" data-image="../resources/img/hero-bg.jpg" data-color="black">
-             <!--
-         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
- 
-         Tip 2: you can also add an image using data-image tag
-     -->
-             <div class="sidebar-wrapper">
-                 <div class="logo">
-                     <a href="https://github.com/Eduardojvr/ProGame-PG" class="simple-text">
-                        Pro Game
-                     </a>
-                 </div>
-                 <ul class="nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="perfil.html">
-                                <i class="nc-icon nc-chart-pie-35"></i>
-                                <p>Perfil</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="ranking.html">
-                                <i class="nc-icon nc-circle-09"></i>
-                                <p>Ranking</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="narrativa.html">
-                                <i class="nc-icon nc-notes"></i>
-                                <p>Modo Narrativa</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="narrativa.html">
-                                <i class="nc-icon nc-paper-2"></i>
-                                <p>1 VS 1</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="narrativa.html">
-                                <i class="nc-icon nc-atom"></i>
-                                <p>Desafios</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="narrativa.html">
-                                <i class="nc-icon nc-atom"></i>
-                                <p>Modo progressivo</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="narrativa.html">
-                                <i class="nc-icon nc-atom"></i>
-                                <p>Notificações</p>
-                            </a>
-                        </li>
+            <div class="sidebar" data-image="../resources/img/hero-bg.jpg" data-color="black">
+                <!--
+            Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
     
-                    </ul>
-                    <div id="login">
-                        <input type="image" src="../resources/img/icons/sair.png" style="width: 30px; height: 40px;" @click="logout()">  
+            Tip 2: you can also add an image using data-image tag
+        -->
+                <div class="sidebar-wrapper">
+                    <div class="logo">
+                        <a href="https://github.com/Eduardojvr/ProGame-PG" class="simple-text">
+                           Pro Game
+                        </a>
                     </div>
-             </div>
-         </div>
+                    <ul class="nav">
+                            <li class="nav-item">
+                                    <a class="nav-link" href="perfil.html">
+                                        <i class="nc-icon nc-circle-09"></i>
+                                        <p>Perfil</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="ranking.html">
+                                        <i class="nc-icon nc-chart-bar-32"></i>
+                                        <p>Ranking</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="narrativa.html">
+                                        <i class="nc-icon nc-chat-round"></i>
+                                        <p>Modo Narrativa</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="batalha.html">
+                                        <i class="nc-icon nc-controller-modern"></i>
+                                        <p>1 VS 1</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="desafios.html">
+                                        <i class="nc-icon nc-puzzle-10 icon-bold"></i>
+                                        <p>Desafios</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="progressivo.html">
+                                        <i class="nc-icon nc-spaceship"></i>
+                                        <p>Modo progressivo</p>
+                                    </a>
+                                </li>
+                                <li>
+                                     <a class="nav-link" href="material.html">
+                                         <i class="nc-icon nc-single-copy-04 icon-bold"></i>
+                                         <p>Material</p>
+                                     </a>
+                                 </li>
+                                <li>
+                                    <a class="nav-link" href="notificacoes.html">
+                                        <i class="nc-icon nc-bulb-63"></i>
+                                        <p>Notificações</p>
+                                    </a>
+                                </li>
+       
+                       </ul>
+                       <div id="login">
+                           <input type="image" src="../resources/img/icons/sair.png" style="width: 30px; height: 40px;" @click="logout()">  
+                       </div>
+                </div>
+            </div>
 
          <div class="main-panel" id="gerenciapersonagem">
                 <div class="container" id="posicao">
@@ -274,7 +280,11 @@
 <script src="../resources/js/pages/perfil.js"></script>
 
 
-
+<script> 
+        $(function(){
+          $("#menu").load("base.html"); // incluir conteúdo do menu.html na div com id #includedContent
+        });
+</script> 
 
 </body>
 </html>
