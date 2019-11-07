@@ -7,6 +7,8 @@ public class Usuario {
 	private String idTipoPerfil;
 	private String idPersonagem;
 	private String email;
+	private String pontuacao;
+	private String level;
 	
 	public String getNomeUsuario() {
 		return nomeUsuario;
@@ -45,5 +47,18 @@ public class Usuario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getPontuacao() {
+		return pontuacao;
+	}
+	public void setPontuacao(String pontuacao) {
+		this.pontuacao = pontuacao;
+	}
+	public String getLevel() {
+		return level;
+	}
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
 	
 }

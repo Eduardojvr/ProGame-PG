@@ -18,3 +18,9 @@ div.box {
 span {
     text-align: center;
 }
+
+img:hover{
+    background-color: rgb(224, 224, 224, 0.7);
+    border-radius: 80px;    
+}
+

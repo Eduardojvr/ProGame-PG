@@ -57,12 +57,15 @@ let a = new Vue({
 
 let t = new Vue({
     el : '#gerenciapersonagem',
+    data : {
+        level : sessionStorage.getItem("level")
+    },
     created : function(){
         const vm = this;
         document.getElementById('nome').innerHTML = sessionStorage.getItem('nomeUsuario');
         document.getElementById('email').innerHTML =  sessionStorage.getItem('email');
         document.getElementById('matricula').innerHTML = sessionStorage.getItem('matricula');
-        document.getElementById('pontos').innerHTML = sessionStorage.getItem('pontos');
+        document.getElementById('pontos').innerHTML = sessionStorage.getItem('pontuacao');
         document.getElementById('personagem').innerHTML = sessionStorage.getItem('nomePersonagem');
         document.getElementById('level').innerHTML =  sessionStorage.getItem('level');
         sessionStorage.setItem('vitorias', 90);

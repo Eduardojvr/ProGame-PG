@@ -21,6 +21,12 @@ let login = new Vue({
                     sessionStorage.setItem('idTipoPerfil', response.data["idTipoPerfil"]);
                     sessionStorage.setItem('idPersonagem', response.data["idPersonagem"]);
                     sessionStorage.setItem('email', response.data["email"]);
+                    sessionStorage.setItem('pontuacao', response.data["pontuacao"]);
+                    sessionStorage.setItem('level', response.data["level"]);
+
+                    //temporario
+                    // sessionStorage.setItem('nivel', 1);
+                    // alert(sessionStorage.getItem('nivel'));
 
                     // gambiarra :(
                     sessionStorage.setItem('imgPersonagem', '../resources/img/persona.png');

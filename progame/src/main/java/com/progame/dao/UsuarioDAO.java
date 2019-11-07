@@ -34,9 +34,11 @@ public class UsuarioDAO {
 		sql.append(" senha, ");		
 		sql.append(" idTipoPerfil, ");
 		sql.append(" idPersonagem, ");
-		sql.append(" email ");
+		sql.append(" email, ");
+		sql.append(" pontuacao, ");
+		sql.append(" level ");
 		sql.append(" ) ");
-		sql.append(" VALUES (?,?,?,?,?,?);");
+		sql.append(" VALUES (?,?,?,?,?,?,?,?);");
 
 		try {
 			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
@@ -46,6 +48,9 @@ public class UsuarioDAO {
 			pstmt.setString(4, usuario.getIdTipoPerfil());
 			pstmt.setString(5, "2");
 			pstmt.setString(6, usuario.getEmail());
+			pstmt.setString(7, "0");
+			pstmt.setString(8, "1");
+
 			pstmt.executeUpdate();
 
 		} finally {
@@ -72,7 +77,7 @@ public class UsuarioDAO {
 	    String criptografia = new BigInteger(1,m.digest()).toString(16);
 		
 		
-		pstmt = db.prepareStatement("select nomeUsuario, matricula, senha, idTipoPerfil, idPersonagem, email from usuario");
+		pstmt = db.prepareStatement("select nomeUsuario, matricula, senha, idTipoPerfil, idPersonagem, email, pontuacao, level from usuario");
 
 		try {
 			result = pstmt.executeQuery();
@@ -85,7 +90,10 @@ public class UsuarioDAO {
 					achou.setSenha(result.getString("senha"));
 					achou.setIdTipoPerfil(result.getString("idTipoPerfil"));
 					achou.setIdPersonagem(result.getString("idPersonagem"));
-					achou.setEmail(result.getString("email"));				
+					achou.setEmail(result.getString("email"));		
+					achou.setPontuacao(result.getString("pontuacao"));				
+					achou.setLevel(result.getString("level"));				
+
 				}
 			}
 		} catch (Exception e) {
