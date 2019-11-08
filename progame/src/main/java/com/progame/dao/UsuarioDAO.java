@@ -87,7 +87,7 @@ public class UsuarioDAO {
 					achou = new Usuario();
 					achou.setNomeUsuario(result.getString("nomeUsuario"));
 					achou.setMatricula(result.getString("matricula"));
-					achou.setSenha(result.getString("senha"));
+					//achou.setSenha(result.getString("senha"));
 					achou.setIdTipoPerfil(result.getString("idTipoPerfil"));
 					achou.setIdPersonagem(result.getString("idPersonagem"));
 					achou.setEmail(result.getString("email"));		

@@ -20,7 +20,7 @@ let usuario = new Vue({
                 idPersonagem : null,
                 email : vm.email
             }
-			axios.post('/progame/rs/user/insert', obj).then(function(response) {
+			axios.post('rs/user/insert', obj).then(function(response) {
 				if(response.status == 200){
 					alert("Usuário cadastrado com sucesso!");
 					window.location.href = 'login.html';

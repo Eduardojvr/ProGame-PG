@@ -12,9 +12,7 @@ let login = new Vue({
                 senha: vm.senha
              }
             
-            axios.post('/progame/rs/user/login', obj).then(function(response) {
-                console.log(response.status);
-
+            axios.post('rs/user/login', obj).then(function(response) {
                 if(response.status == 200){
                     sessionStorage.setItem('nomeUsuario', response.data["nomeUsuario"]);
                     sessionStorage.setItem('matricula', response.data["matricula"]);
@@ -40,12 +38,11 @@ let login = new Vue({
                
             }).catch(function (error){
                 sessionStorage.setItem('isLogado', false);
-                alert("Erro ao realizar login");
+                alert("Erro ao realizar login :(");
             });
         },
         logout: function(){
-            axios.post('/progame/rs/user/logout').then(function(response) {
-                console.log(response);
+            axios.post('../rs/user/logout').then(function(response) {
                 alert("Logout realizado com sucesso!");
                 sessionStorage.clear();
                 window.location.href = "../index.html";

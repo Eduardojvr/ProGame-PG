@@ -43,11 +43,10 @@ let a = new Vue({
     methods : {
         personagem : function(){
             const vm = this;
-            axios.get('/progame/rs/personagem/getPersonagem/'+sessionStorage.getItem('idPersonagem')).then(function(response) {
+            axios.get('../rs/personagem/getPersonagem/'+sessionStorage.getItem('idPersonagem')).then(function(response) {
                 sessionStorage.setItem('idPersonagem', response.data["idPersonagem"]);
                 sessionStorage.setItem('nomePersonagem', response.data["nomePersonagem"]);
                 sessionStorage.setItem('imgPersonagem', response.data["imgPersonagem"]);
-                //alert(sessionStorage.getItem('imgPersonagem'));
             });
         }
     }

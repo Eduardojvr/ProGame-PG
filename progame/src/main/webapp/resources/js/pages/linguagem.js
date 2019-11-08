@@ -11,8 +11,7 @@ let linguagem = new Vue({
                 nomeLinguagem : vm.nomeLinguagem,
 			    descLinguagem : vm.descLinguagem
             }
-			axios.post('/progame/rs/linguagem/inserir', obj).then(function(response) {
-				console.log(response);
+			axios.post('../rs/linguagem/inserir', obj).then(function(response) {
 			});
 		}
 	}

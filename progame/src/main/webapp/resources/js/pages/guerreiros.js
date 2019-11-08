@@ -3,7 +3,13 @@ let j = new Vue({
     methods : {
         selecionaJogador : function(value){
             const vm = this;
-            axios.get('/progame/rs/personagem/setPersonagem/'+value+'/'+sessionStorage.getItem('matricula')).then(function(response) {
+            // Apagar, apenas usar enquanto n tiver banco hospedado
+                // sessionStorage.setItem('idPersonagem', value);   
+                // sessionStorage.setItem('escolheu', 1);   
+                // window.location.href = 'perfil.html';
+                // sessionStorage.setItem('imgPersonagem', '../resources/img/jogadores/aisha.png ');
+            //
+            axios.get('../rs/personagem/setPersonagem/'+value+'/'+sessionStorage.getItem('matricula')).then(function(response) {
                 sessionStorage.setItem('idPersonagem', value);   
                 sessionStorage.setItem('escolheu', 1);   
                 window.location.href = 'perfil.html';
@@ -20,4 +26,7 @@ function fundoMusical(){
 }
 
 fundoMusical();
+
+
+
 
