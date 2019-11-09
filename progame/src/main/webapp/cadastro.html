@@ -20,6 +20,18 @@
 </head>
 <body>
 	
+	    <div class="modal fade" id="loader" tabindex="-1" role="img"  aria-hidden="true" style="padding-right: 10%; padding-top: 10%;">
+				<div class="modal-dialog" role="document" style="width:0px;">
+				  <div class="modal-content" style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
+						<img src="resources/img/loadGT.gif" width=200px height=200px style="border-radius: 100px;">
+						<div>
+							<label style="color: seashell; padding-left: 40px;">Processando...</label>
+						</div>
+					</div>
+				</div>
+			  </div>
+
+	
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('resources/img/hero-bg.jpg');">
 			<div class="wrap-login100 p-t-30 p-b-50">
@@ -51,7 +63,7 @@
                     </div>
                     
 					<div class="container-login100-form-btn m-t-26">
-						<button type="button" class="btn btn-danger" @click="cadastra()">Cadastrar</button>			
+						<button type="button" class="btn btn-danger" @click="cadastra('loader')">Cadastrar</button>			
 					</div>			
 				</form>
 				</div>
@@ -64,7 +76,6 @@
 
 	<script src="resources/js/axios.min.js"></script>
   	<script src="resources/js/vue.js"></script>
-	<script src="resources/js/pages/cadastroUsuario.js"></script>
 	<script src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script src="resources/vendor/animsition/js/animsition.min.js"></script>
 	<script src="resources/vendor/bootstrap/js/popper.js"></script>
@@ -74,8 +85,8 @@
 	<script src="resources/vendor/daterangepicker/daterangepicker.js"></script>
 	<script src="resources/vendor/countdowntime/countdowntime.js"></script>
 	<script src="resources/js/main.js"></script>
-
-
+	<script src="resources/js/load.js"></script>
+	<script src="resources/js/pages/cadastroUsuario.js"></script>
 
 
 

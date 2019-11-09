@@ -10,7 +10,8 @@ let usuario = new Vue({
         
     },
 	methods : {
-		cadastra : function() {
+		cadastra : function(modalName) {
+			abreLoad(modalName);
 	    	const vm = this;
             let obj = {
                 nomeUsuario : vm.nomeUsuario,
@@ -25,8 +26,10 @@ let usuario = new Vue({
 					alert("Usuário cadastrado com sucesso!");
 					window.location.href = 'login.html';
 				} 
+				fechaLoad(modalName);
 			}).catch(function (error){
-                alert("Erro, não foi possível cadastrar usuário!");
+				alert("Erro, não foi possível cadastrar usuário!");
+				fechaLoad(modalName);
             });
 		}
 	}

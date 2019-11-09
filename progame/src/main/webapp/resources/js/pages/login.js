@@ -5,13 +5,14 @@ let login = new Vue({
 		senha : '' 
     },
     methods : {
-        logar : function() {
+        logar : function(modalName) {
             const vm = this;
             let obj = {
                 matricula: vm.matricula,
                 senha: vm.senha
              }
-            
+
+            abreLoad(modalName);
             axios.post('rs/user/login', obj).then(function(response) {
                 if(response.status == 200){
                     sessionStorage.setItem('nomeUsuario', response.data["nomeUsuario"]);
@@ -35,10 +36,13 @@ let login = new Vue({
                 } else {
                     alert("Não foi possível realizar o login. Usuário ou senha incorretos!");
                 }
-               
+                fechaLoad(modalName);
+            
             }).catch(function (error){
                 sessionStorage.setItem('isLogado', false);
                 alert("Erro ao realizar login :(");
+                fechaLoad(modalName);
+
             });
         },
         logout: function(){
