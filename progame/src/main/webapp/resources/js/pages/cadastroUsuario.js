@@ -19,7 +19,9 @@ let usuario = new Vue({
                 senha : vm.senha,
                 idTipoPerfil : '3',
                 idPersonagem : null,
-                email : vm.email
+				email : vm.email,
+				pontuacao : '0',
+				level : '1'
             }
 			axios.post('rs/user/insert', obj).then(function(response) {
 				if(response.status == 200){

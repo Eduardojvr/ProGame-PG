@@ -43,6 +43,10 @@ let a = new Vue({
     methods : {
         personagem : function(){
             const vm = this;
+            // Apagar
+                // sessionStorage.setItem('nomePersonagem','Aisha');
+                // sessionStorage.setItem('imgPersonagem', sessionStorage.getItem('imgPersonagem'));
+            //
             axios.get('../rs/personagem/getPersonagem/'+sessionStorage.getItem('idPersonagem')).then(function(response) {
                 sessionStorage.setItem('idPersonagem', response.data["idPersonagem"]);
                 sessionStorage.setItem('nomePersonagem', response.data["nomePersonagem"]);

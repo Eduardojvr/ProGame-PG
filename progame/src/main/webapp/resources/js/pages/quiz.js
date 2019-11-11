@@ -1,30 +1,22 @@
-$(function(){
-    var loading = $('#loadbar').hide();
-    $(document)
-    .ajaxStart(function () {
-        loading.show();
-    }).ajaxStop(function () {
-    	loading.hide();
-    });
-    
-    $("label.btn").on('click',function () {
-    	var choice = $(this).find('input:radio').val();
-    	$('#loadbar').show();
-    	$('#quiz').fadeOut();
-    	setTimeout(function(){
-           $( "#answer" ).html(  $(this).checking(choice) );      
-            $('#quiz').show();
-            $('#loadbar').fadeOut();
-           /* something else */
-    	}, 1500);
-    });
+// let q = new Vue({
+//     el : '#quest',
+//     data : {
+//         listaQuestao : []
+//     },
+//     created :function(){
+//         const vm = this;
+//         vm.getQuestao();
+//     },
+//     methods : {
+//         getQuestao : function(){
+//             const vm = this;
+//             axios.get('../rs/questao/getQuestao/'+sessionStorage.getItem('level')).then(function(response) {
+//                 console.log(response.data);
+//                 vm.listaQuestao = response.data;
+//             }).catch(function (error){
+//                 alert("Erro!");
+//             });
+//         }
+//     }
 
-    $ans = 3;
-
-    $.fn.checking = function(ck) {
-        if (ck != $ans)
-            return 'INCORRECT';
-        else 
-            return 'CORRECT';
-    }; 
-});	
+// });
