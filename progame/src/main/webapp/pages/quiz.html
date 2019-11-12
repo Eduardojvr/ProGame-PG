@@ -44,14 +44,18 @@
 
       <div class="container-fluid" >
             <br><br> <br><br><br>
-          <div id="quest">
+            <div id="quest">
+              <div style="padding-left:33%;">
+                <label id="pontuacao" style="color: whitesmoke;">Pontuação atual: {{ pontos }}</label>
+              </div>    
                 <!-- Tipo múltipla escolha -->
-                <div class="modal-dialog"  v-if="'2' > countQuestao && items[countQuestao].idTipoQuestao === '4'">
+                <div class="modal-dialog"  v-if=" totalQuestaoMultipla > countQuestao && items[countQuestao].idTipoQuestao === '4'">
                   <div class="modal-content" >
                      <div class="modal-header">
                         <h3><span class="label label-warning" ></span> {{ items[countQuestao].questao }}</h3>
                     </div>
                     <div class="modal-body">
+                        <div id="feedback"></div>
                       <div class="quiz" >
                        <label class="element-animation1 btn btn-lg btn-primary btn-block"><input type="radio"  name="q_answer"  style="display: none;">{{ items[countQuestao].respCorreta }}</label>
                        <label class="element-animation2 btn btn-lg btn-primary btn-block"><input type="radio"  name="q_answer"  style="display: none;">{{ items[countQuestao].respIncorreta1 }}</label>
@@ -67,16 +71,18 @@
            
           </div>    
             <!-- Tipo Verdadeiro ou falso -->
-            <div v-else-if="questaoTipoVF[countQuestaoVF].idTipoQuestao === '3' " class="modal-dialog">
+            <div v-else-if=" totalQuestaoVF > countQuestaoVF && questaoTipoVF[countQuestaoVF].idTipoQuestao === '3' " class="modal-dialog">
                 <div class="modal-content" >
                    <div class="modal-header">
                       <h3><span class="label label-warning" ></span> {{ questaoTipoVF[countQuestaoVF].questao }}</h3>
                   </div>
                   <div class="modal-body">
-                    <div class="quiz" >
-                     <label class="element-animation1 btn btn-lg btn-primary btn-block"><input type="radio"  name="q_answer"  style="display: none;">Verdadeiro</label>
-                     <label class="element-animation2 btn btn-lg btn-primary btn-block"><input type="radio"  name="q_answer"  style="display: none;">Falso</label>
-                 </div>
+                      <div id="feedback"></div>
+                    <div class="quiz" id="btVF">
+                     <label class="element-animation1 btn btn-lg btn-primary btn-block"><input type="radio"  @click="verificaVF('Verdadeiro', countQuestaoVF)"  style="display: none;">Verdadeiro</label>
+                     <label class="element-animation2 btn btn-lg btn-primary btn-block"><input type="radio"  @click="verificaVF('Falso', countQuestaoVF)"  style="display: none;">Falso</label>
+                    </div>
+
              </div>
              <div style="padding-left: 33%; padding-top: 1%;">
                 <input type="image" src="../resources/img/icons/setaEsquerda.png" style="width: 80px; height: 80px;" @click="anteriorVF()">
@@ -85,7 +91,28 @@
           </div>
          
         </div> 
-
+           <!-- Tipo Lacuna -->
+           <div v-else-if=" totalQuestaoLacuna > countQuestaoLacuna && questaoTipoLacuna[countQuestaoLacuna].idTipoQuestao === '1' " class="modal-dialog">
+              <div class="modal-content" >
+                 <div class="modal-header">
+                    <h3><span class="label label-warning" ></span> {{ questaoTipoLacuna[countQuestaoLacuna].questao }}</h3>
+                  </div>
+                  <input type="text" placeholder="Digite a resposta aqui" v-model="lacuna"  name="lacuna">
+                  <div style="padding-top: 15px;">
+                    <label class="element-animation2 btn btn-lg btn-primary btn-block"><input type="button"  name="q_answer"  style="display: none;" @click="verificaLacuna(lacuna, countQuestaoLacuna)">Responder</label>
+                  </div>
+                  <div id="feedback"></div>
+              
+           <div style="padding-left: 33%; padding-top: 1%;">
+              <input type="image" src="../resources/img/icons/setaEsquerda.png" style="width: 80px; height: 80px;" @click="anteriorLacuna()">
+                <input type="image" src="../resources/img/icons/setaDireita.png" style="width: 80px; height: 80px;" @click="proximaLacuna()">
+            </div>  
+        </div>
+       
+      </div> 
+        <div style="text-align: center; padding-right:40px;" >
+          <button type="button" class="btn btn-outline-danger" style="padding: 10px 50px 10px 50px;" onclick="window.location.assign('perfil.html')" >Sair</button>
+        </div>
         </div>
           <!-- Tipo Ecolha multipla -->
           <!-- <div class="modal-dialog" id="quest">
@@ -142,6 +169,8 @@ function teste(value){
 let q = new Vue({
     el : '#quest',
     data : {
+      pontos: '',
+      lacuna: '',
       countQuestao: 0,  
       items: [
         {
@@ -170,28 +199,79 @@ let q = new Vue({
           assunto: ''
         }
       ],
-      countQuestaoVF : 0
+      questaoTipoLacuna: [
+        {
+          idQuestao: '',
+          idTipoQuestao: '',
+          questao: '',
+          resposta: '',
+          respostaAlternativa: '',
+          comentarioCorreta: '',
+          comentarioIncorreta: '',
+          nomeLinguagem: '',
+          assunto: ''
+        }
+      ],
+      countQuestaoVF : 0,
+      countQuestaoLacuna : 0,
+      totalQuestaoMultipla : 0,
+      totalQuestaoVF : 0,
+      totalQuestaoLacuna : 0 
     },
     created :function(){
         const vm = this;
+        vm.pontos = sessionStorage.getItem('pontos');
         vm.getQuestao();
         vm.getQuestaoVF();
+        vm.getQuestaoLacuna();
     },
     methods : {
+      verificaVF : function(resposta, posicao){
+        const vm = this;
+        document.getElementById('btVF').style = "visibility: hidden;";
 
+        if(resposta == vm.questaoTipoVF[posicao].resposta){
+          document.getElementById('feedback').innerHTML = 'Resposta correta!';
+          document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
+
+          vm.atualizaPontuacao();
+        } else {
+          document.getElementById('feedback').innerHTML = 'Resposta incorreta. A resposta correta é: '+vm.questaoTipoVF[posicao].resposta;
+          document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
+        }
+      },
+      verificaLacuna : function(resposta, posicao){
+        const vm = this;
+        if(vm.questaoTipoLacuna[posicao].resposta == resposta || vm.questaoTipoLacuna[posicao].respostaAlternativa == resposta ){
+            document.getElementById('feedback').innerHTML = vm.questaoTipoLacuna[posicao].comentarioCorreta;
+            document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
+            vm.atualizaPontuacao();
+        } else {
+            document.getElementById('feedback').innerHTML = vm.questaoTipoLacuna[posicao].comentarioIncorreta;
+            document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
+        }
+      },
        proxima : function(){
           const vm = this;
-          vm.countQuestao+=1;
+          if(vm.totalQuestaoMultipla > vm.countQuestao){
+            vm.countQuestao+=1;
+          }
+          vm.limpaFeed();
         },
         anterior : function(){
           const vm = this;
           if(vm.countQuestao > 0){
             vm.countQuestao-=1;
           }
+          vm.limpaFeed();
         },
         proximaVF(){
           const vm = this;
-          vm.countQuestaoVF+=1;
+          if(vm.countQuestaoVF < vm.totalQuestaoVF){
+            vm.countQuestaoVF+=1;
+          }
+          vm.limpaFeed();
+          document.getElementById('btVF').style = "visibility: visible;";
         },
         anteriorVF(){
           const vm = this;
@@ -200,13 +280,38 @@ let q = new Vue({
           }else{
             vm.countQuestao-=1;
           }
+          vm.limpaFeed();
+          document.getElementById('btVF').style = "visibility: visible;";
+        },
+        proximaLacuna(){
+          const vm = this;
+          if(vm.totalQuestaoLacuna > vm.countQuestaoLacuna){
+            vm.countQuestaoLacuna+=1;
+          }
+          vm.limpaFeed();
+        },
+        anteriorLacuna(){
+          const vm = this;
+          if(vm.countQuestaoLacuna > 0){
+            vm.countQuestaoLacuna-=1;
+          }else{
+            vm.countQuestaoVF-=1;
+          }
+          vm.limpaFeed();
+
+        },
+        limpaFeed : function(){
+          document.getElementById('feedback').style = "background-color: rgba(255, 255, 255, 0);"
+          document.getElementById('feedback').innerHTML = ""
+
         },
         getQuestao : function(){
             const vm = this;
             axios.get('../rs/questao/getQuestao/'+sessionStorage.getItem('level')).then(function(response) {
-                console.log(response.data);
                 vm.items = response.data;
-                console.log(vm.items);
+                while(vm.items[vm.totalQuestaoMultipla] != null){
+                  vm.totalQuestaoMultipla+=1;
+                }
             }).catch(function (error){
                 alert("Erro!");
             });
@@ -214,12 +319,28 @@ let q = new Vue({
         getQuestaoVF : function(){
             const vm = this;
             axios.get('../rs/questao/getQuestaoVerdadeiroFalso/'+sessionStorage.getItem('level')).then(function(response) {
-                console.log(response.data);
                 vm.questaoTipoVF = response.data;
-                console.log(vm.questaoTipoVF);
+                while(vm.questaoTipoVF[vm.totalQuestaoVF] != null){
+                  vm.totalQuestaoVF+=1;
+                }
             }).catch(function (error){
                 alert("Erro!");
             });
+        },
+        getQuestaoLacuna : function(){
+            const vm = this;
+            axios.get('../rs/questao/getQuestaoLacuna/'+sessionStorage.getItem('level')).then(function(response) {
+                vm.questaoTipoLacuna = response.data;
+                while(vm.questaoTipoLacuna[vm.totalQuestaoLacuna] != null){
+                  vm.totalQuestaoLacuna+=1;
+                }
+            }).catch(function (error){
+                alert("Erro!");
+            });
+        },
+        atualizaPontuacao : function(){
+          const vm = this;
+          vm.pontos =  vm.pontos + 10;
         }
     }
 

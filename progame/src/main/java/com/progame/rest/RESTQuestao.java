@@ -14,8 +14,8 @@ import javax.ws.rs.core.MediaType;
 
 import com.progame.dao.PersonagemDAO;
 import com.progame.dao.QuestaoDAO;
-import com.progame.dao.QuestaoVerdadeiroFalsoDAO;
 import com.progame.dto.QuestaoDTO;
+import com.progame.dto.QuestaoLacunaDTO;
 import com.progame.dto.QuestaoVerdadeiroFalsoDTO;
 import com.progame.entity.Personagem;
 
@@ -53,16 +53,33 @@ public class RESTQuestao {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public List<QuestaoVerdadeiroFalsoDTO> getQuestaoVerdadeiroFalso(@PathParam("level") String level) {
-		QuestaoVerdadeiroFalsoDAO dao = new QuestaoVerdadeiroFalsoDAO();
+		QuestaoDAO dao = new QuestaoDAO();
 		List <QuestaoVerdadeiroFalsoDTO> lista  = null;
 		try {
-			lista = dao.getQuestao(level);
+			lista = dao.getQuestaoVF(level);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return lista;
 	}
+	
+	@GET
+	@Path("/getQuestaoLacuna/{level}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public List<QuestaoLacunaDTO> getQuestaoLacuna(@PathParam("level") String level) {
+		QuestaoDAO dao = new QuestaoDAO();
+		List <QuestaoLacunaDTO> lista  = null;
+		try {
+			lista = dao.getQuestaoLacuna(level);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lista;
+	}
+
 
 	
 }
