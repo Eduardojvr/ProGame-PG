@@ -14,7 +14,9 @@ import javax.ws.rs.core.MediaType;
 
 import com.progame.dao.PersonagemDAO;
 import com.progame.dao.QuestaoDAO;
+import com.progame.dao.QuestaoVerdadeiroFalsoDAO;
 import com.progame.dto.QuestaoDTO;
+import com.progame.dto.QuestaoVerdadeiroFalsoDTO;
 import com.progame.entity.Personagem;
 
 @Path("/questao")
@@ -46,4 +48,21 @@ public class RESTQuestao {
 		return lista;
 	}
 
+	@GET
+	@Path("/getQuestaoVerdadeiroFalso/{level}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public List<QuestaoVerdadeiroFalsoDTO> getQuestaoVerdadeiroFalso(@PathParam("level") String level) {
+		QuestaoVerdadeiroFalsoDAO dao = new QuestaoVerdadeiroFalsoDAO();
+		List <QuestaoVerdadeiroFalsoDTO> lista  = null;
+		try {
+			lista = dao.getQuestao(level);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lista;
+	}
+
+	
 }

@@ -12,6 +12,7 @@ public class QuestaoDTO {
 	private String comentarioErrado;
 	private String nomeLinguagem;
 	private String assunto;
+	private String idTipoQuestao;
 	
 	public String getIdQuestao() {
 		return idQuestao;
@@ -78,6 +79,12 @@ public class QuestaoDTO {
 	}
 	public void setAssunto(String assunto) {
 		this.assunto = assunto;
+	}
+	public String getIdTipoQuestao() {
+		return idTipoQuestao;
+	}
+	public void setIdTipoQuestao(String idTipoQuestao) {
+		this.idTipoQuestao = idTipoQuestao;
 	}
 	
 

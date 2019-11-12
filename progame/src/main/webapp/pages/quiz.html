@@ -44,10 +44,12 @@
 
       <div class="container-fluid" >
             <br><br> <br><br><br>
-                <div class="modal-dialog" id="quest">
+          <div id="quest">
+                <!-- Tipo múltipla escolha -->
+                <div class="modal-dialog"  v-if="'2' > countQuestao && items[countQuestao].idTipoQuestao === '4'">
                   <div class="modal-content" >
                      <div class="modal-header">
-                        <h3><span class="label label-warning" id="qid">{{ countQuestao+1 }} -</span> {{ items[countQuestao].questao }}</h3>
+                        <h3><span class="label label-warning" ></span> {{ items[countQuestao].questao }}</h3>
                     </div>
                     <div class="modal-body">
                       <div class="quiz" >
@@ -63,11 +65,53 @@
                 </div>  
             </div>
            
-          </div>     
+          </div>    
+            <!-- Tipo Verdadeiro ou falso -->
+            <div v-else-if="questaoTipoVF[countQuestaoVF].idTipoQuestao === '3' " class="modal-dialog">
+                <div class="modal-content" >
+                   <div class="modal-header">
+                      <h3><span class="label label-warning" ></span> {{ questaoTipoVF[countQuestaoVF].questao }}</h3>
+                  </div>
+                  <div class="modal-body">
+                    <div class="quiz" >
+                     <label class="element-animation1 btn btn-lg btn-primary btn-block"><input type="radio"  name="q_answer"  style="display: none;">Verdadeiro</label>
+                     <label class="element-animation2 btn btn-lg btn-primary btn-block"><input type="radio"  name="q_answer"  style="display: none;">Falso</label>
+                 </div>
+             </div>
+             <div style="padding-left: 33%; padding-top: 1%;">
+                <input type="image" src="../resources/img/icons/setaEsquerda.png" style="width: 80px; height: 80px;" @click="anteriorVF()">
+                  <input type="image" src="../resources/img/icons/setaDireita.png" style="width: 80px; height: 80px;" @click="proximaVF()">
+              </div>  
+          </div>
+         
+        </div> 
+
+        </div>
+          <!-- Tipo Ecolha multipla -->
+          <!-- <div class="modal-dialog" id="quest">
+              <div class="modal-content" >
+                 <div class="modal-header">
+                    <h3><span class="label label-warning" id="qid">{{ countQuestao+1 }} -</span> {{ items[countQuestao].questao }}</h3>
+                </div>
+                <div class="modal-body">
+                  <div class="quiz" >
+                   <label class="element-animation1 btn btn-lg btn-primary btn-block"><input type="radio"  name="q_answer"  style="display: none;">{{ items[countQuestao].respCorreta }}</label>
+                   <label class="element-animation2 btn btn-lg btn-primary btn-block"><input type="radio"  name="q_answer"  style="display: none;">{{ items[countQuestao].respIncorreta1 }}</label>
+                   <label class="element-animation3 btn btn-lg btn-primary btn-block"><input type="radio"  name="q_answer"  style="display: none;">{{ items[countQuestao].respIncorreta2 }}</label>
+                   <label class="element-animation4 btn btn-lg btn-primary btn-block"><input type="radio"  name="q_answer"  style="display: none;">{{ items[countQuestao].respIncorreta3 }}</label>
+               </div>
+           </div>
+           <div style="padding-left: 33%; padding-top: 1%;">
+              <input type="image" src="../resources/img/icons/setaEsquerda.png" style="width: 80px; height: 80px;" @click="anterior()">
+                <input type="image" src="../resources/img/icons/setaDireita.png" style="width: 80px; height: 80px;" @click="proxima()">
+            </div>  
+        </div>
+       
+      </div> 
           <div style="text-align: center; padding-right:40px;" >
               <button type="button" class="btn btn-outline-danger" style="padding: 10px 50px 10px 50px;" onclick="window.location.assign('perfil.html')" >Sair</button>
           </div>
-          </div>
+           </div>  -->
           
             <script src="../resources/js/vue.js"></script>
             <script src="../resources/js/axios.min.js"></script>
@@ -112,12 +156,26 @@ let q = new Vue({
           respIncorreta1: '',
           respIncorreta2: '',
           respIncorreta3: '',
+          idTipoQuestao: '',
+          resposta: ''
         }
       ],
+      questaoTipoVF: [
+        {
+          idQuestao: '',
+          idTipoQuestao: '',
+          questao: '',
+          resposta: '',
+          nomeLinguagem: '',
+          assunto: ''
+        }
+      ],
+      countQuestaoVF : 0
     },
     created :function(){
         const vm = this;
         vm.getQuestao();
+        vm.getQuestaoVF();
     },
     methods : {
 
@@ -131,12 +189,34 @@ let q = new Vue({
             vm.countQuestao-=1;
           }
         },
+        proximaVF(){
+          const vm = this;
+          vm.countQuestaoVF+=1;
+        },
+        anteriorVF(){
+          const vm = this;
+          if(vm.countQuestaoVF > 0){
+            vm.countQuestaoVF-=1;
+          }else{
+            vm.countQuestao-=1;
+          }
+        },
         getQuestao : function(){
             const vm = this;
             axios.get('../rs/questao/getQuestao/'+sessionStorage.getItem('level')).then(function(response) {
                 console.log(response.data);
                 vm.items = response.data;
                 console.log(vm.items);
+            }).catch(function (error){
+                alert("Erro!");
+            });
+        },
+        getQuestaoVF : function(){
+            const vm = this;
+            axios.get('../rs/questao/getQuestaoVerdadeiroFalso/'+sessionStorage.getItem('level')).then(function(response) {
+                console.log(response.data);
+                vm.questaoTipoVF = response.data;
+                console.log(vm.questaoTipoVF);
             }).catch(function (error){
                 alert("Erro!");
             });

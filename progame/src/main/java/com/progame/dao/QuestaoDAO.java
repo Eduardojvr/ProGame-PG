@@ -22,7 +22,7 @@ public class QuestaoDAO {
 		
 		pstmt = db.prepareStatement(""
 				+ "SELECT q.idQuestao, q.idTipoConteudo, q.questao, r.respCorreta, r.respIncorreta1, r.respIncorreta2,\n" + 
-				"	   r.respIncorreta3, r.comentarioCorreta, r.comentarioErrado, l.nomeLinguagem, t.assunto\n" + 
+				"	   r.respIncorreta3, r.comentarioCorreta, r.comentarioErrado, l.nomeLinguagem, t.assunto, q.idTipoQuestao\n" + 
 				"	FROM QUESTAO q\n" + 
 				"		INNER JOIN resposta_Multipla_Escolha r\n" + 
 				"			ON	q.idQuestao=r.idQuestao\n" + 
@@ -47,6 +47,8 @@ public class QuestaoDAO {
 				questao.setComentarioErrado(result.getString("comentarioErrado"));
 				questao.setNomeLinguagem(result.getString("nomeLinguagem"));
 				questao.setAssunto(result.getString("assunto"));
+				questao.setIdTipoQuestao(result.getString("idTipoQuestao"));
+
 				listaQuestoes.add(questao);				
 			}
 		} catch (Exception e) {
