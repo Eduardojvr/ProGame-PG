@@ -63,7 +63,7 @@
             <br><br> <br><br><br>
             <div id="quest">
               <div style="padding-left:33%;">
-                <label id="pontuacao" style="color: whitesmoke;">Pontuação atual: {{ pontos }}</label>
+                <label id="pontuacao" style="color: whitesmoke;">Pontuação atual: {{ dados.pontuacao }}</label>
               </div>    
                 <!-- Tipo múltipla escolha -->
                 <div class="modal-dialog"  v-if=" totalQuestaoMultipla > countQuestao && items[countQuestao].idTipoQuestao === '4'">
@@ -187,7 +187,6 @@ function teste(value){
 let q = new Vue({
     el : '#quest',
     data : {
-      pontos: 0,
       lacuna: '',
       countQuestao: 0,  
       items: [
@@ -274,7 +273,7 @@ let q = new Vue({
         if(vm.questaoTipoLacuna[posicao].resposta == resposta || vm.questaoTipoLacuna[posicao].respostaAlternativa == resposta ){
             document.getElementById('feedback').innerHTML = vm.questaoTipoLacuna[posicao].comentarioCorreta;
             document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
-            atualizaPontuacao();
+            vm.atualizaPontuacao();
         } else {
             document.getElementById('feedback').innerHTML = vm.questaoTipoLacuna[posicao].comentarioIncorreta;
             document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
@@ -338,7 +337,6 @@ let q = new Vue({
             const vm = this;
             axios.get('../rs/user/getUser/').then(function(response) {
                 vm.dados = response.data;
-                console.log(response);
                 axios.get('../rs/questao/getQuestao/'+response.data["level"]).then(function(response) {
                   vm.items = response.data;
                   while(vm.items[vm.totalQuestaoMultipla] != null){
@@ -362,13 +360,13 @@ let q = new Vue({
         },
         atualizaPontuacao :function (){
           const vm = this;
-          // abreLoad(modalName);
           axios.get('../rs/user/getUser/').then(function(response) {
+            vm.dados = response.data;
             axios.get('../rs/user/atualizaPontuacao/'+(parseInt(response.data["pontuacao"])+parseInt(10))+'/'+vm.dados.matricula).then(function(response) {
+              vm.dados.pontuacao = parseInt(vm.dados.pontuacao)+parseInt(10);
             });
           });
 
-          // fechaLoad(modalName);
 
         }
     }

@@ -116,8 +116,6 @@ public class UsuarioDAO {
 		StringBuilder sql = new StringBuilder();
 
 		sql.append("update USUARIO set pontuacao="+pontos+" where matricula="+matricula);
-		System.out.println("====> "+matricula);
-		System.out.println("====> "+pontos);
 
 		
 		try {
