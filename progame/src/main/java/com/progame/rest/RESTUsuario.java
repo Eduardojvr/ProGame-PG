@@ -49,6 +49,25 @@ public class RESTUsuario {
 		}
 
 	}
+	
+
+	@POST
+	@Path("/pontos")
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public Response atualizaPontos(Usuario usuario) {
+		UsuarioDAO dao = new UsuarioDAO();
+		
+		try {
+			dao.insert(usuario);
+			return Response.ok().entity("Usuario cadastrado").build();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return Response.status(Status.BAD_REQUEST).entity("Erro ao cadastrar!").build();
+		}
+
+	}
 
 	@POST
 	@Path("/login")
@@ -62,7 +81,13 @@ public class RESTUsuario {
 
 			if (login != null) {
 				request.getSession().setAttribute("logado", true);
-				request.getSession().setAttribute("usuario", login);
+				request.getSession().setAttribute("level", login.getLevel());
+				request.getSession().setAttribute("matricula", login.getMatricula());
+				request.getSession().setAttribute("pontuacao", login.getPontuacao());
+				request.getSession().setAttribute("email", login.getEmail());
+				request.getSession().setAttribute("nomeUsuario", login.getNomeUsuario());
+				request.getSession().setAttribute("idTipoPerfil", login.getIdTipoPerfil());
+				request.getSession().setAttribute("idPersonagem", login.getIdPersonagem());				
 				return login;
 			}
 		} catch (Exception e) {
@@ -97,39 +122,46 @@ public class RESTUsuario {
 		}
 
 	}
-
-	@POST
-	@Path("/isLogin")
-	@Produces(MediaType.APPLICATION_JSON)
-	public boolean isLogin() {
-
-		try {
-			Object obj = request.getSession().getAttribute("logado");
-			if (request.getSession() == null || obj.equals(false)) {
-				return false;
-			} else {
-				return true;
-			}
-
-		} catch (Exception e) {
-			// e.printStackTrace();
-			return false;
-		}
-
-	}
+//
+//	@POST
+//	@Path("/isLogin")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public boolean isLogin() {
+//
+//		try {
+//			Object obj = request.getSession().getAttribute("logado");
+//			if (request.getSession() == null || obj.equals(false)) {
+//				return false;
+//			} else {
+//				return true;
+//			}
+//
+//		} catch (Exception e) {
+//			// e.printStackTrace();
+//			return false;
+//		}
+//
+//	}
 
 	@GET
 	@Path("/getUser")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response userAut() {
+	public  Usuario usuario() {
 
 		try {
-			Usuario user = (Usuario) request.getSession().getAttribute("usuario");
-			return Response.ok().entity(user).build();
-
+			Usuario usuario = new Usuario();
+			usuario.setLevel(request.getSession().getAttribute("level").toString());
+			usuario.setMatricula(request.getSession().getAttribute("matricula").toString());
+			usuario.setPontuacao(request.getSession().getAttribute("pontuacao").toString());
+			usuario.setEmail(request.getSession().getAttribute("email").toString());
+			usuario.setNomeUsuario(request.getSession().getAttribute("nomeUsuario").toString());
+			usuario.setIdTipoPerfil(request.getSession().getAttribute("idTipoPerfil").toString());
+			usuario.setIdPersonagem(request.getSession().getAttribute("idPersonagem").toString());
+			
+			return usuario;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return Response.status(Status.FORBIDDEN).build();
+			return null;
 		}
 
 	}

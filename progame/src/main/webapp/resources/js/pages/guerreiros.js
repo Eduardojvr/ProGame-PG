@@ -9,11 +9,16 @@ let j = new Vue({
                 // window.location.href = 'perfil.html';
                 // sessionStorage.setItem('imgPersonagem', '../resources/img/jogadores/aisha.png ');
             //
-            axios.get('../rs/personagem/setPersonagem/'+value+'/'+sessionStorage.getItem('matricula')).then(function(response) {
-                sessionStorage.setItem('idPersonagem', value);   
-                sessionStorage.setItem('escolheu', 1);   
-                window.location.href = 'perfil.html';
+            axios.get('../rs/user/getUser/').then(function(response) {
+                var matricula = response.data["matricula"];
+                axios.get('../rs/personagem/setPersonagem/'+value+'/'+matricula).then(function(response) {
+                    sessionStorage.setItem('idPersonagem', value);   
+                    sessionStorage.setItem('escolheu', 1);   
+                    window.location.href = 'perfil.html';
+                });
             });
+
+            
         }
     }
     

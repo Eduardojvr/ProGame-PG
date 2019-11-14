@@ -46,7 +46,7 @@ public class UsuarioDAO {
 			pstmt.setString(2, usuario.getMatricula());
 			pstmt.setString(3, criptografia);
 			pstmt.setString(4, usuario.getIdTipoPerfil());
-			pstmt.setString(5, "2");
+			pstmt.setString(5, "7");
 			pstmt.setString(6, usuario.getEmail());
 			pstmt.setString(7, "0");
 			pstmt.setString(8, "1");

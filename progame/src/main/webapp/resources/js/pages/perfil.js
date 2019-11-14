@@ -29,78 +29,105 @@ function grafico(){
      });           
 }
 
-let a = new Vue({
-    el : '#imagem',
+
+
+let tes = new Vue({
+    el : '#usuario',
     data : {
-        idPersonagem : sessionStorage.getItem("idPersonagem"),
-        nomePersonagem : sessionStorage.getItem("nomePersonagem"),
-        imgPersonagem : sessionStorage.getItem("imgPersonagem")
+        dados : [
+            {
+                nomeUsuario : '',
+                matricula : '',
+                idTipoPerfil : '',
+                idPersonagem : '',
+                email : '',
+                pontuacao : '',
+                level : '',
+                nomePersonagem : ''
+            }
+        ]
     },
     created : function(){
         const vm = this;
-        vm.personagem();
+        vm.getUser();
+
     },
     methods : {
-        personagem : function(){
+        getUser : function(){
             const vm = this;
-            // Apagar
-                // sessionStorage.setItem('nomePersonagem','Aisha');
-                // sessionStorage.setItem('imgPersonagem', sessionStorage.getItem('imgPersonagem'));
-            //
-            axios.get('../rs/personagem/getPersonagem/'+sessionStorage.getItem('idPersonagem')).then(function(response) {
-                sessionStorage.setItem('idPersonagem', response.data["idPersonagem"]);
-                sessionStorage.setItem('nomePersonagem', response.data["nomePersonagem"]);
-                sessionStorage.setItem('imgPersonagem', response.data["imgPersonagem"]);
+            axios.get('../rs/user/getUser').then(function(response) {
+                vm.dados[0].nomeUsuario = response.data["nomeUsuario"];
+                vm.dados[0].matricula = response.data["matricula"];
+                vm.dados[0].idTipoPerfil  = response.data["idTipoPerfil"];
+                // vm.dados[0].idPersonagem  = response.data["idPersonagem"];
+                vm.dados[0].email = response.data["email"];
+                vm.dados[0].pontuacao  = response.data["pontuacao"];
+                vm.dados[0].level  = response.data["level"];
+                vm.dados[0].nomePersonagem = sessionStorage.getItem('nomePersonagem');
+                // sessionStorage.setItem('idPersonagem', vm.dados[0].idPersonagem);
             });
         }
+
     }
     
  });
 
 
+let a = new Vue({
+    el : '#personagem',
+    data : {
+        idPersonagem : '',
+        nomePersonagem : '',
+        imgPersonagem : ''
+    },
+    mounted : function(){
+            const vm = this;
+            vm.idPersonagem = sessionStorage.getItem('idPersonagem');
+            vm.imgPersonagem = sessionStorage.getItem('imgPersonagem');
+            // Apagar
+                // sessionStorage.setItem('nomePersonagem','Aisha');
+                // sessionStorage.setItem('imgPersonagem', sessionStorage.getItem('imgPersonagem'));
+            if(vm.idPersonagem != null){
+                axios.get('../rs/personagem/getPersonagem/'+vm.idPersonagem).then(function(response) {
+                    vm.nomePersonagem = response.data["nomePersonagem"];
+                    vm.imgPersonagem = response.data["imgPersonagem"];
+                    sessionStorage.setItem('nomePersonagem', vm.nomePersonagem);
+                });
+            }
+    }
+ });
+
+
 let t = new Vue({
     el : '#gerenciapersonagem',
-    data : {
-        level : sessionStorage.getItem("level")
-    },
     created : function(){
         const vm = this;
-        document.getElementById('nome').innerHTML = sessionStorage.getItem('nomeUsuario');
-        document.getElementById('email').innerHTML =  sessionStorage.getItem('email');
-        document.getElementById('matricula').innerHTML = sessionStorage.getItem('matricula');
-        document.getElementById('pontos').innerHTML = sessionStorage.getItem('pontuacao');
-        document.getElementById('personagem').innerHTML = sessionStorage.getItem('nomePersonagem');
-        document.getElementById('level').innerHTML =  sessionStorage.getItem('level');
         sessionStorage.setItem('vitorias', 90);
         sessionStorage.setItem('perdas', 10);
 
     },
     methods : {
-        
         redireciona : function(link){
             window.location.href = link;
         }
-     
-    
     },
     mounted : function(){
             if(sessionStorage.getItem('login') == 1){
                 sessionStorage.setItem('login', 0);
                 $("#modalFeedbackBomJogo").modal("show");
             }
-            if(sessionStorage.getItem('idPersonagem') == 2){
+            if(sessionStorage.getItem('idPersonagem') == 7){
                 $("#modalRelatedContent").modal("show");
             }
             if(sessionStorage.getItem('escolheu') == 1){
                 sessionStorage.setItem('escolheu', 0);
                 $("#modalFeedback").modal("show");
             }
+
     }
     
  });
 
 grafico();
-document.getElementById("nomeJogador").innerHTML = sessionStorage.getItem('nomeUsuario');
-
 
  

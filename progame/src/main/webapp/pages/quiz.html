@@ -144,7 +144,7 @@
             <script src="../resources/js/axios.min.js"></script>
             <script src="../resources/css/quiz.css" ></script>
             <script src="../resources/js/quiz.js"></script>
-            
+            <script src="../resources/js/pages/login.js"></script>
 <script>
 
   
@@ -169,7 +169,7 @@ function teste(value){
 let q = new Vue({
     el : '#quest',
     data : {
-      pontos: '',
+      pontos: 0,
       lacuna: '',
       countQuestao: 0,  
       items: [
@@ -216,7 +216,8 @@ let q = new Vue({
       countQuestaoLacuna : 0,
       totalQuestaoMultipla : 0,
       totalQuestaoVF : 0,
-      totalQuestaoLacuna : 0 
+      totalQuestaoLacuna : 0,
+
     },
     created :function(){
         const vm = this;
@@ -224,6 +225,7 @@ let q = new Vue({
         vm.getQuestao();
         vm.getQuestaoVF();
         vm.getQuestaoLacuna();
+        vm.salvaPontos();
     },
     methods : {
       verificaVF : function(resposta, posicao){
@@ -341,6 +343,17 @@ let q = new Vue({
         atualizaPontuacao : function(){
           const vm = this;
           vm.pontos =  vm.pontos + 10;
+        },
+        salvaPontos : function(){
+          const vm = this;
+            // axios.get('../rs/user/pontos/', ).then(function(response) {
+            //     vm.questaoTipoLacuna = response.data;
+            //     while(vm.questaoTipoLacuna[vm.totalQuestaoLacuna] != null){
+            //       vm.totalQuestaoLacuna+=1;
+            //     }
+            // }).catch(function (error){
+            //     alert("Erro!");
+            // });
         }
     }
 

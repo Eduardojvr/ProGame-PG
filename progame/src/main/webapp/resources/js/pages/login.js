@@ -2,7 +2,7 @@ let login = new Vue({
     el : '#login',
     data : {
         matricula : '',
-		senha : '' 
+        senha : '' 
     },
     methods : {
         logar : function(modalName) {
@@ -15,13 +15,16 @@ let login = new Vue({
             abreLoad(modalName);
             axios.post('rs/user/login', obj).then(function(response) {
                 if(response.status == 200){
-                    sessionStorage.setItem('nomeUsuario', response.data["nomeUsuario"]);
-                    sessionStorage.setItem('matricula', response.data["matricula"]);
-                    sessionStorage.setItem('idTipoPerfil', response.data["idTipoPerfil"]);
+                    // sessionStorage.setItem('nomeUsuario', response.data["nomeUsuario"]);
+                    // sessionStorage.setItem('matricula', response.data["matricula"]);
+                    // sessionStorage.setItem('idTipoPerfil', response.data["idTipoPerfil"]);
+                    // sessionStorage.setItem('idPersonagem', response.data["idPersonagem"]);
+                    // sessionStorage.setItem('email', response.data["email"]);
+                    // sessionStorage.setItem('pontuacao', response.data["pontuacao"]);
+                    // sessionStorage.setItem('level', response.data["level"]);
+                    
+            
                     sessionStorage.setItem('idPersonagem', response.data["idPersonagem"]);
-                    sessionStorage.setItem('email', response.data["email"]);
-                    sessionStorage.setItem('pontuacao', response.data["pontuacao"]);
-                    sessionStorage.setItem('level', response.data["level"]);
 
                     //temporario
                     // sessionStorage.setItem('nivel', 1);
@@ -29,7 +32,7 @@ let login = new Vue({
 
                     // gambiarra :(
                     sessionStorage.setItem('imgPersonagem', '../resources/img/persona.png');
-                    if(sessionStorage.getItem('idPersonagem') != 2) {
+                    if(sessionStorage.getItem('idPersonagem') != 7) {
                         sessionStorage.setItem('login', 1);
                     }
                     window.location.href = "pages/perfil.html"; 
@@ -39,7 +42,6 @@ let login = new Vue({
                 fechaLoad(modalName);
             
             }).catch(function (error){
-                sessionStorage.setItem('isLogado', false);
                 alert("Erro ao realizar login :(");
                 fechaLoad(modalName);
 

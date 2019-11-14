@@ -190,33 +190,31 @@
                 </div>
             </div>
 
-         <div class="main-panel" id="gerenciapersonagem">
+         <div class="main-panel">
+
                 <div class="container" id="posicao">
-                    <!-- Button trigger modal -->
-       <!-- Button trigger modal-->
-  
                         <div class="row">
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="well well-sm">
                                     <div class="row">
-                                        <div class="col-sm-6 col-md-4" id="imagem">
+                                        <div class="col-sm-6 col-md-4" id="personagem">
                                             <img v-bind:src="imgPersonagem" style="height: 290px; width: 280px;"  alt="" class="img-rounded img-responsive" />
                                         </div>
-                                        <div class="col-sm-2 col-md-8" style="padding-left: 130px">
+                                        <div id="usuario" class="col-sm-2 col-md-8" style="padding-left: 130px">
                                             </i></cite></small>
                                             <p>
                                                 <br><br>
-                                                <i class="glyphicon glyphicon-envelope"></i>Nome: <a id="nome"></a>
+                                                <i class="glyphicon glyphicon-envelope"></i>Nome: <a>{{ dados[0].nomeUsuario }}</a>
                                                 <br>
-                                                <i class="glyphicon glyphicon-envelope"></i>Email: <a id="email"></a>
+                                                <i class="glyphicon glyphicon-envelope"></i>Email: <a>{{ dados[0].email }}</a>
                                                 <br />
-                                                <i class="glyphicon glyphicon-gift"></i>Matrícula: <a id="matricula"></a>
+                                                <i class="glyphicon glyphicon-gift"></i>Matrícula: <a>{{ dados[0].matricula }}</a>
                                                 <br />
-                                                <i class="glyphicon glyphicon-gift"></i>Pontos: <a id="pontos"></a>
+                                                <i class="glyphicon glyphicon-gift"></i>Pontos: <a>{{ dados[0].pontuacao }}</a>
                                                 <br />
-                                                <i class="glyphicon glyphicon-gift"></i>Personagem: <a id="personagem"></a>
+                                                <i class="glyphicon glyphicon-gift"></i>Personagem: <a>{{ dados[0].nomePersonagem }}</a>
                                                  <br />
-                                                <i class="glyphicon glyphicon-gift"></i>Level: <a id="level"></a>
+                                                <i class="glyphicon glyphicon-gift"></i>Level: <a>{{ dados[0].level }}</a>
                                             </p>
                                         </div>
                                     </div>
@@ -284,6 +282,13 @@
         $(function(){
           $("#menu").load("base.html"); // incluir conteúdo do menu.html na div com id #includedContent
         });
+
+
+
+
+
+
+
 </script> 
 
 </body>
