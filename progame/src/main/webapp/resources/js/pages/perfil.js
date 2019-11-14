@@ -100,10 +100,17 @@ let a = new Vue({
 
 let t = new Vue({
     el : '#gerenciapersonagem',
+    data : {
+        nomeUsuario : ''    
+    },
     created : function(){
         const vm = this;
         sessionStorage.setItem('vitorias', 90);
         sessionStorage.setItem('perdas', 10);
+
+        axios.get('../rs/user/getUser').then(function(response) {
+            vm.nomeUsuario = response.data["nomeUsuario"];
+        });
 
     },
     methods : {

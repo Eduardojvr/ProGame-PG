@@ -37,8 +37,8 @@
                     class="img-fluid" alt="">
                 </div>
       
-                <div class="col-7" id="gerenciapersonagem">
-                  <p><strong>Olá, <a id="nomeJogador"></a>!</strong></p>
+                <div id="gerenciapersonagem" class="col-7">
+                  <p><strong>Olá, {{ nomeUsuario }}!</strong></p>
                   <p>Notamos que você ainda não escolheu seu guerreiro, faça isso clicando no botão abaixo!</p><br>
                   <div style="padding-left: 12%;">
                     <button type="button" @click="redireciona('guerreiros.html')" class="btn btn-info btn-md">Escolher jogador</button>
