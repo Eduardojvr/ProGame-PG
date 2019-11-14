@@ -1,15 +1,24 @@
-if((sessionStorage.getItem('level')) >=1 && (sessionStorage.getItem('level') <= 9)){
-    sessionStorage.setItem('nivel', '0'+sessionStorage.getItem('level'));
-} else {
-    sessionStorage.setItem('nivel', sessionStorage.getItem('level'));
-}
 
 let progress = new Vue({
     el: '#levelJogador',
     data: {
-        level: sessionStorage.getItem('nivel')
+        level: ''
+    },
+    created : function(){
+        const vm = this;
+        vm.getUser();
+        
     },
     methods : {
-    
+        getUser : function(){
+            const vm = this;
+            axios.get('../rs/user/getUser').then(function(response) {
+                vm.level = response.data["level"];
+                if((vm.level) >=1 && (vm.level) <= 9){
+                    vm.level = '0'+vm.level;
+                } 
+            });
+          
+        }
     }
 });

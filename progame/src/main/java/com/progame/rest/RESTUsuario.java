@@ -11,6 +11,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
@@ -122,41 +123,28 @@ public class RESTUsuario {
 		}
 
 	}
-//
-//	@POST
-//	@Path("/isLogin")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public boolean isLogin() {
-//
-//		try {
-//			Object obj = request.getSession().getAttribute("logado");
-//			if (request.getSession() == null || obj.equals(false)) {
-//				return false;
-//			} else {
-//				return true;
-//			}
-//
-//		} catch (Exception e) {
-//			// e.printStackTrace();
-//			return false;
-//		}
-//
-//	}
 
 	@GET
 	@Path("/getUser")
 	@Produces(MediaType.APPLICATION_JSON)
 	public  Usuario usuario() {
-
+		UsuarioDAO dao = new UsuarioDAO();
+		Usuario usuarioTmp = null;
 		try {
+			usuarioTmp = dao.getUsuario(request.getSession().getAttribute("matricula").toString());
+			
 			Usuario usuario = new Usuario();
-			usuario.setLevel(request.getSession().getAttribute("level").toString());
+//			usuario.setLevel(request.getSession().getAttribute("level").toString());
 			usuario.setMatricula(request.getSession().getAttribute("matricula").toString());
-			usuario.setPontuacao(request.getSession().getAttribute("pontuacao").toString());
-			usuario.setEmail(request.getSession().getAttribute("email").toString());
+//			usuario.setPontuacao(request.getSession().getAttribute("pontuacao").toString());
+//			usuario.setEmail(request.getSession().getAttribute("email").toString());
 			usuario.setNomeUsuario(request.getSession().getAttribute("nomeUsuario").toString());
-			usuario.setIdTipoPerfil(request.getSession().getAttribute("idTipoPerfil").toString());
+//			usuario.setIdTipoPerfil(request.getSession().getAttribute("idTipoPerfil").toString());
 			usuario.setIdPersonagem(request.getSession().getAttribute("idPersonagem").toString());
+			usuario.setPontuacao(usuarioTmp.getPontuacao());			
+			usuario.setLevel(usuarioTmp.getLevel());
+			usuario.setEmail(usuarioTmp.getEmail());
+			usuario.setIdTipoPerfil(usuarioTmp.getIdTipoPerfil());
 			
 			return usuario;
 		} catch (Exception e) {
@@ -164,5 +152,37 @@ public class RESTUsuario {
 			return null;
 		}
 
+	}
+	
+	@GET
+	@Path("/atualizaPontuacao/{pontuacao}/{matricula}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public Boolean atualizaPontuacao(@PathParam("pontuacao") int pontuacao, @PathParam("matricula") String matricula) {
+		UsuarioDAO dao = new UsuarioDAO();
+		boolean update = false;
+		try {
+			update = dao.updatePontuacao(pontuacao, matricula);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return update;
+	}
+	
+	@GET
+	@Path("/atualizaLevel/{levelatual}/{matricula}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public Boolean atualizaLevel(@PathParam("levelatual") String levelatual, @PathParam("matricula") String matricula) {
+		UsuarioDAO dao = new UsuarioDAO();
+		boolean update = false;
+		try {
+			update = dao.updateLevel(levelatual, matricula);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return update;
 	}
 }

@@ -70,7 +70,7 @@ public class UsuarioDAO {
 
 		ResultSet result = null;
 
-		
+			
 		String senha = user.getSenha();
 		MessageDigest m=MessageDigest.getInstance("MD5");
 	    m.update(senha.getBytes(),0,senha.length());
@@ -105,5 +105,95 @@ public class UsuarioDAO {
 		}
 		return achou;
 	}
+	
+	public boolean updatePontuacao(int pontos, String matricula) throws Exception {
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
 
+		ResultSet result = null;
+
+		Boolean execute = false;
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("update USUARIO set pontuacao="+pontos+" where matricula="+matricula);
+		System.out.println("====> "+matricula);
+		System.out.println("====> "+pontos);
+
+		
+		try {
+			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+			pstmt.executeUpdate();
+			execute = true;
+		}catch(Exception e) {
+			throw new Exception(e);
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+		return execute;
+	}
+	
+
+	public boolean updateLevel(String levelatual, String matricula) throws Exception {
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		ResultSet result = null;
+		
+		int novoLevel = Integer.parseInt(levelatual) + 1;
+				
+		Boolean execute = false;
+		pstmt = db.prepareStatement("update USUARIO set level="+novoLevel+" where matricula="+matricula);
+
+		try {
+			result = pstmt.executeQuery();
+			execute = true;
+		} catch(Exception e) {
+			throw new Exception(e);
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+		return execute;
+	}
+	
+	
+	public Usuario getUsuario(String matricula) throws Exception {
+		Usuario achou = null;
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		ResultSet result = null;
+
+		pstmt = db.prepareStatement("select nomeUsuario, matricula, senha, idTipoPerfil, idPersonagem, email, "
+				+ "pontuacao, level from usuario where matricula="+matricula);
+
+		try {
+			result = pstmt.executeQuery();
+			while (result.next()) {
+				if (matricula.equals(result.getString("matricula"))) {
+					achou = new Usuario();
+					achou.setNomeUsuario(result.getString("nomeUsuario"));
+					achou.setMatricula(result.getString("matricula"));
+					//achou.setSenha(result.getString("senha"));
+					achou.setIdTipoPerfil(result.getString("idTipoPerfil"));
+					achou.setIdPersonagem(result.getString("idPersonagem"));
+					achou.setEmail(result.getString("email"));		
+					achou.setPontuacao(result.getString("pontuacao"));				
+					achou.setLevel(result.getString("level"));				
+
+				}
+			}
+			
+		} catch(Exception e) {
+			throw new Exception(e);
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+		return achou;
+	}
 }

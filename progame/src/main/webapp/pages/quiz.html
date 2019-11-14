@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz</title>
@@ -19,7 +25,18 @@
 
 </head>
 <body  style="background-color:  rgb(17, 17, 17);">
-  
+
+  <div class="modal fade" id="loader" tabindex="-1" role="img"  aria-hidden="true" style="padding-right: 10%; padding-top: 10%;">
+    <div class="modal-dialog" role="document" style="width:0px;">
+      <div class="modal-content" style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
+        <img src="../resources/img/loadGT.gif" width=200px height=200px style="border-radius: 100px;">
+        <div>
+          <label style="color: seashell; padding-left: 40px;">Processando...</label>
+        </div>
+      </div>
+    </div>
+    </div>
+
     <div class="modal fade" id="modalCerto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding-right: 20%; padding-top: 5%;">
         <div class="modal-dialog" role="document">
           <div class="modal-content" style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
@@ -141,10 +158,11 @@
            </div>  -->
           
             <script src="../resources/js/vue.js"></script>
-            <script src="../resources/js/axios.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
             <script src="../resources/css/quiz.css" ></script>
             <script src="../resources/js/quiz.js"></script>
-            <script src="../resources/js/pages/login.js"></script>
+            <script src="../resources/js/load.js"></script>
+
 <script>
 
   
@@ -212,20 +230,30 @@ let q = new Vue({
           assunto: ''
         }
       ],
+      dados : [
+            {
+                email : '',
+                idPersonagem : '',
+                idTipoPerfil : '',
+                level : '',
+                matricula : '',
+                nomeUsuario : '',
+                pontuacao : ''
+            }
+        ],
       countQuestaoVF : 0,
       countQuestaoLacuna : 0,
       totalQuestaoMultipla : 0,
       totalQuestaoVF : 0,
       totalQuestaoLacuna : 0,
-
+      matricula : '',
+      idTipoPerfil : '',
+      level : ''
+      
     },
     created :function(){
         const vm = this;
-        vm.pontos = sessionStorage.getItem('pontos');
         vm.getQuestao();
-        vm.getQuestaoVF();
-        vm.getQuestaoLacuna();
-        vm.salvaPontos();
     },
     methods : {
       verificaVF : function(resposta, posicao){
@@ -235,7 +263,6 @@ let q = new Vue({
         if(resposta == vm.questaoTipoVF[posicao].resposta){
           document.getElementById('feedback').innerHTML = 'Resposta correta!';
           document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
-
           vm.atualizaPontuacao();
         } else {
           document.getElementById('feedback').innerHTML = 'Resposta incorreta. A resposta correta é: '+vm.questaoTipoVF[posicao].resposta;
@@ -247,7 +274,7 @@ let q = new Vue({
         if(vm.questaoTipoLacuna[posicao].resposta == resposta || vm.questaoTipoLacuna[posicao].respostaAlternativa == resposta ){
             document.getElementById('feedback').innerHTML = vm.questaoTipoLacuna[posicao].comentarioCorreta;
             document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
-            vm.atualizaPontuacao();
+            atualizaPontuacao();
         } else {
             document.getElementById('feedback').innerHTML = vm.questaoTipoLacuna[posicao].comentarioIncorreta;
             document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
@@ -309,55 +336,45 @@ let q = new Vue({
         },
         getQuestao : function(){
             const vm = this;
-            axios.get('../rs/questao/getQuestao/'+sessionStorage.getItem('level')).then(function(response) {
-                vm.items = response.data;
-                while(vm.items[vm.totalQuestaoMultipla] != null){
-                  vm.totalQuestaoMultipla+=1;
-                }
-            }).catch(function (error){
-                alert("Erro!");
-            });
+            axios.get('../rs/user/getUser/').then(function(response) {
+                vm.dados = response.data;
+                console.log(response);
+                axios.get('../rs/questao/getQuestao/'+response.data["level"]).then(function(response) {
+                  vm.items = response.data;
+                  while(vm.items[vm.totalQuestaoMultipla] != null){
+                    vm.totalQuestaoMultipla+=1;
+                  }
+                });
+                axios.get('../rs/questao/getQuestaoVerdadeiroFalso/'+response.data["level"]).then(function(response) {
+                  vm.questaoTipoVF = response.data;
+                  while(vm.questaoTipoVF[vm.totalQuestaoVF] != null){
+                    vm.totalQuestaoVF+=1;
+                  }
+                });
+                axios.get('../rs/questao/getQuestaoLacuna/'+response.data["level"]).then(function(response) {
+                  vm.questaoTipoLacuna = response.data;
+                  while(vm.questaoTipoLacuna[vm.totalQuestaoLacuna] != null){
+                    vm.totalQuestaoLacuna+=1;
+                  }
+                });
+          });
+            
         },
-        getQuestaoVF : function(){
-            const vm = this;
-            axios.get('../rs/questao/getQuestaoVerdadeiroFalso/'+sessionStorage.getItem('level')).then(function(response) {
-                vm.questaoTipoVF = response.data;
-                while(vm.questaoTipoVF[vm.totalQuestaoVF] != null){
-                  vm.totalQuestaoVF+=1;
-                }
-            }).catch(function (error){
-                alert("Erro!");
-            });
-        },
-        getQuestaoLacuna : function(){
-            const vm = this;
-            axios.get('../rs/questao/getQuestaoLacuna/'+sessionStorage.getItem('level')).then(function(response) {
-                vm.questaoTipoLacuna = response.data;
-                while(vm.questaoTipoLacuna[vm.totalQuestaoLacuna] != null){
-                  vm.totalQuestaoLacuna+=1;
-                }
-            }).catch(function (error){
-                alert("Erro!");
-            });
-        },
-        atualizaPontuacao : function(){
+        atualizaPontuacao :function (){
           const vm = this;
-          vm.pontos =  vm.pontos + 10;
-        },
-        salvaPontos : function(){
-          const vm = this;
-            // axios.get('../rs/user/pontos/', ).then(function(response) {
-            //     vm.questaoTipoLacuna = response.data;
-            //     while(vm.questaoTipoLacuna[vm.totalQuestaoLacuna] != null){
-            //       vm.totalQuestaoLacuna+=1;
-            //     }
-            // }).catch(function (error){
-            //     alert("Erro!");
-            // });
+          // abreLoad(modalName);
+          axios.get('../rs/user/getUser/').then(function(response) {
+            axios.get('../rs/user/atualizaPontuacao/'+(parseInt(response.data["pontuacao"])+parseInt(10))+'/'+vm.dados.matricula).then(function(response) {
+            });
+          });
+
+          // fechaLoad(modalName);
+
         }
     }
-
 });
+
+
 
 </script>
 
