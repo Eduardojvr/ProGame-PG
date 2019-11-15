@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.progame.entity.Usuario;
@@ -194,4 +195,41 @@ public class UsuarioDAO {
 		}
 		return achou;
 	}
+	
+	public ArrayList<Usuario> getAllUsuario() throws Exception {
+		Usuario achou = null;
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		ResultSet result = null;
+		ArrayList <Usuario> usuario = new ArrayList<Usuario>();
+		
+		pstmt = db.prepareStatement("select * from usuario order by pontuacao desc");
+		
+		try {
+			result = pstmt.executeQuery();
+			while (result.next()) {
+					achou = new Usuario();
+					achou.setNomeUsuario(result.getString("nomeUsuario"));
+					achou.setMatricula(result.getString("matricula"));
+					//achou.setSenha(result.getString("senha"));
+					achou.setIdTipoPerfil(result.getString("idTipoPerfil"));
+					achou.setIdPersonagem(result.getString("idPersonagem"));
+					achou.setEmail(result.getString("email"));		
+					achou.setPontuacao(result.getString("pontuacao"));				
+					achou.setLevel(result.getString("level"));	
+					usuario.add(achou);
+
+			}
+			
+		} catch(Exception e) {
+			throw new Exception(e);
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+		return usuario;
+	}
+	
 }

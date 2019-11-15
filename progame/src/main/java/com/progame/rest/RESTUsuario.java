@@ -1,6 +1,7 @@
 
 package com.progame.rest;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -184,5 +185,20 @@ public class RESTUsuario {
 			e.printStackTrace();
 		}
 		return update;
+	}
+	
+	@GET
+	@Path("/todosUsuarios")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Usuario>  getAllUser() {
+		UsuarioDAO dao = new UsuarioDAO();
+		ArrayList <Usuario> usuarios = null;
+		
+		try {
+			usuarios = dao.getAllUsuario();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return usuarios; 
 	}
 }
