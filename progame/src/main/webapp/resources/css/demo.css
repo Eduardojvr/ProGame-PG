@@ -850,3 +850,13 @@
     padding-right: -50px;
     padding-left: 80px;
 }
+
+.card:hover .card-title{
+    transition: 0.3s;
+    color: #00bbff;
+}
+
+.card .card-title{
+    text-align: justify;
+    font-size: 17pt;
+}
