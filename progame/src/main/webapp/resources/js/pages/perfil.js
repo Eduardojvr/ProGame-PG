@@ -3,7 +3,7 @@ function grafico(){
     var myChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ['perdas', 'vitorias'],
+            labels: ['Derrotas', 'Vitórias'],
             datasets: [{
                 label: ['Vitorias', 'Derrotas'],
                 data: [sessionStorage.getItem('vitorias'), sessionStorage.getItem('perdas')],
@@ -50,7 +50,6 @@ let tes = new Vue({
     created : function(){
         const vm = this;
         vm.getUser();
-
     },
     methods : {
         getUser : function(){
@@ -66,8 +65,8 @@ let tes = new Vue({
                 vm.dados[0].nomePersonagem = sessionStorage.getItem('nomePersonagem');
                 // sessionStorage.setItem('idPersonagem', vm.dados[0].idPersonagem);
             });
-        }
 
+        }
     }
     
  });
@@ -96,6 +95,8 @@ let a = new Vue({
             }
     }
  });
+
+
 
 
 let t = new Vue({
@@ -131,6 +132,34 @@ let t = new Vue({
                 $("#modalFeedback").modal("show");
             }
 
+    }
+    
+ });
+
+
+ let progress = new Vue({
+    el : '#progress',
+    data : {
+        level : '',
+        progresso: ''
+    },
+    created : function(){
+        const vm = this;
+        axios.get('../rs/user/getUser').then(function(response) {
+            vm.level = response.data["level"];
+            vm.calculaProgresso();
+        });
+
+    },
+    methods : {
+        calculaProgresso : function(){
+            const vm =this;
+            if(parseInt(vm.level)<12){
+                vm.progresso = (100/12*parseInt(vm.level)).toFixed(2)+'%';
+            } else {
+                vm.progresso = (100/12*parseInt(vm.level)).toFixed(0)+'%';
+            }
+        }
     }
     
  });
