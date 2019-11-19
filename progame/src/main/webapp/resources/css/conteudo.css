@@ -1,0 +1,33 @@
+.imagemMidia{
+    padding-left: 30%;
+    padding-top: 10%;
+} 
+
+.imagem{
+    padding: 20px;
+    height: 150px;
+    width:  150px;
+}
+
+div.box {
+	width: 130px;
+    display: inline-block;
+    padding-bottom: 80px;
+}
+
+span {
+    text-align: center;
+}
+
+img:hover{
+    background-color: rgb(224, 224, 224, 0.7);
+    border-radius: 80px;    
+}
+
+.espaco{
+    padding-left: 100px;
+}
+
+.video{
+    padding-left: 6%;
+}

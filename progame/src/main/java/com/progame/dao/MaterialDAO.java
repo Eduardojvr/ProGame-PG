@@ -15,7 +15,7 @@ public class MaterialDAO {
 		ResultSet result = null;
 		ArrayList <MaterialDTO> material = new ArrayList<MaterialDTO>();
 
-		pstmt = db.prepareStatement("select m.idMaterial, m.idTipoMidia, m.urlMaterial, lp.idLinguagem, lp.nomeLinguagem,\n" + 
+		pstmt = db.prepareStatement("select m.idMaterial, m.idTipoMidia, m.urlMaterial, m.tituloMaterial, lp.idLinguagem, lp.nomeLinguagem,\n" + 
 				"	   lp.descLinguagem, tm.nomeTipo, tm.idTipo, tc.idConteudo,tc.assunto, tc.desConteudo	 from MATERIAL m\n" + 
 				"	inner join TIPO_CONTEUDO tc\n" + 
 				"		on tc.idConteudo = m.idConteudo\n" + 
@@ -23,7 +23,7 @@ public class MaterialDAO {
 				"		on tm.idTipo=m.idTipoMidia\n" + 
 				"	inner join LINGUAGEM_PROGRAMACAO lp\n" + 
 				"		on lp.idLinguagem=m.idLinguagem\n" + 
-				"where m.idTipoMidia="+idTipoMidia+" and tc.idConteudo="+idConteudo+"and lp.idLinguagem="+idLinguagem+";");
+				"where m.idTipoMidia="+idTipoMidia+" and tc.idConteudo="+idConteudo+" and lp.idLinguagem="+idLinguagem+";");
 		try {
 			result = pstmt.executeQuery();
 			while (result.next()) {
@@ -31,6 +31,7 @@ public class MaterialDAO {
 				m.setIdMaterial(result.getString("idMaterial"));
 				m.setIdTipoMidia(result.getString("idTipoMidia"));
 				m.setUrlMaterial(result.getString("urlMaterial"));
+				m.setTituloMaterial(result.getString("tituloMaterial"));
 				m.setIdLinguagem(result.getString("idLinguagem"));
 				m.setNomeLinguagem(result.getString("nomeLinguagem"));
 				m.setDescLinguagem(result.getString("descLinguagem"));

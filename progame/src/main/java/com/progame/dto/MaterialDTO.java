@@ -5,6 +5,7 @@ public class MaterialDTO {
 	private String idConteudo;
 	private String idTipoMidia;
 	private String urlMaterial;
+	private String tituloMaterial;
 	private String idLinguagem;
 	private String nomeLinguagem;
 	private String descLinguagem;
@@ -77,6 +78,12 @@ public class MaterialDTO {
 	}
 	public void setDesConteudo(String desConteudo) {
 		this.desConteudo = desConteudo;
+	}
+	public String getTituloMaterial() {
+		return tituloMaterial;
+	}
+	public void setTituloMaterial(String tituloMaterial) {
+		this.tituloMaterial = tituloMaterial;
 	}
 	
 	

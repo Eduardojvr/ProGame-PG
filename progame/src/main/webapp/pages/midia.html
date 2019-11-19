@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ProGame</title>
+    <link
+	href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+<link href="../resources/css/bootstrap.min.css" rel="stylesheet" />
+<link href="../resources/css/light-bootstrap-dashboard.css?v=2.0.0 "
+	rel="stylesheet" />
+<link href="../resources/css/demo.css" rel="stylesheet" />
+<link href="../resources/css/conteudo.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    	<div class="wrapper">
+                <div id="menu"></div>
+                <div class="main-panel">
+                    <div class="container">
+                            <br><br>
+                        <h2 class="titulo">Selecione um tipo de conteúdo</h2> 
+                        <div class="imagemMidia">
+					<div class="box" onclick="tipoMidia(2)">
+						<img class="imagem" src="../resources/img/site.png"
+							alt="">
+
+						<div style="text-align: center;">
+							<span> Sítio virtual </span>
+						</div>
+					</div> <span class="espaco"></span>
+                    <div class="box" onclick="tipoMidia(1)">
+                            <img class="imagem" src="../resources/img/video.png"
+                                alt="">
+    
+                            <div style="text-align: center;">
+                                <span> Vídeo aula </span>
+                            </div>
+                        </div>
+			
+					</div>
+				</div>   
+                       
+
+                </div>
+            </div>
+        
+
+    	<script src="../resources/js/axios.min.js"></script>
+	<script src="../resources/js/vue.js"></script>
+
+	<script src="../resources/js/core/jquery.3.2.1.min.js"
+		type="text/javascript"></script>
+	<script src="../resources/js/core/popper.min.js" type="text/javascript"></script>
+	<script src="../resources/js/core/bootstrap.min.js"
+		type="text/javascript"></script>
+	<script src="../resources/js/plugins/bootstrap-switch.js"></script>
+	
+	<script src="../resources/js/plugins/bootstrap-notify.js"></script>
+	<script src="../resources/js/light-bootstrap-dashboard.js?v=2.0.0 "
+		type="text/javascript"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+	<script src="../resources/js/Chart.js"></script>
+	<script src="../resources/js/Chart.bundle.js"></script>
+	<script src="../resources/js/Chart.bundle.min.js"></script>
+	<script src="../resources/js/Chart.min.js"></script>
+
+	<script>
+    $(function(){
+        $("#menu").load("base.html"); 
+    });
+
+    function tipoMidia(tipo){
+        sessionStorage.setItem('tipomidia', tipo);
+        location.href="conteudo.html"
+    }
+
+    </script>
+</body>
+</html>
