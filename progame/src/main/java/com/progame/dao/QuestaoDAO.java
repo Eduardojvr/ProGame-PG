@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.progame.dto.QuestaoCodigoDTO;
 import com.progame.dto.QuestaoDTO;
 import com.progame.dto.QuestaoLacunaDTO;
 import com.progame.dto.QuestaoVerdadeiroFalsoDTO;
@@ -135,6 +136,52 @@ public class QuestaoDAO {
 				questao.setRespostaAlternativa(result.getString("respostaAlternativa"));
 				questao.setComentarioCorreta(result.getString("comentarioCorreta"));
 				questao.setComentarioIncorreta(result.getString("comentarioIncorreta"));
+				questao.setNomeLinguagem(result.getString("nomeLinguagem"));
+				questao.setAssunto(result.getString("assunto"));
+				listaQuestoes.add(questao);		
+				
+			}
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+		return listaQuestoes;
+	}
+	
+
+	public List<QuestaoCodigoDTO> getQuestaoCodigo(String level) throws Exception {
+
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		ResultSet result = null;
+		List<QuestaoCodigoDTO> listaQuestoes = new ArrayList<QuestaoCodigoDTO>();
+
+
+		pstmt = db.prepareStatement("select q.idQuestao, q.idTipoConteudo, q.idLinguagem, q.idTipoQuestao, q.questao,\n" + 
+				"	   rc.resposta, l.nomeLinguagem, t.assunto \n" + 
+				"from questao q\n" + 
+				"	inner join resposta_codigo rc\n" + 
+				"			on rc.idQuestao=q.idQuestao\n" + 
+				"	Inner join LINGUAGEM_PROGRAMACAO l\n" + 
+				"			ON l.idLinguagem=q.idLinguagem\n" + 
+				"	inner join TIPO_CONTEUDO t\n" + 
+				"			ON t.idConteudo=q.idTipoConteudo\n" + 
+				"	where q.idTipoConteudo="+level+";");
+
+		try {
+			result = pstmt.executeQuery();
+			while (result.next()) {
+				QuestaoCodigoDTO questao = new QuestaoCodigoDTO();
+				questao.setIdQuestao(result.getString("idQuestao"));
+				questao.setIdTipoConteudo(result.getString("idTipoConteudo"));
+				questao.setIdLinguagem(result.getString("idLinguagem"));
+				questao.setIdTipoQuestao(result.getString("idTipoQuestao"));
+				questao.setQuestao(result.getString("questao"));
+				questao.setResposta(result.getString("resposta"));
 				questao.setNomeLinguagem(result.getString("nomeLinguagem"));
 				questao.setAssunto(result.getString("assunto"));
 				listaQuestoes.add(questao);		

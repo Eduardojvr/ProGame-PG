@@ -66,7 +66,7 @@
                 <label id="pontuacao" style="color: whitesmoke;">Pontuação atual: {{ dados.pontuacao }}</label>
               </div>    
                 <!-- Tipo múltipla escolha -->
-                <div class="modal-dialog"  v-if=" totalQuestaoMultipla > countQuestao && items[countQuestao].idTipoQuestao === '4'">
+                <!-- <div class="modal-dialog"  v-if=" totalQuestaoMultipla > countQuestao && items[countQuestao].idTipoQuestao === '4'">
                   <div class="modal-content" >
                      <div class="modal-header">
                         <h3><span class="label label-warning" ></span> {{ items[countQuestao].questao }}</h3>
@@ -86,9 +86,9 @@
                 </div>  
             </div>
            
-          </div>    
+          </div>     -->
             <!-- Tipo Verdadeiro ou falso -->
-            <div v-else-if=" totalQuestaoVF > countQuestaoVF && questaoTipoVF[countQuestaoVF].idTipoQuestao === '3' " class="modal-dialog">
+            <div v-if=" totalQuestaoVF > countQuestaoVF && questaoTipoVF[countQuestaoVF].idTipoQuestao === '3' " class="modal-dialog">
                 <div class="modal-content" >
                    <div class="modal-header">
                       <h3><span class="label label-warning" ></span> {{ questaoTipoVF[countQuestaoVF].questao }}</h3>
@@ -114,9 +114,28 @@
                  <div class="modal-header">
                     <h3><span class="label label-warning" ></span> {{ questaoTipoLacuna[countQuestaoLacuna].questao }}</h3>
                   </div>
-                  <input type="text" placeholder="Digite a resposta aqui" v-model="lacuna"  name="lacuna">
+                  <input type="text" placeholder="Digite a resposta aqui" rows="10" cols="40"  v-model="lacuna"  name="lacuna">
                   <div style="padding-top: 15px;">
                     <label class="element-animation2 btn btn-lg btn-primary btn-block"><input type="button"  name="q_answer"  style="display: none;" @click="verificaLacuna(lacuna, countQuestaoLacuna)">Responder</label>
+                  </div>
+                  <div id="feedback"></div>
+              
+           <div style="padding-left: 33%; padding-top: 1%;">
+              <input type="image" src="../resources/img/icons/setaEsquerda.png" style="width: 80px; height: 80px;" @click="anteriorLacuna()">
+                <input type="image" src="../resources/img/icons/setaDireita.png" style="width: 80px; height: 80px;" @click="proximaLacuna()">
+            </div>  
+        </div>
+       
+      </div> 
+          <!-- Tipo Codigo -->
+          <div v-else-if="totalQuestaoCodigo > countQuestaoCodigo && questaoTipoCodigo[countQuestaoCodigo].idTipoQuestao === '2' " class="modal-dialog">
+              <div class="modal-content" >
+                 <div class="modal-header">
+                    <h3><span class="label label-warning" ></span> {{ questaoTipoCodigo[countQuestaoCodigo].questao }}</h3>
+                  </div>
+                    <textarea name="codigo" rows="10" cols="30" v-model="codigo" >Escreva seu código aqui</textarea>               
+                       <div style="padding-top: 15px;">
+                    <label class="element-animation2 btn btn-lg btn-primary btn-block"><input type="button"  name="q_answer"  style="display: none;" @click="verificaCodigo(codigo, countQuestaoCodigo)">Responder</label>
                   </div>
                   <div id="feedback"></div>
               
@@ -229,6 +248,18 @@ let q = new Vue({
           assunto: ''
         }
       ],
+      questaoTipoCodigo: [
+        {
+          idQuestao : '',
+          idTipoConteudo: '',
+          idLinguagem: '',
+          idTipoQuestao: '',
+          questao: '',
+          resposta: '',
+          nomeLinguagem: '',
+          assunto: '',
+        }
+      ],
       dados : [
             {
                 email : '',
@@ -245,9 +276,12 @@ let q = new Vue({
       totalQuestaoMultipla : 0,
       totalQuestaoVF : 0,
       totalQuestaoLacuna : 0,
+      totalQuestaoCodigo: 0,
+      countQuestaoCodigo: 0,
       matricula : '',
       idTipoPerfil : '',
-      level : ''
+      level : '',
+      codigo: ''
       
     },
     created :function(){
@@ -355,6 +389,12 @@ let q = new Vue({
                     vm.totalQuestaoLacuna+=1;
                   }
                 });
+                axios.get('../rs/questao/getQuestaoCodigo/'+response.data["level"]).then(function(response) {
+                  vm.questaoTipoCodigo = response.data;
+                  while(vm.questaoTipoCodigo[vm.totalQuestaoCodigo] != null){
+                    vm.totalQuestaoCodigo+=1;
+                  }
+                });
           });
             
         },
@@ -366,8 +406,23 @@ let q = new Vue({
               vm.dados.pontuacao = parseInt(vm.dados.pontuacao)+parseInt(10);
             });
           });
-
-
+        },
+        verificaCodigo : function(codigo, posicao){
+          const vm = this;
+          let obj = {
+            matricula: vm.dados.matricula,
+            codigo: vm.codigo
+          }
+          axios.post('../rs/questao/verificacodigo', obj).then(function(response) {
+            if(response.data == vm.questaoTipoCodigo[posicao].resposta ){
+              document.getElementById('feedback').innerHTML = "Parabéns, resposta correta!";
+              document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
+              vm.atualizaPontuacao();
+            } else {
+              document.getElementById('feedback').innerHTML = "Resposta incorreta! A saída esperada é: "+vm.questaoTipoCodigo[posicao].resposta;
+              document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
+            }
+          });
         }
     }
 });

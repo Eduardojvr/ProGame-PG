@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="cache-control" content="max-age=0">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT">
+    <meta http-equiv="pragma" content="no-cache">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+    <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
+    <script src="Quiz_arquivos/jquery-1.js"></script>
+
+
+    <link rel="stylesheet" href="Quiz_arquivos/bootstrap.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="Quiz_arquivos/jquery-3.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="Quiz_arquivos/popper.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="Quiz_arquivos/bootstrap.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>        
+    <link rel="stylesheet" type="text/css" href="Quiz_arquivos/util.css">
+    <link rel="stylesheet" href="Quiz_arquivos/font-awesome.css">
+
+</head>
+<body style="background-color:  rgb(17, 17, 17);">
+
+  <div class="modal fade" id="loader" tabindex="-1" role="img" aria-hidden="true" style="padding-right: 10%; padding-top: 10%;">
+    <div class="modal-dialog" role="document" style="width:0px;">
+      <div class="modal-content" style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
+        <img src="Quiz_arquivos/loadGT.gif" style="border-radius: 100px;" width="200px" height="200px">
+        <div>
+          <label style="color: seashell; padding-left: 40px;">Processando...</label>
+        </div>
+      </div>
+    </div>
+    <div id="extwaiimpotscp" style="display:none" v="{aa90" f="ZTJGaE9UQTVNekkwTFRjMU1qQXROR1JqWkMwNVpXSXdMVGxtTUdFNVpXTXpZekF3TTMwPQ==" q="db61ca7f" c="174.1" i="184.8" u="17.51" s="19102318" w="false" m="BMe=" vn="yotcn"></div></div>
+
+    <div class="modal fade" id="modalCerto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding-right: 20%; padding-top: 5%;">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content" style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
+              <audio id="venceu" src="Quiz_arquivos/levelup.mp3"></audio>
+              <img src="Quiz_arquivos/levelUp.gif" alt="some text" width="800" height="500">
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="modalErrado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding-right: 20%; padding-top: 4%;">
+          <div class="modal-dialog" role="document">
+              <div>
+                  <h1 style="color:whitesmoke; padding-left: 160px;">Você foi derrotado!</h1>
+                </div>
+              <div class="modal-content">
+                <audio id="perdeu" src="Quiz_arquivos/perdeu.mp3"></audio>
+                  <img src="Quiz_arquivos/orcWin.gif" alt="some text" width="800" height="450">
+            </div>
+          </div>
+        </div>
+
+
+      <div class="container-fluid">
+            <br><br> <br><br><br>
+            <div id="quest"><div style="padding-left: 33%;"><label id="pontuacao" style="color: whitesmoke;">Pontuação atual: 320</label></div> <div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h3><span class="label label-warning"></span>
+ Orcs são guerreiros que não se dão bem com números. Escreva um código 
+que seja capaz de somar dois valores a e b, onde a=3 e b=1</h3></div> <textarea name="codigo" rows="10" cols="30">#include
+
+int main(){
+}</textarea> <div style="padding-top: 15px;"><label class="element-animation2 btn btn-lg btn-primary btn-block"><input type="button" name="q_answer" style="display: none;">Responder</label></div> <div class="" id="feedback" style="background-color: rgba(255, 255, 255, 0);"></div> <div style="padding-left: 33%; padding-top: 1%;"><input type="image" src="Quiz_arquivos/setaEsquerda.png" style="width: 80px; height: 80px;"> <input type="image" src="Quiz_arquivos/setaDireita.png" style="width: 80px; height: 80px;"></div></div></div> <div style="text-align: center; padding-right: 40px;"><button type="button" onclick="window.location.assign('perfil.html')" class="btn btn-outline-danger" style="padding: 10px 50px;">Sair</button></div></div>
+          <!-- Tipo Ecolha multipla -->
+          <!-- <div class="modal-dialog" id="quest">
+              <div class="modal-content" >
+                 <div class="modal-header">
+                    <h3><span class="label label-warning" id="qid">{{ countQuestao+1 }} -</span> {{ items[countQuestao].questao }}</h3>
+                </div>
+                <div class="modal-body">
+                  <div class="quiz" >
+                   <label class="element-animation1 btn btn-lg btn-primary btn-block"><input type="radio"  name="q_answer"  style="display: none;">{{ items[countQuestao].respCorreta }}</label>
+                   <label class="element-animation2 btn btn-lg btn-primary btn-block"><input type="radio"  name="q_answer"  style="display: none;">{{ items[countQuestao].respIncorreta1 }}</label>
+                   <label class="element-animation3 btn btn-lg btn-primary btn-block"><input type="radio"  name="q_answer"  style="display: none;">{{ items[countQuestao].respIncorreta2 }}</label>
+                   <label class="element-animation4 btn btn-lg btn-primary btn-block"><input type="radio"  name="q_answer"  style="display: none;">{{ items[countQuestao].respIncorreta3 }}</label>
+               </div>
+           </div>
+           <div style="padding-left: 33%; padding-top: 1%;">
+              <input type="image" src="../resources/img/icons/setaEsquerda.png" style="width: 80px; height: 80px;" @click="anterior()">
+                <input type="image" src="../resources/img/icons/setaDireita.png" style="width: 80px; height: 80px;" @click="proxima()">
+            </div>  
+        </div>
+       
+      </div> 
+          <div style="text-align: center; padding-right:40px;" >
+              <button type="button" class="btn btn-outline-danger" style="padding: 10px 50px 10px 50px;" onclick="window.location.assign('perfil.html')" >Sair</button>
+          </div>
+           </div>  -->
+          
+            <script src="Quiz_arquivos/vue.js"></script>
+            <script src="Quiz_arquivos/axios.js"></script>
+            <script src="Quiz_arquivos/quiz.css"></script>
+            <script src="Quiz_arquivos/quiz.js"></script>
+            <script src="Quiz_arquivos/load.js"></script>
+
+<script>
+
+  
+  function abreModal(modal){
+    $("#"+modal).modal("show");
+
+  }
+function teste(value){
+  if(value == 'f'){
+    abreModal("modalCerto");
+    const audio = document.getElementById('venceu');
+    audio.play();
+  }
+  else {
+    abreModal("modalErrado");
+    const audio = document.getElementById('perdeu');
+    audio.play();
+
+  }
+}
+
+let q = new Vue({
+    el : '#quest',
+    data : {
+      lacuna: '',
+      countQuestao: 0,  
+      items: [
+        {
+          assunto : '',
+          comentarioCorreta: '',
+          comentarioErrado: '',
+          idQuestao: '',
+          idTipoConteudo: '',
+          nomeLinguagem: '',
+          questao: '',
+          respCorreta: '',
+          respIncorreta1: '',
+          respIncorreta2: '',
+          respIncorreta3: '',
+          idTipoQuestao: '',
+          resposta: ''
+        }
+      ],
+      questaoTipoVF: [
+        {
+          idQuestao: '',
+          idTipoQuestao: '',
+          questao: '',
+          resposta: '',
+          nomeLinguagem: '',
+          assunto: ''
+        }
+      ],
+      questaoTipoLacuna: [
+        {
+          idQuestao: '',
+          idTipoQuestao: '',
+          questao: '',
+          resposta: '',
+          respostaAlternativa: '',
+          comentarioCorreta: '',
+          comentarioIncorreta: '',
+          nomeLinguagem: '',
+          assunto: ''
+        }
+      ],
+      questaoTipoCodigo: [
+        {
+          idQuestao : '',
+          idTipoConteudo: '',
+          idLinguagem: '',
+          idTipoQuestao: '',
+          questao: '',
+          resposta: '',
+          nomeLinguagem: '',
+          assunto: '',
+        }
+      ],
+      dados : [
+            {
+                email : '',
+                idPersonagem : '',
+                idTipoPerfil : '',
+                level : '',
+                matricula : '',
+                nomeUsuario : '',
+                pontuacao : ''
+            }
+        ],
+      countQuestaoVF : 0,
+      countQuestaoLacuna : 0,
+      totalQuestaoMultipla : 0,
+      totalQuestaoVF : 0,
+      totalQuestaoLacuna : 0,
+      totalQuestaoCodigo: 0,
+      countQuestaoCodigo: 0,
+      matricula : '',
+      idTipoPerfil : '',
+      level : '',
+      codigo: ''
+      
+    },
+    created :function(){
+        const vm = this;
+        vm.getQuestao();
+    },
+    methods : {
+      verificaVF : function(resposta, posicao){
+        const vm = this;
+        document.getElementById('btVF').style = "visibility: hidden;";
+
+        if(resposta == vm.questaoTipoVF[posicao].resposta){
+          document.getElementById('feedback').innerHTML = 'Resposta correta!';
+          document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
+          vm.atualizaPontuacao();
+        } else {
+          document.getElementById('feedback').innerHTML = 'Resposta incorreta. A resposta correta é: '+vm.questaoTipoVF[posicao].resposta;
+          document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
+        }
+      },
+      verificaLacuna : function(resposta, posicao){
+        const vm = this;
+        if(vm.questaoTipoLacuna[posicao].resposta == resposta || vm.questaoTipoLacuna[posicao].respostaAlternativa == resposta ){
+            document.getElementById('feedback').innerHTML = vm.questaoTipoLacuna[posicao].comentarioCorreta;
+            document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
+            vm.atualizaPontuacao();
+        } else {
+            document.getElementById('feedback').innerHTML = vm.questaoTipoLacuna[posicao].comentarioIncorreta;
+            document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
+        }
+      },
+       proxima : function(){
+          const vm = this;
+          if(vm.totalQuestaoMultipla > vm.countQuestao){
+            vm.countQuestao+=1;
+          }
+          vm.limpaFeed();
+        },
+        anterior : function(){
+          const vm = this;
+          if(vm.countQuestao > 0){
+            vm.countQuestao-=1;
+          }
+          vm.limpaFeed();
+        },
+        proximaVF(){
+          const vm = this;
+          if(vm.countQuestaoVF < vm.totalQuestaoVF){
+            vm.countQuestaoVF+=1;
+          }
+          vm.limpaFeed();
+          document.getElementById('btVF').style = "visibility: visible;";
+        },
+        anteriorVF(){
+          const vm = this;
+          if(vm.countQuestaoVF > 0){
+            vm.countQuestaoVF-=1;
+          }else{
+            vm.countQuestao-=1;
+          }
+          vm.limpaFeed();
+          document.getElementById('btVF').style = "visibility: visible;";
+        },
+        proximaLacuna(){
+          const vm = this;
+          if(vm.totalQuestaoLacuna > vm.countQuestaoLacuna){
+            vm.countQuestaoLacuna+=1;
+          }
+          vm.limpaFeed();
+        },
+        anteriorLacuna(){
+          const vm = this;
+          if(vm.countQuestaoLacuna > 0){
+            vm.countQuestaoLacuna-=1;
+          }else{
+            vm.countQuestaoVF-=1;
+          }
+          vm.limpaFeed();
+
+        },
+        limpaFeed : function(){
+          document.getElementById('feedback').style = "background-color: rgba(255, 255, 255, 0);"
+          document.getElementById('feedback').innerHTML = ""
+
+        },
+        getQuestao : function(){
+            const vm = this;
+            axios.get('../rs/user/getUser/').then(function(response) {
+                vm.dados = response.data;
+                axios.get('../rs/questao/getQuestao/'+response.data["level"]).then(function(response) {
+                  vm.items = response.data;
+                  while(vm.items[vm.totalQuestaoMultipla] != null){
+                    vm.totalQuestaoMultipla+=1;
+                  }
+                });
+                axios.get('../rs/questao/getQuestaoVerdadeiroFalso/'+response.data["level"]).then(function(response) {
+                  vm.questaoTipoVF = response.data;
+                  while(vm.questaoTipoVF[vm.totalQuestaoVF] != null){
+                    vm.totalQuestaoVF+=1;
+                  }
+                  console.log(vm.questaoTipoVF);
+                });
+                axios.get('../rs/questao/getQuestaoLacuna/'+response.data["level"]).then(function(response) {
+                  vm.questaoTipoLacuna = response.data;
+                  while(vm.questaoTipoLacuna[vm.totalQuestaoLacuna] != null){
+                    vm.totalQuestaoLacuna+=1;
+                  }
+                });
+                axios.get('../rs/questao/getQuestaoCodigo/'+response.data["level"]).then(function(response) {
+                  vm.questaoTipoCodigo = response.data;
+                  while(vm.questaoTipoCodigo[vm.totalQuestaoCodigo] != null){
+                    vm.totalQuestaoCodigo+=1;
+                  }
+                });
+          });
+            
+        },
+        atualizaPontuacao :function (){
+          const vm = this;
+          axios.get('../rs/user/getUser/').then(function(response) {
+            vm.dados = response.data;
+            axios.get('../rs/user/atualizaPontuacao/'+(parseInt(response.data["pontuacao"])+parseInt(10))+'/'+vm.dados.matricula).then(function(response) {
+              vm.dados.pontuacao = parseInt(vm.dados.pontuacao)+parseInt(10);
+            });
+          });
+        },
+        verificaCodigo : function(codigo){
+          axios.get('../rs/questao/verificacodigo/'+codigo).then(function(response) {
+            alert("OK!")
+          });
+        }
+    }
+});
+
+
+
+</script>
+
+
+</div></body></html>

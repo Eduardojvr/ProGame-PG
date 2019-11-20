@@ -853,10 +853,11 @@
 
 .card:hover .card-title{
     transition: 0.3s;
-    color: #00bbff;
+    color: #9368E9;
 }
 
 .card .card-title{
+    color: #00bbff;
     font-size: 17pt;
 }
 
