@@ -13,10 +13,10 @@ public class ConnectionManager implements Serializable {
 	 * *
 	 */ 
 
-
-		private static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/progame?serverTimezone=America/Sao_Paulo&allowPublicKeyRetrieval=true&useSSL=false";
-		private static final String DB_USER = "adm";
-		private static final String DB_PASSWORD = "adm";
+//
+		private static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/heroku_7e0ed9b0e3f50c0?serverTimezone=America/Sao_Paulo&allowPublicKeyRetrieval=true&useSSL=false";
+		private static final String DB_USER = "progame";
+		private static final String DB_PASSWORD = "progame";
 
 	Connection dbConnection = null;
 	
