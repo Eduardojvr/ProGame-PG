@@ -419,7 +419,7 @@ let q = new Vue({
               document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
               vm.atualizaPontuacao();
             } else {
-              document.getElementById('feedback').innerHTML = "Resposta incorreta! A saída esperada é: "+vm.questaoTipoCodigo[posicao].resposta;
+              document.getElementById('feedback').innerHTML = "Resposta incorreta! A saída esperada é: "+vm.questaoTipoCodigo[posicao].resposta+". Resposta obtida: "+response.data;
               document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
             }
           });

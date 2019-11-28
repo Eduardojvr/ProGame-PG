@@ -34,6 +34,8 @@ import com.progame.dto.QuestaoVerdadeiroFalsoDTO;
 import com.progame.entity.Codigo;
 import com.progame.entity.Personagem;
 
+import com.progame.biblioteca.*;
+
 @Path("/questao")
 public class RESTQuestao {
 	
@@ -119,9 +121,9 @@ public class RESTQuestao {
 			ArrayList<String> resultado = null;
 			final CompiladorDAO shell = new CompiladorDAO();
 	        try {
-	        	String comando = "cd && cd Desktop && echo '"+codigo.getCodigo()+"' >> "+codigo.getMatricula()+".c"+
-	        			" && gcc "+codigo.getMatricula()+".c"+" -o "+codigo.getMatricula()+" && ./"+codigo.getMatricula()+
-	        			" && rm "+codigo.getMatricula()+".c"+" && rm "+codigo.getMatricula();
+	        	String comando = "cd && mkdir "+codigo.getMatricula()+" && cd "+ codigo.getMatricula() +" && git clone https://github.com/Eduardojvr/bibliotecasC.git && cd bibliotecasC/STDIO && echo '"+codigo.getCodigo()+"' >> "+codigo.getMatricula()+".c"+
+	        			" && gcc "+codigo.getMatricula()+".c"+" -o "+codigo.getMatricula()+" && ./"+codigo.getMatricula();
+//	        			+" && rm "+codigo.getMatricula()+".c"+" && rm "+codigo.getMatricula();
 				resultado = shell.executeCommand(comando);
 				
 

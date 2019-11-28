@@ -31,7 +31,7 @@ public class CompiladorDAO{
             br = new BufferedReader(isr);
              String line=null;
             while((line = br.readLine()) != null) {
-//                System.out.println("Saida: "+line);
+            	System.out.println("Saida: "+line);
                 resultado.add(line);
             }
             
