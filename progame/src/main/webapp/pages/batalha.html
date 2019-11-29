@@ -54,6 +54,59 @@
   </div>
   <!-- FIM MODAL -->
 
+  <!-- inicio modal batalha -->
+
+
+
+
+
+
+  <div class="modal fade top" id="modalBatalha" tabindex="-1" role="dialog" aria-labelledby="modalLinguagem" aria-hidden="true" data-backdrop='false'>
+      <div class="modal-dialog modal-lg modal-frame modal-top" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalLinguagem">Cadastro de Linguagem</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <table>
+                  <tr>
+                    <td>Título:</td>
+                    <td><input type="text" v-model="nomeLinguagem" name="nome" size="60"> <br/><br/></td>
+                  </tr>
+                  <tr>
+                    <td>Desafio:</td>
+                    <td><textarea name="descricao" v-model="descLinguagem" rows="5" cols="60"></textarea><br/></td>
+                  </tr>
+              </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" @click="cadastra()">Salvar</button>
+          </div>
+        </div>
+      </div>
+  </div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- fim modal batalha -->
+
   <div class="wrapper">
     <div id="menu"></div>
     
@@ -83,7 +136,7 @@
                   </v-app> -->
                   <b-table :fields="headers" :items="usuarios"
                    @row-clicked="testa" hover responsive> 
-                
+
                 </b-table>
                 </div>
          </div>
@@ -164,7 +217,9 @@ new Vue({
     },
     testa:function(user){
       const vm = user;
-      alert(user.nomeUsuario);
+
+      $("#modalBatalha").modal("show");
+
     }
   },
   mounted : function(){

@@ -34,7 +34,6 @@ import com.progame.dto.QuestaoVerdadeiroFalsoDTO;
 import com.progame.entity.Codigo;
 import com.progame.entity.Personagem;
 
-import com.progame.biblioteca.*;
 
 @Path("/questao")
 public class RESTQuestao {
