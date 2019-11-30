@@ -4,16 +4,16 @@ public class QuestaoDTO {
 	private String idQuestao;
 	private String idTipoConteudo;
 	private String questao;
-	private String respCorreta;
-	private String respIncorreta1;
-	private String respIncorreta2;
-	private String respIncorreta3;
+	private String respostaCorretaAlternativa;
+	private String alternativa1;
+	private String alternativa2;
+	private String alternativa3;
+	private String alternativa4;
 	private String comentarioCorreta;
 	private String comentarioErrado;
 	private String nomeLinguagem;
 	private String assunto;
 	private String idTipoQuestao;
-	
 	public String getIdQuestao() {
 		return idQuestao;
 	}
@@ -32,29 +32,35 @@ public class QuestaoDTO {
 	public void setQuestao(String questao) {
 		this.questao = questao;
 	}
-	public String getRespCorreta() {
-		return respCorreta;
+	public String getRespostaCorretaAlternativa() {
+		return respostaCorretaAlternativa;
 	}
-	public void setRespCorreta(String respCorreta) {
-		this.respCorreta = respCorreta;
+	public void setRespostaCorretaAlternativa(String respostaCorretaAlternativa) {
+		this.respostaCorretaAlternativa = respostaCorretaAlternativa;
 	}
-	public String getRespIncorreta1() {
-		return respIncorreta1;
+	public String getAlternativa1() {
+		return alternativa1;
 	}
-	public void setRespIncorreta1(String respIncorreta1) {
-		this.respIncorreta1 = respIncorreta1;
+	public void setAlternativa1(String alternativa1) {
+		this.alternativa1 = alternativa1;
 	}
-	public String getRespIncorreta2() {
-		return respIncorreta2;
+	public String getAlternativa2() {
+		return alternativa2;
 	}
-	public void setRespIncorreta2(String respIncorreta2) {
-		this.respIncorreta2 = respIncorreta2;
+	public void setAlternativa2(String alternativa2) {
+		this.alternativa2 = alternativa2;
 	}
-	public String getRespIncorreta3() {
-		return respIncorreta3;
+	public String getAlternativa3() {
+		return alternativa3;
 	}
-	public void setRespIncorreta3(String respIncorreta3) {
-		this.respIncorreta3 = respIncorreta3;
+	public void setAlternativa3(String alternativa3) {
+		this.alternativa3 = alternativa3;
+	}
+	public String getAlternativa4() {
+		return alternativa4;
+	}
+	public void setAlternativa4(String alternativa4) {
+		this.alternativa4 = alternativa4;
 	}
 	public String getComentarioCorreta() {
 		return comentarioCorreta;
@@ -88,5 +94,6 @@ public class QuestaoDTO {
 	}
 	
 
+	
 
 }

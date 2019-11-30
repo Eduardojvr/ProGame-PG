@@ -24,16 +24,16 @@ public class QuestaoDAO {
 
 
 		pstmt = db.prepareStatement(""
-				+ "SELECT q.idQuestao, q.idTipoConteudo, q.questao, r.respCorreta, r.respIncorreta1, r.respIncorreta2,\n" + 
-				"	   r.respIncorreta3, r.comentarioCorreta, r.comentarioErrado, l.nomeLinguagem, t.assunto, q.idTipoQuestao\n" + 
+				+ "SELECT q.idQuestao, q.idTipoConteudo, q.questao, r.respostaCorretaAlternativa, r.alternativa1, r.alternativa2,\n" + 
+				"	   r.alternativa3, r.alternativa4, r.comentarioCorreta, r.comentarioErrado, l.nomeLinguagem, t.assunto, q.idTipoQuestao\n" + 
 				"	FROM QUESTAO q\n" + 
-				"		INNER JOIN resposta_Multipla_Escolha r\n" + 
+				"		INNER JOIN resposta_multipla_escolha r\n" + 
 				"			ON	q.idQuestao=r.idQuestao\n" + 
 				"		INNER JOIN LINGUAGEM_PROGRAMACAO l\n" + 
 				"			ON l.idLinguagem=q.idLinguagem\n" + 
 				"		INNER JOIN TIPO_CONTEUDO t\n" + 
 				"			ON t.idConteudo=q.idTipoConteudo\n" + 
-				"    WHERE q.idTipoConteudo="+level);
+				"    WHERE q.idTipoConteudo="+level+" order by rand()");
 
 		try {
 			result = pstmt.executeQuery();
@@ -42,16 +42,16 @@ public class QuestaoDAO {
 				questao.setIdQuestao(result.getString("idQuestao"));
 				questao.setIdTipoConteudo(result.getString("idTipoConteudo"));
 				questao.setQuestao(result.getString("questao"));
-				questao.setRespCorreta(result.getString("respCorreta"));
-				questao.setRespIncorreta1(result.getString("respIncorreta1"));
-				questao.setRespIncorreta2(result.getString("respIncorreta2"));
-				questao.setRespIncorreta3(result.getString("respIncorreta3"));
+				questao.setRespostaCorretaAlternativa(result.getString("respostaCorretaAlternativa"));
+				questao.setAlternativa1(result.getString("alternativa1"));
+				questao.setAlternativa2(result.getString("alternativa2"));
+				questao.setAlternativa3(result.getString("alternativa3"));
+				questao.setAlternativa4(result.getString("alternativa4"));
 				questao.setComentarioCorreta(result.getString("comentarioCorreta"));
 				questao.setComentarioErrado(result.getString("comentarioErrado"));
 				questao.setNomeLinguagem(result.getString("nomeLinguagem"));
 				questao.setAssunto(result.getString("assunto"));
 				questao.setIdTipoQuestao(result.getString("idTipoQuestao"));
-
 				listaQuestoes.add(questao);				
 			}
 		} catch (Exception e) {
@@ -81,7 +81,7 @@ public class QuestaoDAO {
 				"			ON l.idLinguagem=q.idLinguagem\n" + 
 				"		Inner join TIPO_CONTEUDO t\n" + 
 				"			ON t.idConteudo=q.idTipoConteudo\n" + 
-				"		where q.idTipoConteudo="+level);
+				"		where q.idTipoConteudo="+level+" order by rand()");
 
 		try {
 			result = pstmt.executeQuery();
@@ -123,7 +123,7 @@ public class QuestaoDAO {
 				"			ON l.idLinguagem=q.idLinguagem\n" + 
 				"		Inner join TIPO_CONTEUDO t\n" + 
 				"			ON t.idConteudo=q.idTipoConteudo\n" + 
-				"		where q.idTipoConteudo="+level);
+				"		where q.idTipoConteudo="+level+" order by rand()");
 
 		try {
 			result = pstmt.executeQuery();
@@ -170,7 +170,7 @@ public class QuestaoDAO {
 				"			ON l.idLinguagem=q.idLinguagem\n" + 
 				"	inner join TIPO_CONTEUDO t\n" + 
 				"			ON t.idConteudo=q.idTipoConteudo\n" + 
-				"	where q.idTipoConteudo="+level+";");
+				"	where q.idTipoConteudo="+level+" order by rand();");
 
 		try {
 			result = pstmt.executeQuery();
