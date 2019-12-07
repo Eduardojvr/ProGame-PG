@@ -22,7 +22,7 @@
 </head>
 <body>
   <!-- INICIO MODAL -->
-  <div class="modal fade right" id="modalInicio" tabindex="-1" role="dialog"
+  <div style="padding-left: 15%; background-color: rgba(0, 0, 0, 0.6);" class="modal fade right" id="modalInicio" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-info" role="document">
       <!--Content-->
@@ -58,28 +58,36 @@
 
 
 
-<div style="padding-left: 15%; background-color: rgba(0, 0, 0, 0.6);" class="modal fade top" id="pvsp" tabindex="-1" role="dialog" aria-labelledby="pvsp" aria-hidden="true" data-backdrop='false'>
-    <div class="modal-dialog modal-lg modal-frame modal-top" role="document">
-      <div class="modal-content">         
+<div style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);" class="modal fade top" id="pvsp" tabindex="-1" role="dialog" aria-labelledby="pvsp" aria-hidden="true" data-backdrop='false'>
+    <div  class="modal-dialog modal-lg modal-frame modal-top" role="document">
+      <div  style="background-color:rgba(255, 255, 255, 0.9);"  class="modal-content">         
         <div class="modal-header">
+            <!-- <div style="text-align: center;">
+                <h2 style="color: royalblue;" >Player vs Player</h2>
+            </div> -->
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
+          
         </div>
-        <div style="text-align: center;">
-            <h2>Player vs Player</h2>
-        </div>
-        <div class="modal-body">
+       
+        <div id="jogadores" class="modal-body">
+          <div style="text-align: center;">
+            <h3>Desafio enviado! Você recebeu 100 pontos!</h3>
+          </div>
             <div class="row">
                 <div class="col-3">
-          <img height="250" width="200" src="../resources/img/jogadores/Scar.png" alt="">
+          <img height="250" width="200" v-bind:src="desafiante" alt="">
+          <!-- <legend style="color:steelblue; text-align: center;">Você</legend> -->
+
         </div>
         <div class="col-3">
             <audio src="../resources/sons/misterio.mp3"></audio>
           <img width="250" height="250" style="padding-left: 30px;" src="../resources/img/vs.gif" alt="">
           </div>
           <div class="col-3" style="padding-left: 150px;">
-          <img height="250" width="200"src="../resources/img/jogadores/aisha.png" alt="">
+          <img height="250" width="200" v-bind:src="desafiado" alt="">
+          <!-- <legend style="color:steelblue; text-align: center;">{{ nomeDesafiado }}</legend> -->
           </div>
           </div>
         </div>
@@ -90,7 +98,7 @@
 
 
 
-  <div class="modal fade top" id="modalBatalha" tabindex="-1" role="dialog" aria-labelledby="modalLinguagem" aria-hidden="true" data-backdrop='false'>
+  <div style="padding-left: 15%; background-color: rgba(0, 0, 0, 0.6);" class="modal fade top" id="modalBatalha" tabindex="-1" role="dialog" aria-labelledby="modalLinguagem" aria-hidden="true" data-backdrop='false'>
       <div id="cadastraBatalha" class="modal-dialog modal-lg modal-frame modal-top" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -246,9 +254,10 @@ new Vue({
     },
     testa:function(user){
       const vm = user;
+      sessionStorage.setItem('desafiado', user.idPersonagem);
+      sessionStorage.setItem('nomeDesafiado', user.nomeUsuario);
 
       $("#modalBatalha").modal("show");
-
     }
   },
   mounted : function(){
@@ -275,6 +284,28 @@ new Vue({
       const audio = document.querySelector('audio');
       audio.play();
       $("#pvsp").modal("show");
+    }
+  }
+});
+
+new Vue({
+  el:"#jogadores",
+  data : {
+    desafiante: '',
+    desafiado: '',
+    nomeDesafiado: sessionStorage.getItem('nomeDesafiado')
+  },
+  created : function(){
+    const vm = this;   
+      axios.get('../rs/personagem/getPersonagem/'+sessionStorage.getItem('idPersonagem')).then(function(response) {
+        vm.desafiante = response.data['imgPersonagem'];
+      });
+      axios.get('../rs/personagem/getPersonagem/'+sessionStorage.getItem('desafiado')).then(function(response) {
+        vm.desafiado = response.data['imgPersonagem'];
+      });
+    },
+  methods : {
+    cadastra: function(){
     }
   }
 });
