@@ -128,25 +128,6 @@
           <div id="app" class="tabela">
               <h2 style="text-align: center;">Modo 1 VS 1</h2>
               <div >
-                  <!-- <v-app id="inspire">
-                    <v-card>
-                      <v-card-title>
-                        <v-spacer>Jogadores</v-spacer>
-                        <v-text-field
-                          v-model="search"
-                          label="Search"
-                          single-line
-                          hide-details
-                        ></v-text-field>
-                      </v-card-title>
-                      <v-data-table
-                        :headers="headers"
-                        :items="usuarios"
-                        :search="search"
-                        :row-clicked="testa"
-                      ></v-data-table>
-                    </v-card>
-                  </v-app> -->
                   <b-table :fields="headers" :items="usuarios"
                    @row-clicked="batalha" hover responsive> 
 
@@ -234,6 +215,7 @@ new Vue({
       const vm = user;
       const context = this;
       context.desafiado = '../resources/img/persona.png';
+      context.desafiante = '../resources/img/persona.png';
       axios.get('../rs/personagem/getPersonagem/'+vm.idPersonagem).then(function(response) {
           context.desafiado = response.data['imgPersonagem'];
         });
@@ -271,11 +253,10 @@ new Vue({
   }
 });
 
-    $(function(){
-        $("#menu").load("base.html"); 
-        $("#modalInicio").modal("show");
-
-      });
+  $(function(){
+    $("#menu").load("base.html"); 
+    $("#modalInicio").modal("show");
+  });
   
   
   </script> 
