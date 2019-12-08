@@ -13,6 +13,7 @@ public class MaterialDTO {
 	private String idTipo;
 	private String assunto;
 	private String desConteudo;
+	
 	public String getIdMaterial() {
 		return idMaterial;
 	}

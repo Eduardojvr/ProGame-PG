@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -51,6 +52,40 @@ public class RESTMaterial {
 		}
 		
 	}
-
+	
+	@GET
+	@Path("/getAllMaterial")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public ArrayList <MaterialDTO> getAllMaterial() {
+		MaterialDAO dao = new MaterialDAO();
+		ArrayList <MaterialDTO> dto = null;
+		try {
+			dto = dao.getAllMaterial();
+			return dto;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+	@POST
+	@Path("/insereMaterial")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Boolean insereMaterial(MaterialDTO material) {
+		MaterialDAO dao = new MaterialDAO();
+		Boolean status = false;
+		try {
+			status = dao.insereMaterial(material);
+			status = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return status;
+		
+	}
 
 }

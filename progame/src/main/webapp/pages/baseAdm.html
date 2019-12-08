@@ -9,14 +9,14 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
     <!-- CSS Files -->
-    <link href="../../resources/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../../resources/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
+    <link href="../resources/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../resources/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="../../resources/css/demo.css" rel="stylesheet" />
+    <link href="../resources/css/demo.css" rel="stylesheet" />
 
 </head>
 <body>
-        <div class="sidebar" data-image="../../resources/img/hero-bg.jpg" data-color="orange">
+        <div class="sidebar" data-image="../resources/img/hero-bg.jpg" data-color="orange">
             <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -42,7 +42,7 @@
                            </a>
                        </li>
                        <li>
-                           <a class="nav-link" href="ranking.html">
+                           <a class="nav-link" href="material.html">
                                <i class="nc-icon nc-chart-bar-32"></i>
                                <p>Material</p>
                            </a>
@@ -62,27 +62,45 @@
                      
                    </ul>
                    <div id="login">
-                       <input type="image" src="../../resources/img/icons/sair.png" style="width: 30px; height: 40px;" @click="logout()">  
+                       <input type="image" src="../resources/img/icons/sair.png" style="width: 30px; height: 40px;" @click="logout()">  
                    </div>
             </div>
         </div>
 
-        <script src="../../resources/js/axios.min.js"></script>
-        <script src="../../resources/js/vue.js"></script>
-        <script src="../../resources/js/pages/login.js"></script>
+        <script src="../resources/js/axios.min.js"></script>
+        <script src="../resources/js/vue.js"></script>
 
-        <script src="../../resources/js/core/popper.min.js" type="text/javascript"></script>
-        <script src="../../resources/js/core/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../resources/js/core/popper.min.js" type="text/javascript"></script>
+        <script src="../resources/js/core/bootstrap.min.js" type="text/javascript"></script>
         <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-        <script src="../../resources/js/plugins/bootstrap-switch.js"></script>
+        <script src="../resources/js/plugins/bootstrap-switch.js"></script>
         <!--  Google Maps Plugin    -->
         <!--  Chartist Plugin  -->
-        <script src="../../resources/js/plugins/chartist.min.js"></script>
+        <script src="../resources/js/plugins/chartist.min.js"></script>
         <!--  Notifications Plugin    -->
-        <script src="../../resources/js/plugins/bootstrap-notify.js"></script>
+        <script src="../resources/js/plugins/bootstrap-notify.js"></script>
         <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
-        <script src="../../resources/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
+        <script src="../resources/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
         <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
-        <script src="../../resources/js/demo.js"></script>
+        <script src="../resources/js/demo.js"></script>
+
+        <script>
+        new Vue({
+            el:'#login',
+            methods:{
+                logout: function(){
+            axios.post('../rs/user/logout').then(function(response) {
+                alert("Logout realizado com sucesso!");
+                sessionStorage.clear();
+                window.location.href = "../index.html";
+            }).catch(function (error){
+                alert("Erro ao realizar logout!");
+            });
+        }
+            }
+        });
+
+        </script>
+
 </body>
 </html>
