@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Painel administrador</title>
+    
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <!-- CSS Files -->
+    <link href="../../resources/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../resources/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="../../resources/css/demo.css" rel="stylesheet" />
+</head>
+<body>
+        <div class="wrapper">
+            <div id="menu"></div>
+            <div class="main-panel">
+            <div class="container" id="posicao">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="well well-sm">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-4" id="personagem">
+                                        <img src="../../resources/img/administrador/adm.png" style="height: 290px; width: 280px;"  alt="" class="img-rounded img-responsive" />
+                                    </div>
+                                    <div id="usuario" class="col-sm-2 col-md-8" style="padding-left: 130px">
+                                        </i></cite></small>
+                                        <p>
+                                            <br><br>
+                                            <i class="glyphicon glyphicon-envelope"></i>Nome: <a>{{ dados[0].nomeUsuario }}</a>
+                                            <br>
+                                            <i class="glyphicon glyphicon-envelope"></i>Email: <a>{{ dados[0].email }}</a>
+                                            <br />
+                                            <i class="glyphicon glyphicon-gift"></i>Personagem: <a>{{ dados[0].nomePersonagem }}</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script src="../../resources/js/axios.min.js"></script>
+    <script src="../../resources/js/vue.js"></script>     
+    <!-- <script src="../../resources/js/pages/perfil.js"></script> -->
+    <script src="../../resources/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+    <script src="../../resources/js/core/popper.min.js" type="text/javascript"></script>
+    <script src="../../resources/js/core/bootstrap.min.js" type="text/javascript"></script>
+    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+    <script src="../../resources/js/plugins/bootstrap-switch.js"></script>
+    <!--  Google Maps Plugin    -->
+    <!--  Chartist Plugin  -->
+    <!--  Notifications Plugin    -->
+    <script src="../../resources/js/plugins/bootstrap-notify.js"></script>
+    <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+    <script src="../../resources/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
+    <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+    <script src="../../resources/js/demo.js"></script>
+    <script>
+         new Vue({
+    el : '#usuario',
+    data : {
+        dados : [
+            {
+                nomeUsuario : '',
+                matricula : '',
+                idTipoPerfil : '',
+                idPersonagem : '',
+                email : '',
+                pontuacao : '',
+                level : '',
+                nomePersonagem : ''
+            }
+        ]
+    },
+    created : function(){
+        const vm = this;
+        vm.getUser();
+    },
+    methods : {
+        getUser : function(){
+            const vm = this;
+            axios.get('../../rs/user/getUser').then(function(response) {
+                vm.dados[0].nomeUsuario = response.data["nomeUsuario"];
+                vm.dados[0].matricula = response.data["matricula"];
+                vm.dados[0].idTipoPerfil  = response.data["idTipoPerfil"];
+                // vm.dados[0].idPersonagem  = response.data["idPersonagem"];
+                vm.dados[0].email = response.data["email"];
+                vm.dados[0].pontuacao  = response.data["pontuacao"];
+                vm.dados[0].level  = response.data["level"];
+                vm.dados[0].nomePersonagem = sessionStorage.getItem('nomePersonagem');
+                // sessionStorage.setItem('idPersonagem', vm.dados[0].idPersonagem);
+            });
+
+        }
+    }
+    
+ }); 
+        $(function(){
+          $("#menu").load("../baseAdm.html"); // incluir conteúdo do menu.html na div com id #includedContent
+        });
+    
+    </script>
+</body>
+</html>

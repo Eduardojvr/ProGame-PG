@@ -35,7 +35,12 @@ let login = new Vue({
                     if(sessionStorage.getItem('idPersonagem') != 7) {
                         sessionStorage.setItem('login', 1);
                     }
-                    window.location.href = "pages/perfil.html"; 
+
+                    if(response.data["idTipoPerfil"] == 2){
+                        window.location.href = "pages/administrador/adm.html"; 
+                    }else if(response.data["idTipoPerfil"] == 3){
+                        window.location.href = "pages/perfil.html"; 
+                    }
                 } else {
                     alert("Não foi possível realizar o login. Usuário ou senha incorretos!");
                 }

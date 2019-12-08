@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>ProGame</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+
+    <link href="../../resources/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../resources/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
+
+    <link href="../../resources/css/demo.css" rel="stylesheet" />
+
+</head>
+
+<body>
+  <div  id="linguagem">
+      <div class="modal fade top" id="modalLinguagem" tabindex="-1" role="dialog" aria-labelledby="modalLinguagem" aria-hidden="true" data-backdrop='false'>
+        <div class="modal-dialog modal-lg modal-frame modal-top" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalLinguagem">Cadastro de Linguagem</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div >
+            <div class="modal-body">
+                <table>
+                    <tr>
+                      <td>Nome da linguagem:</td>
+                      <td><input type="text" v-model="nomeLinguagem" name="nome" size="60"> <br/><br/></td>
+                    </tr>
+                    <tr>
+                      <td>Descrição:</td>
+                      <td><textarea name="descricao" v-model="descLinguagem" rows="5" cols="60"></textarea><br/></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal" @click="cadastra()">Salvar</button>
+            </div>
+        </div>
+          </div>
+        </div>
+    </div> 
+
+    <div class="wrapper">
+        <div id="menu"></div>
+        <div class="main-panel">
+        <div class="container" id="posicao">
+            <div class="tabela">
+                <h2 style="text-align: center;">Linguagem</h2>
+                <div >
+                    <b-table :fields="headers" :items="linguagem"
+                    hover responsive> 
+  
+                  </b-table>
+                  </div>
+           </div>
+            <button id="modalActivate" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalLinguagem">
+                Nova Linguagem    
+            </button>
+          </div>
+          </div>
+          </div>
+
+        </div>
+
+          <script src="../../resources/js/vue.js"></script>
+          <script src="../../resources/js/axios.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+          <script src="../../resources/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+          <script src="../../resources/js/core/popper.min.js" type="text/javascript"></script>
+          <script src="../../resources/js/core/bootstrap.min.js" type="text/javascript"></script>
+          <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+          <script src="../../resources/js/plugins/bootstrap-switch.js"></script>
+          <!--  Chartist Plugin  -->
+          <script src="../../resources/js/plugins/chartist.min.js"></script>
+          <!--  Notifications Plugin    -->
+          <script src="../../resources/js/plugins/bootstrap-notify.js"></script>
+          <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+          <script src="../../resources/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
+          <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+          <script src="../../resources/js/demo.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
+          <script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+          <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+<script>
+
+new Vue({
+  el:'#linguagem',
+  vuetify: new Vuetify(),
+  data () {
+    return {
+      search: '',
+      headers: [
+        {
+          align: 'left',
+          sortable: false,
+          value: 'posicao',
+        },
+        { text: 'Nome', value: 'nomeLinguegem' },
+        { text: 'Descrição', value: 'descLinguagem' },
+        { text: 'Identificador', value: 'idLinguagem' }
+      ],
+      linguagem: [],
+      nomeLinguagem:'',
+      descLinguagem:''
+    }
+  },
+  created: function(){
+    const vm = this;
+    axios.get('../../rs/linguagem/todasLinguagens').then(function(response) {
+      vm.linguagem = response.data;      
+    });
+  },
+  methods : {
+		cadastra : function() {
+	    	const vm = this;
+            let obj = {
+                nomeLinguagem : vm.nomeLinguagem,
+			          descLinguagem : vm.descLinguagem
+            }
+			axios.post('../../rs/linguagem/inserir', obj).then(function(response) {
+        location.reload();
+			});
+		}
+	}
+});
+
+$(function(){
+    $("#menu").load("../baseAdm.html");
+  });
+</script>
+
+</body>
+
+</html>
+
+
