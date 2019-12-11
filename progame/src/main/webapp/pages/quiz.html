@@ -26,7 +26,8 @@
 </head>
 <body  style="background-color:  rgba(0, 0, 0, 0.9);">
 
-  <div class="modal fade" id="loader" tabindex="-1" role="img"  aria-hidden="true" style="padding-right: 10%; padding-top: 10%;">
+
+  <div class="modal fade" id="processando" tabindex="-1" role="img" style="padding-right: 10%; padding-top: 10%;" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document" style="width:0px;">
       <div class="modal-content" style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
         <img src="../resources/img/loadGT.gif" width=200px height=200px style="border-radius: 100px;">
@@ -127,7 +128,7 @@
        
       </div> 
           <!-- Tipo Codigo -->
-          <div v-else-if="totalQuestaoCodigo > countQuestaoCodigo && questaoTipoCodigo[countQuestaoCodigo].idTipoQuestao === '2' " class="modal-dialog">
+          <!-- <div v-else-if="totalQuestaoCodigo > countQuestaoCodigo && questaoTipoCodigo[countQuestaoCodigo].idTipoQuestao === '2' " class="modal-dialog">
               <div class="modal-content" >
                  <div class="modal-header">
                     <h3><span class="label label-warning" ></span> {{ questaoTipoCodigo[countQuestaoCodigo].questao }}</h3>
@@ -144,7 +145,7 @@
             </div>  
         </div>
        
-      </div> 
+      </div>  -->
         <div style="text-align: center; padding-right:40px;" >
           <button type="button" class="btn btn-outline-danger" style="padding: 10px 50px 10px 50px;" onclick="window.location.assign('perfil.html')" >Sair</button>
         </div>
@@ -178,29 +179,8 @@
             <script src="../resources/js/vue.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
             <script src="../resources/css/quiz.css" ></script>
-            <script src="../resources/js/quiz.js"></script>
-            <script src="../resources/js/load.js"></script>
 
 <script>
-
-  
-  function abreModal(modal){
-    $("#"+modal).modal("show");
-
-  }
-function teste(value){
-  if(value == 'f'){
-    abreModal("modalCerto");
-    const audio = document.getElementById('venceu');
-    audio.play();
-  }
-  else {
-    abreModal("modalErrado");
-    const audio = document.getElementById('perdeu');
-    audio.play();
-
-  }
-}
 
 let q = new Vue({
     el : '#quest',
@@ -417,6 +397,7 @@ let q = new Vue({
             vm.dados = response.data;
             axios.get('../rs/user/atualizaPontuacao/'+(parseInt(response.data["pontuacao"])+parseInt(10))+'/'+vm.dados.matricula).then(function(response) {
               vm.dados.pontuacao = parseInt(vm.dados.pontuacao)+parseInt(10);
+              
             });
           });
         },

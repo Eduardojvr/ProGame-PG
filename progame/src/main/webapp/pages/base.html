@@ -14,9 +14,10 @@
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="expires" content="0" />
     <meta http-equiv="pragma" content="no-cache" />  
-
+        
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <link href="../resources/sass/lbd/notf.scss" rel="stylesheet" />
 
     <link href="../resources/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../resources/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
@@ -79,13 +80,15 @@
                                 <p>Material</p>
                             </a>
                         </li>
-                       <li>
-                           <a class="nav-link" href="notificacoes.html">
-                               <i class="nc-icon nc-bulb-63"></i>
-                               <p>Notificações</p>
-                           </a>
-                       </li>
-   
+                        <li>
+                                <a class="nav-link" href="notificacoes.html">
+                                  <div id="notifica">
+                                    <i class="nc-icon nc-bulb-63"></i>
+                                    <span class="notificacao">{{ totalNotificacao }}</span>
+                                    <p>Notificações</p>
+                                  </div>
+                                </a>
+                            </li>
                    </ul>
                    <div id="login">
                        <input type="image" src="../resources/img/icons/sair.png" style="width: 30px; height: 40px;" @click="logout()">  
@@ -110,5 +113,7 @@
         <script src="../resources/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
         <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
         <script src="../resources/js/demo.js"></script>
+        <script src="../resources/js/notifica.js" ></script>
+
 </body>
 </html>

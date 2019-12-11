@@ -20,7 +20,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import com.progame.entity.Usuario;
-import com.progame.dao.*;;
+import com.progame.dao.*;
+import com.progame.dto.DesafiovsDTO;;
 
 @Path("/user")
 public class RESTUsuario {
@@ -200,5 +201,34 @@ public class RESTUsuario {
 			e.printStackTrace();
 		}
 		return usuarios; 
+	}
+	
+	@POST
+	@Path("/novoDesafioX1")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public boolean desafioX1(DesafiovsDTO desafio) {
+		UsuarioDAO dao = new UsuarioDAO();
+		boolean isOk = false;
+		try {
+			isOk = dao.insertDesafioVs1(desafio);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return isOk; 
+	}
+	
+	@GET
+	@Path("/todosDesafios/{matricula}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList <DesafiovsDTO> desafioX1(@PathParam("matricula") String matricula) {
+		UsuarioDAO dao = new UsuarioDAO();
+		ArrayList <DesafiovsDTO> desafios = null;
+		try {
+			desafios = dao.getAllDesafio(matricula);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return desafios; 
 	}
 }
