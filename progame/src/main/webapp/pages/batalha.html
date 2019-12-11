@@ -128,7 +128,7 @@
           <div id="app" class="tabela">
               <h2 style="text-align: center;">Modo 1 VS 1</h2>
               <div >
-                  <b-table :fields="headers" :items="usuarios"
+                  <b-table :fields="headers" :items="usuarios" 
                    @row-clicked="batalha" hover responsive> 
 
                 </b-table>
@@ -171,11 +171,26 @@ new Vue({
     return {
       search: '',
       headers: [
-        {
-          text: 'Posição',
-          align: 'left',
-          sortable: false
-        }
+            {
+                sortable: false,
+                key: "posicao",
+                label: "Posição"
+            },
+            {
+                sortable: false,
+                key: "nomeUsuario",
+                label: "Usuário"
+            },
+            {
+                sortable: true,
+                key: "pontuacao",
+                label: "Pontuação"
+            },
+            {
+                sortable: true,
+                key: "level",
+                label: "Level"
+            }
       ],
       usuarios: [],
       pontos : '',
@@ -208,13 +223,17 @@ new Vue({
                 posicao: '',
                 nomeUsuario: '', 
                 matricula: '',
-                pontuacao: ''
+                pontuacao: '',
+                idPersonagem: '',
+                level: ''
               }
               obj.posicao = aux+1,
               obj.nomeUsuario = array[count]["nomeUsuario"];
               obj.matricula = array[count]["matricula"];
               obj.pontuacao = array[count]["pontuacao"]; 
-              vm.usuarios.push(obj);          
+              obj.idPersonagem = array[count]["idPersonagem"]; 
+              obj.level = array[count]["level"]; 
+              vm.usuarios.push(obj); 
               aux+=1;
             }
             count+=1;
