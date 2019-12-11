@@ -177,14 +177,7 @@ new Vue({
           sortable: false
         }
       ],
-      usuarios: [
-        {
-          posicao : '',
-          nomeUsuario : '',
-          matricula : '',
-          pontuacao : ''
-        }
-      ],
+      usuarios: [],
       pontos : '',
       matricula : '',
       posicaojogador: '',
@@ -201,14 +194,41 @@ new Vue({
     todosUsuarios : function(){
       const vm = this;
       var count = 0;
-      axios.get('../rs/user/todosUsuarios/').then(function(response) {
-      vm.usuarios = response.data;
-      while(vm.usuarios[count]){
-        vm.usuarios[count].posicao = count+1;
-        count+=1;
-      }
-        vm.totalJogadores = count;
+      var aux = 0;
+      var matriculaLogado;
+      var array = [];
+  
+      axios.get('../rs/user/todosUsuarios/').then(function(response)   {
+        array = response.data;
+        axios.get('../rs/user/getUser/').then(function(response) {
+          matriculaLogado = response.data["matricula"];
+          while(array[count]){
+            if((parseInt(array[count]["matricula"]) != parseInt(matriculaLogado)) && (parseInt(array[count]["idTipoPerfil"]) == 3)){
+              let obj = {
+                posicao: '',
+                nomeUsuario: '', 
+                matricula: '',
+                pontuacao: ''
+              }
+              obj.posicao = aux+1,
+              obj.nomeUsuario = array[count]["nomeUsuario"];
+              obj.matricula = array[count]["matricula"];
+              obj.pontuacao = array[count]["pontuacao"]; 
+              vm.usuarios.push(obj);          
+              aux+=1;
+            }
+            count+=1;
+          }
+            vm.totalJogadores = aux;
+        });
       });
+    },
+    atualizaPontuacao: function (valor){
+          const vm = this;
+          axios.get('../rs/user/getUser/').then(function(response) {
+            axios.get('../rs/user/atualizaPontuacao/'+(parseInt(response.data["pontuacao"])+parseInt(valor))+'/'+response.data["matricula"]).then(function(response) {              
+            });
+          });
     },
     batalha: function(user){
       const vm = user;
@@ -221,23 +241,10 @@ new Vue({
       axios.get('../rs/personagem/getPersonagem/'+sessionStorage.getItem('idPersonagem')).then(function(response) {
         context.desafiante = response.data['imgPersonagem'];
       });   
+      context.atualizaPontuacao(100);
       $("#modalBatalha").modal("show"); 
     }
-  },
-  mounted : function(){
-      const vm = this;
-      var count = 0;
-      axios.get('../rs/user/getUser/').then(function(response) {
-      vm.pontos = response.data["pontuacao"];
-      vm.matricula = response.data["matricula"];
-      while(count < vm.totalJogadores){
-        if(vm.usuarios[count].matricula == vm.matricula){
-          vm.posicaojogador = vm.usuarios[count].posicao;
-        }
-        count+=1;
-      }
-      });
-    }
+  }
 });
 
 
