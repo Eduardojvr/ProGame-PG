@@ -21,6 +21,7 @@
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
 </head>
 <body>
+
   <!-- INICIO MODAL -->
   <div style="padding-left: 15%; background-color: rgba(0, 0, 0, 0.6);" class="modal fade right" id="modalInicio" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
@@ -53,11 +54,13 @@
     </div>
   </div>
   <!-- FIM MODAL -->
-  <div style="padding-left: 15%; background-color: rgba(0, 0, 0, 0.6);" class="modal fade top" id="modalBatalha" tabindex="-1" role="dialog" aria-labelledby="modalLinguagem" aria-hidden="true" data-backdrop='false'>
-      <div id="cadastraBatalha" class="modal-dialog modal-lg modal-frame modal-top" role="document">
+  <div id="batalha">
+
+  <div id="modalBatalha" style="padding-left: 15%; background-color: rgba(0, 0, 0, 0.6);" class="modal fade top" tabindex="-1" role="dialog" aria-labelledby="modalLinguagem" aria-hidden="true" data-backdrop='false'>
+      <div class="modal-dialog modal-lg modal-frame modal-top" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalLinguagem">Batalha 1 vs 1</h5>
+            <h5 class="modal-title">Batalha 1 vs 1</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -66,24 +69,23 @@
               <table>
                   <tr>
                     <td>Título:</td>
-                    <td><input type="text" name="nome" size="60"> <br/><br/></td>
+                    <td><input type="text" name="nome" size="60" v-model="tituloDesafio" > <br/><br/></td>
                   </tr>
                   <tr>
                     <td>Desafio:</td>
-                    <td><textarea name="descricao"  rows="5" cols="60"></textarea><br/></td>
+                    <td><textarea name="descricao"  rows="5" cols="60" v-model="desafio"></textarea><br/></td>
                   </tr>
               </table>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" @click="cadastra()">Salvar</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" @click="salvaDesafio()">Salvar</button>
           </div>
         </div>
       </div>
   </div> 
   <!-- fim modal batalha -->
-  <div id="batalha">
-  <div style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);" class="modal fade top" id="pvsp" tabindex="-1" role="dialog" aria-labelledby="pvsp" aria-hidden="true" data-backdrop='false' data-keyboard="false">
+  <div style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);" id="pvsp" class="modal fade top"  tabindex="-1" role="dialog" aria-labelledby="pvsp" aria-hidden="true" data-backdrop='false' data-keyboard="false">
       <div  class="modal-dialog modal-lg modal-frame modal-top" role="document">
         <div  style="background-color:rgba(255, 255, 255, 0.9);"  class="modal-content">         
           <div class="modal-header">
@@ -198,7 +200,10 @@ new Vue({
       posicaojogador: '',
       totalJogadores: 0,  
       desafiante: '',
-      desafiado: ''
+      desafiado: '',
+      desafio:'',
+      tituloDesafio: '',
+      matriculaDesafiado: ''
     }
   },
   created : function(){
@@ -210,15 +215,14 @@ new Vue({
       const vm = this;
       var count = 0;
       var aux = 0;
-      var matriculaLogado;
       var array = [];
   
       axios.get('../rs/user/todosUsuarios/').then(function(response)   {
         array = response.data;
         axios.get('../rs/user/getUser/').then(function(response) {
-          matriculaLogado = response.data["matricula"];
+          vm.matricula = response.data["matricula"];
           while(array[count]){
-            if((parseInt(array[count]["matricula"]) != parseInt(matriculaLogado)) && (parseInt(array[count]["idTipoPerfil"]) == 3)){
+            if((parseInt(array[count]["matricula"]) != parseInt(vm.matricula)) && (parseInt(array[count]["idTipoPerfil"]) == 3)){
               let obj = {
                 posicao: '',
                 nomeUsuario: '', 
@@ -245,6 +249,7 @@ new Vue({
     atualizaPontuacao: function (valor){
           const vm = this;
           axios.get('../rs/user/getUser/').then(function(response) {
+            
             axios.get('../rs/user/atualizaPontuacao/'+(parseInt(response.data["pontuacao"])+parseInt(valor))+'/'+response.data["matricula"]).then(function(response) {              
             });
           });
@@ -254,29 +259,38 @@ new Vue({
       const context = this;
       context.desafiado = '../resources/img/persona.png';
       context.desafiante = '../resources/img/persona.png';
+      context.matriculaDesafiado = vm.matricula;
+
       axios.get('../rs/personagem/getPersonagem/'+vm.idPersonagem).then(function(response) {
           context.desafiado = response.data['imgPersonagem'];
         });
       axios.get('../rs/personagem/getPersonagem/'+sessionStorage.getItem('idPersonagem')).then(function(response) {
         context.desafiante = response.data['imgPersonagem'];
-      });   
-      context.atualizaPontuacao(100);
+      });
       $("#modalBatalha").modal("show"); 
+    
+    },
+    salvaDesafio: function(){
+      const vm = this;
+      let obj = {
+        matriculaDesafiante: vm.matricula,
+        matriculaDesafiado: vm.matriculaDesafiado,
+        tituloDesafio: vm.tituloDesafio,
+        desafio: vm.desafio,
+        respostaDesafiado: '',
+        resultado: ''
+      }
+      axios.post('../rs/user/novoDesafioX1', obj).then(function(response) {
+        console.log(response.data);
+        vm.atualizaPontuacao(100);
+        $("#pvsp").modal("show");
+        const audio = document.querySelector('audio');
+        audio.play();
+      });  
     }
   }
 });
 
-
-new Vue({
-  el:"#cadastraBatalha",
-  methods : {
-    cadastra: function(){
-      const audio = document.querySelector('audio');
-      audio.play();
-      $("#pvsp").modal("show");
-    }
-  }
-});
 
   $(function(){
     $("#menu").load("base.html"); 
