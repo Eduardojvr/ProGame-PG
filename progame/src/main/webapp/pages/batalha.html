@@ -12,9 +12,9 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
 	rel="stylesheet">
-<link
+<!-- <link
 	href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"
-	rel="stylesheet">
+	rel="stylesheet"> -->
 
 <link
 	href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200"
@@ -81,35 +81,92 @@
 	<!-- FIM MODAL -->
 	<div id="batalha">
 
-		<div id="modalBatalha"
-			style="padding-left: 15%; background-color: rgba(0, 0, 0, 0.6);"
-			class="modal fade top" tabindex="-1" role="dialog"
-			aria-labelledby="modalLinguagem" aria-hidden="true"
-			data-backdrop='false'>
+<div class="modal fade" id="modalResposta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="color: steelblue;" class="modal-title" id="myModalLabel">Desafio</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		<label>Digite sua resposta</label>
+		<textarea style="border-radius: 10px;" cols="47" rows="6" v-model="minhaResposta"></textarea>
+      </div>
+      <div class="modal-footer">
+			<button type="button" class="btn btn-secondary"
+				data-dismiss="modal">Cancelar</button>
+			<button type="button" class="btn btn-primary" data-dismiss="modal"
+				@click="responde()">Salvar</button>
+		</div>
+    </div>
+  </div>
+</div>
+
+<div
+style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+id="pvsp" class="modal fade top" tabindex="-1" role="dialog"
+aria-labelledby="pvsp" aria-hidden="true" data-backdrop='false'
+data-keyboard="false">
+<div class="modal-dialog modal-lg modal-frame modal-top"
+	role="document">
+	<div style="background-color: rgba(255, 255, 255, 0.9);"
+		class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<div style="text-align: center;">
+				<h3>Desafio enviado! Você recebeu 100 pontos!</h3>
+			</div>
+			<div class="row">
+				<div class="col-3">
+					<img height="250" width="200" v-bind:src="desafiante" alt="">
+
+				</div>
+				<div class="col-3">
+					<audio src="../resources/sons/misterio.mp3"></audio>
+					<img width="250" height="250" style="padding-left: 30px;"
+						src="../resources/img/vs.gif" alt="">
+				</div>
+				<div class="col-3" style="padding-left: 150px;">
+					<img height="250" width="200" v-bind:src="desafiado" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+
+		<div style="padding-left: 15%; background-color: rgba(0, 0, 0, 0.6);"
+			class="modal fade top" tabindex="-1" role="dialog" aria-hidden="true"
+			data-backdrop='false' id="modalBatalha">
 			<div class="modal-dialog modal-lg modal-frame modal-top"
 				role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title">Batalha 1 vs 1</h5>
+						<h3 style="color: steelblue;" class="modal-title">Batalha 1 vs 1</h3>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body">
-						<table>
-							<tr>
-								<td>Título:</td>
-								<td><input type="text" name="nome" size="60"
-									v-model="tituloDesafio"> <br />
-								<br /></td>
-							</tr>
-							<tr>
-								<td>Desafio:</td>
-								<td><textarea name="descricao" rows="5" cols="60"
-										v-model="desafio"></textarea><br /></td>
-							</tr>
-						</table>
+					<div class="modal-body">		
+						<label style="padding-left: 13%;">Título do Desafio</label><br>
+						<div style="text-align: center;">
+							<input style="border-radius: 10px;" type="text" name="nome" size="60" v-model="tituloDesafio"> <br/><br />
+						</div>
+
+						<label style="padding-left: 13%;">Desafio</label><br>
+						<div style="text-align: center;">
+							<textarea style="border-radius: 10px;" name="descricao" rows="5" cols="60"v-model="desafio"></textarea><br />						
+						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
@@ -121,50 +178,6 @@
 			</div>
 		</div>
 		<!-- fim modal batalha -->
-		<div
-			style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
-			id="pvsp" class="modal fade top" tabindex="-1" role="dialog"
-			aria-labelledby="pvsp" aria-hidden="true" data-backdrop='false'
-			data-keyboard="false">
-			<div class="modal-dialog modal-lg modal-frame modal-top"
-				role="document">
-				<div style="background-color: rgba(255, 255, 255, 0.9);"
-					class="modal-content">
-					<div class="modal-header">
-						<!-- <div style="text-align: center;">
-                  <h2 style="color: royalblue;" >Player vs Player</h2>
-              </div> -->
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-
-					</div>
-
-					<div class="modal-body">
-						<div style="text-align: center;">
-							<h3>Desafio enviado! Você recebeu 100 pontos!</h3>
-						</div>
-						<div class="row">
-							<div class="col-3">
-								<img height="250" width="200" v-bind:src="desafiante" alt="">
-								<!-- <legend style="color:steelblue; text-align: center;">Você</legend> -->
-
-							</div>
-							<div class="col-3">
-								<audio src="../resources/sons/misterio.mp3"></audio>
-								<img width="250" height="250" style="padding-left: 30px;"
-									src="../resources/img/vs.gif" alt="">
-							</div>
-							<div class="col-3" style="padding-left: 150px;">
-								<img height="250" width="200" v-bind:src="desafiado" alt="">
-								<!-- <legend style="color:steelblue; text-align: center;">{{ nomeDesafiado }}</legend> -->
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 
 		<div class="wrapper">
 			<div id="menu"></div>
@@ -183,7 +196,6 @@
 										<!-- <p class="mt-3">Current Page: {{ currentPage }}</p> -->
 										<b-table
 										  @row-clicked="batalha" 
-										  id="my-table"
 										  :fields="headers"
 										  :items="usuarios"
 										  :per-page="perPage"
@@ -195,7 +207,7 @@
 									  <div style="padding-left: 30%;">
 									  <b-pagination
 									  v-model="currentPage"
-									  :total-rows="rows"
+									  :total-rows="rowDesafio"
 									  :per-page="perPage"
 									  prev-text="◀︎"
 									  next-text="▶︎"
@@ -205,15 +217,18 @@
 								</div>      
 									  </div>
 						</div>
+					</div>
 
 					<br><hr><br>
+					<div  class="tabela">
+
 					<h3 style="text-align: left;">🏆 Seus desafios</h3>
 					
 					<div class="overflow-auto">
 						
 							<!-- <p class="mt-3">Current Page: {{ currentPage }}</p> -->
 							<b-table
-							  @row-clicked="responder" 
+							  @row-clicked="abreModalResposta" 
 							  id="my-table"
 							  :fields="headersDesafios"
 							  :items="desafios"
@@ -338,14 +353,18 @@ new Vue({
               tituloDesafio:''
           }
       ],
-      totalNotificacao: 0
+	  totalNotificacao: 0,
+	  minhaResposta: ''
 
     }
   },
   computed: {
     rows() {
       return this.desafios.length
-    }
+	},
+	rowDesafio(){
+		return this.usuarios.length
+	}
   },
 created : function(){
     const vm = this;
@@ -375,8 +394,11 @@ created : function(){
             });
         });
 	},
-	responder: function(){
-            alert();
+	abreModalResposta: function(){
+		$("#modalResposta").modal("show");
+	},
+	responde: function(){
+		alert();
     },
     todosUsuarios : function(){
       const vm = this;
