@@ -1,309 +1,351 @@
- <!DOCTYPE html>
 
- <html lang="pt-br">
- 
- <head>
-     <meta charset="utf-8" />
-     <link rel="apple-touch-icon" sizes="76x76" href="../resources/img/apple-icon.png">
-     <link rel="icon" type="image/png" href="../resources/img/favicon.ico">
-     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+<!DOCTYPE html>
 
-     <!--     Fonts and icons     -->
-     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
-     <!-- CSS Files -->
-     <link href="../resources/css/bootstrap.min.css" rel="stylesheet" />
-     <link href="../resources/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
-     <!-- CSS Just for demo purpose, don't include it in your project -->
-     <link href="../resources/css/demo.css" rel="stylesheet" />
+<html lang="pt-br">
 
-     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
-     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet"> 
- 
-     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
-     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
- 
-   
 <head>
-        
+<meta charset="utf-8" />
+<link rel="apple-touch-icon" sizes="76x76"
+	href="../resources/img/apple-icon.png">
+<link rel="icon" type="image/png" href="../resources/img/favicon.ico">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta
+	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+	name='viewport' />
+
+<!--     Fonts and icons     -->
+<link
+	href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+<!-- CSS Files -->
+<link href="../resources/css/bootstrap.min.css" rel="stylesheet" />
+<link href="../resources/css/light-bootstrap-dashboard.css?v=2.0.0 "
+	rel="stylesheet" />
+<!-- CSS Just for demo purpose, don't include it in your project -->
+<link href="../resources/css/demo.css" rel="stylesheet" />
+
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
+	rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"
+	rel="stylesheet">
+
+<link type="text/css" rel="stylesheet"
+	href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+<link type="text/css" rel="stylesheet"
+	href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+<head>
 <body>
-      <!--Modal: modalRelatedContent-->
-      <div class="modal fade right" id="modalRelatedContent" tabindex="-1" role="dialog"
-        aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-info" role="document">
-          <!--Content-->
-          <div class="modal-content">
-    
-            <!--Body-->
-            <div class="modal-body" style="background-color: rgba(192,192,192, 0.5)">
-      
-              <div class="row">
-                <div class="col-5">
-                  <img src="../resources/img/aisha.png"
-                    class="img-fluid" alt="">
-                </div>
-      
-                <div id="gerenciapersonagem" class="col-7">
-                  <p><strong>Olá, {{ nomeUsuario }}!</strong></p>
-                  <p>Notamos que você ainda não escolheu seu guerreiro, faça isso clicando no botão abaixo!</p><br>
-                  <div style="padding-left: 12%;">
-                    <button type="button" @click="redireciona('guerreiros.html')" class="btn btn-info btn-md">Escolher jogador</button>
-                  </div>
-      
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--/.Content-->
-        </div>
-      </div>
-      <!--Modal: modalRelatedContent-->
+	<!--Modal: modalRelatedContent-->
+	<div class="modal fade right" id="modalRelatedContent" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+		data-backdrop="static" data-keyboard="false">
+		<div
+			class="modal-dialog modal-side modal-bottom-right modal-notify modal-info"
+			role="document">
+			<!--Content-->
+			<div class="modal-content">
+
+				<!--Body-->
+				<div class="modal-body"
+					style="background-color: rgba(192, 192, 192, 0.5)">
+
+					<div class="row">
+						<div class="col-5">
+							<img src="../resources/img/aisha.png" class="img-fluid" alt="">
+						</div>
+
+						<div id="gerenciapersonagem" class="col-7">
+							<p>
+								<strong>Olá, {{ nomeUsuario }}!</strong>
+							</p>
+							<p>Notamos que você ainda não escolheu seu guerreiro, faça
+								isso clicando no botão abaixo!</p>
+							<br>
+							<div style="padding-left: 12%;">
+								<button type="button" @click="redireciona('guerreiros.html')"
+									class="btn btn-info btn-md">Escolher jogador</button>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--/.Content-->
+		</div>
+	</div>
+	<!--Modal: modalRelatedContent-->
 
 
-      <div class="modal fade right" id="modalFeedback" tabindex="-1" role="dialog"
-        aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-info" role="document">
-          <!--Content-->
-          <div class="modal-content">
-    
-            <!--Body-->
-            <div class="modal-body" style="background-color: rgba(192,192,192, 0.5)">
-      
-              <div class="row">
-                <div class="col-5">
-                  <img src="../resources/img/aisha.png"
-                    class="img-fluid" alt="">
-                </div>
-      
-                <div class="col-7" id="gerenciapersonagem">
-                  <p><strong>Estamos felizes em tê-lo conosco!</strong></p>
-                  <p>Seu guerreiro foi escolhido com sucesso. A partir de agora você pode utilizar todas as funcionalidades do sistema! <br> Bom jogo! </p><br>
-                  <div style="padding-left: 12%;">
-                    <button type="button" onclick="location.reload()" class="btn btn-info btn-md">Ok</button>
-                  </div>
-      
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--/.Content-->
-        </div>
-      </div>
-      <!--Modal: modalRelatedContent-->
+	<div class="modal fade right" id="modalFeedback" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+		data-backdrop="static" data-keyboard="false">
+		<div
+			class="modal-dialog modal-side modal-bottom-right modal-notify modal-info"
+			role="document">
+			<!--Content-->
+			<div class="modal-content">
 
-      <div class="modal fade right" id="modalFeedbackBomJogo" tabindex="-1" role="dialog"
-      aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-      <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-info" role="document">
-        <!--Content-->
-        <div class="modal-content">
-  
-          <!--Body-->
-          <div class="modal-body" style="background-color: rgba(192,192,192, 0.5)">
-    
-            <div class="row">
-              <div class="col-5">
-                <img src="../resources/img/aisha.png"
-                  class="img-fluid" alt="">
-              </div>
-    
-              <div class="col-7" id="gerenciapersonagem">
-                <p><strong>Bom jogo!</strong></p>
-                <p> <br> Olá novamente jogador! Estávamos ansiosos para vê-lo novamente!<br>Divirta-se! </p><br>
-                <div style="padding-left: 12%;">
-                  <button type="button" onclick="location.reload()" class="btn btn-info btn-md">Ok</button>
-                </div>
-    
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--/.Content-->
-      </div>
-    </div>
-    <!--Modal: modalRelatedContent-->
+				<!--Body-->
+				<div class="modal-body"
+					style="background-color: rgba(192, 192, 192, 0.5)">
+
+					<div class="row">
+						<div class="col-5">
+							<img src="../resources/img/aisha.png" class="img-fluid" alt="">
+						</div>
+
+						<div class="col-7" id="gerenciapersonagem">
+							<p>
+								<strong>Estamos felizes em tê-lo conosco!</strong>
+							</p>
+							<p>
+								Seu guerreiro foi escolhido com sucesso. A partir de agora você
+								pode utilizar todas as funcionalidades do sistema! <br> Bom
+								jogo!
+							</p>
+							<br>
+							<div style="padding-left: 12%;">
+								<button type="button" onclick="location.reload()"
+									class="btn btn-info btn-md">Ok</button>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--/.Content-->
+		</div>
+	</div>
+	<!--Modal: modalRelatedContent-->
+
+	<div class="modal fade right" id="modalFeedbackBomJogo" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+		data-backdrop="static" data-keyboard="false">
+		<div
+			class="modal-dialog modal-side modal-bottom-right modal-notify modal-info"
+			role="document">
+			<!--Content-->
+			<div class="modal-content">
+
+				<!--Body-->
+				<div class="modal-body"
+					style="background-color: rgba(192, 192, 192, 0.5)">
+
+					<div class="row">
+						<div class="col-5">
+							<img src="../resources/img/aisha.png" class="img-fluid" alt="">
+						</div>
+
+						<div class="col-7" id="gerenciapersonagem">
+							<p>
+								<strong>Bom jogo!</strong>
+							</p>
+							<p>
+								<br> Olá novamente jogador! Estávamos ansiosos para vê-lo
+								novamente!<br>Divirta-se!
+							</p>
+							<br>
+							<div style="padding-left: 12%;">
+								<button type="button" onclick="location.reload()"
+									class="btn btn-info btn-md">Ok</button>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--/.Content-->
+		</div>
+	</div>
+	<!--Modal: modalRelatedContent-->
 
 
 
-     
 
-     <div class="wrapper">
-            <div class="sidebar" data-image="../resources/img/hero-bg.jpg" data-color="black">
-                <!--
+
+	<div class="wrapper">
+		<div class="sidebar" data-image="../resources/img/hero-bg.jpg"
+			data-color="black">
+			<!--
             Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
     
             Tip 2: you can also add an image using data-image tag
         -->
-                <div class="sidebar-wrapper">
-                    <div class="logo">
-                        <a href="https://github.com/Eduardojvr/ProGame-PG" class="simple-text">
-                           Pro Game
-                        </a>
-                    </div>
-                    <ul class="nav">
-                            <li class="nav-item">
-                                    <a class="nav-link" href="perfil.html">
-                                        <i class="nc-icon nc-circle-09"></i>
-                                        <p>Perfil</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" href="ranking.html">
-                                        <i class="nc-icon nc-chart-bar-32"></i>
-                                        <p>Ranking</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" href="narrativa.html">
-                                        <i class="nc-icon nc-chat-round"></i>
-                                        <p>Modo Narrativa</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" href="batalha.html">
-                                        <i class="nc-icon nc-controller-modern"></i>
-                                        <p>1 VS 1</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" href="desafios.html">
-                                        <i class="nc-icon nc-puzzle-10 icon-bold"></i>
-                                        <p>Desafios</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" href="progressivo.html">
-                                        <i class="nc-icon nc-spaceship"></i>
-                                        <p>Modo progressivo</p>
-                                    </a>
-                                </li>
-                                <li>
-                                     <a class="nav-link" href="material.html">
-                                         <i class="nc-icon nc-single-copy-04 icon-bold"></i>
-                                         <p>Material</p>
-                                     </a>
-                                 </li>
-                                <li>
-                                    <a class="nav-link" href="notificacoes.html">
-                                      <div id="notifica">
-                                        <i class="nc-icon nc-bulb-63"></i>
-                                        <span v-if="totalNotificacao > 0" class="notificacao">{{ totalNotificacao }}</span>
-                                        <p>Notificações</p>
-                                      </div>
-                                    </a>
-                                </li>
-       
-                       </ul>
-                       <div id="login">
-                           <input type="image" src="../resources/img/icons/sair.png" style="width: 30px; height: 40px;" @click="logout()">  
-                       </div>
-                </div>
-            </div>
+			<div class="sidebar-wrapper">
+				<div class="logo">
+					<a href="https://github.com/Eduardojvr/ProGame-PG"
+						class="simple-text"> Pro Game </a>
+				</div>
+				<ul class="nav">
+					<li class="nav-item"><a class="nav-link" href="perfil.html">
+							<i class="nc-icon nc-circle-09"></i>
+							<p>Perfil</p>
+					</a></li>
+					<li><a class="nav-link" href="ranking.html"> <i
+							class="nc-icon nc-chart-bar-32"></i>
+							<p>Ranking</p>
+					</a></li>
+					<li><a class="nav-link" href="narrativa.html"> <i
+							class="nc-icon nc-chat-round"></i>
+							<p>Modo Narrativa</p>
+					</a></li>
+					<li><a class="nav-link" href="batalha.html"> <i
+							class="nc-icon nc-controller-modern"></i>
+							<p>1 VS 1</p>
+					</a></li>
+					<li><a class="nav-link" href="desafios.html"> <i
+							class="nc-icon nc-puzzle-10 icon-bold"></i>
+							<p>Desafios</p>
+					</a></li>
+					<li><a class="nav-link" href="progressivo.html"> <i
+							class="nc-icon nc-spaceship"></i>
+							<p>Modo progressivo</p>
+					</a></li>
+					<li><a class="nav-link" href="material.html"> <i
+							class="nc-icon nc-single-copy-04 icon-bold"></i>
+							<p>Material</p>
+					</a></li>
+					<li><a class="nav-link" href="notificacoes.html">
+							<div id="notifica">
+								<i class="nc-icon nc-bulb-63"></i> <span
+									v-if="totalNotificacao > 0" class="notificacao">{{
+									totalNotificacao }}</span>
+								<p>Notificações</p>
+							</div>
+					</a></li>
 
-         <div class="main-panel">
+				</ul>
+				<div id="login">
+					<input type="image" src="../resources/img/icons/sair.png"
+						style="width: 30px; height: 40px;" @click="logout()">
+				</div>
+			</div>
+		</div>
 
-                <div class="container" id="posicao">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="well well-sm">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-md-4" id="personagem">
-                                            <img v-bind:src="imgPersonagem" style="height: 290px; width: 280px;"  alt="" class="img-rounded img-responsive" />
-                                        </div>
-                                        <div id="usuario" class="col-sm-2 col-md-8" style="padding-left: 130px">
-                                            </i></cite></small>
-                                            <p>
-                                                <br><br>
-                                                <i class="glyphicon glyphicon-envelope"></i>Nome: <a>{{ dados[0].nomeUsuario }}</a>
-                                                <br>
-                                                <i class="glyphicon glyphicon-envelope"></i>Email: <a>{{ dados[0].email }}</a>
-                                                <br />
-                                                <i class="glyphicon glyphicon-gift"></i>Matrícula: <a>{{ dados[0].matricula }}</a>
-                                                <br />
-                                                <i class="glyphicon glyphicon-gift"></i>Pontos: <a>{{ dados[0].pontuacao }}</a>
-                                                <br />
-                                                <i class="glyphicon glyphicon-gift"></i>Personagem: <a>{{ dados[0].nomePersonagem }}</a>
-                                                 <br />
-                                                <i class="glyphicon glyphicon-gift"></i>Level: <a>{{ dados[0].level }}</a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-             <div id="progress" class="content"> 
-                 <div class="container-fluid"></div>
-                     <div class="row">
-                         <div class="col-md-4">
-                             <div class="card ">
-                                 <div class="card-header ">
-                                     <h4 class="card-title">Disputas individuais</h4>
-                                     <p class="card-category">1 VS 1</p>
-                                 </div>
-                                 <canvas id="myChart" width="600" height="400"></canvas>
-                             </div>
-                         </div>
-                         <div class="col-md-8">
-                             <div class="card ">
-                                 <div class="card-header ">
-                                     <h4 class="card-title">Progresso Geral</h4><br>
-                                     <div class="progress">
-                                            <div  class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" faria-valuenow="{ progresso }" aria-valuemin="0" aria-valuemax="100" v-bind:style="{width:  progresso }">{{ progresso }}</div>
-    
-                                        </div><br><br>
-                                 </div>
-                                 
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         </div>
+		<div class="main-panel">
 
- 	
-<script src="../resources/js/axios.min.js"></script>
-<script src="../resources/js/vue.js"></script>
-<script src="../resources/js/pages/login.js"></script>
+			<div class="container" id="posicao">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<div class="well well-sm">
+							<div class="row">
+								<div class="col-sm-6 col-md-4" id="personagem">
+									<img v-bind:src="imgPersonagem"
+										style="height: 290px; width: 280px;" alt=""
+										class="img-rounded img-responsive" />
+								</div>
+								<div id="usuario" class="col-sm-2 col-md-8"
+									style="padding-left: 130px">
+									</i></cite></small>
+									<p>
+										<br>
+										<br> <i class="glyphicon glyphicon-envelope"></i>Nome: <a>{{
+											dados[0].nomeUsuario }}</a> <br> <i
+											class="glyphicon glyphicon-envelope"></i>Email: <a>{{
+											dados[0].email }}</a> <br /> <i class="glyphicon glyphicon-gift"></i>Matrícula:
+										<a>{{ dados[0].matricula }}</a> <br /> <i
+											class="glyphicon glyphicon-gift"></i>Pontos: <a>{{
+											dados[0].pontuacao }}</a> <br /> <i
+											class="glyphicon glyphicon-gift"></i>Personagem: <a>{{
+											dados[0].nomePersonagem }}</a> <br /> <i
+											class="glyphicon glyphicon-gift"></i>Level: <a>{{
+											dados[0].level }}</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="progress" class="content">
+				<div class="container-fluid"></div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="card ">
+							<div class="card-header ">
+								<h4 class="card-title">Disputas individuais</h4>
+								<p class="card-category">1 VS 1</p>
+							</div>
+							<canvas id="myChart" width="600" height="400"></canvas>
+						</div>
+					</div>
+					<div class="col-md-8">
+						<div class="card ">
+							<div class="card-header ">
+								<h4 class="card-title">Progresso Geral</h4>
+								<br>
+								<div class="progress">
+									<div
+										class="progress-bar progress-bar-striped progress-bar-animated"
+										role="progressbar" faria-valuenow="{ progresso }"
+										aria-valuemin="0" aria-valuemax="100"
+										v-bind:style="{width:  progresso }">{{ progresso }}</div>
 
-<!-- <script src="../resources/js/pages/perfil.js"></script> -->
-<script src="../resources/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
-<script src="../resources/js/core/popper.min.js" type="text/javascript"></script>
-<script src="../resources/js/core/bootstrap.min.js" type="text/javascript"></script>
-<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-<script src="../resources/js/plugins/bootstrap-switch.js"></script>
-<!--  Google Maps Plugin    -->
-<!--  Chartist Plugin  -->
-<!--  Notifications Plugin    -->
-<script src="../resources/js/plugins/bootstrap-notify.js"></script>
-<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
-<script src="../resources/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
-<!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
-<script src="../resources/js/demo.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
-<script src="../resources/js/Chart.js"></script>
-<script src="../resources/js/Chart.bundle.js"></script>
-<script src="../resources/js/Chart.bundle.min.js"></script>
-<script src="../resources/js/Chart.min.js"></script>
-<script src="../resources/js/pages/perfil.js"></script>
-<script src="../resources/js/notifica.js" ></script>
+								</div>
+								<br>
+								<br>
+							</div>
 
-<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-<script src="../resources/js/plugins/chartist.min.js"></script>
-<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
-<script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
-<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
-<script src="../resources/js/notifica.js"></script>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-<script> 
+	<script src="../resources/js/axios.min.js"></script>
+	<script src="../resources/js/vue.js"></script>
+	<script src="../resources/js/pages/login.js"></script>
+
+	<!-- <script src="../resources/js/pages/perfil.js"></script> -->
+	<script src="../resources/js/core/jquery.3.2.1.min.js"
+		type="text/javascript"></script>
+	<script src="../resources/js/core/popper.min.js" type="text/javascript"></script>
+	<script src="../resources/js/core/bootstrap.min.js"
+		type="text/javascript"></script>
+	<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+	<script src="../resources/js/plugins/bootstrap-switch.js"></script>
+	<!--  Google Maps Plugin    -->
+	<!--  Chartist Plugin  -->
+	<!--  Notifications Plugin    -->
+	<script src="../resources/js/plugins/bootstrap-notify.js"></script>
+	<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+	<script src="../resources/js/light-bootstrap-dashboard.js?v=2.0.0 "
+		type="text/javascript"></script>
+	<!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+	<script src="../resources/js/demo.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+	<script src="../resources/js/Chart.js"></script>
+	<script src="../resources/js/Chart.bundle.js"></script>
+	<script src="../resources/js/Chart.bundle.min.js"></script>
+	<script src="../resources/js/Chart.min.js"></script>
+	<script src="../resources/js/pages/perfil.js"></script>
+	<script src="../resources/js/notifica.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+	<script src="../resources/js/plugins/chartist.min.js"></script>
+	<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
+	<script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+	<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+	<script src="../resources/js/notifica.js"></script>
+
+
+	<script> 
         $(function(){
           $("#menu").load("base.html"); // incluir conteúdo do menu.html na div com id #includedContent
         });
@@ -314,7 +356,7 @@
 
 
 
-</script> 
+</script>
 
 </body>
 </html>

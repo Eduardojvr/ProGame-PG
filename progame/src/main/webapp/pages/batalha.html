@@ -1,171 +1,216 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ProGame</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>ProGame</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet"> 
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
+	rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"
+	rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+<link
+	href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 
-    <link href="../resources/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../resources/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
+<link href="../resources/css/bootstrap.min.css" rel="stylesheet" />
+<link href="../resources/css/light-bootstrap-dashboard.css?v=2.0.0 "
+	rel="stylesheet" />
 
-    <link href="../resources/css/demo.css" rel="stylesheet" />
-    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
-    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
+<link href="../resources/css/demo.css" rel="stylesheet" />
+<link type="text/css" rel="stylesheet"
+	href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+<link type="text/css" rel="stylesheet"
+	href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
 </head>
 <body>
 
-  <!-- INICIO MODAL -->
-  <div style="padding-left: 15%; background-color: rgba(0, 0, 0, 0.6);" class="modal fade right" id="modalInicio" tabindex="-1" role="dialog"
-    aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-info" role="document">
-      <!--Content-->
-      <div class="modal-content">
+	<!-- INICIO MODAL -->
+	<div style="padding-left: 15%; background-color: rgba(0, 0, 0, 0.6);"
+		class="modal fade right" id="modalInicio" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		data-backdrop="static" data-keyboard="false">
+		<div
+			class="modal-dialog modal-side modal-bottom-right modal-notify modal-info"
+			role="document">
+			<!--Content-->
+			<div class="modal-content">
 
-        <!--Body-->
-        <div class="modal-body" style="background-color: rgba(192,192,192, 0.5)">
-  
-          <div class="row">
-            <div class="col-5">
-              <img src="../resources/img/aisha.png"
-                class="img-fluid" alt="">
-            </div>
-  
-            <div class="col-7" id="gerenciapersonagem">
-              <p><strong>Bem vindo ao modo 1 VS 1</strong></p>
-              <p> Desafie outros jogadores a solucionarem problemas criados por você e conquiste mais pontos. <br> Ao propor ou resolver um 
-                desafio, você automaticamente recebe 100 pontos.<br>Conferir a resposta dada por seu adversário duplica seus ganhos.<br><br>Bom jogo! </p><br>
-              <div style="padding-left: 12%;">
-                <button type="button" class="btn btn-info btn-md" onclick='$("#modalInicio").modal("hide");'>Ok</button>
-              </div>
-  
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--/.Content-->
-    </div>
-  </div>
-  <!-- FIM MODAL -->
-  <div id="batalha">
+				<!--Body-->
+				<div class="modal-body"
+					style="background-color: rgba(192, 192, 192, 0.5)">
 
-  <div id="modalBatalha" style="padding-left: 15%; background-color: rgba(0, 0, 0, 0.6);" class="modal fade top" tabindex="-1" role="dialog" aria-labelledby="modalLinguagem" aria-hidden="true" data-backdrop='false'>
-      <div class="modal-dialog modal-lg modal-frame modal-top" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Batalha 1 vs 1</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-              <table>
-                  <tr>
-                    <td>Título:</td>
-                    <td><input type="text" name="nome" size="60" v-model="tituloDesafio" > <br/><br/></td>
-                  </tr>
-                  <tr>
-                    <td>Desafio:</td>
-                    <td><textarea name="descricao"  rows="5" cols="60" v-model="desafio"></textarea><br/></td>
-                  </tr>
-              </table>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" @click="salvaDesafio()">Salvar</button>
-          </div>
-        </div>
-      </div>
-  </div> 
-  <!-- fim modal batalha -->
-  <div style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);" id="pvsp" class="modal fade top"  tabindex="-1" role="dialog" aria-labelledby="pvsp" aria-hidden="true" data-backdrop='false' data-keyboard="false">
-      <div  class="modal-dialog modal-lg modal-frame modal-top" role="document">
-        <div  style="background-color:rgba(255, 255, 255, 0.9);"  class="modal-content">         
-          <div class="modal-header">
-              <!-- <div style="text-align: center;">
+					<div class="row">
+						<div class="col-5">
+							<img src="../resources/img/aisha.png" class="img-fluid" alt="">
+						</div>
+
+						<div class="col-7" id="gerenciapersonagem">
+							<p>
+								<strong>Bem vindo ao modo 1 VS 1</strong>
+							</p>
+							<p>
+								Desafie outros jogadores a solucionarem problemas criados por
+								você e conquiste mais pontos. <br> Ao propor ou resolver um
+								desafio, você automaticamente recebe 100 pontos.<br>Conferir
+								a resposta dada por seu adversário duplica seus ganhos.<br>
+								<br>Bom jogo!
+							</p>
+							<br>
+							<div style="padding-left: 12%;">
+								<button type="button" class="btn btn-info btn-md"
+									onclick='$("#modalInicio").modal("hide");'>Ok</button>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--/.Content-->
+		</div>
+	</div>
+	<!-- FIM MODAL -->
+	<div id="batalha">
+
+		<div id="modalBatalha"
+			style="padding-left: 15%; background-color: rgba(0, 0, 0, 0.6);"
+			class="modal fade top" tabindex="-1" role="dialog"
+			aria-labelledby="modalLinguagem" aria-hidden="true"
+			data-backdrop='false'>
+			<div class="modal-dialog modal-lg modal-frame modal-top"
+				role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Batalha 1 vs 1</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<table>
+							<tr>
+								<td>Título:</td>
+								<td><input type="text" name="nome" size="60"
+									v-model="tituloDesafio"> <br />
+								<br /></td>
+							</tr>
+							<tr>
+								<td>Desafio:</td>
+								<td><textarea name="descricao" rows="5" cols="60"
+										v-model="desafio"></textarea><br /></td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							@click="salvaDesafio()">Salvar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- fim modal batalha -->
+		<div
+			style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+			id="pvsp" class="modal fade top" tabindex="-1" role="dialog"
+			aria-labelledby="pvsp" aria-hidden="true" data-backdrop='false'
+			data-keyboard="false">
+			<div class="modal-dialog modal-lg modal-frame modal-top"
+				role="document">
+				<div style="background-color: rgba(255, 255, 255, 0.9);"
+					class="modal-content">
+					<div class="modal-header">
+						<!-- <div style="text-align: center;">
                   <h2 style="color: royalblue;" >Player vs Player</h2>
               </div> -->
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            
-          </div>
-         
-          <div class="modal-body">
-            <div style="text-align: center;">
-              <h3>Desafio enviado! Você recebeu 100 pontos!</h3>
-            </div>
-              <div class="row">
-                  <div class="col-3">
-            <img height="250" width="200" v-bind:src="desafiante" alt="">
-            <!-- <legend style="color:steelblue; text-align: center;">Você</legend> -->
-  
-          </div>
-          <div class="col-3">
-              <audio src="../resources/sons/misterio.mp3"></audio>
-            <img width="250" height="250" style="padding-left: 30px;" src="../resources/img/vs.gif" alt="">
-            </div>
-            <div class="col-3" style="padding-left: 150px;">
-            <img height="250" width="200" v-bind:src="desafiado" alt="">
-            <!-- <legend style="color:steelblue; text-align: center;">{{ nomeDesafiado }}</legend> -->
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  </div> 
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
 
-  <div class="wrapper">
-    <div id="menu"></div>
-    
-		<div class="main-panel">
-		  <div class="container">
-          <div id="app" class="tabela">
-              <h2 style="text-align: center;">Modo 1 VS 1</h2>
-              <div >
-                  <b-table :fields="headers" :items="usuarios" 
-                   @row-clicked="batalha" hover responsive> 
+					</div>
 
-                </b-table>
-                </div>
-         </div>
-      </div>
-    </div>
-  </div>
-</div>
+					<div class="modal-body">
+						<div style="text-align: center;">
+							<h3>Desafio enviado! Você recebeu 100 pontos!</h3>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<img height="250" width="200" v-bind:src="desafiante" alt="">
+								<!-- <legend style="color:steelblue; text-align: center;">Você</legend> -->
 
+							</div>
+							<div class="col-3">
+								<audio src="../resources/sons/misterio.mp3"></audio>
+								<img width="250" height="250" style="padding-left: 30px;"
+									src="../resources/img/vs.gif" alt="">
+							</div>
+							<div class="col-3" style="padding-left: 150px;">
+								<img height="250" width="200" v-bind:src="desafiado" alt="">
+								<!-- <legend style="color:steelblue; text-align: center;">{{ nomeDesafiado }}</legend> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-    <script src="../resources/js/vue.js"></script>
-    <script src="../resources/js/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-    <script src="../resources/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
-    <script src="../resources/js/core/popper.min.js" type="text/javascript"></script>
-    <script src="../resources/js/core/bootstrap.min.js" type="text/javascript"></script>
-    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-    <script src="../resources/js/plugins/bootstrap-switch.js"></script>
-    <!--  Chartist Plugin  -->
-    <script src="../resources/js/plugins/chartist.min.js"></script>
-    <!--  Notifications Plugin    -->
-    <script src="../resources/js/plugins/bootstrap-notify.js"></script>
-    <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
-    <script src="../resources/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
-    <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
-    <script src="../resources/js/demo.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
-    <script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
-    <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+		<div class="wrapper">
+			<div id="menu"></div>
+
+			<div class="main-panel">
+				<div class="container">
+					<div id="app" class="tabela">
+						<h2 style="text-align: center;">Modo 1 VS 1</h2>
+						<div>
+							<b-table :fields="headers" :items="usuarios"
+								@row-clicked="batalha" hover responsive> </b-table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-  
-<script> 
+	<script src="../resources/js/vue.js"></script>
+	<script src="../resources/js/axios.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+	<script src="../resources/js/core/jquery.3.2.1.min.js"
+		type="text/javascript"></script>
+	<script src="../resources/js/core/popper.min.js" type="text/javascript"></script>
+	<script src="../resources/js/core/bootstrap.min.js"
+		type="text/javascript"></script>
+	<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+	<script src="../resources/js/plugins/bootstrap-switch.js"></script>
+	<!--  Chartist Plugin  -->
+	<script src="../resources/js/plugins/chartist.min.js"></script>
+	<!--  Notifications Plugin    -->
+	<script src="../resources/js/plugins/bootstrap-notify.js"></script>
+	<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+	<script src="../resources/js/light-bootstrap-dashboard.js?v=2.0.0 "
+		type="text/javascript"></script>
+	<!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+	<script src="../resources/js/demo.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
+	<script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+	<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+
+
+
+	<script> 
 new Vue({
   el: '#batalha',
   vuetify: new Vuetify(),
@@ -298,8 +343,8 @@ new Vue({
   });
   
   
-  </script> 
-        
+  </script>
+
 
 
 </body>

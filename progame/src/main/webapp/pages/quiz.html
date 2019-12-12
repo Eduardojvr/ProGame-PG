@@ -1,134 +1,203 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta http-equiv="cache-control" content="max-age=0" />
-    <meta http-equiv="cache-control" content="no-cache" />
-    <meta http-equiv="expires" content="0" />
-    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-    <meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="max-age=0" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+<meta http-equiv="pragma" content="no-cache" />
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz</title>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-    <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz</title>
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>        
-    <link rel="stylesheet" type="text/css" href="../resources/css/util.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="../resources/css/util.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body  style="background-color:  rgba(0, 0, 0, 0.9);">
+<body style="background-color: rgba(0, 0, 0, 0.9);">
 
 
-  <div class="modal fade" id="processando" tabindex="-1" role="img" style="padding-right: 10%; padding-top: 10%;" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog" role="document" style="width:0px;">
-      <div class="modal-content" style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
-        <img src="../resources/img/loadGT.gif" width=200px height=200px style="border-radius: 100px;">
-        <div>
-          <label style="color: seashell; padding-left: 40px;">Processando...</label>
-        </div>
-      </div>
-    </div>
-    </div>
+	<div class="modal fade" id="processando" tabindex="-1" role="img"
+		style="padding-right: 10%; padding-top: 10%;" data-backdrop="static"
+		data-keyboard="false">
+		<div class="modal-dialog" role="document" style="width: 0px;">
+			<div class="modal-content"
+				style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
+				<img src="../resources/img/loadGT.gif" width=200px height=200px
+					style="border-radius: 100px;">
+				<div>
+					<label style="color: seashell; padding-left: 40px;">Processando...</label>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div class="modal fade" id="modalCerto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding-right: 20%; padding-top: 5%;">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content" style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
-              <audio id="venceu" src="../resources/sons/levelup.mp3"></audio>
-              <img src="../resources/img/levelUp.gif" alt="some text" width=800 height=500>
-          </div>
-        </div>
-      </div>
+	<div class="modal fade" id="modalCerto" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true"
+		style="padding-right: 20%; padding-top: 5%;">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content"
+				style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
+				<audio id="venceu" src="../resources/sons/levelup.mp3"></audio>
+				<img src="../resources/img/levelUp.gif" alt="some text" width=800
+					height=500>
+			</div>
+		</div>
+	</div>
 
-      <div class="modal fade" id="modalErrado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding-right: 20%; padding-top: 4%;">
-          <div class="modal-dialog" role="document">
-              <div>
-                  <h1 style="color:whitesmoke; padding-left: 160px;">Você foi derrotado!</h1>
-                </div>
-              <div class="modal-content">
-                <audio id="perdeu" src="../resources/sons/perdeu.mp3"></audio>
-                  <img src="../resources/img/feedback/orcWin.gif" alt="some text" width=800 height=450>
-            </div>
-          </div>
-        </div>
+	<div class="modal fade" id="modalErrado" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true"
+		style="padding-right: 20%; padding-top: 4%;">
+		<div class="modal-dialog" role="document">
+			<div>
+				<h1 style="color: whitesmoke; padding-left: 160px;">Você foi
+					derrotado!</h1>
+			</div>
+			<div class="modal-content">
+				<audio id="perdeu" src="../resources/sons/perdeu.mp3"></audio>
+				<img src="../resources/img/feedback/orcWin.gif" alt="some text"
+					width=800 height=450>
+			</div>
+		</div>
+	</div>
 
 
-      <div class="container-fluid">
-            <br><br> <br><br><br>
-            <div id="quest">
-              <div style="padding-left:33%;">
-                <label id="pontuacao" style="color: whitesmoke;">Pontuação atual: {{ dados.pontuacao }}</label>
-              </div>    
-                <!-- Tipo múltipla escolha -->
-                <div class="modal-dialog"  v-if=" totalQuestaoMultipla > countQuestao && items[countQuestao].idTipoQuestao === '4'">
-                  <div class="modal-content" >
-                     <div class="modal-header">
-                        <h3><span class="label label-warning" ></span> {{ items[countQuestao].questao }}</h3>
-                    </div>
-                    <div class="modal-body">
-                      <div class="quiz" id="btMultipla">
-                       <label class="element-animation1 btn btn-lg btn-primary btn-block"><input type="radio"  name="q_answer"  style="display: none;" @click="verificaMultipla(1, countQuestao)">{{ items[countQuestao].alternativa1 }}</label>
-                       <label class="element-animation2 btn btn-lg btn-primary btn-block"><input type="radio"  name="q_answer"  style="display: none;" @click="verificaMultipla(2, countQuestao)">{{ items[countQuestao].alternativa2 }}</label>
-                       <label class="element-animation3 btn btn-lg btn-primary btn-block"><input type="radio"  name="q_answer"  style="display: none;" @click="verificaMultipla(3, countQuestao)">{{ items[countQuestao].alternativa3 }}</label>
-                       <label class="element-animation4 btn btn-lg btn-primary btn-block"><input type="radio"  name="q_answer"  style="display: none;" @click="verificaMultipla(4, countQuestao)">{{ items[countQuestao].alternativa4 }}</label>
-                   </div>
-                   <div id="feedback"></div>
-                  </div>
-               <div style="padding-left: 33%; padding-top: 1%;">
-                  <input type="image" src="../resources/img/icons/setaEsquerda.png" style="width: 80px; height: 80px;" @click="anterior()">
-                    <input type="image" src="../resources/img/icons/setaDireita.png" style="width: 80px; height: 80px;" @click="proxima()">
-                </div>  
-            </div>
-           
-          </div>    
-            <!-- Tipo Verdadeiro ou falso -->
-            <div v-else-if=" totalQuestaoVF > countQuestaoVF && questaoTipoVF[countQuestaoVF].idTipoQuestao === '3' " class="modal-dialog" style="border-radius: 100px;">
-                <div class="modal-content" >
-                   <div class="modal-header">
-                      <h3><span class="label label-warning" ></span> {{ questaoTipoVF[countQuestaoVF].questao }}</h3>
-                  </div>
-                  <div class="modal-body">
-                    <div class="quiz" id="btVF">
-                     <label class="element-animation1 btn btn-lg btn-primary btn-block"><input type="radio"  @click="verificaVF('Verdadeiro', countQuestaoVF)"  style="display: none;">Verdadeiro</label>
-                     <label class="element-animation2 btn btn-lg btn-primary btn-block"><input type="radio"  @click="verificaVF('Falso', countQuestaoVF)"  style="display: none;">Falso</label>
-                    </div>
-                    <div id="feedback"></div>
-             </div>
-             <div style="padding-left: 33%; padding-top: 1%;">
-                <input type="image" src="../resources/img/icons/setaEsquerda.png" style="width: 80px; height: 80px;" @click="anteriorVF()">
-                  <input type="image" src="../resources/img/icons/setaDireita.png" style="width: 80px; height: 80px;" @click="proximaVF()">
-              </div>  
-          </div>
-         
-        </div> 
-           <!-- Tipo Lacuna -->
-           <div v-else-if=" totalQuestaoLacuna > countQuestaoLacuna && questaoTipoLacuna[countQuestaoLacuna].idTipoQuestao === '1' " class="modal-dialog">
-              <div class="modal-content" >
-                 <div class="modal-header">
-                    <h3><span class="label label-warning" ></span> {{ questaoTipoLacuna[countQuestaoLacuna].questao }}</h3>
-                  </div>
-                  <input type="text" placeholder="Digite a resposta aqui" rows="10" cols="40"  v-model="lacuna"  name="lacuna">
-                  <div style="padding-top: 15px;">
-                    <label class="element-animation2 btn btn-lg btn-primary btn-block"><input type="button"  name="q_answer"  style="display: none;" @click="verificaLacuna(lacuna, countQuestaoLacuna)">Responder</label>
-                  </div>
-                  <div id="feedback"></div>
-              
-           <div style="padding-left: 33%; padding-top: 1%;">
-              <input type="image" src="../resources/img/icons/setaEsquerda.png" style="width: 80px; height: 80px;" @click="anteriorLacuna()">
-                <input type="image" src="../resources/img/icons/setaDireita.png" style="width: 80px; height: 80px;" @click="proximaLacuna()">
-            </div>  
-        </div>
-       
-      </div> 
-          <!-- Tipo Codigo -->
-          <!-- <div v-else-if="totalQuestaoCodigo > countQuestaoCodigo && questaoTipoCodigo[countQuestaoCodigo].idTipoQuestao === '2' " class="modal-dialog">
+	<div class="container-fluid">
+		<br>
+		<br> <br>
+		<br>
+		<br>
+		<div id="quest">
+			<div style="padding-left: 33%;">
+				<label id="pontuacao" style="color: whitesmoke;">Pontuação
+					atual: {{ dados.pontuacao }}</label>
+			</div>
+			<!-- Tipo múltipla escolha -->
+			<div class="modal-dialog"
+				v-if=" totalQuestaoMultipla > countQuestao && items[countQuestao].idTipoQuestao === '4'">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3>
+							<span class="label label-warning"></span> {{
+							items[countQuestao].questao }}
+						</h3>
+					</div>
+					<div class="modal-body">
+						<div class="quiz" id="btMultipla">
+							<label
+								class="element-animation1 btn btn-lg btn-primary btn-block"><input
+								type="radio" name="q_answer" style="display: none;"
+								@click="verificaMultipla(1, countQuestao)">{{
+								items[countQuestao].alternativa1 }}</label> <label
+								class="element-animation2 btn btn-lg btn-primary btn-block"><input
+								type="radio" name="q_answer" style="display: none;"
+								@click="verificaMultipla(2, countQuestao)">{{
+								items[countQuestao].alternativa2 }}</label> <label
+								class="element-animation3 btn btn-lg btn-primary btn-block"><input
+								type="radio" name="q_answer" style="display: none;"
+								@click="verificaMultipla(3, countQuestao)">{{
+								items[countQuestao].alternativa3 }}</label> <label
+								class="element-animation4 btn btn-lg btn-primary btn-block"><input
+								type="radio" name="q_answer" style="display: none;"
+								@click="verificaMultipla(4, countQuestao)">{{
+								items[countQuestao].alternativa4 }}</label>
+						</div>
+						<div id="feedback"></div>
+					</div>
+					<div style="padding-left: 33%; padding-top: 1%;">
+						<input type="image" src="../resources/img/icons/setaEsquerda.png"
+							style="width: 80px; height: 80px;" @click="anterior()"> <input
+							type="image" src="../resources/img/icons/setaDireita.png"
+							style="width: 80px; height: 80px;" @click="proxima()">
+					</div>
+				</div>
+
+			</div>
+			<!-- Tipo Verdadeiro ou falso -->
+			<div
+				v-else-if=" totalQuestaoVF > countQuestaoVF && questaoTipoVF[countQuestaoVF].idTipoQuestao === '3' "
+				class="modal-dialog" style="border-radius: 100px;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3>
+							<span class="label label-warning"></span> {{
+							questaoTipoVF[countQuestaoVF].questao }}
+						</h3>
+					</div>
+					<div class="modal-body">
+						<div class="quiz" id="btVF">
+							<label
+								class="element-animation1 btn btn-lg btn-primary btn-block"><input
+								type="radio" @click="verificaVF('Verdadeiro', countQuestaoVF)"
+								style="display: none;">Verdadeiro</label> <label
+								class="element-animation2 btn btn-lg btn-primary btn-block"><input
+								type="radio" @click="verificaVF('Falso', countQuestaoVF)"
+								style="display: none;">Falso</label>
+						</div>
+						<div id="feedback"></div>
+					</div>
+					<div style="padding-left: 33%; padding-top: 1%;">
+						<input type="image" src="../resources/img/icons/setaEsquerda.png"
+							style="width: 80px; height: 80px;" @click="anteriorVF()">
+						<input type="image" src="../resources/img/icons/setaDireita.png"
+							style="width: 80px; height: 80px;" @click="proximaVF()">
+					</div>
+				</div>
+
+			</div>
+			<!-- Tipo Lacuna -->
+			<div
+				v-else-if=" totalQuestaoLacuna > countQuestaoLacuna && questaoTipoLacuna[countQuestaoLacuna].idTipoQuestao === '1' "
+				class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3>
+							<span class="label label-warning"></span> {{
+							questaoTipoLacuna[countQuestaoLacuna].questao }}
+						</h3>
+					</div>
+					<input type="text" placeholder="Digite a resposta aqui" rows="10"
+						cols="40" v-model="lacuna" name="lacuna">
+					<div style="padding-top: 15px;">
+						<label class="element-animation2 btn btn-lg btn-primary btn-block"><input
+							type="button" name="q_answer" style="display: none;"
+							@click="verificaLacuna(lacuna, countQuestaoLacuna)">Responder</label>
+					</div>
+					<div id="feedback"></div>
+
+					<div style="padding-left: 33%; padding-top: 1%;">
+						<input type="image" src="../resources/img/icons/setaEsquerda.png"
+							style="width: 80px; height: 80px;" @click="anteriorLacuna()">
+						<input type="image" src="../resources/img/icons/setaDireita.png"
+							style="width: 80px; height: 80px;" @click="proximaLacuna()">
+					</div>
+				</div>
+
+			</div>
+			<!-- Tipo Codigo -->
+			<!-- <div v-else-if="totalQuestaoCodigo > countQuestaoCodigo && questaoTipoCodigo[countQuestaoCodigo].idTipoQuestao === '2' " class="modal-dialog">
               <div class="modal-content" >
                  <div class="modal-header">
                     <h3><span class="label label-warning" ></span> {{ questaoTipoCodigo[countQuestaoCodigo].questao }}</h3>
@@ -146,12 +215,14 @@
         </div>
        
       </div>  -->
-        <div style="text-align: center; padding-right:40px;" >
-          <button type="button" class="btn btn-outline-danger" style="padding: 10px 50px 10px 50px;" onclick="window.location.assign('perfil.html')" >Sair</button>
-        </div>
-        </div>
-          <!-- Tipo Ecolha multipla -->
-          <!-- <div class="modal-dialog" id="quest">
+			<div style="text-align: center; padding-right: 40px;">
+				<button type="button" class="btn btn-outline-danger"
+					style="padding: 10px 50px 10px 50px;"
+					onclick="window.location.assign('perfil.html')">Sair</button>
+			</div>
+		</div>
+		<!-- Tipo Ecolha multipla -->
+		<!-- <div class="modal-dialog" id="quest">
               <div class="modal-content" >
                  <div class="modal-header">
                     <h3><span class="label label-warning" id="qid">{{ countQuestao+1 }} -</span> {{ items[countQuestao].questao }}</h3>
@@ -175,12 +246,13 @@
               <button type="button" class="btn btn-outline-danger" style="padding: 10px 50px 10px 50px;" onclick="window.location.assign('perfil.html')" >Sair</button>
           </div>
            </div>  -->
-          
-            <script src="../resources/js/vue.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
-            <script src="../resources/css/quiz.css" ></script>
 
-<script>
+		<script src="../resources/js/vue.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+		<script src="../resources/css/quiz.css"></script>
+
+		<script>
 
 let q = new Vue({
     el : '#quest',
@@ -424,6 +496,5 @@ let q = new Vue({
 
 
 </script>
-
 </body>
 </html>
