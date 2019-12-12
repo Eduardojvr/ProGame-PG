@@ -39,7 +39,7 @@
 
         Tip 2: you can also add an image using data-image tag
     -->
-		<div class="sidebar-wrapper">
+		<div  id="notifica" class="sidebar-wrapper">
 			<div class="logo">
 				<a href="https://github.com/Eduardojvr/ProGame-PG"
 					class="simple-text"> Pro Game </a>
@@ -57,9 +57,13 @@
 						class="nc-icon nc-chat-round"></i>
 						<p>Modo Narrativa</p>
 				</a></li>
-				<li><a class="nav-link" href="batalha.html"> <i
-						class="nc-icon nc-controller-modern"></i>
+				<li><a class="nav-link" href="batalha.html"> 
+						<div id="notifica">
+						<i class="nc-icon nc-controller-modern"></i>
+						<span v-if="totalvs > 0" class="notificacao">{{
+								totalvs }}</span>
 						<p>1 VS 1</p>
+						</div>
 				</a></li>
 				<li><a class="nav-link" href="desafios.html"> <i
 						class="nc-icon nc-puzzle-10 icon-bold"></i>
@@ -74,12 +78,10 @@
 						<p>Material</p>
 				</a></li>
 				<li><a class="nav-link" href="notificacoes.html">
-						<div id="notifica">
-							<i class="nc-icon nc-bulb-63"></i> <span
-								v-if="totalNotificacao > 0" class="notificacao">{{
-								totalNotificacao }}</span>
+							<i class="nc-icon nc-bulb-63"></i> 
+							<span v-if="totalNotificacao > 0" class="notificacao">{{
+									totalNotificacao }}</span>
 							<p>Notificações</p>
-						</div>
 				</a></li>
 			</ul>
 			<div id="login">

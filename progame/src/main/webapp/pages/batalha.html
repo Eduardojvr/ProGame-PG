@@ -171,17 +171,81 @@
 
 			<div class="main-panel">
 				<div class="container">
-					<div id="app" class="tabela">
+					<div  class="tabela">
+						<hr>
 						<h2 style="text-align: center;">Modo 1 VS 1</h2>
+						<hr><br><br>
+
 						<div>
-							<b-table :fields="headers" :items="usuarios"
-								@row-clicked="batalha" hover responsive> </b-table>
+								<h3 style="text-align: left;">🏆 Desafie outros jogadores</h3>
+								<div class="overflow-auto">
+						
+										<!-- <p class="mt-3">Current Page: {{ currentPage }}</p> -->
+										<b-table
+										  @row-clicked="batalha" 
+										  id="my-table"
+										  :fields="headers"
+										  :items="usuarios"
+										  :per-page="perPage"
+										  :current-page="currentPage"
+										  small
+										  hover 
+										  responsive
+										></b-table>
+									  <div style="padding-left: 30%;">
+									  <b-pagination
+									  v-model="currentPage"
+									  :total-rows="rows"
+									  :per-page="perPage"
+									  prev-text="◀︎"
+									  next-text="▶︎"
+									  class="mt-4"
+									  pills
+									></b-pagination>
+								</div>      
+									  </div>
 						</div>
-					</div>
+
+					<br><hr><br>
+					<h3 style="text-align: left;">🏆 Seus desafios</h3>
+					
+					<div class="overflow-auto">
+						
+							<!-- <p class="mt-3">Current Page: {{ currentPage }}</p> -->
+							<b-table
+							  @row-clicked="responder" 
+							  id="my-table"
+							  :fields="headersDesafios"
+							  :items="desafios"
+							  :per-page="perPage"
+							  :current-page="currentPage"
+							  small
+							  hover 
+							  responsive
+							></b-table>
+						  <div style="padding-left: 30%;">
+						  <b-pagination
+						  v-model="currentPage"
+						  :total-rows="rows"
+						  :per-page="perPage"
+						  prev-text="◀︎"
+						  next-text="▶︎"
+						  class="mt-4"
+						  pills
+						></b-pagination>
+					</div>      
+						  </div>
+						  </div>
 				</div>
+				
 			</div>
+			
 		</div>
+		
 	</div>
+
+
+
 
 
 	<script src="../resources/js/vue.js"></script>
@@ -207,6 +271,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
 	<script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
 	<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+	<!-- <script src="../resources/js/notifica.js" ></script> -->
 
 
 
@@ -248,14 +313,71 @@ new Vue({
       desafiado: '',
       desafio:'',
       tituloDesafio: '',
-      matriculaDesafiado: ''
+	  matriculaDesafiado: '',
+	  perPage: 5,
+      currentPage: 1,
+      headersDesafios: [
+            {
+              align: 'left',
+              sortable: false,
+            },
+            { key: 'idDesafio', label: 'Prioridade Desafio' },
+            { key: 'tituloDesafio', label: 'Título' },
+            { key: 'desafio', label: 'Desafio' },
+            { key: 'respostaDesafiado', label: 'Sua resposta' },
+            { key: 'resultado', label: 'Resultado' } 
+       ],
+      desafios:[
+          {
+              desafio: '',
+              idDesafio: '',
+              matriculaDesafiado: '',
+              matriculaDesafiante: '',
+              respostaDesafiado: '',
+              resultado: '',
+              tituloDesafio:''
+          }
+      ],
+      totalNotificacao: 0
+
     }
   },
-  created : function(){
+  computed: {
+    rows() {
+      return this.desafios.length
+    }
+  },
+created : function(){
     const vm = this;
-    vm.todosUsuarios();
+	vm.todosUsuarios();
+	vm.meusDesafios();
   },
   methods : {
+	meusDesafios: function(){
+		const vm = this;
+        var count = 0;
+        axios.get('../rs/user/getUser').then(function(response){
+            axios.get('../rs/user/todosDesafios/'+response.data["matricula"]).then(function(response){
+                while(response.data[count]){
+                    if(response.data[count]['resultado'] == '' || response.data[count]['resultado'] == null){
+                        response.data[count]['resultado'] = 'Aguardando correção';
+                    }
+
+                    if(response.data[count]['respostaDesafiado'] == '' || response.data[count]['respostaDesafiado'] == null){
+                        response.data[count]['respostaDesafiado'] = 'Sem resposta';
+                    }
+                    response.data[count]["idDesafio"] = count+1;
+                    // vm.desafios.push(response.data[count]);
+                    count+=1;
+                }
+                vm.totalNotificacao = count;
+                vm.desafios = response.data;
+            });
+        });
+	},
+	responder: function(){
+            alert();
+    },
     todosUsuarios : function(){
       const vm = this;
       var count = 0;

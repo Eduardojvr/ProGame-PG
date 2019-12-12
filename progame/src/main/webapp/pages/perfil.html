@@ -178,7 +178,7 @@
     
             Tip 2: you can also add an image using data-image tag
         -->
-			<div class="sidebar-wrapper">
+			<div id="notifica" class="sidebar-wrapper">
 				<div class="logo">
 					<a href="https://github.com/Eduardojvr/ProGame-PG"
 						class="simple-text"> Pro Game </a>
@@ -196,8 +196,10 @@
 							class="nc-icon nc-chat-round"></i>
 							<p>Modo Narrativa</p>
 					</a></li>
-					<li><a class="nav-link" href="batalha.html"> <i
-							class="nc-icon nc-controller-modern"></i>
+					<li><a class="nav-link" href="batalha.html"> 
+							<i class="nc-icon nc-controller-modern"></i>
+							<span v-if="totalvs > 0" class="notificacao">{{
+									totalvs }}</span>
 							<p>1 VS 1</p>
 					</a></li>
 					<li><a class="nav-link" href="desafios.html"> <i
@@ -213,14 +215,14 @@
 							<p>Material</p>
 					</a></li>
 					<li><a class="nav-link" href="notificacoes.html">
-							<div id="notifica">
-								<i class="nc-icon nc-bulb-63"></i> <span
-									v-if="totalNotificacao > 0" class="notificacao">{{
-									totalNotificacao }}</span>
-								<p>Notificações</p>
-							</div>
+									<i class="nc-icon nc-bulb-63"></i> 
+									<span v-if="totalNotificacao > 0" class="notificacao">{{
+											totalNotificacao }}</span>
+									<p>Notificações</p>
 					</a></li>
+				
 
+				
 				</ul>
 				<div id="login">
 					<input type="image" src="../resources/img/icons/sair.png"
@@ -329,7 +331,6 @@
 	<script src="../resources/js/Chart.bundle.min.js"></script>
 	<script src="../resources/js/Chart.min.js"></script>
 	<script src="../resources/js/pages/perfil.js"></script>
-	<script src="../resources/js/notifica.js"></script>
 
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
@@ -343,6 +344,7 @@
 	<script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
 	<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
 	<script src="../resources/js/notifica.js"></script>
+
 
 
 	<script> 
