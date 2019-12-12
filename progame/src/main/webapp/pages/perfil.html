@@ -188,7 +188,7 @@
                                     <a class="nav-link" href="notificacoes.html">
                                       <div id="notifica">
                                         <i class="nc-icon nc-bulb-63"></i>
-                                        <span class="notificacao">{{ totalNotificacao }}</span>
+                                        <span v-if="totalNotificacao > 0" class="notificacao">{{ totalNotificacao }}</span>
                                         <p>Notificações</p>
                                       </div>
                                     </a>
@@ -249,7 +249,7 @@
                              <div class="card ">
                                  <div class="card-header ">
                                      <h4 class="card-title">Progresso Geral</h4><br>
-                                     <div  class="progress">
+                                     <div class="progress">
                                             <div  class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" faria-valuenow="{ progresso }" aria-valuemin="0" aria-valuemax="100" v-bind:style="{width:  progresso }">{{ progresso }}</div>
     
                                         </div><br><br>
