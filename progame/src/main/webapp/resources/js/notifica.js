@@ -3,17 +3,19 @@ new Vue({
     vuetify: new Vuetify(),
   data () {
     return {
+      perPage: 5,
+      currentPage: 1,
       search: '',
       headers: [
             {
               align: 'left',
               sortable: false,
             },
-            { value: 'idDesafio', text: 'Prioridade Desafio' },
-            { value: 'tituloDesafio', text: 'Título' },
-            { value: 'desafio', text: 'Desafio' },
-            { value: 'respostaDesafiado', text: 'Sua resposta' },
-            { value: 'resultado', text: 'Resultado' } 
+            { key: 'idDesafio', label: 'Prioridade Desafio' },
+            { key: 'tituloDesafio', label: 'Título' },
+            { key: 'desafio', label: 'Desafio' },
+            { key: 'respostaDesafiado', label: 'Sua resposta' },
+            { key: 'resultado', label: 'Resultado' } 
        ],
       desafios:[
           {
@@ -28,6 +30,11 @@ new Vue({
       ],
       totalNotificacao: 0
 
+    }
+  },
+  computed: {
+    rows() {
+      return this.desafios.length
     }
   },
     created: function(){
@@ -51,6 +58,11 @@ new Vue({
                 vm.desafios = response.data;
             });
         });
+    },
+    methods: {
+        responder: function(){
+            alert();
+        }
     }
 });
 
