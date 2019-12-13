@@ -8,6 +8,8 @@ public class DesafiovsDTO {
 	private String desafio;
 	private String respostaDesafiado;
 	private String resultado;
+	private String avaliacao;
+	
 	public String getIdDesafio() {
 		return idDesafio;
 	}
@@ -49,6 +51,12 @@ public class DesafiovsDTO {
 	}
 	public void setResultado(String resultado) {
 		this.resultado = resultado;
+	}
+	public String getAvaliacao() {
+		return avaliacao;
+	}
+	public void setAvaliacao(String avaliacao) {
+		this.avaliacao = avaliacao;
 	}
 	
 	

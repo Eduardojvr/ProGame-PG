@@ -84,5 +84,20 @@ public class RESTDesafio {
 		}				
 		return desafios;
 	}
+	
+	
+	@POST
+	@Path("/salvaAvaliacao")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public boolean salvaAvaliacao(DesafiovsDTO desafio) {
+		boolean isOk = false;
+		DesafioDAO dao = new DesafioDAO();
+		try {
+			isOk = dao.salvaAvaliacao(desafio);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}				
+		return isOk;
+	}
 }
 

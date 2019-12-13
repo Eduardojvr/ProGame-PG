@@ -81,67 +81,70 @@
 	<!-- FIM MODAL -->
 	<div id="batalha">
 
-<div class="modal fade" id="modalResposta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 style="color: steelblue;" class="modal-title" id="myModalLabel">Desafio</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-		<label>Digite sua resposta</label>
-		<textarea style="border-radius: 10px;" cols="47" rows="6" v-model="minhaResposta"></textarea>
-      </div>
-      <div class="modal-footer">
-			<button type="button" class="btn btn-secondary"
-				data-dismiss="modal">Cancelar</button>
-			<button type="button" class="btn btn-primary" data-dismiss="modal"
-				@click="responde()">Salvar</button>
-		</div>
-    </div>
-  </div>
-</div>
-
-<div
-style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
-id="pvsp" class="modal fade top" tabindex="-1" role="dialog"
-aria-labelledby="pvsp" aria-hidden="true" data-backdrop='false'
-data-keyboard="false">
-<div class="modal-dialog modal-lg modal-frame modal-top"
-	role="document">
-	<div style="background-color: rgba(255, 255, 255, 0.9);"
-		class="modal-content">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal"
-				aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-		<div class="modal-body">
-			<div style="text-align: center;">
-				<h3>Desafio enviado! Você recebeu 100 pontos!</h3>
-			</div>
-			<div class="row">
-				<div class="col-3">
-					<img height="250" width="200" v-bind:src="desafiante" alt="">
-
-				</div>
-				<div class="col-3">
-					<audio src="../resources/sons/misterio.mp3"></audio>
-					<img width="250" height="250" style="padding-left: 30px;"
-						src="../resources/img/vs.gif" alt="">
-				</div>
-				<div class="col-3" style="padding-left: 150px;">
-					<img height="250" width="200" v-bind:src="desafiado" alt="">
+		<div class="modal fade" id="modalResposta" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 style="color: steelblue;" class="modal-title"
+							id="myModalLabel">Desafio</h3>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<label>Digite sua resposta</label>
+						<textarea style="border-radius: 10px;" cols="47" rows="6"
+							v-model="minhaResposta"></textarea>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							@click="responde()">Salvar</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
-</div>
+
+		<div
+			style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+			id="pvsp" class="modal fade top" tabindex="-1" role="dialog"
+			aria-labelledby="pvsp" aria-hidden="true" data-backdrop='false'
+			data-keyboard="false">
+			<div class="modal-dialog modal-lg modal-frame modal-top"
+				role="document">
+				<div style="background-color: rgba(255, 255, 255, 0.9);"
+					class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div style="text-align: center;">
+							<h3>Desafio enviado! Você recebeu 100 pontos!</h3>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<img height="250" width="200" v-bind:src="desafiante" alt="">
+
+							</div>
+							<div class="col-3">
+								<audio src="../resources/sons/misterio.mp3"></audio>
+								<img width="250" height="250" style="padding-left: 30px;"
+									src="../resources/img/vs.gif" alt="">
+							</div>
+							<div class="col-3" style="padding-left: 150px;">
+								<img height="250" width="200" v-bind:src="desafiado" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
 		<div style="padding-left: 15%; background-color: rgba(0, 0, 0, 0.6);"
@@ -151,21 +154,25 @@ data-keyboard="false">
 				role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h3 style="color: steelblue;" class="modal-title">Batalha 1 vs 1</h3>
+						<h3 style="color: steelblue;" class="modal-title">Batalha 1
+							vs 1</h3>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body">		
+					<div class="modal-body">
 						<label style="padding-left: 13%;">Título do Desafio</label><br>
 						<div style="text-align: center;">
-							<input style="border-radius: 10px;" type="text" name="nome" size="60" v-model="tituloDesafio"> <br/><br />
+							<input style="border-radius: 10px;" type="text" name="nome"
+								size="60" v-model="tituloDesafio"> <br /> <br />
 						</div>
 
 						<label style="padding-left: 13%;">Desafio</label><br>
 						<div style="text-align: center;">
-							<textarea style="border-radius: 10px;" name="descricao" rows="5" cols="60"v-model="desafio"></textarea><br />						
+							<textarea style="border-radius: 10px;" name="descricao" rows="5"
+								cols="60" v-model="desafio"></textarea>
+							<br />
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -177,117 +184,102 @@ data-keyboard="false">
 				</div>
 			</div>
 		</div>
-		<!-- fim modal batalha -->
-
+		<div class="modal fade" id="modalAnalise" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 style="color: steelblue;" class="modal-title"
+							id="myModalLabel">Correção</h3>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<label>Avaliação: &nbsp; </label> <select v-model="correcaoOpcao">
+							<option value="c">Certo</option>
+							<option value="e">Errado</option>
+						</select> <br>
+						<br> <label>Digite suas observações</label>
+						<textarea style="border-radius: 10px;" cols="47" rows="6"
+							v-model="correcaoAvalia"></textarea>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							@click="salvaAvaliacao()">Salvar</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="wrapper">
 			<div id="menu"></div>
 
 			<div class="main-panel">
 				<div class="container">
-					<div  class="tabela">
+					<div class="tabela">
 						<hr>
 						<h2 style="text-align: center;">Modo 1 VS 1</h2>
-						<hr><br><br>
-
+						<hr>
+						<br> <br>
 						<div>
-								<h3 style="text-align: left;">🏆 Desafie outros jogadores</h3>
-								<div class="overflow-auto">
-						
-										<!-- <p class="mt-3">Current Page: {{ currentPage }}</p> -->
-										<b-table
-										  @row-clicked="batalha" 
-										  :fields="headers"
-										  :items="usuarios"
-										  :per-page="perPage"
-										  :current-page="currentPage"
-										  small
-										  hover 
-										  responsive
-										></b-table>
-									  <div style="padding-left: 30%;">
-									  <b-pagination
-									  v-model="currentPage"
-									  :total-rows="rowDesafio"
-									  :per-page="perPage"
-									  prev-text="◀︎"
-									  next-text="▶︎"
-									  class="mt-4"
-									  pills
-									></b-pagination>
-								</div>      
-									  </div>
+							<h3 style="text-align: left;">🏆 Desafie outros jogadores</h3>
+							<div class="overflow-auto">
+								<b-table @row-clicked="batalha" :fields="headers"
+									:items="usuarios" :per-page="perPage"
+									:current-page="currentPage" small hover responsive></b-table>
+								<div style="padding-left: 30%;">
+									<b-pagination v-model="currentPage" :total-rows="rowDesafio"
+										:per-page="perPage" prev-text="◀︎" next-text="▶︎" class="mt-4"
+										pills></b-pagination>
+								</div>
+							</div>
 						</div>
 					</div>
 
-					<br><hr><br>
-					<div  class="tabela">
+					<br>
+					<hr>
+					<br>
+					<div class="tabela">
 
-					<h3 style="text-align: left;">🏆 Desafios recebidos</h3>
-					
-					<div class="overflow-auto">
-						
-							<!-- <p class="mt-3">Current Page: {{ currentPage }}</p> -->
-							<b-table
-							  @row-clicked="abreModalResposta" 
-							  id="my-table"
-							  :fields="headersDesafios"
-							  :items="desafios"
-							  :per-page="perPage"
-							  :current-page="currentPageDesafios"
-							  small
-							  hover 
-							  responsive
-							></b-table>
-						  <div style="padding-left: 30%;">
-						  <b-pagination
-						  v-model="currentPage"
-						  :total-rows="rows"
-						  :per-page="perPage"
-						  prev-text="◀︎"
-						  next-text="▶︎"
-						  class="mt-4"
-						  pills
-						></b-pagination>
-					</div>      
-						  </div>
-						  </div>
+						<h3 style="text-align: left;">🏆 Desafios recebidos</h3>
 
-						  <br><hr><br>
-						  <div  class="tabela">
-	  
-						  <h3 style="text-align: left;">🏆 Desafios Enviados</h3>
-						  
-						  <div class="overflow-auto">
-							  
-								  <b-table
-									id="my-table-correcao"
-									:fields="headersDesafiosCorrecao"
-									:items="desafiosCorrecao"
-									:per-page="perPage"
-									:current-page="currentPageCorrecao"
-									small
-									hover 
-									responsive
-								  ></b-table>
-								<div style="padding-left: 30%;">
-								<b-pagination
-								v-model="currentPage"
-								:total-rows="rowsCorrecao"
-								:per-page="perPage"
-								prev-text="◀︎"
-								next-text="▶︎"
-								class="mt-4"
-								pills
-							  ></b-pagination>
-						  </div>      
-								</div>
-								</div>
+						<div class="overflow-auto">
+							<b-table @row-clicked="abreModalResposta" id="my-table"
+								:fields="headersDesafios" :items="desafios" :per-page="perPage"
+								:current-page="currentPageDesafios" small hover responsive></b-table>
+							<div style="padding-left: 30%;">
+								<b-pagination v-model="currentPageDesafios" :total-rows="rows"
+									:per-page="perPage" prev-text="◀︎" next-text="▶︎" class="mt-4"
+									pills></b-pagination>
+							</div>
+						</div>
+					</div>
+
+					<br>
+					<hr>
+					<br>
+					<div class="tabela">
+						<h3 style="text-align: left;">🏆 Desafios Enviados</h3>
+						<div class="overflow-auto">
+							<b-table  @row-clicked="avalia" id="my-table-correcao" :fields="headersDesafiosCorrecao"
+								:items="desafiosCorrecao" :per-page="perPage"
+								:current-page="currentPageCorrecao" small hover responsive></b-table>
+							<div style="padding-left: 30%;">
+								<b-pagination v-model="currentPageCorrecao"
+									:total-rows="rowsCorrecao" :per-page="perPage" prev-text="◀︎"
+									next-text="▶︎" class="mt-4" pills></b-pagination>
+							</div>
+						</div>
+					</div>
 				</div>
-				
+
 			</div>
-			
+
 		</div>
-		
+
 	</div>
 
 
@@ -369,11 +361,12 @@ new Vue({
               align: 'left',
               sortable: false,
             },
-            { key: 'idDesafio', label: 'Prioridade Desafio' },
+            // { key: 'idDesafio', label: 'Prioridade Desafio' },
             { key: 'tituloDesafio', label: 'Título' },
             { key: 'desafio', label: 'Desafio' },
-            { key: 'respostaDesafiado', label: 'Sua resposta' },
-            { key: 'resultado', label: 'Resultado',  sortable: true  } 
+            { key: 'respostaDesafiado', label: 'Sua resposta', sortable: true },
+			{ key: 'resultado', label: 'Resultado',  sortable: true  },
+			{ key: 'avaliacao', label: 'Feedback' }
        ],
       desafios:[
           {
@@ -383,7 +376,8 @@ new Vue({
               matriculaDesafiante: '',
               respostaDesafiado: '',
               resultado: '',
-              tituloDesafio:''
+			  tituloDesafio:'',
+			  avaliacao: ''
           }
       ],
 	  totalNotificacao: 0,
@@ -396,7 +390,8 @@ new Vue({
             matriculaDesafiante: '',
             respostaDesafiado: '',
             resultado: '',
-            tituloDesafio:''
+			tituloDesafio:'',
+			avaliacao: ''
           }
 	  ],
 	  headersDesafiosCorrecao: [
@@ -404,7 +399,7 @@ new Vue({
               align: 'left',
               sortable: false,
             },
-            { key: 'idDesafio', label: 'Prioridade Desafio' },
+            // { key: 'idDesafio', label: 'Prioridade Desafio' },
             { key: 'tituloDesafio', label: 'Título' },
             { key: 'desafio', label: 'Desafio' },
             { key: 'respostaDesafiado', label: 'Resposta do desafiado', sortable: true },
@@ -418,10 +413,12 @@ new Vue({
             matriculaDesafiante: '',
             respostaDesafiado: '',
             resultado: '',
-            tituloDesafio:''
+			tituloDesafio:'',
+			avaliacao: ''
           }
 	  ],
-
+	  correcaoAvalia: '',
+	  correcaoOpcao: ''
     }
   },
   computed: {
@@ -442,6 +439,28 @@ created : function(){
 	vm.desafiosCorrigir();
   },
   methods : {
+	avalia: function(item){
+		const vm = item;
+		const context = this;
+		context.respostaDesafio = vm;
+		$("#modalAnalise").modal("show");
+	},
+	salvaAvaliacao: function(){
+		const vm = this;
+		if(vm.respostaDesafio.resultado == 'Aguardando sua correção' && vm.respostaDesafio.respostaDesafiado != 'Desafiado ainda não respondeu'){
+			vm.respostaDesafio.avaliacao = vm.correcaoAvalia;
+			vm.respostaDesafio.resultado = vm.correcaoOpcao;
+			axios.post('../rs/desafio/salvaAvaliacao', vm.respostaDesafio).then(function(response){
+				if(response.data == true){
+					alert("Avaliação salva com sucesso!");
+				}
+			});
+		} else if (vm.respostaDesafio.respostaDesafiado == 'Desafiado ainda não respondeu'){
+			alert("O desafiado ainda não respondeu a este desafio!");
+		} else {
+			alert("Você já avaliou este desafio!");
+		}
+	},
 	desafiosCorrigir: function(){
 		const vm = this;
 		var count = 0;
@@ -454,9 +473,14 @@ created : function(){
 
                     if(response.data[count]['respostaDesafiado'] == '' || response.data[count]['respostaDesafiado'] == null){
                         response.data[count]['respostaDesafiado'] = 'Desafiado ainda não respondeu';
-                    }
-                    response.data[count]["idDesafio"] = count+1;
-                    // vm.desafios.push(response.data[count]);
+					}
+					
+					if(response.data[count]['resultado'] == 'C'){
+                        response.data[count]['resultado'] = 'Correto';
+                    } else if(response.data[count]['resultado'] == 'E'){
+                        response.data[count]['resultado'] = 'Errado';
+					}
+                    // response.data[count]["idDesafio"] = count+1;
                     count+=1;
                 }
 				vm.desafiosCorrecao = response.data;
@@ -472,12 +496,22 @@ created : function(){
                 while(response.data[count]){
                     if(response.data[count]['resultado'] == '' || response.data[count]['resultado'] == null){
                         response.data[count]['resultado'] = 'Aguardando correção';
-                    }
-
+					}
+					
+					if(response.data[count]['avaliacao'] == '' || response.data[count]['avaliacao'] == null){
+                        response.data[count]['avaliacao'] = 'Aguardando feedback';
+					}
+					
                     if(response.data[count]['respostaDesafiado'] == '' || response.data[count]['respostaDesafiado'] == null){
                         response.data[count]['respostaDesafiado'] = 'Sem resposta';
-                    }
-                    response.data[count]["idDesafio"] = count+1;
+					}
+					
+					if(response.data[count]['resultado'] == 'C'){
+                        response.data[count]['resultado'] = 'Correto';
+                    } else if(response.data[count]['resultado'] == 'E'){
+                        response.data[count]['resultado'] = 'Errado';
+					}
+                    //response.data[count]["idDesafio"] = count+1;
                     // vm.desafios.push(response.data[count]);
                     count+=1;
                 }

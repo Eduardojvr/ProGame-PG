@@ -25,9 +25,10 @@ public class DesafioDAO {
 		sql.append(" tituloDesafio, ");		
 		sql.append(" desafio, ");
 		sql.append(" respostaDesafiado, ");
-		sql.append(" resultado ");
+		sql.append(" resultado, ");
+		sql.append(" avaliacao ");
 		sql.append(" ) ");
-		sql.append(" VALUES (?,?,?,?,?,?);");
+		sql.append(" VALUES (?,?,?,?,?,?,?);");
 
 		try {
 			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
@@ -37,6 +38,7 @@ public class DesafioDAO {
 			pstmt.setString(4, desafio.getDesafio());
 			pstmt.setString(5, null);
 			pstmt.setString(6, null);
+			pstmt.setString(7, null);
 
 			pstmt.executeUpdate();
 
@@ -70,6 +72,7 @@ public class DesafioDAO {
 					desafio.setDesafio(result.getString("desafio"));	
 					desafio.setRespostaDesafiado(result.getString("respostaDesafiado"));
 					desafio.setResultado(result.getString("resultado"));	
+					desafio.setAvaliacao(result.getString("avaliacao"));	
 					desafios.add(desafio);
 			}
 			
@@ -130,6 +133,8 @@ public class DesafioDAO {
 					desafio.setDesafio(result.getString("desafio"));	
 					desafio.setRespostaDesafiado(result.getString("respostaDesafiado"));
 					desafio.setResultado(result.getString("resultado"));	
+					desafio.setAvaliacao(result.getString("avaliacao"));	
+
 					desafios.add(desafio);
 			}
 			
@@ -143,6 +148,31 @@ public class DesafioDAO {
 		return desafios;
 	}
 	
+	public boolean salvaAvaliacao(DesafiovsDTO desafio) throws Exception {
+
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		StringBuilder sql = new StringBuilder();	
+		
+		boolean isOk = false;
+		
+		sql.append(	"update desafio set resultado='"+desafio.getResultado()+"', avaliacao='"+desafio.getAvaliacao()+"' where idDesafio="+desafio.getIdDesafio());
+		
+
+		try {
+			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+			pstmt.executeUpdate();
+			isOk = true;
+
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+
+		return isOk;
+	}
 }
 
 
