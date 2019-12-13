@@ -8,7 +8,7 @@ new Vue({
     const vm = this;
     var count = 0;
     axios.get('../rs/user/getUser').then(function(response){
-      axios.get('../rs/user/todosDesafios/'+response.data["matricula"]).then(function(response){
+      axios.get('../rs/desafio/todosDesafios/'+response.data["matricula"]).then(function(response){
           while(response.data[count]){
               count+=1;
           }

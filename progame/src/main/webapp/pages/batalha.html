@@ -222,7 +222,7 @@ data-keyboard="false">
 					<br><hr><br>
 					<div  class="tabela">
 
-					<h3 style="text-align: left;">🏆 Seus desafios</h3>
+					<h3 style="text-align: left;">🏆 Desafios recebidos</h3>
 					
 					<div class="overflow-auto">
 						
@@ -233,7 +233,7 @@ data-keyboard="false">
 							  :fields="headersDesafios"
 							  :items="desafios"
 							  :per-page="perPage"
-							  :current-page="currentPage"
+							  :current-page="currentPageDesafios"
 							  small
 							  hover 
 							  responsive
@@ -251,6 +251,37 @@ data-keyboard="false">
 					</div>      
 						  </div>
 						  </div>
+
+						  <br><hr><br>
+						  <div  class="tabela">
+	  
+						  <h3 style="text-align: left;">🏆 Desafios Enviados</h3>
+						  
+						  <div class="overflow-auto">
+							  
+								  <b-table
+									id="my-table-correcao"
+									:fields="headersDesafiosCorrecao"
+									:items="desafiosCorrecao"
+									:per-page="perPage"
+									:current-page="currentPageCorrecao"
+									small
+									hover 
+									responsive
+								  ></b-table>
+								<div style="padding-left: 30%;">
+								<b-pagination
+								v-model="currentPage"
+								:total-rows="rowsCorrecao"
+								:per-page="perPage"
+								prev-text="◀︎"
+								next-text="▶︎"
+								class="mt-4"
+								pills
+							  ></b-pagination>
+						  </div>      
+								</div>
+								</div>
 				</div>
 				
 			</div>
@@ -330,7 +361,9 @@ new Vue({
       tituloDesafio: '',
 	  matriculaDesafiado: '',
 	  perPage: 5,
-      currentPage: 1,
+	  currentPage: 1,
+	  currentPageDesafios: 1,
+	  currentPageCorrecao: 1,
       headersDesafios: [
             {
               align: 'left',
@@ -340,7 +373,7 @@ new Vue({
             { key: 'tituloDesafio', label: 'Título' },
             { key: 'desafio', label: 'Desafio' },
             { key: 'respostaDesafiado', label: 'Sua resposta' },
-            { key: 'resultado', label: 'Resultado' } 
+            { key: 'resultado', label: 'Resultado',  sortable: true  } 
        ],
       desafios:[
           {
@@ -354,7 +387,40 @@ new Vue({
           }
       ],
 	  totalNotificacao: 0,
-	  minhaResposta: ''
+	  minhaResposta: '',
+	  respostaDesafio: [
+		  {
+            desafio: '',
+            idDesafio: '',
+            matriculaDesafiado: '',
+            matriculaDesafiante: '',
+            respostaDesafiado: '',
+            resultado: '',
+            tituloDesafio:''
+          }
+	  ],
+	  headersDesafiosCorrecao: [
+            {
+              align: 'left',
+              sortable: false,
+            },
+            { key: 'idDesafio', label: 'Prioridade Desafio' },
+            { key: 'tituloDesafio', label: 'Título' },
+            { key: 'desafio', label: 'Desafio' },
+            { key: 'respostaDesafiado', label: 'Resposta do desafiado', sortable: true },
+            { key: 'resultado', label: 'Sua correção' , sortable: true  } 
+	   ],
+	   desafiosCorrecao: [
+		  {
+            desafio: '',
+            idDesafio: '',
+            matriculaDesafiado: '',
+            matriculaDesafiante: '',
+            respostaDesafiado: '',
+            resultado: '',
+            tituloDesafio:''
+          }
+	  ],
 
     }
   },
@@ -364,19 +430,45 @@ new Vue({
 	},
 	rowDesafio(){
 		return this.usuarios.length
+	},
+	rowsCorrecao(){
+		return this.desafiosCorrecao.length
 	}
   },
 created : function(){
     const vm = this;
 	vm.todosUsuarios();
 	vm.meusDesafios();
+	vm.desafiosCorrigir();
   },
   methods : {
+	desafiosCorrigir: function(){
+		const vm = this;
+		var count = 0;
+		axios.get('../rs/user/getUser').then(function(response){
+            axios.get('../rs/desafio/desafiosCorrecao/'+response.data["matricula"]).then(function(response){
+				while(response.data[count]){
+                    if(response.data[count]['resultado'] == '' || response.data[count]['resultado'] == null){
+                        response.data[count]['resultado'] = 'Aguardando sua correção';
+                    }
+
+                    if(response.data[count]['respostaDesafiado'] == '' || response.data[count]['respostaDesafiado'] == null){
+                        response.data[count]['respostaDesafiado'] = 'Desafiado ainda não respondeu';
+                    }
+                    response.data[count]["idDesafio"] = count+1;
+                    // vm.desafios.push(response.data[count]);
+                    count+=1;
+                }
+				vm.desafiosCorrecao = response.data;
+			});
+		});
+
+	},
 	meusDesafios: function(){
 		const vm = this;
         var count = 0;
         axios.get('../rs/user/getUser').then(function(response){
-            axios.get('../rs/user/todosDesafios/'+response.data["matricula"]).then(function(response){
+            axios.get('../rs/desafio/todosDesafios/'+response.data["matricula"]).then(function(response){
                 while(response.data[count]){
                     if(response.data[count]['resultado'] == '' || response.data[count]['resultado'] == null){
                         response.data[count]['resultado'] = 'Aguardando correção';
@@ -394,11 +486,24 @@ created : function(){
             });
         });
 	},
-	abreModalResposta: function(){
+	abreModalResposta: function(item){
+		const vm = this;
+		vm.respostaDesafio = item;
 		$("#modalResposta").modal("show");
+
 	},
 	responde: function(){
-		alert();
+		const vm = this;
+		if(vm.respostaDesafio.respostaDesafiado == 'Sem resposta'){
+			vm.respostaDesafio.respostaDesafiado = vm.minhaResposta;
+			axios.post('../rs/desafio/respondeDesafio/', vm.respostaDesafio).then(function(response) {
+				if(response.data == true){
+					alert("Desafio respondido! Aguarde correção do desafiante!");
+				}
+			});
+		} else {
+			alert("Você já respondeu esse desafio!");
+		}
     },
     todosUsuarios : function(){
       const vm = this;
@@ -469,7 +574,7 @@ created : function(){
         respostaDesafiado: '',
         resultado: ''
       }
-      axios.post('../rs/user/novoDesafioX1', obj).then(function(response) {
+      axios.post('../rs/desafio/novoDesafioX1', obj).then(function(response) {
         console.log(response.data);
         vm.atualizaPontuacao(100);
         $("#pvsp").modal("show");
