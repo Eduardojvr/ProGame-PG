@@ -293,7 +293,7 @@
 							<div class="overflow-auto">
 								<b-table @row-clicked="batalha" :fields="headers"
 									:items="usuarios" :per-page="perPage"
-									:current-page="currentPage" small hover responsive></b-table>
+									:current-page="currentPage" striped bordered hover responsive></b-table>
 								<div style="padding-left: 30%;">
 									<b-pagination v-model="currentPage" :total-rows="rowDesafio"
 										:per-page="perPage" prev-text="◀︎" next-text="▶︎" class="mt-4"
@@ -310,10 +310,10 @@
 
 						<h3 style="text-align: left;">🏆 Desafios recebidos</h3>
 
-						<div class="overflow-auto">
+						<div class="table-responsive-sm">
 							<b-table @row-clicked="abreModalResposta" id="my-table"
 								:fields="headersDesafios" :items="desafios" :per-page="perPage"
-								:current-page="currentPageDesafios" small hover responsive></b-table>
+								:current-page="currentPageDesafios" striped bordered hover  sticky-header ></b-table>
 							<div style="padding-left: 30%;">
 								<b-pagination v-model="currentPageDesafios" :total-rows="rows"
 									:per-page="perPage" prev-text="◀︎" next-text="▶︎" class="mt-4"
@@ -330,7 +330,7 @@
 						<div class="overflow-auto">
 							<b-table  @row-clicked="avalia" id="my-table-correcao" :fields="headersDesafiosCorrecao"
 								:items="desafiosCorrecao" :per-page="perPage"
-								:current-page="currentPageCorrecao" small hover responsive></b-table>
+								:current-page="currentPageCorrecao" bordered striped  hover responsive ></b-table>
 							<div style="padding-left: 30%;">
 								<b-pagination v-model="currentPageCorrecao"
 									:total-rows="rowsCorrecao" :per-page="perPage" prev-text="◀︎"
