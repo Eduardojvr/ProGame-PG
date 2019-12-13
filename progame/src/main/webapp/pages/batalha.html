@@ -81,6 +81,70 @@
 	<!-- FIM MODAL -->
 	<div id="batalha">
 
+		<div
+		style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+		id="feedbackResposta" class="modal fade top" tabindex="-1" role="dialog"
+		 aria-hidden="true" data-backdrop='false'
+		data-keyboard="false">
+		<div class="modal-dialog modal-lg modal-frame modal-top"
+			role="document">
+			<div style="background-color: rgba(255, 255, 255, 0.9);"
+				class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div style="text-align: center;">
+						<h3>Resposta registrada com sucesso!</h3>
+					</div>
+					<div class="row">
+						<div class="col-3">
+							<img height="250" width="200" src="../resources/img/orcDancando.gif" alt="">
+						</div>
+						<div style="padding-left: 40px; padding-top: 5%;" class="col-8">
+							<h4>Você acaba de receber 100 pontos de experiência por responder um desafio!<br>Aguarde a correção e feedback do desafiante!</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+		<div
+		style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+		id="feedbackAvalia" class="modal fade top" tabindex="-1" role="dialog"
+		 aria-hidden="true" data-backdrop='false'
+		data-keyboard="false">
+		<div class="modal-dialog modal-lg modal-frame modal-top"
+			role="document">
+			<div style="background-color: rgba(255, 255, 255, 0.9);"
+				class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div style="text-align: center;">
+						<h3>Avaliação registrada com sucesso!</h3>
+					</div>
+					<div class="row">
+						<div class="col-3">
+							<img height="250" width="200" src="../resources/img/orcAnimado.gif" alt="">
+						</div>
+						<div style="padding-left: 40px; padding-top: 5%;" class="col-8">
+							<h4>Você acaba de receber 100 pontos de experiência por avaliar a resposta de outro jogador!</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 		<div class="modal fade" id="modalResposta" tabindex="-1" role="dialog"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
@@ -452,7 +516,9 @@ created : function(){
 			vm.respostaDesafio.resultado = vm.correcaoOpcao;
 			axios.post('../rs/desafio/salvaAvaliacao', vm.respostaDesafio).then(function(response){
 				if(response.data == true){
-					alert("Avaliação salva com sucesso!");
+					$("#feedbackAvalia").modal("show");
+					vm.atualizaPontuacao(100);
+					vm.desafiosCorrigir();
 				}
 			});
 		} else if (vm.respostaDesafio.respostaDesafiado == 'Desafiado ainda não respondeu'){
@@ -532,7 +598,8 @@ created : function(){
 			vm.respostaDesafio.respostaDesafiado = vm.minhaResposta;
 			axios.post('../rs/desafio/respondeDesafio/', vm.respostaDesafio).then(function(response) {
 				if(response.data == true){
-					alert("Desafio respondido! Aguarde correção do desafiante!");
+					$("#feedbackResposta").modal("show");
+					vm.atualizaPontuacao(100);
 				}
 			});
 		} else {
