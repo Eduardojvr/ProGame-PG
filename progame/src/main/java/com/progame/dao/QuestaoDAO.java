@@ -11,6 +11,7 @@ import java.util.List;
 import com.progame.dto.QuestaoCodigoDTO;
 import com.progame.dto.QuestaoDTO;
 import com.progame.dto.QuestaoLacunaDTO;
+import com.progame.dto.QuestaoTodasDTO;
 import com.progame.dto.QuestaoVerdadeiroFalsoDTO;
 
 public class QuestaoDAO {
@@ -196,4 +197,65 @@ public class QuestaoDAO {
 		}
 		return listaQuestoes;
 	}
+	
+	public ArrayList<QuestaoTodasDTO> getTodasQuestoes(String level) throws Exception {
+
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		ResultSet result = null;
+		ArrayList<QuestaoTodasDTO> listaQuestoes = new ArrayList<QuestaoTodasDTO>();
+
+
+		pstmt = db.prepareStatement("select q.idQuestao, q.idTipoConteudo, q.idTipoQuestao, q.questao, rm.alternativa1,\n" + 
+				"	   rm.alternativa2, rm.alternativa3, rm.alternativa4, rm.respostaCorretaAlternativa,\n" + 
+				"	   rm.comentarioCorreta as comentarioCorretaMultipla, rm.comentarioErrado, rl.resposta as respostaLacuna, rl.respostaAlternativa,\n" + 
+				"       rl.comentarioCorreta, rl.comentarioIncorreta, rvf.resposta, lp.nomeLinguagem 	\n" + 
+				"       from Questao q\n" + 
+				"			left JOIN resposta_multipla_escolha rm\n" + 
+				"				ON rm.idQuestao=q.idQuestao\n" + 
+				"			left JOIN resposta_lacuna rl\n" + 
+				"				ON rl.idQuestao=q.idQuestao  \n" + 
+				"			left JOIN resposta_verdadeiro_falso rvf\n" + 
+				"				ON rvf.idQuestao=q.idQuestao\n" + 
+				"			inner join linguagem_programacao lp\n" + 
+				"				ON lp.idLinguagem=q.idLinguagem\n" + 
+				"		where q.idTipoConteudo="+level+"\n" + 
+				"		order by rand();");
+
+		try {
+			result = pstmt.executeQuery();
+			while (result.next()) {
+				QuestaoTodasDTO questao = new QuestaoTodasDTO();
+				questao.setIdQuestao(result.getString("idQuestao"));
+				questao.setIdTipoConteudo(result.getString("idTipoConteudo"));
+				questao.setIdTipoQuestao(result.getString("idTipoQuestao"));
+				questao.setQuestao(result.getString("questao"));
+				questao.setAlternativa1(result.getString("alternativa1"));
+				questao.setAlternativa2(result.getString("alternativa2"));
+				questao.setAlternativa3(result.getString("alternativa3"));
+				questao.setAlternativa4(result.getString("alternativa4"));
+				questao.setRespostaCorretaAlternativa(result.getString("respostaCorretaAlternativa"));
+				questao.setComentarioCorretaMultipla(result.getString("comentarioCorretaMultipla"));
+				questao.setComentarioErrado(result.getString("comentarioErrado"));
+				questao.setRespostaLacuna(result.getString("respostaLacuna"));
+				questao.setRespostaAlternativa(result.getString("respostaAlternativa"));
+				questao.setComentarioCorreta(result.getString("comentarioCorreta"));
+				questao.setComentarioIncorreta(result.getString("comentarioIncorreta"));
+				questao.setResposta(result.getString("resposta"));
+				questao.setNomeLinguagem(result.getString("nomeLinguagem"));
+				listaQuestoes.add(questao);		
+			}
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+		return listaQuestoes;
+	}
 }
+
+
+

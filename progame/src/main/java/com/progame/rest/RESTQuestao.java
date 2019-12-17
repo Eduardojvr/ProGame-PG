@@ -30,6 +30,7 @@ import com.progame.dao.QuestaoDAO;
 import com.progame.dto.QuestaoCodigoDTO;
 import com.progame.dto.QuestaoDTO;
 import com.progame.dto.QuestaoLacunaDTO;
+import com.progame.dto.QuestaoTodasDTO;
 import com.progame.dto.QuestaoVerdadeiroFalsoDTO;
 import com.progame.entity.Codigo;
 import com.progame.entity.Personagem;
@@ -132,7 +133,22 @@ public class RESTQuestao {
 			}
 			return resultado;
 	}
+	
 
+	@GET
+	@Path("/todasQuestoes/{level}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<QuestaoTodasDTO> todasQuestoes(@PathParam("level") String level){
+		ArrayList<QuestaoTodasDTO> questoes = null;
+		QuestaoDAO dao = new QuestaoDAO();
+		
+		try {
+			questoes = dao.getTodasQuestoes(level);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return questoes;
+	}
 
 	
 }

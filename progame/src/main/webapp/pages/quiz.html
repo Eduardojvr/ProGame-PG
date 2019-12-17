@@ -96,12 +96,12 @@
 			</div>
 			<!-- Tipo múltipla escolha -->
 			<div class="modal-dialog"
-				v-if=" totalQuestaoMultipla > countQuestao && items[countQuestao].idTipoQuestao === '4'">
+				v-if="totalQuestao > countQuestao && todasQuestoes[countQuestao].idTipoQuestao === '4'">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h3>
 							<span class="label label-warning"></span> {{
-							items[countQuestao].questao }}
+                todasQuestoes[countQuestao].questao }}
 						</h3>
 					</div>
 					<div class="modal-body">
@@ -110,19 +110,19 @@
 								class="element-animation1 btn btn-lg btn-primary btn-block"><input
 								type="radio" name="q_answer" style="display: none;"
 								@click="verificaMultipla(1, countQuestao)">{{
-								items[countQuestao].alternativa1 }}</label> <label
+                  todasQuestoes[countQuestao].alternativa1 }}</label> <label
 								class="element-animation2 btn btn-lg btn-primary btn-block"><input
 								type="radio" name="q_answer" style="display: none;"
 								@click="verificaMultipla(2, countQuestao)">{{
-								items[countQuestao].alternativa2 }}</label> <label
+                  todasQuestoes[countQuestao].alternativa2 }}</label> <label
 								class="element-animation3 btn btn-lg btn-primary btn-block"><input
 								type="radio" name="q_answer" style="display: none;"
 								@click="verificaMultipla(3, countQuestao)">{{
-								items[countQuestao].alternativa3 }}</label> <label
+                  todasQuestoes[countQuestao].alternativa3 }}</label> <label
 								class="element-animation4 btn btn-lg btn-primary btn-block"><input
 								type="radio" name="q_answer" style="display: none;"
 								@click="verificaMultipla(4, countQuestao)">{{
-								items[countQuestao].alternativa4 }}</label>
+                  todasQuestoes[countQuestao].alternativa4 }}</label>
 						</div>
 						<div id="feedback"></div>
 					</div>
@@ -137,13 +137,13 @@
 			</div>
 			<!-- Tipo Verdadeiro ou falso -->
 			<div
-				v-else-if=" totalQuestaoVF > countQuestaoVF && questaoTipoVF[countQuestaoVF].idTipoQuestao === '3' "
+				v-else-if=" totalQuestao > countQuestao && todasQuestoes[countQuestao].idTipoQuestao === '3' "
 				class="modal-dialog" style="border-radius: 100px;">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h3>
 							<span class="label label-warning"></span> {{
-							questaoTipoVF[countQuestaoVF].questao }}
+                todasQuestoes[countQuestao].questao }}
 						</h3>
 					</div>
 					<div class="modal-body">
@@ -160,22 +160,22 @@
 					</div>
 					<div style="padding-left: 33%; padding-top: 1%;">
 						<input type="image" src="../resources/img/icons/setaEsquerda.png"
-							style="width: 80px; height: 80px;" @click="anteriorVF()">
+							style="width: 80px; height: 80px;" @click="anterior()">
 						<input type="image" src="../resources/img/icons/setaDireita.png"
-							style="width: 80px; height: 80px;" @click="proximaVF()">
+							style="width: 80px; height: 80px;" @click="proxima()">
 					</div>
 				</div>
 
 			</div>
 			<!-- Tipo Lacuna -->
 			<div
-				v-else-if=" totalQuestaoLacuna > countQuestaoLacuna && questaoTipoLacuna[countQuestaoLacuna].idTipoQuestao === '1' "
+				v-else-if=" totalQuestao > countQuestao && todasQuestoes[countQuestao].idTipoQuestao === '1' "
 				class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h3>
 							<span class="label label-warning"></span> {{
-							questaoTipoLacuna[countQuestaoLacuna].questao }}
+                todasQuestoes[countQuestao].questao }}
 						</h3>
 					</div>
 					<input type="text" placeholder="Digite a resposta aqui" rows="10"
@@ -189,32 +189,14 @@
 
 					<div style="padding-left: 33%; padding-top: 1%;">
 						<input type="image" src="../resources/img/icons/setaEsquerda.png"
-							style="width: 80px; height: 80px;" @click="anteriorLacuna()">
+							style="width: 80px; height: 80px;" @click="anterior()">
 						<input type="image" src="../resources/img/icons/setaDireita.png"
-							style="width: 80px; height: 80px;" @click="proximaLacuna()">
+							style="width: 80px; height: 80px;" @click="proxima()">
 					</div>
 				</div>
 
 			</div>
-			<!-- Tipo Codigo -->
-			<!-- <div v-else-if="totalQuestaoCodigo > countQuestaoCodigo && questaoTipoCodigo[countQuestaoCodigo].idTipoQuestao === '2' " class="modal-dialog">
-              <div class="modal-content" >
-                 <div class="modal-header">
-                    <h3><span class="label label-warning" ></span> {{ questaoTipoCodigo[countQuestaoCodigo].questao }}</h3>
-                  </div>
-                    <textarea name="codigo" rows="10" cols="30" v-model="codigo" >Escreva seu código aqui</textarea>               
-                       <div style="padding-top: 15px;">
-                    <label class="element-animation2 btn btn-lg btn-primary btn-block"><input type="button"  name="q_answer"  style="display: none;" @click="verificaCodigo(codigo, countQuestaoCodigo)">Responder</label>
-                  </div>
-                  <div id="feedback"></div>
-              
-           <div style="padding-left: 33%; padding-top: 1%;">
-              <input type="image" src="../resources/img/icons/setaEsquerda.png" style="width: 80px; height: 80px;" @click="anteriorLacuna()">
-                <input type="image" src="../resources/img/icons/setaDireita.png" style="width: 80px; height: 80px;" @click="proximaLacuna()">
-            </div>  
-        </div>
-       
-      </div>  -->
+
 			<div style="text-align: center; padding-right: 40px;">
 				<button type="button" class="btn btn-outline-danger"
 					style="padding: 10px 50px 10px 50px;"
@@ -322,24 +304,65 @@ let q = new Vue({
                 pontuacao : ''
             }
         ],
-      countQuestaoVF : 0,
-      countQuestaoLacuna : 0,
-      totalQuestaoMultipla : 0,
-      totalQuestaoVF : 0,
-      totalQuestaoLacuna : 0,
-      totalQuestaoCodigo: 0,
-      countQuestaoCodigo: 0,
       matricula : '',
       idTipoPerfil : '',
       level : '',
-      codigo: ''
+      codigo: '',
+      todasQuestoes: [
+        {
+          idQuestao: '',
+          idTipoConteudo: '',
+          idTipoQuestao: '',
+          questao: '',
+          alternativa1: '',
+          alternativa2: '',
+          alternativa3: '',
+          alternativa4: '',
+          respostaCorretaAlternativa: '',
+          comentarioCorretaMultipla: '',
+          comentarioErrado: '',
+          respostaLacuna: '',
+          respostaAlternativa: '',
+          comentarioCorreta: '',
+          comentarioIncorreta: '',
+          resposta: '',
+          nomeLinguagem: ''
+        }
+      ],
+      totalQuestao: 0
       
     },
     created :function(){
         const vm = this;
-        vm.getQuestao();
+        vm.getAllQuestions();
     },
     methods : {
+      proxima:function(){
+        const vm = this;
+        if(vm.countQuestao < vm.totalQuestao-1){
+          vm.countQuestao+=1;
+        } else{
+          vm.countQuestao=0;
+        }
+      },
+      anterior: function(){
+        const vm = this;
+        if(vm.countQuestao > 0){
+          vm.countQuestao-=1;
+        } else{
+          vm.countQuestao=vm.totalQuestao-1;
+        }
+      },
+      getAllQuestions: function(){
+        const vm = this;
+        axios.get('../rs/user/getUser').then(function(response){
+          vm.dados = response.data
+          axios.get('../rs/questao/todasQuestoes/' + response.data["level"]).then(function(questao){
+            vm.todasQuestoes = questao.data;
+            vm.totalQuestao = vm.todasQuestoes.length;
+          });
+        });
+      },
       verificaVF : function(resposta, posicao){
         const vm = this;
         document.getElementById('btVF').style = "visibility: hidden;";
@@ -377,92 +400,47 @@ let q = new Vue({
             document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
         }
       },
-       proxima : function(){
-          const vm = this;
-          if(vm.totalQuestaoMultipla > vm.countQuestao){
-            vm.countQuestao+=1;
-          }
-          vm.limpaFeed();
-          document.getElementById('btMultipla').style = "visibility: visible;";
-        },
-        anterior : function(){
-          const vm = this;
-          if(vm.countQuestao > 0){
-            vm.countQuestao-=1;
-          }
-          vm.limpaFeed();
-        },
-        proximaVF(){
-          const vm = this;
-          if(vm.countQuestaoVF < vm.totalQuestaoVF){
-            vm.countQuestaoVF+=1;
-          }
-          vm.limpaFeed();
-          document.getElementById('btVF').style = "visibility: visible;";
-        },
-        anteriorVF(){
-          const vm = this;
-          if(vm.countQuestaoVF > 0){
-            vm.countQuestaoVF-=1;
-          }else{
-            vm.countQuestao-=1;
-          }
-          vm.limpaFeed();
-          document.getElementById('btVF').style = "visibility: visible;";
-        },
-        proximaLacuna(){
-          const vm = this;
-          if(vm.totalQuestaoLacuna > vm.countQuestaoLacuna){
-            vm.countQuestaoLacuna+=1;
-          }
-          vm.limpaFeed();
-        },
-        anteriorLacuna(){
-          const vm = this;
-          if(vm.countQuestaoLacuna > 0){
-            vm.countQuestaoLacuna-=1;
-          }else{
-            vm.countQuestaoVF-=1;
-          }
-          vm.limpaFeed();
-
-        },
         limpaFeed : function(){
           document.getElementById('feedback').style = "background-color: rgba(255, 255, 255, 0);"
           document.getElementById('feedback').innerHTML = ""
 
         },
-        getQuestao : function(){
-            const vm = this;
-            axios.get('../rs/user/getUser/').then(function(response) {
-                vm.dados = response.data;
-                axios.get('../rs/questao/getQuestao/'+response.data["level"]).then(function(response) {
-                  vm.items = response.data;
-                  while(vm.items[vm.totalQuestaoMultipla] != null){
-                    vm.totalQuestaoMultipla+=1;
-                  }
-                });
-                axios.get('../rs/questao/getQuestaoVerdadeiroFalso/'+response.data["level"]).then(function(response) {
-                  vm.questaoTipoVF = response.data;
-                  while(vm.questaoTipoVF[vm.totalQuestaoVF] != null){
-                    vm.totalQuestaoVF+=1;
-                  }
-                });
-                axios.get('../rs/questao/getQuestaoLacuna/'+response.data["level"]).then(function(response) {
-                  vm.questaoTipoLacuna = response.data;
-                  while(vm.questaoTipoLacuna[vm.totalQuestaoLacuna] != null){
-                    vm.totalQuestaoLacuna+=1;
-                  }
-                });
-                axios.get('../rs/questao/getQuestaoCodigo/'+response.data["level"]).then(function(response) {
-                  vm.questaoTipoCodigo = response.data;
-                  while(vm.questaoTipoCodigo[vm.totalQuestaoCodigo] != null){
-                    vm.totalQuestaoCodigo+=1;
-                  }
-                });
-          });
-            
-        },
+        // getQuestao : function(){
+        //     const vm = this;
+        //     axios.get('../rs/user/getUser/').then(function(response) {
+        //         vm.dados = response.data;
+        //         axios.get('../rs/questao/getQuestao/'+response.data["level"]).then(function(response) {
+        //           vm.items = response.data;
+
+        //           while(vm.items[vm.totalQuestaoMultipla] != null){
+        //             vm.totalQuestaoMultipla+=1;
+        //           }
+                
+        //         });
+        //         axios.get('../rs/questao/getQuestaoVerdadeiroFalso/'+response.data["level"]).then(function(response) {
+        //           vm.questaoTipoVF = response.data;
+
+        //           while(vm.questaoTipoVF[vm.totalQuestaoVF] != null){
+        //             vm.totalQuestaoVF+=1;
+        //           }
+                   
+        //         });
+        //         axios.get('../rs/questao/getQuestaoLacuna/'+response.data["level"]).then(function(response) {
+        //           vm.questaoTipoLacuna = response.data;
+        //           while(vm.questaoTipoLacuna[vm.totalQuestaoLacuna] != null){
+        //             vm.totalQuestaoLacuna+=1;
+        //           }
+
+        //         });
+        //         axios.get('../rs/questao/getQuestaoCodigo/'+response.data["level"]).then(function(response) {
+        //           vm.questaoTipoCodigo = response.data;
+        //           while(vm.questaoTipoCodigo[vm.totalQuestaoCodigo] != null){
+        //             vm.totalQuestaoCodigo+=1;
+        //           }
+        //         });
+
+        //   });
+        // },
         atualizaPontuacao :function (){
           const vm = this;
           axios.get('../rs/user/getUser/').then(function(response) {
@@ -472,24 +450,24 @@ let q = new Vue({
               
             });
           });
-        },
-        verificaCodigo : function(codigo, posicao){
-          const vm = this;
-          let obj = {
-            matricula: vm.dados.matricula,
-            codigo: vm.codigo
-          }
-          axios.post('../rs/questao/verificacodigo', obj).then(function(response) {
-            if(response.data == vm.questaoTipoCodigo[posicao].resposta ){
-              document.getElementById('feedback').innerHTML = "Parabéns, resposta correta!";
-              document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
-              vm.atualizaPontuacao();
-            } else {
-              document.getElementById('feedback').innerHTML = "Resposta incorreta! A saída esperada é: "+vm.questaoTipoCodigo[posicao].resposta+". Resposta obtida: "+response.data;
-              document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
-            }
-          });
         }
+        // verificaCodigo : function(codigo, posicao){
+        //   const vm = this;
+        //   let obj = {
+        //     matricula: vm.dados.matricula,
+        //     codigo: vm.codigo
+        //   }
+        //   axios.post('../rs/questao/verificacodigo', obj).then(function(response) {
+        //     if(response.data == vm.questaoTipoCodigo[posicao].resposta ){
+        //       document.getElementById('feedback').innerHTML = "Parabéns, resposta correta!";
+        //       document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
+        //       vm.atualizaPontuacao();
+        //     } else {
+        //       document.getElementById('feedback').innerHTML = "Resposta incorreta! A saída esperada é: "+vm.questaoTipoCodigo[posicao].resposta+". Resposta obtida: "+response.data;
+        //       document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
+        //     }
+        //   });
+        // }
     }
 });
 
