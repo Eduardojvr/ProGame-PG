@@ -150,10 +150,10 @@
 						<div class="quiz" id="btVF">
 							<label
 								class="element-animation1 btn btn-lg btn-primary btn-block"><input
-								type="radio" @click="verificaVF('Verdadeiro', countQuestaoVF)"
+								type="radio" @click="verificaVF('Verdadeiro', countQuestao)"
 								style="display: none;">Verdadeiro</label> <label
 								class="element-animation2 btn btn-lg btn-primary btn-block"><input
-								type="radio" @click="verificaVF('Falso', countQuestaoVF)"
+								type="radio" @click="verificaVF('Falso', countQuestao)"
 								style="display: none;">Falso</label>
 						</div>
 						<div id="feedback"></div>
@@ -183,7 +183,7 @@
 					<div style="padding-top: 15px;">
 						<label class="element-animation2 btn btn-lg btn-primary btn-block"><input
 							type="button" name="q_answer" style="display: none;"
-							@click="verificaLacuna(lacuna, countQuestaoLacuna)">Responder</label>
+							@click="verificaLacuna(lacuna, countQuestao)">Responder</label>
 					</div>
 					<div id="feedback"></div>
 
@@ -339,6 +339,7 @@ let q = new Vue({
     methods : {
       proxima:function(){
         const vm = this;
+        vm.limpaFeed();
         if(vm.countQuestao < vm.totalQuestao-1){
           vm.countQuestao+=1;
         } else{
@@ -347,6 +348,7 @@ let q = new Vue({
       },
       anterior: function(){
         const vm = this;
+        vm.limpaFeed();
         if(vm.countQuestao > 0){
           vm.countQuestao-=1;
         } else{
@@ -365,38 +367,38 @@ let q = new Vue({
       },
       verificaVF : function(resposta, posicao){
         const vm = this;
-        document.getElementById('btVF').style = "visibility: hidden;";
+        // document.getElementById('btVF').style = "visibility: hidden;";
 
-        if(resposta == vm.questaoTipoVF[posicao].resposta){
+        if(resposta == vm.todasQuestoes[posicao].resposta){
           document.getElementById('feedback').innerHTML = 'Resposta correta!';
           document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
           vm.atualizaPontuacao();
         } else {
-          document.getElementById('feedback').innerHTML = 'Resposta incorreta. A resposta correta é: '+vm.questaoTipoVF[posicao].resposta;
+          document.getElementById('feedback').innerHTML = 'Resposta incorreta. A resposta correta é: '+vm.todasQuestoes[posicao].resposta;
           document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
         }
       },
       verificaMultipla : function(resposta, posicao){
         const vm = this;
-        document.getElementById('btMultipla').style = "visibility: hidden;";
+        // document.getElementById('btMultipla').style = "visibility: hidden;";
 
-        if(resposta == vm.items[posicao].respostaCorretaAlternativa){
+        if(resposta == vm.todasQuestoes[posicao].respostaCorretaAlternativa){
           document.getElementById('feedback').innerHTML = 'Resposta correta!';
           document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
           vm.atualizaPontuacao();
         } else {
-          document.getElementById('feedback').innerHTML = 'Resposta incorreta. A resposta correta é a alternativa: '+vm.items[posicao].respostaCorretaAlternativa;
+          document.getElementById('feedback').innerHTML = 'Resposta incorreta. A resposta correta é a alternativa: '+vm.todasQuestoes[posicao].respostaCorretaAlternativa;
           document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
         }
       },
       verificaLacuna : function(resposta, posicao){
         const vm = this;
-        if(vm.questaoTipoLacuna[posicao].resposta == resposta || vm.questaoTipoLacuna[posicao].respostaAlternativa == resposta ){
-            document.getElementById('feedback').innerHTML = vm.questaoTipoLacuna[posicao].comentarioCorreta;
+        if(vm.todasQuestoes[posicao].respostaLacuna == resposta || vm.todasQuestoes[posicao].respostaAlternativa == resposta ){
+            document.getElementById('feedback').innerHTML = vm.todasQuestoes[posicao].comentarioCorreta;
             document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
             vm.atualizaPontuacao();
         } else {
-            document.getElementById('feedback').innerHTML = vm.questaoTipoLacuna[posicao].comentarioIncorreta;
+            document.getElementById('feedback').innerHTML = vm.todasQuestoes[posicao].comentarioIncorreta;
             document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
         }
       },
@@ -405,42 +407,6 @@ let q = new Vue({
           document.getElementById('feedback').innerHTML = ""
 
         },
-        // getQuestao : function(){
-        //     const vm = this;
-        //     axios.get('../rs/user/getUser/').then(function(response) {
-        //         vm.dados = response.data;
-        //         axios.get('../rs/questao/getQuestao/'+response.data["level"]).then(function(response) {
-        //           vm.items = response.data;
-
-        //           while(vm.items[vm.totalQuestaoMultipla] != null){
-        //             vm.totalQuestaoMultipla+=1;
-        //           }
-                
-        //         });
-        //         axios.get('../rs/questao/getQuestaoVerdadeiroFalso/'+response.data["level"]).then(function(response) {
-        //           vm.questaoTipoVF = response.data;
-
-        //           while(vm.questaoTipoVF[vm.totalQuestaoVF] != null){
-        //             vm.totalQuestaoVF+=1;
-        //           }
-                   
-        //         });
-        //         axios.get('../rs/questao/getQuestaoLacuna/'+response.data["level"]).then(function(response) {
-        //           vm.questaoTipoLacuna = response.data;
-        //           while(vm.questaoTipoLacuna[vm.totalQuestaoLacuna] != null){
-        //             vm.totalQuestaoLacuna+=1;
-        //           }
-
-        //         });
-        //         axios.get('../rs/questao/getQuestaoCodigo/'+response.data["level"]).then(function(response) {
-        //           vm.questaoTipoCodigo = response.data;
-        //           while(vm.questaoTipoCodigo[vm.totalQuestaoCodigo] != null){
-        //             vm.totalQuestaoCodigo+=1;
-        //           }
-        //         });
-
-        //   });
-        // },
         atualizaPontuacao :function (){
           const vm = this;
           axios.get('../rs/user/getUser/').then(function(response) {
@@ -451,23 +417,6 @@ let q = new Vue({
             });
           });
         }
-        // verificaCodigo : function(codigo, posicao){
-        //   const vm = this;
-        //   let obj = {
-        //     matricula: vm.dados.matricula,
-        //     codigo: vm.codigo
-        //   }
-        //   axios.post('../rs/questao/verificacodigo', obj).then(function(response) {
-        //     if(response.data == vm.questaoTipoCodigo[posicao].resposta ){
-        //       document.getElementById('feedback').innerHTML = "Parabéns, resposta correta!";
-        //       document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
-        //       vm.atualizaPontuacao();
-        //     } else {
-        //       document.getElementById('feedback').innerHTML = "Resposta incorreta! A saída esperada é: "+vm.questaoTipoCodigo[posicao].resposta+". Resposta obtida: "+response.data;
-        //       document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
-        //     }
-        //   });
-        // }
     }
 });
 
