@@ -63,6 +63,7 @@
   </style>
 
 </head>
+<audio loop src="../resources/sons/fundoNarrativa.mp3"></audio>
 <body style="background: rgb(67, 186, 204);">
 	<div class="modal fade" id="processando" tabindex="-1" role="img"
 		style="padding-right: 10%; padding-top: 10%;" data-backdrop="static"
@@ -313,8 +314,13 @@ let q = new Vue({
     created :function(){
         const vm = this;
         vm.getAllQuestions();
+        vm.fundoMusical();
     },
     methods : {
+      fundoMusical : function(){
+        const audio = document.querySelector('audio');
+        audio.play();
+      },
       proxima:function(){
         const vm = this;
         vm.limpaFeed();
@@ -341,6 +347,7 @@ let q = new Vue({
             vm.todasQuestoes = questao.data;
             vm.totalQuestao = vm.todasQuestoes.length;
           });
+          // vm.totalQuestao.sort();
         });
       },
       verificaVF : function(resposta, posicao){
