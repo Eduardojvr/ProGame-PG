@@ -411,7 +411,7 @@ let q = new Vue({
           const vm = this;
           axios.get('../rs/user/getUser/').then(function(response) {
             vm.dados = response.data;
-            axios.get('../rs/user/atualizaPontuacao/'+(parseInt(response.data["pontuacao"])+parseInt(10))+'/'+vm.dados.matricula).then(function(response) {
+            axios.get('../rs/user/atualizaPontuacao/'+(parseInt(response.data["pontuacao"])+parseInt(10))+'/'+vm.dados.matricula+'/'+response.data["level"]).then(function(response) {
               vm.dados.pontuacao = parseInt(vm.dados.pontuacao)+parseInt(10);
               
             });

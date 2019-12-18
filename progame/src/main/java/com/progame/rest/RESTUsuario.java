@@ -53,24 +53,24 @@ public class RESTUsuario {
 
 	}
 	
-
-	@POST
-	@Path("/pontos")
-	@Produces({ MediaType.APPLICATION_JSON })
-	@Consumes({ MediaType.APPLICATION_JSON })
-	public Response atualizaPontos(Usuario usuario) {
-		UsuarioDAO dao = new UsuarioDAO();
-		
-		try {
-			dao.insert(usuario);
-			return Response.ok().entity("Usuario cadastrado").build();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return Response.status(Status.BAD_REQUEST).entity("Erro ao cadastrar!").build();
-		}
-
-	}
+//
+//	@POST
+//	@Path("/pontos")
+//	@Produces({ MediaType.APPLICATION_JSON })
+//	@Consumes({ MediaType.APPLICATION_JSON })
+//	public Response atualizaPontos(Usuario usuario) {
+//		UsuarioDAO dao = new UsuarioDAO();
+//		
+//		try {
+//			dao.insert(usuario);
+//			return Response.ok().entity("Usuario cadastrado").build();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			return Response.status(Status.BAD_REQUEST).entity("Erro ao cadastrar!").build();
+//		}
+//
+//	}
 
 	@POST
 	@Path("/login")
@@ -157,14 +157,14 @@ public class RESTUsuario {
 	}
 	
 	@GET
-	@Path("/atualizaPontuacao/{pontuacao}/{matricula}")
+	@Path("/atualizaPontuacao/{pontuacao}/{matricula}/{levelAtual}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes({ MediaType.APPLICATION_JSON })
-	public Boolean atualizaPontuacao(@PathParam("pontuacao") int pontuacao, @PathParam("matricula") String matricula) {
+	public Boolean atualizaPontuacao(@PathParam("pontuacao") int pontuacao, @PathParam("matricula") String matricula, @PathParam("levelAtual") String levelAtual) {
 		UsuarioDAO dao = new UsuarioDAO();
 		boolean update = false;
 		try {
-			update = dao.updatePontuacao(pontuacao, matricula);
+			update = dao.updatePontuacao(pontuacao, matricula, levelAtual);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -645,7 +645,7 @@ created : function(){
           const vm = this;
           axios.get('../rs/user/getUser/').then(function(response) {
             
-            axios.get('../rs/user/atualizaPontuacao/'+(parseInt(response.data["pontuacao"])+parseInt(valor))+'/'+response.data["matricula"]).then(function(response) {              
+            axios.get('../rs/user/atualizaPontuacao/'+(parseInt(response.data["pontuacao"])+parseInt(valor))+'/'+response.data["matricula"]+'/'+response.data["level"]).then(function(response) {              
             });
           });
     },

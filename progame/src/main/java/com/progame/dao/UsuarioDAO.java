@@ -107,7 +107,7 @@ public class UsuarioDAO {
 		return achou;
 	}
 	
-	public boolean updatePontuacao(int pontos, String matricula) throws Exception {
+	public boolean updatePontuacao(int pontos, String matricula, String levelAtual) throws Exception {
 		Connection db = ConnectionManager.getDBConnection();
 		PreparedStatement pstmt = null;
 
@@ -117,7 +117,46 @@ public class UsuarioDAO {
 		StringBuilder sql = new StringBuilder();
 
 		sql.append("update USUARIO set pontuacao="+pontos+" where matricula="+matricula);
-
+		
+		
+		switch(pontos) {
+			case 800:
+				updateLevel(levelAtual , matricula);
+				break;
+			case 1600:
+				updateLevel(levelAtual , matricula);
+				break;
+			case 3200:
+				updateLevel(levelAtual , matricula);
+				break;
+			case 6400:
+				updateLevel(levelAtual , matricula);
+				break;
+			case 12800:
+				updateLevel(levelAtual , matricula);
+				break;
+			case 25600:
+				updateLevel(levelAtual , matricula);
+				break;
+			case 51200:
+				updateLevel(levelAtual , matricula);
+				break;
+			case 102400:
+				updateLevel(levelAtual , matricula);
+				break;
+			case 204800:
+				updateLevel(levelAtual , matricula);
+				break;
+			case 409600:
+				updateLevel(levelAtual , matricula);
+				break;
+			case 819200:
+				updateLevel(levelAtual , matricula);
+				break;
+			case 1638400:
+				updateLevel(levelAtual , matricula);
+				break;
+		}
 		
 		try {
 			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
@@ -138,15 +177,17 @@ public class UsuarioDAO {
 		Connection db = ConnectionManager.getDBConnection();
 		PreparedStatement pstmt = null;
 
-		ResultSet result = null;
-		
+		Boolean execute = false;
+		StringBuilder sql = new StringBuilder();
+
+						
 		int novoLevel = Integer.parseInt(levelatual) + 1;
 				
-		Boolean execute = false;
-		pstmt = db.prepareStatement("update USUARIO set level="+novoLevel+" where matricula="+matricula);
-
+		sql.append("update USUARIO set level="+novoLevel+" where matricula="+matricula);
+		
 		try {
-			result = pstmt.executeQuery();
+			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+			pstmt.executeUpdate();
 			execute = true;
 		} catch(Exception e) {
 			throw new Exception(e);
