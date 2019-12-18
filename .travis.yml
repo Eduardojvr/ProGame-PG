@@ -1,0 +1,13 @@
+sudo: required
+
+language: java
+script:
+  - jar cfv progame.war progame
+  - git add progame.war
+deploy:
+  provider: heroku
+  api_key: $CHAVE_DEPLOY
+  app:
+    master: javagamificacao
+  run:
+    - war:deploy progame.war --app javagamificacao

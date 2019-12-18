@@ -33,12 +33,37 @@
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="../resources/css/util.css">
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="../resources/less/style.less">
+  
+  <style>
+  @font-face {
+    font-family: 'game';
+    src: url('../resources/fonts/game.ttf');
+  }
+
+  @font-face {
+    font-family: 'pixel';
+    /* src: url('../resources/fonts/PixelOperatorHB.ttf'); */
+    src: url('../resources/fonts/PixelOperatorMono.ttf');
+
+  }
+
+.img{
+  width: 25px;
+  height: 25px;
+}
+
+.sombra:hover{
+  background-color: rgba(134, 134, 134, 0.705);
+  border-radius: 15px;
+}
+
+  </style>
 
 </head>
-<body style="background-color: rgba(0, 0, 0, 0.9);">
-
-
+<body style="background: rgb(67, 186, 204);">
 	<div class="modal fade" id="processando" tabindex="-1" role="img"
 		style="padding-right: 10%; padding-top: 10%;" data-backdrop="static"
 		data-keyboard="false">
@@ -82,128 +107,106 @@
 			</div>
 		</div>
 	</div>
-
-
-	<div class="container-fluid">
-		<br>
-		<br> <br>
-		<br>
-		<br>
+<div style="background-color: rgba(66, 66, 66); text-align: center;">
+<br>
+<h3 style="color: seashell; font-family: game;">Quiz</h3>
+<br>
+</div>
+<div style="text-align: right; padding-right: 20px;">
+ <label style="color: rgb(224, 83, 83); font-family: pixel; font-size: 30px;" onclick="window.location.assign('perfil.html')">Sair<img src="../resources/img/sair.png" style="width: 30px; height: 30px;" 
+  ></label> 
+</div>
+  <div style="padding-left: 5%; padding-right: 5%;">
 		<div id="quest">
-			<div style="padding-left: 33%;">
-				<label id="pontuacao" style="color: whitesmoke;">Pontuação
-					atual: {{ dados.pontuacao }}</label>
-			</div>
-			<!-- Tipo múltipla escolha -->
-			<div class="modal-dialog"
-				v-if="totalQuestao > countQuestao && todasQuestoes[countQuestao].idTipoQuestao === '4'">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h3>
-							<span class="label label-warning"></span> {{
-                todasQuestoes[countQuestao].questao }}
-						</h3>
-					</div>
-					<div class="modal-body">
-						<div class="quiz" id="btMultipla">
-							<label
-								class="element-animation1 btn btn-lg btn-primary btn-block"><input
-								type="radio" name="q_answer" style="display: none;"
-								@click="verificaMultipla(1, countQuestao)">{{
-                  todasQuestoes[countQuestao].alternativa1 }}</label> <label
-								class="element-animation2 btn btn-lg btn-primary btn-block"><input
-								type="radio" name="q_answer" style="display: none;"
-								@click="verificaMultipla(2, countQuestao)">{{
-                  todasQuestoes[countQuestao].alternativa2 }}</label> <label
-								class="element-animation3 btn btn-lg btn-primary btn-block"><input
-								type="radio" name="q_answer" style="display: none;"
-								@click="verificaMultipla(3, countQuestao)">{{
-                  todasQuestoes[countQuestao].alternativa3 }}</label> <label
-								class="element-animation4 btn btn-lg btn-primary btn-block"><input
-								type="radio" name="q_answer" style="display: none;"
-								@click="verificaMultipla(4, countQuestao)">{{
-                  todasQuestoes[countQuestao].alternativa4 }}</label>
-						</div>
-						<div id="feedback"></div>
-					</div>
-					<div style="padding-left: 33%; padding-top: 1%;">
-						<input type="image" src="../resources/img/icons/setaEsquerda.png"
-							style="width: 80px; height: 80px;" @click="anterior()"> <input
-							type="image" src="../resources/img/icons/setaDireita.png"
-							style="width: 80px; height: 80px;" @click="proxima()">
-					</div>
-				</div>
-
-			</div>
+			<div>
+          <h3 id="pontuacao" style="color: ghostwhite; font-family: pixel;">Pontuação: {{ dados.pontuacao }} pontos</h3>
+      </div>
+      <hr>
+      <!-- Tipo múltipla escolha -->
+      <div 	v-if="totalQuestao > countQuestao && todasQuestoes[countQuestao].idTipoQuestao === '4'">
+        <h3 style="color: ghostwhite; font-family: pixel;">
+          <span class="label label-warning"></span> {{
+            todasQuestoes[countQuestao].questao }}
+        </h3>
+        <br>
+        <div class="quiz" id="btMultipla" style="text-align:center;">
+          <label class="element-animation1 sombra" style="font-size:20px; color: ghostwhite; padding: 6px 10px 6px 10px; font-family: pixel;"><input
+            type="radio" name="q_answer" style="display: none;"
+            @click="verificaMultipla(1, countQuestao)"><img class="img" src="../resources/img/espada1.png">&nbsp;{{ 
+              todasQuestoes[countQuestao].alternativa1 }}</label><br>
+          <label class="element-animation2 sombra" style="font-size:20px; color: ghostwhite; padding: 6px 10px 6px 10px; font-family: pixel;"><input
+            type="radio" name="q_answer" style="display: none;"
+            @click="verificaMultipla(2, countQuestao)"><img class="img" src="../resources/img/escudo.png">&nbsp;{{
+              todasQuestoes[countQuestao].alternativa2 }}</label><br>
+          <label class="element-animation3 sombra" style="font-size:20px; color: ghostwhite; padding: 6px 10px 6px 10px; font-family: pixel;"><input
+            type="radio" name="q_answer" style="display: none;"
+            @click="verificaMultipla(3, countQuestao)"><img class="img" src="../resources/img/porcao.png">&nbsp;{{
+              todasQuestoes[countQuestao].alternativa3 }}</label><br>
+          <label class="element-animation4 sombra" style="font-size:20px; color: ghostwhite; padding: 6px 10px 6px 10px; font-family: pixel;"><input
+            type="radio" name="q_answer" style="display: none;"
+            @click="verificaMultipla(4, countQuestao)"><img class="img" src="../resources/img/lanca.png">&nbsp;{{
+              todasQuestoes[countQuestao].alternativa4 }}</label>
+        </div>
+        <div id="feedback"></div>
+        <div style="padding-left: 43%; padding-top: 1%;">
+          <input type="image" src="../resources/img/icons/setaEsquerda.png"
+            style="width: 80px; height: 80px;" @click="anterior()"> <input
+            type="image" src="../resources/img/icons/setaDireita.png"
+            style="width: 80px; height: 80px;" @click="proxima()">
+        </div>
+      </div>
 			<!-- Tipo Verdadeiro ou falso -->
 			<div
-				v-else-if=" totalQuestao > countQuestao && todasQuestoes[countQuestao].idTipoQuestao === '3' "
-				class="modal-dialog" style="border-radius: 100px;">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h3>
+				v-else-if=" totalQuestao > countQuestao && todasQuestoes[countQuestao].idTipoQuestao === '3' ">
+						<h3 style="color: ghostwhite; font-family: pixel;">
 							<span class="label label-warning"></span> {{
                 todasQuestoes[countQuestao].questao }}
 						</h3>
-					</div>
-					<div class="modal-body">
-						<div class="quiz" id="btVF">
-							<label
-								class="element-animation1 btn btn-lg btn-primary btn-block"><input
+						<div class="quiz" id="btVF" style="text-align: center;"><br>
+							<label 
+								class="element-animation1 sombra" style="font-size:20px; color: ghostwhite; padding: 6px 10px 6px 10px; font-family: pixel;"><input
 								type="radio" @click="verificaVF('Verdadeiro', countQuestao)"
-								style="display: none;">Verdadeiro</label> <label
-								class="element-animation2 btn btn-lg btn-primary btn-block"><input
+								style="display: none;"><img class="img" src="../resources/img/espada1.png">&nbsp;Verdadeiro</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label
+								class="element-animation2 sombra" style="font-size:20px; color: ghostwhite; padding: 6px 10px 6px 10px; font-family: pixel;"><input
 								type="radio" @click="verificaVF('Falso', countQuestao)"
-								style="display: none;">Falso</label>
+								style="display: none;"><img class="img" src="../resources/img/escudo.png">&nbsp;Falso</label>
 						</div>
 						<div id="feedback"></div>
-					</div>
-					<div style="padding-left: 33%; padding-top: 1%;">
-						<input type="image" src="../resources/img/icons/setaEsquerda.png"
+            <div style="padding-left: 43%; padding-top: 1%;">
+              <input type="image" src="../resources/img/icons/setaEsquerda.png"
 							style="width: 80px; height: 80px;" @click="anterior()">
 						<input type="image" src="../resources/img/icons/setaDireita.png"
 							style="width: 80px; height: 80px;" @click="proxima()">
 					</div>
-				</div>
-
 			</div>
 			<!-- Tipo Lacuna -->
 			<div
-				v-else-if=" totalQuestao > countQuestao && todasQuestoes[countQuestao].idTipoQuestao === '1' "
-				class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h3>
+				v-else-if=" totalQuestao > countQuestao && todasQuestoes[countQuestao].idTipoQuestao === '1' ">
+					<div>
+						<h3 style="color: ghostwhite; font-family: pixel;">
 							<span class="label label-warning"></span> {{
                 todasQuestoes[countQuestao].questao }}
 						</h3>
-					</div>
-					<input type="text" placeholder="Digite a resposta aqui" rows="10"
-						cols="40" v-model="lacuna" name="lacuna">
-					<div style="padding-top: 15px;">
-						<label class="element-animation2 btn btn-lg btn-primary btn-block"><input
+          </div>
+          <div style="text-align: center;">
+					  <input type="text" placeholder="Digite a resposta aqui" rows="10"
+            cols="40" v-model="lacuna" name="lacuna" style="border-radius: 8px;"> 
+          </div>
+					<div style="padding-top: 15px; text-align: center;">
+						<label class="element-animation2 btn btn-primary"><input
 							type="button" name="q_answer" style="display: none;"
 							@click="verificaLacuna(lacuna, countQuestao)">Responder</label>
 					</div>
 					<div id="feedback"></div>
 
-					<div style="padding-left: 33%; padding-top: 1%;">
+          <div style="padding-left: 43%; padding-top: 1%;">
 						<input type="image" src="../resources/img/icons/setaEsquerda.png"
 							style="width: 80px; height: 80px;" @click="anterior()">
 						<input type="image" src="../resources/img/icons/setaDireita.png"
 							style="width: 80px; height: 80px;" @click="proxima()">
 					</div>
-				</div>
-
 			</div>
-
-			<div style="text-align: center; padding-right: 40px;">
-				<button type="button" class="btn btn-outline-danger"
-					style="padding: 10px 50px 10px 50px;"
-					onclick="window.location.assign('perfil.html')">Sair</button>
-			</div>
-		</div>
-
+</div>
 		<script src="../resources/js/vue.js"></script>
 		<script
 			src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>

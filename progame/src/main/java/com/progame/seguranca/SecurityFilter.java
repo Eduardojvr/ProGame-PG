@@ -35,6 +35,7 @@ public class SecurityFilter implements Filter{
 				redirectURL = request.getContextPath() + "/index.html";
 				try {
 					response.sendRedirect(redirectURL);
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
