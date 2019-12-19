@@ -177,6 +177,8 @@ public class UsuarioDAO {
 		Connection db = ConnectionManager.getDBConnection();
 		PreparedStatement pstmt = null;
 
+		ResultSet result = null;
+
 		Boolean execute = false;
 		StringBuilder sql = new StringBuilder();
 

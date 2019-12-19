@@ -63,7 +63,9 @@
   </style>
 
 </head>
-<audio loop src="../resources/sons/fundoNarrativa.mp3"></audio>
+
+<audio id="audioPlayer" loop autoplay></audio>
+
 <body style="background: rgb(67, 186, 204);">
 	<div class="modal fade" id="processando" tabindex="-1" role="img"
 		style="padding-right: 10%; padding-top: 10%;" data-backdrop="static"
@@ -71,15 +73,36 @@
 		<div class="modal-dialog" role="document" style="width: 0px;">
 			<div class="modal-content"
 				style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
-				<img src="../resources/img/loadGT.gif" width=200px height=200px
-					style="border-radius: 100px;">
+				<img src="../resources/img/orcDancando.gif" width=200px height=250px
+          style="border-radius: 100px;">
+    
 				<div>
-					<label style="color: seashell; padding-left: 40px;">Processando...</label>
+					<!-- <label style="color: seashell; padding-left: 40px;">Processando...</label> -->
+				</div>
+			</div>
+		</div>
+  </div>
+  
+
+	<div class="modal fade" id="aguarde" tabindex="-1" role="img"
+		style="padding-right: 10%; padding-top: 10%;" data-backdrop="static"
+		data-keyboard="false">
+		<div class="modal-dialog" role="document" style="width: 0px;">
+			<div class="modal-content"
+				style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
+				<img src="../resources/img/orcDancando3.gif" width=200px height=250px
+          style="border-radius: 100px;">
+          
+				<div>
+					<label style="color: seashell; padding-left: 60px; font-family: pixel; font-size: 30px;">Aguarde</label>
 				</div>
 			</div>
 		</div>
 	</div>
 
+
+
+<!-- 
 	<div class="modal fade" id="modalCerto" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true"
 		style="padding-right: 20%; padding-top: 5%;">
@@ -91,9 +114,9 @@
 					height=500>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
-	<div class="modal fade" id="modalErrado" tabindex="-1" role="dialog"
+	<!-- <div class="modal fade" id="modalErrado" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true"
 		style="padding-right: 20%; padding-top: 4%;">
 		<div class="modal-dialog" role="document">
@@ -107,7 +130,7 @@
 					width=800 height=450>
 			</div>
 		</div>
-	</div>
+	</div> -->
 <div style="background-color: rgba(66, 66, 66); text-align: center;">
 <br>
 <h3 style="color: seashell; font-family: game;">Quiz</h3>
@@ -318,8 +341,7 @@ let q = new Vue({
     },
     methods : {
       fundoMusical : function(){
-        const audio = document.querySelector('audio');
-        audio.play();
+        $("#audioPlayer").attr('src',"../resources/sons/fundoNarrativa.mp3");  
       },
       proxima:function(){
         const vm = this;
@@ -341,11 +363,13 @@ let q = new Vue({
       },
       getAllQuestions: function(){
         const vm = this;
+        $('#aguarde').modal('show');
         axios.get('../rs/user/getUser').then(function(response){
           vm.dados = response.data
           axios.get('../rs/questao/todasQuestoes/' + response.data["level"]).then(function(questao){
             vm.todasQuestoes = questao.data;
             vm.totalQuestao = vm.todasQuestoes.length;
+            $('#aguarde').modal('hide');
           });
           // vm.totalQuestao.sort();
         });
@@ -357,10 +381,15 @@ let q = new Vue({
         if(resposta == vm.todasQuestoes[posicao].resposta){
           document.getElementById('feedback').innerHTML = 'Resposta correta!';
           document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
+          $("#audioPlayer").attr('src',"../resources/sons/certo.mp3");        
+          setTimeout(vm.fundoMusical, 4500);
           vm.atualizaPontuacao();
         } else {
           document.getElementById('feedback').innerHTML = 'Resposta incorreta. A resposta correta é: '+vm.todasQuestoes[posicao].resposta;
           document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
+          //vm.getAllQuestions();
+          $("#audioPlayer").attr('src',"../resources/sons/errado.mp3");        
+          setTimeout(vm.fundoMusical, 4000);
         }
       },
       verificaMultipla : function(resposta, posicao){
@@ -370,10 +399,14 @@ let q = new Vue({
         if(resposta == vm.todasQuestoes[posicao].respostaCorretaAlternativa){
           document.getElementById('feedback').innerHTML = 'Resposta correta!';
           document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
+          $("#audioPlayer").attr('src',"../resources/sons/certo.mp3");        
+          setTimeout(vm.fundoMusical, 4500);
           vm.atualizaPontuacao();
         } else {
           document.getElementById('feedback').innerHTML = 'Resposta incorreta. A resposta correta é a alternativa: '+vm.todasQuestoes[posicao].respostaCorretaAlternativa;
           document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
+          $("#audioPlayer").attr('src',"../resources/sons/errado.mp3");        
+          setTimeout(vm.fundoMusical, 4000);
         }
       },
       verificaLacuna : function(resposta, posicao){
@@ -381,10 +414,14 @@ let q = new Vue({
         if(vm.todasQuestoes[posicao].respostaLacuna == resposta || vm.todasQuestoes[posicao].respostaAlternativa == resposta ){
             document.getElementById('feedback').innerHTML = vm.todasQuestoes[posicao].comentarioCorreta;
             document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
+            $("#audioPlayer").attr('src',"../resources/sons/certo.mp3");        
+            setTimeout(vm.fundoMusical, 4500);
             vm.atualizaPontuacao();
         } else {
             document.getElementById('feedback').innerHTML = vm.todasQuestoes[posicao].comentarioIncorreta;
             document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
+            $("#audioPlayer").attr('src',"../resources/sons/errado.mp3");        
+            setTimeout(vm.fundoMusical, 4000);
         }
       },
         limpaFeed : function(){
@@ -405,7 +442,6 @@ let q = new Vue({
         }
     }
 });
-
 
 </script>
 </body>
