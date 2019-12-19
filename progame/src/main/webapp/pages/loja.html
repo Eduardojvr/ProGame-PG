@@ -113,7 +113,7 @@
          ></label> 
        </div>
        <div style="padding-left: 5%;">
-        <h3 id="pontuacao" style="color: ghostwhite; font-family: pixel;">Pontuação: {{ pontos }} pontos</h3>
+        <h3 id="pontuacao" style="color: ghostwhite; font-family: pixel;">Pontuação: {{ usuario.pontuacao }} pontos</h3>
     </div>
     <hr>
     <br><br>
@@ -352,11 +352,29 @@
         new Vue({
             el:"#loja",
             data:{
-                pontos: 0
+                usuario: {},
+                todosUsuarios: {}
             },
             created: function(){
                 const vm = this;
+                vm.getUser();
+                vm.getAllUsers();
                 $("#audioPlayer").attr('src',"../resources/sons/fundoLoja.mp3");        
+            },
+            methods : {
+                getUser : function(){
+                    const vm = this;
+                    axios.get('../rs/user/getUser').then(function(response){
+                        vm.usuario = response.data;
+                    });
+                },
+                getAllUsers : function(){
+                    const vm = this;
+                    axios.get('../rs/user/todosUsuarios').then(function(response){
+                        vm.todosUsuarios = response.data;
+                        console.log(vm.todosUsuarios);
+                    });
+                }
             }
 
         });

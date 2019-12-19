@@ -14,6 +14,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import com.progame.dao.DesafioDAO;
+import com.progame.dto.DesafioDTO;
 import com.progame.dto.DesafiovsDTO;
 
 @Path("/desafio")
@@ -98,6 +99,20 @@ public class RESTDesafio {
 			e.printStackTrace();
 		}				
 		return isOk;
+	}
+	
+	@GET
+	@Path("/desafioProgramado")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<DesafioDTO> desafiosProgramados() {
+		DesafioDAO dao = new DesafioDAO();
+		ArrayList<DesafioDTO> desafios = null;
+		try {
+			desafios = dao.todosDesafiosProgramado();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}				
+		return desafios;
 	}
 	
 }

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.progame.dto.DesafioDTO;
 import com.progame.dto.DesafiovsDTO;
 
 public class DesafioDAO {
@@ -172,6 +173,38 @@ public class DesafioDAO {
 		}
 
 		return isOk;
+	}
+	
+	public ArrayList<DesafioDTO> todosDesafiosProgramado() throws Exception {
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		ResultSet result = null;
+		ArrayList <DesafioDTO> desafios = new ArrayList<DesafioDTO>();
+		
+		pstmt = db.prepareStatement("select * from desafio_programado dp left join resposta_desafio_programado rp on rp.idDesafio=dp.idDesafio");
+		
+		try {
+			result = pstmt.executeQuery();
+			while (result.next()) {
+					DesafioDTO desafio = new DesafioDTO();
+					desafio.setIdDesafio(result.getString("idDesafio"));	
+					desafio.setDesafio(result.getString("desafio"));	
+					desafio.setIdResposta(result.getString("idResposta"));
+					desafio.setMatricula(result.getString("matricula"));	
+					desafio.setResposta(result.getString("resposta"));	
+					desafio.setCorrecaoAvaliador(result.getString("correcaoAvaliador"));
+					desafios.add(desafio);
+			}
+			
+		} catch(Exception e) {
+			throw new Exception(e);
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+		return desafios;
 	}
 }
 

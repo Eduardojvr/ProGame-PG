@@ -9,6 +9,10 @@ public class ConnectionManager implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
 
+	/*
+	 * * ######## PRODUÇÃO #########################################################
+	 * *
+	 */ 
 
 
 	/*
