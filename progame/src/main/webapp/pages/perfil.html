@@ -181,7 +181,7 @@
 			<div class="sidebar-wrapper">
 				<div class="logo">
 					<a href="https://github.com/Eduardojvr/ProGame-PG"
-						class="simple-text"> Pro Game </a>
+						class="simple-text"> ProGame </a>
 				</div>
 				<ul  id="notifica" class="nav">
 					<li class="nav-item"><a class="nav-link" href="perfil.html">
@@ -210,6 +210,10 @@
 							class="nc-icon nc-spaceship"></i>
 							<p>Modo progressivo</p>
 					</a></li>
+					<li><a class="nav-link" href="loja.html">
+						<i class="nc-icon nc-layers-3"></i> 
+						<p>Loja</p>
+					</a></li>
 					<li><a class="nav-link" href="material.html"> <i
 							class="nc-icon nc-single-copy-04 icon-bold"></i>
 							<p>Material</p>
@@ -220,19 +224,14 @@
 											totalNotificacao }}</span>
 									<p>Notificações</p>
 					</a></li>
-				
-
-				
 				</ul>
-				<div id="login">
-					<input type="image" src="../resources/img/icons/sair.png"
-						style="width: 30px; height: 40px;" @click="logout()">
+				<div id="login" style="padding-left: 35%;">
+					<label style="color: rgb(240, 37, 37); font-size: 20px; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;" @click="logout()">Sair</label>
 				</div>
 			</div>
 		</div>
 
 		<div class="main-panel">
-
 			<div class="container" id="posicao">
 				<div class="row">
 					<div class="col-xs-12 col-sm-6 col-md-6">
@@ -286,12 +285,10 @@
 										role="progressbar" faria-valuenow="{ progresso }"
 										aria-valuemin="0" aria-valuemax="100"
 										v-bind:style="{width:  progresso }">{{ progresso }}</div>
-
 								</div>
 								<br>
 								<br>
 							</div>
-
 						</div>
 					</div>
 				</div>
