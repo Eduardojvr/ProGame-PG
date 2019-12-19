@@ -176,7 +176,7 @@ public class RESTUsuario {
 	@Path("/atualizaLevel/{levelatual}/{matricula}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes({ MediaType.APPLICATION_JSON })
-	public Boolean atualizaLevel(@PathParam("levelatual") String levelatual, @PathParam("matricula") String matricula) {
+	public Boolean atualizaLevel(@PathParam("levelatual") int levelatual, @PathParam("matricula") String matricula) {
 		UsuarioDAO dao = new UsuarioDAO();
 		boolean update = false;
 		try {

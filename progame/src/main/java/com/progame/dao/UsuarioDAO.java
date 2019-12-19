@@ -118,45 +118,39 @@ public class UsuarioDAO {
 
 		sql.append("update USUARIO set pontuacao="+pontos+" where matricula="+matricula);
 		
+		if(pontos >=800 && pontos<1600) {
+			updateLevel(2 , matricula);
+			
+		} else if(pontos >=1600 && pontos < 3200) {
+			updateLevel(3 , matricula);
+
+		} else if(pontos >=3200 && pontos < 6400) {
+			updateLevel(4 , matricula);
+			
+		} else if(pontos >=6400 && pontos < 12800) {
+			updateLevel(5 , matricula);
+			
+		} else if(pontos >=12800 && pontos < 25600) {
+			updateLevel(6 , matricula);
+			
+		} else if(pontos >=25600 && pontos < 51200) {
+			updateLevel(7 , matricula);
+			
+		} else if(pontos >=51200 && pontos < 102400) {
+			updateLevel(8 , matricula);
+			
+		} else if(pontos >=102400 && pontos < 204800) {
+			updateLevel(9 , matricula);
+		} else if(pontos >=204800 && pontos < 409600) {
+			updateLevel(10 , matricula);
+
+		} else if(pontos >=409600 && pontos < 819200) {
+			updateLevel(11 , matricula);
+			
+		} else if(pontos >=819200 && pontos < 819200) {
+			updateLevel(12 , matricula);
+		} 
 		
-		switch(pontos) {
-			case 800:
-				updateLevel(levelAtual , matricula);
-				break;
-			case 1600:
-				updateLevel(levelAtual , matricula);
-				break;
-			case 3200:
-				updateLevel(levelAtual , matricula);
-				break;
-			case 6400:
-				updateLevel(levelAtual , matricula);
-				break;
-			case 12800:
-				updateLevel(levelAtual , matricula);
-				break;
-			case 25600:
-				updateLevel(levelAtual , matricula);
-				break;
-			case 51200:
-				updateLevel(levelAtual , matricula);
-				break;
-			case 102400:
-				updateLevel(levelAtual , matricula);
-				break;
-			case 204800:
-				updateLevel(levelAtual , matricula);
-				break;
-			case 409600:
-				updateLevel(levelAtual , matricula);
-				break;
-			case 819200:
-				updateLevel(levelAtual , matricula);
-				break;
-			case 1638400:
-				updateLevel(levelAtual , matricula);
-				break;
-		}
 		
 		try {
 			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
@@ -173,7 +167,7 @@ public class UsuarioDAO {
 	}
 	
 
-	public boolean updateLevel(String levelatual, String matricula) throws Exception {
+	public boolean updateLevel(int level, String matricula) throws Exception {
 		Connection db = ConnectionManager.getDBConnection();
 		PreparedStatement pstmt = null;
 
@@ -183,9 +177,10 @@ public class UsuarioDAO {
 		StringBuilder sql = new StringBuilder();
 
 						
-		int novoLevel = Integer.parseInt(levelatual) + 1;
+//		int novoLevel = Integer.parseInt(level) + 1;
+
 				
-		sql.append("update USUARIO set level="+novoLevel+" where matricula="+matricula);
+		sql.append("update USUARIO set level="+level+" where matricula="+matricula);
 		
 		try {
 			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
