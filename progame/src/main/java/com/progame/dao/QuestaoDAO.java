@@ -16,6 +16,7 @@ import com.progame.dto.QuestaoLacunaDTO;
 import com.progame.dto.QuestaoTodasDTO;
 import com.progame.dto.QuestaoVerdadeiroFalsoDTO;
 import com.progame.entity.Questao;
+import com.progame.entity.RespostaLacuna;
 import com.progame.entity.RespostaVF;
 import com.progame.entity.TipoQuestao;
 
@@ -370,6 +371,42 @@ public class QuestaoDAO {
 			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, getIdQuestao());
 			pstmt.setString(2, resposta.getResposta());
+			pstmt.executeUpdate();
+			
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+
+		return true;
+
+	}
+	
+	public boolean insertRespostaQuestaoLacuna(RespostaLacuna resposta) throws Exception {
+
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		StringBuilder sql = new StringBuilder();	
+
+		sql.append("INSERT INTO resposta_lacuna ");
+		sql.append(" ( ");
+		sql.append(" idQuestao, ");
+		sql.append(" resposta, ");
+		sql.append(" respostaAlternativa, ");
+		sql.append(" comentarioCorreta, ");		
+		sql.append(" comentarioIncorreta ");
+		sql.append(" ) ");
+		sql.append(" VALUES (?,?,?,?,?);");
+
+		try {
+			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, getIdQuestao());
+			pstmt.setString(2, resposta.getResposta());
+			pstmt.setString(3, resposta.getRespostaAlternativa());
+			pstmt.setString(4, resposta.getComentarioCorreta());
+			pstmt.setString(5, resposta.getComentarioIncorreta());
 			pstmt.executeUpdate();
 			
 		} finally {

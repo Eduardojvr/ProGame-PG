@@ -35,6 +35,7 @@ import com.progame.dto.QuestaoVerdadeiroFalsoDTO;
 import com.progame.entity.Codigo;
 import com.progame.entity.Personagem;
 import com.progame.entity.Questao;
+import com.progame.entity.RespostaLacuna;
 import com.progame.entity.RespostaVF;
 import com.progame.entity.TipoQuestao;
 
@@ -198,5 +199,19 @@ public class RESTQuestao {
 		return isOk;
 	}
 	
+	@POST
+	@Path("/insertRespostaLacuna")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public boolean insertQuestao(RespostaLacuna resposta){
+		boolean isOk = false;
+		QuestaoDAO dao = new QuestaoDAO();
+		try {
+			isOk = dao.insertRespostaQuestaoLacuna(resposta);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return isOk;
+	}
 	
 }

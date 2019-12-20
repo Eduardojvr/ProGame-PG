@@ -20,6 +20,24 @@
     <link href="../../resources/css/demo.css" rel="stylesheet" />
 </head>
 <body>
+  
+
+	<div class="modal fade" id="aguarde" tabindex="-1" role="img"
+		style="padding-right: 10%; padding-top: 10%;" data-backdrop="static"
+		data-keyboard="false">
+		<div class="modal-dialog" role="document" style="width: 0px;">
+			<div class="modal-content"
+				style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
+				<img src="../../resources/img/orcDancando3.gif" width=200px height=250px
+          style="border-radius: 100px;">
+          
+				<div>
+					<label style="color: seashell; padding-left: 60px; font-family: pixel; font-size: 30px;">Aguarde</label>
+				</div>
+			</div>
+		</div>
+  </div>
+
 <div id="questao" >
         <div class="modal fade top" id="modalMaterial" tabindex="-1" role="dialog" aria-labelledby="modalLinguagem" aria-hidden="true" data-backdrop='false'>
                 <div class="modal-dialog modal-lg modal-frame modal-top" role="document">
@@ -108,7 +126,7 @@
                 <div class="container" id="posicao">
                     <div class="tabela">
                         <button id="modalMaterial" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalMaterial">
-                                Novo Material    
+                                Nova Questão    
                             </button>
                     <!-- <div class="tabela">
                             <button id="modalMaterial" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalMaterial">
@@ -242,6 +260,7 @@ new Vue({
   methods : {
     cadastrar : function(){
         const vm = this;
+        $("#aguarde").modal("show");
         var objQuestao = {
             idQuestao: '',
             idTipoConteudo: vm.quest.idTipoConteudo,
@@ -257,7 +276,22 @@ new Vue({
           }
           axios.post('../../rs/questao/insertQuestao', objQuestao).then(function(response) {
             axios.post('../../rs/questao/insertRespostaVF', objRespostaVF).then(function(response) {
-              alert();
+              $("#aguarde").modal("hide");
+            });
+          });
+        } else if(vm.quest.idTipoQuestao == 4){
+
+        } else if(vm.quest.idTipoQuestao == 1){
+          var objRespostaLacuna = {
+            idQuestao: '',
+            resposta: vm.quest.resposta,
+            respostaAlternativa: vm.quest.respostaAlternativa,
+            comentarioCorreta: vm.quest.comentarioCorreta,
+            comentarioIncorreta: vm.quest.comentarioIncorreta
+          }
+          axios.post('../../rs/questao/insertQuestao', objQuestao).then(function(response) {
+            axios.post('../../rs/questao/insertRespostaLacuna', objRespostaLacuna).then(function(response) {
+              $("#aguarde").modal("hide");
             });
           });
         }
