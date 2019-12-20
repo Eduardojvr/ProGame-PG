@@ -10,6 +10,7 @@ public class ConnectionManager implements Serializable {
 	private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
 
 
+
 	/*
 	 * * ######## BANCO LOCAL #########################################################
 	 * *
@@ -22,7 +23,7 @@ public class ConnectionManager implements Serializable {
 	
 	public static Connection getDBConnection() throws Exception {
 		return getDBConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
-	}
+	} 	
 
 	public static Connection getDBConnection(String conn, String user, String pass) throws Exception {
 		Connection dbConnection = null;

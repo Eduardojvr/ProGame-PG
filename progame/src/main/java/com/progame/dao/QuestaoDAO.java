@@ -5,14 +5,19 @@ import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.progame.dto.DesafiovsDTO;
 import com.progame.dto.QuestaoCodigoDTO;
 import com.progame.dto.QuestaoDTO;
 import com.progame.dto.QuestaoLacunaDTO;
 import com.progame.dto.QuestaoTodasDTO;
 import com.progame.dto.QuestaoVerdadeiroFalsoDTO;
+import com.progame.entity.Questao;
+import com.progame.entity.RespostaVF;
+import com.progame.entity.TipoQuestao;
 
 public class QuestaoDAO {
 	public List<QuestaoDTO> getQuestao(String level) throws Exception {
@@ -255,6 +260,130 @@ public class QuestaoDAO {
 		}
 		return listaQuestoes;
 	}
+	
+	public ArrayList<TipoQuestao> getTipoQuestao() throws Exception {
+
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		ResultSet result = null;
+		ArrayList<TipoQuestao> listaQuestoes = new ArrayList<TipoQuestao>();
+
+
+		pstmt = db.prepareStatement("select * from tipo_questao;");
+
+		try {
+			result = pstmt.executeQuery();
+			while (result.next()) {
+				TipoQuestao questao = new TipoQuestao();
+				questao.setIdTipo(result.getString("idTipo"));
+				questao.setTipo(result.getString("tipo"));
+			
+				listaQuestoes.add(questao);		
+			}
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+		return listaQuestoes;
+	}
+	
+	
+	public boolean insertQuestao(Questao questao) throws Exception {
+
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		StringBuilder sql = new StringBuilder();	
+
+		sql.append("INSERT INTO questao ");
+		sql.append(" ( ");
+		sql.append(" idTipoConteudo, ");
+		sql.append(" idLinguagem, ");
+		sql.append(" idTipoQuestao, ");		
+		sql.append(" questao ");
+		sql.append(" ) ");
+		sql.append(" VALUES (?,?,?,?);");
+
+		try {
+			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, questao.getIdTipoConteudo());
+			pstmt.setString(2, questao.getIdLinguagem());
+			pstmt.setString(3, questao.getIdTipoQuestao());
+			pstmt.setString(4, questao.getQuestao());
+			pstmt.executeUpdate();
+			
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+
+		return true;
+
+	}
+	
+	public String getIdQuestao() throws Exception {
+
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		ResultSet result = null;
+		String id = null;
+
+
+		pstmt = db.prepareStatement("SELECT idQuestao FROM questao ORDER BY idQuestao DESC limit 1;");
+
+		try {
+			result = pstmt.executeQuery();
+			while (result.next()) {
+				id = result.getString("idQuestao");
+			}
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+		return id;
+	}
+	
+	public boolean insertRespostaQuestaoVF(RespostaVF resposta) throws Exception {
+
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		StringBuilder sql = new StringBuilder();	
+
+		sql.append("INSERT INTO resposta_verdadeiro_falso ");
+		sql.append(" ( ");
+		sql.append(" idQuestao, ");
+		sql.append(" resposta ");
+		sql.append(" ) ");
+		sql.append(" VALUES (?,?);");
+
+		try {
+			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, getIdQuestao());
+			pstmt.setString(2, resposta.getResposta());
+			pstmt.executeUpdate();
+			
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+
+		return true;
+
+	}
+	
+	
+	
 }
 
 

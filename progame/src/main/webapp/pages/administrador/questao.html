@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Painel administrativo</title>
+
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">  -->
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+
+    <link href="../../resources/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../resources/css/light-bootstrap-dashboard.css?v=2.0.0" rel="stylesheet" />
+
+    <link href="../../resources/css/demo.css" rel="stylesheet" />
+</head>
+<body>
+<div id="questao" >
+        <div class="modal fade top" id="modalMaterial" tabindex="-1" role="dialog" aria-labelledby="modalLinguagem" aria-hidden="true" data-backdrop='false'>
+                <div class="modal-dialog modal-lg modal-frame modal-top" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3 class="modal-title" id="modalLinguagem">Cadastro de Questao</h>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div >
+                    <div class="modal-body">
+                            
+                               Tipo Questão:
+                                <select v-model="quest.idTipoQuestao">
+                                      <option v-for="option in tipoQuestao" v-bind:value="option.idTipo">
+                                        {{ option.tipo }}
+                                      </option>
+                                    </select> <br/><br/>
+                              
+                             Assunto:
+                             <select v-model="quest.idTipoConteudo">
+                                   <option v-for="option in tipoConteudo" v-bind:value="option.idConteudo">
+                                     {{ option.assunto }}
+                                   </option>
+                                 </select> <br/><br/>
+                           
+                            
+                             Questão
+                             <input type="text" v-model="quest.questao" name="nome" size="60"> <br/><br/>
+                             <div v-if="quest.idTipoQuestao === '3'">
+                                Resposta
+                                <select v-model="quest.resposta">
+                                    <option value="Verdadeiro">Verdadeiro</option>
+                                    <option value="Falso">Falso</option>
+                                </select>
+                            </div>
+                            <div v-if="quest.idTipoQuestao === '1'">
+                                Resposta
+                                <input type="text" v-model="quest.resposta" name="nome" size="60"> <br/><br/>
+                                Resposta Alternativa
+                                <input type="text" v-model="quest.respostaAlternativa" name="nome" size="60"> <br/><br/>
+                                Comentario Correta
+                                <input type="text" v-model="quest.comentarioCorreta" name="nome" size="60"> <br/><br/>
+                                Comentario Incorreta
+                                <input type="text" v-model="quest.comentarioIncorreta" name="nome" size="60"> <br/><br/>
+
+                            </div>
+                            <div v-if="quest.idTipoQuestao === '4'">
+                                Alternativa 1
+                                <input type="text" v-model="quest.alternativa1" name="nome" size="60"> <br/><br/>
+                                Alternativa 2
+                                <input type="text" v-model="quest.alternativa2" name="nome" size="60"> <br/><br/>
+                                Alternativa 3
+                                <input type="text" v-model="quest.alternativa3" size="60"> <br/><br/>
+                                Alternativa 4
+                                <input type="text" v-model="quest.alternativa4" name="nome" size="60"> <br/><br/>                           
+                                Alternativa correta
+                                <input type="number" v-model="quest.respostaCorretaAlternativa" name="nome" size="20" max="4" min="1"> <br/><br/>                          
+                                Comentário Correta                              
+                                <input type="text" v-model="quest.comentarioCorreta" name="nome" size="60"> <br/><br/>                           
+                                Comentário Errada
+                                <input type="text" v-model="quest.comentarioIncorreta" name="nome" size="60"> <br/><br/>                           
+                             </div>      
+                             
+                             Linguagem:
+                              <select v-model="quest.nomeLinguagem">
+                                    <option v-for="option in linguagem" v-bind:value="option.idLinguagem">
+                                      {{ option.nomeLinguagem }}
+                                    </option>
+                                  </select> <br/><br/>
+                            
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal" @click="cadastrar()">Salvar</button>
+                    </div>
+                </div>
+                  </div>
+                </div>
+            </div> 
+        <div  class="wrapper">
+                <div id="menu"></div>
+                <div class="main-panel">
+                <div class="container" id="posicao">
+                    <div class="tabela">
+                        <button id="modalMaterial" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalMaterial">
+                                Novo Material    
+                            </button>
+                    <!-- <div class="tabela">
+                            <button id="modalMaterial" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalMaterial">
+                                    Novo Material    
+                                </button>
+                        <h2 style="text-align: center;">Material</h2>
+                        <div >
+                                <b-table :fields="headers" :items="material"
+                                hover responsive> 
+              
+                              </b-table>
+                              </div>
+                       </div> -->
+                 
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+
+                  <script src="../../resources/js/vue.js"></script>
+                  <script src="../../resources/js/axios.min.js"></script>
+                  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+                  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+                  <script src="../../resources/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+                  <script src="../../resources/js/core/popper.min.js" type="text/javascript"></script>
+                  <script src="../../resources/js/core/bootstrap.min.js" type="text/javascript"></script>
+                  <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+                  <script src="../../resources/js/plugins/bootstrap-switch.js"></script>
+                  <!--  Chartist Plugin  -->
+                  <script src="../../resources/js/plugins/chartist.min.js"></script>
+                  <!--  Notifications Plugin    -->
+                  <script src="../../resources/js/plugins/bootstrap-notify.js"></script>
+                  <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+                  <script src="../../resources/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
+                  <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+                  <script src="../../resources/js/demo.js"></script>
+                  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
+                  <script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+                  <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+    <script>
+
+new Vue({
+  el:'#questao',
+  vuetify: new Vuetify(),
+  data () {
+    return {
+    //   search: '',
+    //   headers: [
+    //     {
+    //       align: 'left',
+    //       sortable: false,
+    //       value: 'posicao',
+    //     },
+    //     { text: 'Url', value: 'urlMaterial' },
+    //     { text: 'Titulo', value: 'tituloMaterial' },
+    //     { text: 'Assunto', value: 'assunto' },
+    //     { text: 'Descrição', value: 'desConteudo' },
+    //     { text: 'Tipo', value: 'nomeTipo' },
+    //     { text: 'Linguagem', value: 'nomeLinguagem' }
+    //   ],
+    //   material: [
+    //       {
+    //         urlMaterial: '',
+    //         tituloMaterial:'',
+    //         assunto:'',
+    //         desConteudo:'',
+    //         nomeTipo:'',
+    //         nomeLinguagem:''
+    //       }
+    //   ],
+      tipo_questao:'',
+      tipo_conteudo:'',
+      tmp_questao:'',
+      tmp_linguagem:'',
+      quest: [
+        {
+          idQuestao: '',
+          idTipoConteudo: '',
+          idTipoQuestao: '',
+          questao: '',
+          alternativa1: '',
+          alternativa2: '',
+          alternativa3: '',
+          alternativa4: '',
+          respostaCorretaAlternativa: '',
+          comentarioCorretaMultipla: '',
+          comentarioErrado: '',
+          respostaLacuna: '',
+          respostaAlternativa: '',
+          comentarioCorreta: '',
+          comentarioIncorreta: '',
+          resposta: '',
+          nomeLinguagem: ''
+        }
+      ],
+
+      tipoQuestao: {},
+      questao: {},
+      tipoConteudo:{},
+      linguagem:{}
+
+
+
+      
+    }
+  },
+  created: function(){
+    const vm = this;
+
+
+
+    axios.get('../../rs/linguagem/todasLinguagens').then(function(response) {
+      vm.linguagem = response.data;      
+      console.log(vm.linguagem );
+    });
+
+    axios.get('../../rs/assunto/getAllAssunto').then(function(response) {
+      vm.tipoConteudo = response.data;    
+      console.log(vm.tipoConteudo);
+  
+    });
+
+    axios.get('../../rs/questao/tipoQuestao').then(function(response) {
+      vm.tipoQuestao = response.data;     
+      console.log(vm.tipoQuestao);
+ 
+    });
+
+    
+  },
+  methods : {
+    cadastrar : function(){
+        const vm = this;
+        var objQuestao = {
+            idQuestao: '',
+            idTipoConteudo: vm.quest.idTipoConteudo,
+            idLinguagem: vm.quest.nomeLinguagem,
+            idTipoQuestao: vm.quest.idTipoQuestao,
+            questao: vm.quest.questao
+          }
+
+        if(vm.quest.idTipoQuestao == 3){
+          var objRespostaVF = {
+            idQuestao: '',
+            resposta: vm.quest.resposta
+          }
+          axios.post('../../rs/questao/insertQuestao', objQuestao).then(function(response) {
+            axios.post('../../rs/questao/insertRespostaVF', objRespostaVF).then(function(response) {
+              alert();
+            });
+          });
+        }
+    }
+		
+	}
+});
+
+     $(function(){
+          $("#menu").load("../baseAdm.html"); // incluir conteúdo do menu.html na div com id #includedContent
+        });    
+    </script>
+</body>
+</html>

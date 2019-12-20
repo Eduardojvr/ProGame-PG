@@ -34,6 +34,9 @@ import com.progame.dto.QuestaoTodasDTO;
 import com.progame.dto.QuestaoVerdadeiroFalsoDTO;
 import com.progame.entity.Codigo;
 import com.progame.entity.Personagem;
+import com.progame.entity.Questao;
+import com.progame.entity.RespostaVF;
+import com.progame.entity.TipoQuestao;
 
 
 @Path("/questao")
@@ -150,5 +153,50 @@ public class RESTQuestao {
 		return questoes;
 	}
 
+	@GET
+	@Path("/tipoQuestao")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<TipoQuestao> tipoQuestao(){
+		ArrayList<TipoQuestao> questoes = null;
+		QuestaoDAO dao = new QuestaoDAO();
+		
+		try {
+			questoes = dao.getTipoQuestao();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return questoes;
+	}
+	
+	@POST
+	@Path("/insertQuestao")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public boolean insertQuestao(Questao questao){
+		boolean isOk = false;
+		QuestaoDAO dao = new QuestaoDAO();
+		try {
+			isOk = dao.insertQuestao(questao);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return isOk;
+	}
+	
+	@POST
+	@Path("/insertRespostaVF")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public boolean insertQuestao(RespostaVF resposta){
+		boolean isOk = false;
+		QuestaoDAO dao = new QuestaoDAO();
+		try {
+			isOk = dao.insertRespostaQuestaoVF(resposta);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return isOk;
+	}
+	
 	
 }
