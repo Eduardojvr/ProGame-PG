@@ -49,14 +49,14 @@
 						class="nc-icon nc-chat-round"></i>
 						<p>Desafio</p>
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="adm.html"> <i
+				<li class="nav-item"><a class="nav-link" href="questao.html"> <i
 						class="nc-icon nc-circle-09"></i>
 						<p>Questões</p>
 				</a></li>
 
 			</ul>
 			<div id="login">
-				<input type="image" src="../resources/img/icons/sair.png"
+				<input type="image" src="../../resources/img/icons/sair.png"
 					style="width: 30px; height: 40px;" @click="logout()">
 			</div>
 		</div>
@@ -86,14 +86,14 @@
             el:'#login',
             methods:{
                 logout: function(){
-            axios.post('../rs/user/logout').then(function(response) {
-                alert("Logout realizado com sucesso!");
-                sessionStorage.clear();
-                window.location.href = "../index.html";
-            }).catch(function (error){
-                alert("Erro ao realizar logout!");
-            });
-        }
+					axios.post('../../rs/user/logout').then(function(response) {
+						alert("Logout realizado com sucesso!");
+						sessionStorage.clear();
+						window.location.href = "/progame";
+					}).catch(function (error){
+						alert("Erro ao realizar logout!");
+					});
+        		}
             }
         });
 
