@@ -36,6 +36,7 @@ import com.progame.entity.Codigo;
 import com.progame.entity.Personagem;
 import com.progame.entity.Questao;
 import com.progame.entity.RespostaLacuna;
+import com.progame.entity.RespostaMultipla;
 import com.progame.entity.RespostaVF;
 import com.progame.entity.TipoQuestao;
 
@@ -188,7 +189,7 @@ public class RESTQuestao {
 	@Path("/insertRespostaVF")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public boolean insertQuestao(RespostaVF resposta){
+	public boolean insertRespostaVF(RespostaVF resposta){
 		boolean isOk = false;
 		QuestaoDAO dao = new QuestaoDAO();
 		try {
@@ -203,11 +204,26 @@ public class RESTQuestao {
 	@Path("/insertRespostaLacuna")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public boolean insertQuestao(RespostaLacuna resposta){
+	public boolean insertRespostaLacuna(RespostaLacuna resposta){
 		boolean isOk = false;
 		QuestaoDAO dao = new QuestaoDAO();
 		try {
 			isOk = dao.insertRespostaQuestaoLacuna(resposta);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return isOk;
+	}
+	
+	@POST
+	@Path("/insertRespostaMultipla")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public boolean insertRespostaMultipla(RespostaMultipla resposta){
+		boolean isOk = false;
+		QuestaoDAO dao = new QuestaoDAO();
+		try {
+			isOk = dao.insertRespostaQuestaoMultipla(resposta);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -100,7 +100,7 @@
                                 Comentário Correta                              
                                 <input type="text" v-model="quest.comentarioCorreta" name="nome" size="60"> <br/><br/>                           
                                 Comentário Errada
-                                <input type="text" v-model="quest.comentarioIncorreta" name="nome" size="60"> <br/><br/>                           
+                                <input type="text" v-model="quest.comentarioErrado" name="nome" size="60"> <br/><br/>                           
                              </div>      
                              
                              Linguagem:
@@ -280,6 +280,21 @@ new Vue({
             });
           });
         } else if(vm.quest.idTipoQuestao == 4){
+          var objRespostaMultipla = {
+            idQuestao: '',
+            alternativa1: vm.quest.alternativa1,
+            alternativa2: vm.quest.alternativa2,
+            alternativa3: vm.quest.alternativa3,
+            alternativa4: vm.quest.alternativa4,
+            respostaCorretaAlternativa: vm.quest.respostaCorretaAlternativa,
+            comentarioCorreta: vm.quest.comentarioCorreta,
+            comentarioErrado: vm.quest.comentarioErrado
+          }
+          axios.post('../../rs/questao/insertQuestao', objQuestao).then(function(response) {
+            axios.post('../../rs/questao/insertRespostaMultipla', objRespostaMultipla).then(function(response) {
+              $("#aguarde").modal("hide");
+            });
+          });
 
         } else if(vm.quest.idTipoQuestao == 1){
           var objRespostaLacuna = {

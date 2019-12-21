@@ -17,6 +17,7 @@ import com.progame.dto.QuestaoTodasDTO;
 import com.progame.dto.QuestaoVerdadeiroFalsoDTO;
 import com.progame.entity.Questao;
 import com.progame.entity.RespostaLacuna;
+import com.progame.entity.RespostaMultipla;
 import com.progame.entity.RespostaVF;
 import com.progame.entity.TipoQuestao;
 
@@ -418,6 +419,51 @@ public class QuestaoDAO {
 		return true;
 
 	}
+	
+	public boolean insertRespostaQuestaoMultipla(RespostaMultipla resposta) throws Exception {
+
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		StringBuilder sql = new StringBuilder();	
+
+		sql.append("INSERT INTO resposta_multipla_escolha ");
+		sql.append(" ( ");
+		sql.append(" idQuestao, ");
+		sql.append(" alternativa1, ");
+		sql.append(" alternativa2, ");
+		sql.append(" alternativa3, ");
+		sql.append(" alternativa4, ");
+		sql.append(" respostaCorretaAlternativa, ");
+		sql.append(" comentarioCorreta, ");
+		sql.append(" comentarioErrado ");
+		sql.append(" ) ");
+		sql.append(" VALUES (?,?,?,?,?,?,?,?);");
+
+		try {
+			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, getIdQuestao());
+			pstmt.setString(2, resposta.getAlternativa1());
+			pstmt.setString(3, resposta.getAlternativa2());
+			pstmt.setString(4, resposta.getAlternativa3());
+			pstmt.setString(5, resposta.getAlternativa4());
+			pstmt.setString(6, resposta.getRespostaCorretaAlternativa());
+			pstmt.setString(7, resposta.getComentarioCorreta());
+			pstmt.setString(8, resposta.getComentarioErrado());
+			pstmt.executeUpdate();
+			
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+
+		return true;
+
+	}
+	
+	
+	
 	
 	
 	
