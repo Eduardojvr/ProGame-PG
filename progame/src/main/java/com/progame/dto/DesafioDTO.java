@@ -3,6 +3,7 @@ package com.progame.dto;
 public class DesafioDTO {
 	private String idDesafio;
 	private String desafio;
+	private String imgDesafio;
 	private String idResposta;
 	private String matricula;
 	private String resposta;
@@ -43,6 +44,12 @@ public class DesafioDTO {
 	}
 	public void setCorrecaoAvaliador(String correcaoAvaliador) {
 		this.correcaoAvaliador = correcaoAvaliador;
+	}
+	public String getImgDesafio() {
+		return imgDesafio;
+	}
+	public void setImgDesafio(String imgDesafio) {
+		this.imgDesafio = imgDesafio;
 	}
 
 	

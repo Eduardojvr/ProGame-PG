@@ -23,7 +23,71 @@
 
 </head>
 <body>
+
 <div id="desafio">
+
+
+  <div
+  style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+  id="feedbackResposta" class="modal fade top" tabindex="-1" role="dialog"
+   aria-hidden="true" data-backdrop='false'
+  data-keyboard="false">
+  <div class="modal-dialog modal-lg modal-frame modal-top"
+    role="document">
+    <div style="background-color: rgba(255, 255, 255, 0.9);"
+      class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div style="text-align: center;">
+          <h3>Resposta registrada com sucesso!</h3>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <img height="200" width="150" src="../resources/img/orcDancando2.gif" alt="">
+          </div>
+          <div style="padding-left: 40px; padding-top: 1%;" class="col-8">
+            <h4>Você acaba de receber 100 pontos de experiência por responder um desafio!<br>Aguarde a correção de um monitor ou professor!<br>Você pode acompanhar o status
+            de seus desafios na página de desafios!</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="modal fade" id="responde" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="color: steelblue;" class="modal-title"
+          id="myModalLabel">Desafio</h3>
+        <button type="button" class="close" data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label>Digite sua resposta</label>
+        <textarea style="border-radius: 10px;" cols="56" rows="6"
+          v-model="respostaDesafio.resposta"></textarea><br><br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+          data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+          @click="salvar()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 	<div class="wrapper">
 		<div id="menu"></div>
 		<div class="main-panel" id="gerenciapersonagem">
@@ -33,18 +97,18 @@
           <hr>
           <div v-for="item in desafios" style="padding-right: 20%; padding-left: 20%;">
               <div class="card bg-secondary mb-3" style="max-width: 450rem; border-radius: 10px;">
-                <div style="text-align: center;">
-                  <!-- <img class="card-img-top" src="../resources/img/codigo.png" style="height: 200px; width: 200px;" alt="Card image cap"> -->
+                <div style="text-align: center; padding-top: 10px;">
+                  <img class="card-img-top" v-bind:src="item.imgDesafio" style="border-radius: 20px; height: 150px; width: 150px;" alt="Card image cap">
                 </div>
                 <div class="card-body col=3">
-                  <p class="card-text" style="font-family: 'Courier New', Courier, monospace; color: white;">{{ item.desafio }}</p>
-                   <label v-if="item.correcao === 'Errado'" style="color: rgb(224, 40, 7);">Incorreto</label><br>
-                   <label v-if="item.correcao === 'Correto'" style="color: rgb(7, 224, 54);">Correto</label><br>
-                   <label v-if="item.correcao === 'Sem avaliacao'" style="color: rgb(0, 84, 139);">Responder</label>
-
-                </div>
+                  <a class="card-text" style="font-family: 'Courier New', Courier, monospace; color: white;">{{ item.desafio }}</a>
+                   <div v-if="item.correcaoAvaliador === 'Errado'" style="color: rgb(224, 40, 7);">Incorreto</div>
+                   <div v-else-if="item.correcaoAvaliador === 'Certo'" style="color: rgb(7, 224, 54);">Correto</div>
+                   <div v-else-if="item.correcaoAvaliador === 'Aguardando avaliação'" style="color: rgb(127, 187, 211);">Aguardando avaliação</div>
+                   <div v-else style="color: rgb(127, 187, 211);" @click="responde(item)">Responder</div>
+                  </div>
               </div>
-          </div>
+          </div>  
         </div>	
       </div>
     </div>
@@ -52,7 +116,9 @@
 </div>
         
   <script src="../resources/js/vue.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+  <script src="../resources/js/axios.min.js"></script>
+
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script> -->
     <script src="../resources/js/core/jquery.3.2.1.min.js"
 		type="text/javascript"></script>
 
@@ -61,27 +127,53 @@
     new Vue({
       el:'#desafio',
       data:{
-        desafios: [
-        {
-          idDesafio: '',
-          desafio: '',
-          idResposta: '',
-          matricula:'Sem matricula',
-          resposta:'Sem resposta',
-          correcaoAvaliador:'Sem avaliacao'
-        }
-      ]
+        desafios: {},
+        respostaDesafio: [
+          {
+            idDesafio: '',
+            desafio: '',
+            imgDesafio:'',
+            idResposta: '',
+            matricula:'',
+            resposta:'',
+            correcaoAvaliador:''
+          }
+        ],
+        usuario: {}
       },
       created: function(){
         const vm = this;
+        vm.getUser();
         vm.getAllDesafios();
       },
       methods : {
+        getUser : function(){
+          const vm = this;
+          axios.get('../rs/user/getUser/').then(function(response){
+            vm.usuario = response.data;
+          });
+        },
         getAllDesafios : function(){
           const vm = this;
-          axios.get('../rs/desafio/desafioProgramado').then(function(response){
-            vm.desafios = response.data;
-            console.log(vm.desafios);
+          axios.get('../rs/user/getUser/').then(function(response){
+            axios.get('../rs/desafio/desafioProgramado/'+response.data["matricula"]).then(function(response){
+              vm.desafios = response.data;
+              console.log(response.data);
+            });
+          });
+        },
+        responde: function(item){
+          const vm = this;
+          vm.respostaDesafio = item;
+          $('#responde').modal('show');
+        },
+        salvar: function(){
+          const vm = this;
+          vm.respostaDesafio.matricula = vm.usuario.matricula;
+          axios.post('../rs/desafio/salvaRespostaDesafioProgramado',  vm.respostaDesafio).then(function(response){
+            if(response.data == true){
+              $("#feedbackResposta").modal("show");
+            }
           });
         }
       }

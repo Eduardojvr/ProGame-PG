@@ -14,8 +14,10 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import com.progame.dao.DesafioDAO;
+import com.progame.dao.UsuarioDAO;
 import com.progame.dto.DesafioDTO;
 import com.progame.dto.DesafiovsDTO;
+import com.progame.entity.Usuario;
 
 @Path("/desafio")
 public class RESTDesafio {
@@ -102,18 +104,34 @@ public class RESTDesafio {
 	}
 	
 	@GET
-	@Path("/desafioProgramado")
+	@Path("/desafioProgramado/{matricula}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<DesafioDTO> desafiosProgramados() {
+	public ArrayList<DesafioDTO> desafiosProgramados(@PathParam("matricula") Double matricula) {
 		DesafioDAO dao = new DesafioDAO();
+		
 		ArrayList<DesafioDTO> desafios = null;
+
 		try {
-			desafios = dao.todosDesafiosProgramado();
+			desafios = dao.todosDesafiosProgramado(matricula);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}				
 		return desafios;
 	}
 	
+	@POST
+	@Path("/salvaRespostaDesafioProgramado")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public boolean salvaRespostaDesafioProgramado(DesafioDTO desafio) {
+		DesafioDAO dao = new DesafioDAO();
+		boolean isOk = false;
+		try {
+			isOk = dao.salvaRespostaDesafioProgramado(desafio);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}				
+		return isOk;
+	}
+	
 }
-

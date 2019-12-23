@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.progame.dto.DesafioDTO;
 import com.progame.dto.DesafiovsDTO;
+import com.progame.entity.Usuario;
 
 public class DesafioDAO {
 
@@ -175,36 +176,120 @@ public class DesafioDAO {
 		return isOk;
 	}
 	
-	public ArrayList<DesafioDTO> todosDesafiosProgramado() throws Exception {
+	public ArrayList<DesafioDTO> todosDesafiosProgramado(double matricula) throws Exception {
 		Connection db = ConnectionManager.getDBConnection();
 		PreparedStatement pstmt = null;
-
+	
 		ResultSet result = null;
+
 		ArrayList <DesafioDTO> desafios = new ArrayList<DesafioDTO>();
+		ArrayList <DesafioDTO> desafiosFiltrados = todosDesafiosProgramadoFiltrado(matricula);
 		
-		pstmt = db.prepareStatement("select * from desafio_programado dp left join resposta_desafio_programado rp on rp.idDesafio=dp.idDesafio");
+		pstmt = db.prepareStatement("select * from desafio_programado;");
 		
 		try {
 			result = pstmt.executeQuery();
 			while (result.next()) {
-					DesafioDTO desafio = new DesafioDTO();
-					desafio.setIdDesafio(result.getString("idDesafio"));	
-					desafio.setDesafio(result.getString("desafio"));	
-					desafio.setIdResposta(result.getString("idResposta"));
-					desafio.setMatricula(result.getString("matricula"));	
-					desafio.setResposta(result.getString("resposta"));	
-					desafio.setCorrecaoAvaliador(result.getString("correcaoAvaliador"));
-					desafios.add(desafio);
+						DesafioDTO desafio = new DesafioDTO();
+						desafio.setIdDesafio(result.getString("idDesafio"));	
+						desafio.setDesafio(result.getString("desafio"));
+						desafio.setImgDesafio(result.getString("imgDesafio"));
+						desafio.setIdResposta(" ");
+						desafio.setMatricula(" ");	
+						desafio.setResposta(" ");	
+						desafio.setCorrecaoAvaliador(" ");
+						desafios.add(desafio);
+					
 			}
-			
-		} catch(Exception e) {
-			throw new Exception(e);
+
+			for(int i = 0; i < desafiosFiltrados.size() ; i++){
+				for(int j = 0; j < desafios.size(); j++){
+					if(desafios.get(j).getIdDesafio().equals(desafiosFiltrados.get(i).getIdDesafio())){
+						desafios.remove(j);
+					}
+				}
+			}
+
+			for(int i = 0; i < desafiosFiltrados.size(); i++){
+				desafios.add(desafiosFiltrados.get(i));
+			}
 		} finally {
 			if (pstmt != null)
 				pstmt.close();
 			db.close();
 		}
+	
 		return desafios;
+	}
+
+	public ArrayList<DesafioDTO> todosDesafiosProgramadoFiltrado(double matricula) throws Exception {
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+	
+		ResultSet result = null;
+
+		ArrayList <DesafioDTO> desafios = new ArrayList<DesafioDTO>();
+
+
+		pstmt = db.prepareStatement("select * from desafio_programado dp left join resposta_desafio_programado rp on rp.idDesafio=dp.idDesafio where rp.matricula='"+matricula+"';");
+		
+		try {
+			result = pstmt.executeQuery();
+			while (result.next()) {
+					// if((result.getString("matricula") == null) || (result.getDouble("matricula") == matricula)) {		
+						DesafioDTO desafio = new DesafioDTO();				
+						desafio.setIdDesafio(result.getString("idDesafio"));	
+						desafio.setDesafio(result.getString("desafio"));
+						desafio.setImgDesafio(result.getString("imgDesafio"));
+						desafio.setIdResposta(result.getString("idResposta"));
+						desafio.setMatricula(result.getString("matricula"));	
+						desafio.setResposta(result.getString("resposta"));	
+						desafio.setCorrecaoAvaliador(result.getString("correcaoAvaliador"));
+						desafios.add(desafio);
+					// } 
+			}
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+	
+		return desafios;
+	}
+	
+	public boolean salvaRespostaDesafioProgramado(DesafioDTO desafio) throws Exception {
+		boolean isOk = false;
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		StringBuilder sql = new StringBuilder();	
+
+		sql.append("INSERT INTO resposta_desafio_programado ");
+		sql.append(" ( ");
+		sql.append(" idDesafio, ");
+		sql.append(" matricula, ");
+		sql.append(" resposta, ");		
+		sql.append(" correcaoAvaliador ");
+		sql.append(" ) ");
+		sql.append(" VALUES (?,?,?,?);");
+
+		try {
+			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, desafio.getIdDesafio());
+			pstmt.setString(2, desafio.getMatricula());
+			pstmt.setString(3, desafio.getResposta());
+			pstmt.setString(4, "Aguardando avaliação");
+			pstmt.executeUpdate();
+			isOk=true;
+
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+
+		return isOk;
+
 	}
 }
 
