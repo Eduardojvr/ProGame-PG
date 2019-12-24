@@ -77,12 +77,74 @@
           style="border-radius: 100px;">
     
 				<div>
-					<!-- <label style="color: seashell; padding-left: 40px;">Processando...</label> -->
 				</div>
 			</div>
 		</div>
   </div>
   
+  <div
+  style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+  id="levelUp" class="modal fade top" tabindex="-1" role="dialog"
+   aria-hidden="true" data-backdrop='false'
+  data-keyboard="false">
+  <div class="modal-dialog modal-lg modal-frame modal-top"
+    role="document">
+    <div style="background-color: rgba(255, 255, 255, 0.9);"
+      class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"
+          aria-label="Close" onclick="location.reload()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div style="text-align: center;">
+          <h3>Level Up</h3>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <img height="300" width="280" src="../resources/img/viloes/boss1.gif" alt="">
+          </div>
+          <div style="padding-left: 90px; padding-top: 9%;" class="col-8">
+            <h4>Você conseguiu me derrotar neste nível, mas dúvido que no próximo você tenha a mesma sorte!</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+id="notificaErros" class="modal fade top" tabindex="-1" role="dialog"
+ aria-hidden="true" data-backdrop='false'
+data-keyboard="false">
+<div class="modal-dialog modal-lg modal-frame modal-top"
+  role="document">
+  <div style="background-color: rgba(255, 255, 255, 0.9);"
+    class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal"
+        aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div style="text-align: center;">
+        <h3>HA HA HA, que jogadas fracas!</h3>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <img height="300" width="280" src="../resources/img/viloes/orcMulher.png" alt="">
+        </div>
+        <div style="padding-left: 160px; padding-top: 9%;" class="col-8">
+          <h4>Você precisa se esforçar mais!<br>Nesse ritmo sua aldeia será exterminada!</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 
 	<div class="modal fade" id="aguarde" tabindex="-1" role="img"
 		style="padding-right: 10%; padding-top: 10%;" data-backdrop="static"
@@ -300,15 +362,43 @@ let q = new Vue({
           nomeLinguagem: ''
         }
       ],
-      totalQuestao: 0
+      totalQuestao: 0,
+      salvaLevel: 0,
+      qtdErros: 0
       
     },
     created :function(){
         const vm = this;
         vm.getAllQuestions();
         vm.fundoMusical();
+        vm.getUser();
+
     },
     methods : {
+      controlaAcertos : function(type){
+        const vm = this;
+        if(type == 'e' && vm.qtdErros <= 3){
+          vm.qtdErros+=1;
+        } else if(type == 'a' && vm.qtdErros >=0){
+          vm.qtdErros-=1;
+        }
+
+        if(vm.qtdErros == 3){
+          $("#notificaErros").modal('show');
+          vm.qtdErros = 0;
+        }
+        vm.getUser();
+      },
+      getUser : function(){
+        const vm = this;
+        var tmp = vm.salvaLevel;
+        axios.get('../rs/user/getUser').then(function(response){
+          vm.salvaLevel = response.data["level"];
+          if(tmp < vm.salvaLevel && vm.tmp>0){
+            $("#levelUp").modal('show');
+          }
+        });
+      },
       fundoMusical : function(){
         $("#audioPlayer").attr('src',"../resources/sons/fundoNarrativa.mp3");  
       },
@@ -356,6 +446,7 @@ let q = new Vue({
         } else {
           document.getElementById('feedback').innerHTML = 'Resposta incorreta. A resposta correta é: '+vm.todasQuestoes[posicao].resposta;
           document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
+          vm.controlaAcertos('e');
           //vm.getAllQuestions();
           $("#audioPlayer").attr('src',"../resources/sons/errado.mp3");        
           setTimeout(vm.fundoMusical, 4000);
@@ -374,6 +465,7 @@ let q = new Vue({
         } else {
           document.getElementById('feedback').innerHTML = 'Resposta incorreta. A resposta correta é a alternativa: '+vm.todasQuestoes[posicao].respostaCorretaAlternativa;
           document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
+          vm.controlaAcertos('e');
           $("#audioPlayer").attr('src',"../resources/sons/errado.mp3");        
           setTimeout(vm.fundoMusical, 4000);
         }
@@ -389,6 +481,7 @@ let q = new Vue({
         } else {
             document.getElementById('feedback').innerHTML = vm.todasQuestoes[posicao].comentarioIncorreta;
             document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
+            vm.controlaAcertos('e');
             $("#audioPlayer").attr('src',"../resources/sons/errado.mp3");        
             setTimeout(vm.fundoMusical, 4000);
         }

@@ -127,17 +127,16 @@ public class DesafioDAO {
 		try {
 			result = pstmt.executeQuery();
 			while (result.next()) {
-					DesafiovsDTO desafio = new DesafiovsDTO();
-					desafio.setIdDesafio(result.getString("idDesafio"));	
-					desafio.setMatriculaDesafiante(result.getString("matriculaDesafiante"));	
-					desafio.setMatriculaDesafiado(result.getString("matriculaDesafiado"));
-					desafio.setTituloDesafio(result.getString("tituloDesafio"));	
-					desafio.setDesafio(result.getString("desafio"));	
-					desafio.setRespostaDesafiado(result.getString("respostaDesafiado"));
-					desafio.setResultado(result.getString("resultado"));	
-					desafio.setAvaliacao(result.getString("avaliacao"));	
-
-					desafios.add(desafio);
+				DesafiovsDTO desafio = new DesafiovsDTO();
+				desafio.setIdDesafio(result.getString("idDesafio"));	
+				desafio.setMatriculaDesafiante(result.getString("matriculaDesafiante"));	
+				desafio.setMatriculaDesafiado(result.getString("matriculaDesafiado"));
+				desafio.setTituloDesafio(result.getString("tituloDesafio"));	
+				desafio.setDesafio(result.getString("desafio"));	
+				desafio.setRespostaDesafiado(result.getString("respostaDesafiado"));
+				desafio.setResultado(result.getString("resultado"));	
+				desafio.setAvaliacao(result.getString("avaliacao"));	
+				desafios.add(desafio);
 			}
 			
 		} catch(Exception e) {
@@ -160,7 +159,6 @@ public class DesafioDAO {
 		boolean isOk = false;
 		
 		sql.append(	"update desafio set resultado='"+desafio.getResultado()+"', avaliacao='"+desafio.getAvaliacao()+"' where idDesafio="+desafio.getIdDesafio());
-		
 
 		try {
 			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
@@ -172,7 +170,6 @@ public class DesafioDAO {
 				pstmt.close();
 			db.close();
 		}
-
 		return isOk;
 	}
 	
@@ -190,16 +187,15 @@ public class DesafioDAO {
 		try {
 			result = pstmt.executeQuery();
 			while (result.next()) {
-						DesafioDTO desafio = new DesafioDTO();
-						desafio.setIdDesafio(result.getString("idDesafio"));	
-						desafio.setDesafio(result.getString("desafio"));
-						desafio.setImgDesafio(result.getString("imgDesafio"));
-						desafio.setIdResposta(" ");
-						desafio.setMatricula(" ");	
-						desafio.setResposta(" ");	
-						desafio.setCorrecaoAvaliador(" ");
-						desafios.add(desafio);
-					
+				DesafioDTO desafio = new DesafioDTO();
+				desafio.setIdDesafio(result.getString("idDesafio"));	
+				desafio.setDesafio(result.getString("desafio"));
+				desafio.setImgDesafio(result.getString("imgDesafio"));
+				desafio.setIdResposta(" ");
+				desafio.setMatricula(" ");	
+				desafio.setResposta(" ");	
+				desafio.setCorrecaoAvaliador(" ");
+				desafios.add(desafio);
 			}
 
 			for(int i = 0; i < desafiosFiltrados.size() ; i++){
@@ -213,6 +209,7 @@ public class DesafioDAO {
 			for(int i = 0; i < desafiosFiltrados.size(); i++){
 				desafios.add(desafiosFiltrados.get(i));
 			}
+			
 		} finally {
 			if (pstmt != null)
 				pstmt.close();
@@ -236,17 +233,15 @@ public class DesafioDAO {
 		try {
 			result = pstmt.executeQuery();
 			while (result.next()) {
-					// if((result.getString("matricula") == null) || (result.getDouble("matricula") == matricula)) {		
-						DesafioDTO desafio = new DesafioDTO();				
-						desafio.setIdDesafio(result.getString("idDesafio"));	
-						desafio.setDesafio(result.getString("desafio"));
-						desafio.setImgDesafio(result.getString("imgDesafio"));
-						desafio.setIdResposta(result.getString("idResposta"));
-						desafio.setMatricula(result.getString("matricula"));	
-						desafio.setResposta(result.getString("resposta"));	
-						desafio.setCorrecaoAvaliador(result.getString("correcaoAvaliador"));
-						desafios.add(desafio);
-					// } 
+				DesafioDTO desafio = new DesafioDTO();				
+				desafio.setIdDesafio(result.getString("idDesafio"));	
+				desafio.setDesafio(result.getString("desafio"));
+				desafio.setImgDesafio(result.getString("imgDesafio"));
+				desafio.setIdResposta(result.getString("idResposta"));
+				desafio.setMatricula(result.getString("matricula"));	
+				desafio.setResposta(result.getString("resposta"));	
+				desafio.setCorrecaoAvaliador(result.getString("correcaoAvaliador"));
+				desafios.add(desafio); 
 			}
 		} finally {
 			if (pstmt != null)
@@ -287,9 +282,7 @@ public class DesafioDAO {
 				pstmt.close();
 			db.close();
 		}
-
 		return isOk;
-
 	}
 }
 
