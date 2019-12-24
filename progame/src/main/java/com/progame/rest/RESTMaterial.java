@@ -17,7 +17,8 @@ import javax.ws.rs.core.Response.Status;
 
 import com.progame.dao.MaterialDAO;
 import com.progame.dao.PersonagemDAO;
-import com.progame.dto.MaterialDTO;;
+import com.progame.dto.MaterialDTO;
+import com.progame.dto.curteDTO;;
 
 
 @Path("/material")
@@ -87,5 +88,52 @@ public class RESTMaterial {
 		return status;
 		
 	}
+	
+	@GET
+	@Path("/likeVideo/{idMaterial}/{matricula}/{tipo}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public boolean controlaLike(@PathParam("idMaterial") String idMaterial, @PathParam("matricula") String matricula, @PathParam("tipo") String tipo) {
+		MaterialDAO dao = new MaterialDAO();
+		Boolean status = false;
+		try {
+			status = dao.controlaCurtida(idMaterial, matricula, tipo);
+			status = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return status;
+	}
+	
+	@GET
+	@Path("/todosLikes")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public ArrayList<curteDTO> todosLikes() {
+		MaterialDAO dao = new MaterialDAO();
+		ArrayList <curteDTO> todos = null;
+		try {
+			todos = dao.getAllLike();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return todos;
+	}
+	
 
+	@GET
+	@Path("/todosDislikes")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public ArrayList<curteDTO> todosDislikes() {
+		MaterialDAO dao = new MaterialDAO();
+		ArrayList <curteDTO> todos = null;
+		try {
+			todos = dao.getAllDislike();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return todos;
+	}
+	
 }

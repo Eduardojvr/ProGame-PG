@@ -13,6 +13,9 @@ public class MaterialDTO {
 	private String idTipo;
 	private String assunto;
 	private String desConteudo;
+	private String total;
+	private String totalDislike;
+
 	
 	public String getIdMaterial() {
 		return idMaterial;
@@ -85,6 +88,18 @@ public class MaterialDTO {
 	}
 	public void setTituloMaterial(String tituloMaterial) {
 		this.tituloMaterial = tituloMaterial;
+	}
+	public String getTotal() {
+		return total;
+	}
+	public void setTotal(String total) {
+		this.total = total;
+	}
+	public String getTotalDislike() {
+		return totalDislike;
+	}
+	public void setTotalDislike(String totalDislike) {
+		this.totalDislike = totalDislike;
 	}
 	
 	

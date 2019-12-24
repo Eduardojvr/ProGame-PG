@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.progame.dto.MaterialDTO;
+import com.progame.dto.curteDTO;
 import com.progame.entity.Usuario;
 
 
@@ -45,6 +46,9 @@ public class MaterialDAO {
 				m.setIdConteudo(result.getString("idConteudo"));
 				m.setAssunto(result.getString("assunto"));
 				m.setDesConteudo(result.getString("desConteudo"));
+				m.setTotal("0");
+				m.setTotalDislike("0");
+
 				material.add(m);
 			}
 		} catch (Exception e) {
@@ -99,7 +103,6 @@ public class MaterialDAO {
 		PreparedStatement pstmt = null;
 
 		StringBuilder sql = new StringBuilder();
-		
 
 		sql.append("INSERT INTO material ");
 		sql.append(" ( ");
@@ -130,5 +133,107 @@ public class MaterialDAO {
 		return true;
 
 	}
+	
+	public boolean controlaCurtida(String idMaterial, String matricula, String tipo) throws Exception {
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+		boolean isOk = false;
+
+		StringBuilder sql = new StringBuilder();
+		
+		sql.append("INSERT INTO curte ");
+		sql.append(" ( ");
+		sql.append(" idMaterial, ");
+		sql.append(" matricula, ");	
+		sql.append(" tipoCurtida ");		
+		sql.append(" ) ");
+		sql.append(" VALUES (?,?,?);");
+
+		try {
+			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, idMaterial);
+			pstmt.setString(2, matricula);
+			pstmt.setString(3, tipo);
+
+			pstmt.executeUpdate();
+			isOk = true;
+
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+
+		return isOk;
+
+	}
+	
+	public ArrayList<curteDTO> getAllLike() throws Exception{
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+		ResultSet result = null;
+		
+		ArrayList<curteDTO> allLike = new ArrayList<curteDTO>();
+		
+		pstmt = db.prepareStatement("select m.idMaterial, count(c.idMaterial) as total , c.tipoCurtida from material m left join curte c on m.idMaterial=c.idMaterial where c.tipoCurtida='l' group by m.idMaterial");
+		
+		try {
+			result = pstmt.executeQuery();
+			while (result.next()) {
+				curteDTO m = new curteDTO();
+				m.setIdMaterial(result.getString("idMaterial"));
+				if(result.getString("total") == null) {
+					m.setTotal("0");					
+				} else {
+					m.setTotal(result.getString("total"));					
+				}
+				allLike.add(m);
+			}
+			
+		} finally {
+			if(pstmt != null) {
+				pstmt.close();
+			} else {
+				db.close();
+			}
+		}
+		
+		return allLike;
+	}
+	
+	public ArrayList<curteDTO> getAllDislike() throws Exception{
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+		ResultSet result = null;
+		
+		ArrayList<curteDTO> allDislike = new ArrayList<curteDTO>();
+		
+		pstmt = db.prepareStatement("select m.idMaterial, count(c.idMaterial) as total , c.tipoCurtida from material m left join curte c on m.idMaterial=c.idMaterial where c.tipoCurtida='d' group by m.idMaterial");
+		
+		try {
+			result = pstmt.executeQuery();
+			while (result.next()) {
+				curteDTO m = new curteDTO();
+				m.setIdMaterial(result.getString("idMaterial"));
+				if(result.getString("total") == null) {
+					m.setTotal("0");					
+				} else {
+					m.setTotal(result.getString("total"));					
+				}
+				
+				allDislike.add(m);
+			}
+			
+		} finally {
+			if(pstmt != null) {
+				pstmt.close();
+			} else {
+				db.close();
+			}
+		}
+		
+		return allDislike;
+	}
+	
 }
 
