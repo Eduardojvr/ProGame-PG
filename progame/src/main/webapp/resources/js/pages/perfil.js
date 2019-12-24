@@ -1,36 +1,3 @@
-function grafico(){
-    var ctx = document.getElementById('myChart');  
-    var myChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Derrotas', 'Vitórias'],
-            datasets: [{
-                label: ['Vitorias', 'Derrotas'],
-                data: [sessionStorage.getItem('vitorias'), sessionStorage.getItem('perdas')],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                    ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                    borderWidth: 1
-            }]
-        }
-     });           
-}
-
-
-
 let tes = new Vue({
     el : '#usuario',
     data : {
@@ -106,9 +73,7 @@ let t = new Vue({
     },
     created : function(){
         const vm = this;
-        sessionStorage.setItem('vitorias', 90);
-        sessionStorage.setItem('perdas', 10);
-
+    
         axios.get('../rs/user/getUser').then(function(response) {
             vm.nomeUsuario = response.data["nomeUsuario"];
         });
@@ -141,29 +106,70 @@ let t = new Vue({
     el : '#progress',
     data : {
         level : '',
-        progresso: ''
+        progresso: '',
+        usuario: {}
     },
     created : function(){
         const vm = this;
         axios.get('../rs/user/getUser').then(function(response) {
-            vm.level = response.data["level"];
+            vm.usuario = response.data;
             vm.calculaProgresso();
+            vm.grafico();
         });
 
     },
     methods : {
+        grafico : function (){
+            const vm = this;
+            axios.get('../rs/desafio/totalDesafioCerto/'+vm.usuario.matricula).then(function(response){
+                sessionStorage.setItem('certos', response.data);
+                axios.get('../rs/desafio/totalDesafioErrado/'+vm.usuario.matricula).then(function(response){
+                    sessionStorage.setItem('errado', response.data);
+                });
+            });
+        },
         calculaProgresso : function(){
             const vm =this;
-            if(parseInt(vm.level)<12){
-                vm.progresso = (100/12*parseInt(vm.level)).toFixed(2)+'%';
+            if(parseInt(vm.usuario.level)<12){
+                vm.progresso = (100/12*parseInt(vm.usuario.level)).toFixed(2)+'%';
             } else {
-                vm.progresso = (100/12*parseInt(vm.level)).toFixed(0)+'%';
+                vm.progresso = (100/12*parseInt(vm.usuario.level)).toFixed(0)+'%';
             }
         }
     }
     
  });
 
-grafico();
 
- 
+ function grafico (){
+    var ctx = document.getElementById('myChart');  
+    var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Incorretos', 'Corretos'],
+            datasets: [{
+                label: ['Incorretos', 'Corretos'],
+                data: [sessionStorage.getItem('errado'), sessionStorage.getItem('certos')],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                    ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                    borderWidth: 1
+            }]
+        }
+     });           
+}
+
+grafico();

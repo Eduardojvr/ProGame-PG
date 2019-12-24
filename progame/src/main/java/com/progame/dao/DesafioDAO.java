@@ -284,6 +284,56 @@ public class DesafioDAO {
 		}
 		return isOk;
 	}
+	
+	public int totalDesafioCerto(double matricula) throws Exception {
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+	
+		ResultSet result = null;
+
+		ArrayList <DesafioDTO> desafios = new ArrayList<DesafioDTO>();
+		int total = 0;
+
+		pstmt = db.prepareStatement("select count(*) as Total from resposta_desafio_programado rdp where rdp.matricula="+matricula+" and rdp.correcaoAvaliador='certo' group by rdp.matricula");
+		
+		try {
+			result = pstmt.executeQuery();
+			while (result.next()) {
+				total = result.getInt("total");
+			}
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+	
+		return total;
+	}
+	
+	public int totalDesafioErrado(double matricula) throws Exception {
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+	
+		ResultSet result = null;
+
+		ArrayList <DesafioDTO> desafios = new ArrayList<DesafioDTO>();
+		int total = 0;
+
+		pstmt = db.prepareStatement("select count(*) as Total from resposta_desafio_programado rdp where rdp.matricula="+matricula+" and rdp.correcaoAvaliador='Certo' group by rdp.matricula");
+		
+		try {
+			result = pstmt.executeQuery();
+			while (result.next()) {
+				total = result.getInt("total");
+			}
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+	
+		return total;
+	}
 }
 
 

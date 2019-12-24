@@ -134,4 +134,33 @@ public class RESTDesafio {
 		return isOk;
 	}
 	
+
+	@GET
+	@Path("/totalDesafioCerto/{matricula}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public int totalDesafioCerto(@PathParam("matricula") Double matricula) {
+		DesafioDAO dao = new DesafioDAO();
+		int total = 0;
+		try {
+			total = dao.totalDesafioCerto(matricula);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}				
+		return total;
+	}
+	
+	@GET
+	@Path("/totalDesafioErrado/{matricula}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public int totalDesafioErrado(@PathParam("matricula") Double matricula) {
+		DesafioDAO dao = new DesafioDAO();
+		int total = 0;
+		try {
+			total = dao.totalDesafioErrado(matricula);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}				
+		return total;
+	}
+	
 }
