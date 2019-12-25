@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta http-equiv="cache-control" content="max-age=0" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+<meta http-equiv="pragma" content="no-cache" />
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProGame</title>
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="../resources/css/util.css">
+<link rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="../resources/less/style.less">
+  
+  <style>
+  @font-face {
+    font-family: 'game';
+    src: url('../resources/fonts/game.ttf');
+  }
+
+  @font-face {
+    font-family: 'pixel';
+    /* src: url('../resources/fonts/PixelOperatorHB.ttf'); */
+    src: url('../resources/fonts/PixelOperatorMono.ttf');
+
+  }
+
+.img{
+  width: 25px;
+  height: 25px;
+}
+
+.sombra:hover{
+  background-color: rgba(134, 134, 134, 0.705);
+  border-radius: 15px;
+}
+
+  </style>
+
+</head>
+
+<body style="background: rgb(204, 156, 67);">
+	<div class="modal fade" id="processando" tabindex="-1" role="img"
+		style="padding-right: 10%; padding-top: 10%;" data-backdrop="static"
+		data-keyboard="false">
+		<div class="modal-dialog" role="document" style="width: 0px;">
+			<div class="modal-content"
+				style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
+				<img src="../resources/img/orcDancando.gif" width=200px height=250px
+          style="border-radius: 100px;">
+    
+				<div>
+				</div>
+			</div>
+		</div>
+  </div>
+
+<div class="modal fade" id="aguarde" tabindex="-1" role="img"
+		style="padding-right: 10%; padding-top: 10%;" data-backdrop="static"
+		data-keyboard="false">
+		<div class="modal-dialog" role="document" style="width: 0px;">
+			<div class="modal-content"
+				style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
+				<img src="../resources/img/loading.gif" width=70px height=70px
+          style="border-radius: 100px; padding-left: 20px;">
+          
+				<div>
+					<label style="color: seashell; font-family: pixel; font-size: 30px;">Aguarde</label>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+<div style="background-color: rgba(66, 66, 66); text-align: center;">
+<br>
+<h3 style="color: seashell; font-family: game;">Quiz Progressivo</h3>
+<br>
+</div>
+<div style="text-align: right; padding-right: 20px;">
+ <label style="color: rgb(224, 83, 83); font-family: pixel; font-size: 30px;" onclick="window.location.assign('progressivo.html')">Sair<img src="../resources/img/sair.png" style="width: 30px; height: 30px;" 
+  ></label> 
+</div>
+  <div style="padding-left: 5%; padding-right: 5%;">
+		<div id="quest">
+			<div>
+          <h3 id="pontuacao" style="color: ghostwhite; font-family: pixel;">Pontuação: {{ dados.pontuacao }} pontos</h3>
+      </div>
+      <hr>
+      <!-- Tipo múltipla escolha -->
+      <div 	v-if="totalQuestao > countQuestao && todasQuestoes[countQuestao].idTipoQuestao === '4'">
+        <h3 style="color: ghostwhite; font-family: pixel;">
+          <span class="label label-warning"></span> {{
+            todasQuestoes[countQuestao].questao }}
+        </h3>
+        <br>
+        <div class="quiz" id="btMultipla" style="text-align:center;">
+          <label class="element-animation1 sombra" style="font-size:20px; color: ghostwhite; padding: 6px 10px 6px 10px; font-family: pixel;"><input
+            type="radio" name="q_answer" style="display: none;"
+            @click="verificaMultipla(1, countQuestao)"><img class="img" src="../resources/img/espada1.png">&nbsp;{{ 
+              todasQuestoes[countQuestao].alternativa1 }}</label><br>
+          <label class="element-animation2 sombra" style="font-size:20px; color: ghostwhite; padding: 6px 10px 6px 10px; font-family: pixel;"><input
+            type="radio" name="q_answer" style="display: none;"
+            @click="verificaMultipla(2, countQuestao)"><img class="img" src="../resources/img/escudo.png">&nbsp;{{
+              todasQuestoes[countQuestao].alternativa2 }}</label><br>
+          <label class="element-animation3 sombra" style="font-size:20px; color: ghostwhite; padding: 6px 10px 6px 10px; font-family: pixel;"><input
+            type="radio" name="q_answer" style="display: none;"
+            @click="verificaMultipla(3, countQuestao)"><img class="img" src="../resources/img/porcao.png">&nbsp;{{
+              todasQuestoes[countQuestao].alternativa3 }}</label><br>
+          <label class="element-animation4 sombra" style="font-size:20px; color: ghostwhite; padding: 6px 10px 6px 10px; font-family: pixel;"><input
+            type="radio" name="q_answer" style="display: none;"
+            @click="verificaMultipla(4, countQuestao)"><img class="img" src="../resources/img/lanca.png">&nbsp;{{
+              todasQuestoes[countQuestao].alternativa4 }}</label>
+        </div>
+        <div id="feedback"></div>
+        <div style="padding-left: 43%; padding-top: 1%;">
+          <input type="image" src="../resources/img/icons/setaEsquerda.png"
+            style="width: 80px; height: 80px;" @click="anterior()"> <input
+            type="image" src="../resources/img/icons/setaDireita.png"
+            style="width: 80px; height: 80px;" @click="proxima()">
+        </div>
+      </div>
+			<!-- Tipo Verdadeiro ou falso -->
+			<div
+				v-else-if=" totalQuestao > countQuestao && todasQuestoes[countQuestao].idTipoQuestao === '3' ">
+						<h3 style="color: ghostwhite; font-family: pixel;">
+							<span class="label label-warning"></span> {{
+                todasQuestoes[countQuestao].questao }}
+						</h3>
+						<div class="quiz" id="btVF" style="text-align: center;"><br>
+							<label 
+								class="element-animation1 sombra" style="font-size:20px; color: ghostwhite; padding: 6px 10px 6px 10px; font-family: pixel;"><input
+								type="radio" @click="verificaVF('Verdadeiro', countQuestao)"
+								style="display: none;"><img class="img" src="../resources/img/espada1.png">&nbsp;Verdadeiro</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label
+								class="element-animation2 sombra" style="font-size:20px; color: ghostwhite; padding: 6px 10px 6px 10px; font-family: pixel;"><input
+								type="radio" @click="verificaVF('Falso', countQuestao)"
+								style="display: none;"><img class="img" src="../resources/img/escudo.png">&nbsp;Falso</label>
+						</div>
+						<div id="feedback"></div>
+            <div style="padding-left: 43%; padding-top: 1%;">
+              <input type="image" src="../resources/img/icons/setaEsquerda.png"
+							style="width: 80px; height: 80px;" @click="anterior()">
+						<input type="image" src="../resources/img/icons/setaDireita.png"
+							style="width: 80px; height: 80px;" @click="proxima()">
+					</div>
+			</div>
+			<!-- Tipo Lacuna -->
+			<div
+				v-else-if=" totalQuestao > countQuestao && todasQuestoes[countQuestao].idTipoQuestao === '1' ">
+					<div>
+						<h3 style="color: ghostwhite; font-family: pixel;">
+							<span class="label label-warning"></span> {{
+                todasQuestoes[countQuestao].questao }}
+						</h3>
+          </div>
+          <div style="text-align: center;">
+					  <input type="text" placeholder="Digite a resposta aqui" rows="10"
+            cols="40" v-model="lacuna" name="lacuna" style="border-radius: 8px;"> 
+          </div>
+					<div style="padding-top: 15px; text-align: center;">
+						<label class="element-animation2 btn btn-primary"><input
+							type="button" name="q_answer" style="display: none;"
+							@click="verificaLacuna(lacuna, countQuestao)">Responder</label>
+					</div>
+					<div id="feedback"></div>
+
+          <div style="padding-left: 43%; padding-top: 1%;">
+						<input type="image" src="../resources/img/icons/setaEsquerda.png"
+							style="width: 80px; height: 80px;" @click="anterior()">
+						<input type="image" src="../resources/img/icons/setaDireita.png"
+							style="width: 80px; height: 80px;" @click="proxima()">
+					</div>
+			</div>
+</div>
+		<script src="../resources/js/vue.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+		<script src="../resources/css/quiz.css"></script>
+
+		<script>
+
+let q = new Vue({
+    el : '#quest',
+    data : {
+      lacuna: '',
+      countQuestao: 0,  
+      items: [
+        {
+          assunto : '',
+          comentarioCorreta: '',
+          comentarioErrado: '',
+          idQuestao: '',
+          idTipoConteudo: '',
+          nomeLinguagem: '',
+          questao: '',
+          alternativa1: '',
+          alternativa2: '',
+          alternativa3: '',
+          alternativa4: '',
+          idTipoQuestao: '',
+          respostaCorretaAlternativa: ''
+        }
+      ],
+      questaoTipoVF: [
+        {
+          idQuestao: '',
+          idTipoQuestao: '',
+          questao: '',
+          resposta: '',
+          nomeLinguagem: '',
+          assunto: ''
+        }
+      ],
+      questaoTipoLacuna: [
+        {
+          idQuestao: '',
+          idTipoQuestao: '',
+          questao: '',
+          resposta: '',
+          respostaAlternativa: '',
+          comentarioCorreta: '',
+          comentarioIncorreta: '',
+          nomeLinguagem: '',
+          assunto: ''
+        }
+      ],
+      questaoTipoCodigo: [
+        {
+          idQuestao : '',
+          idTipoConteudo: '',
+          idLinguagem: '',
+          idTipoQuestao: '',
+          questao: '',
+          resposta: '',
+          nomeLinguagem: '',
+          assunto: '',
+        }
+      ],
+      dados : [
+            {
+                email : '',
+                idPersonagem : '',
+                idTipoPerfil : '',
+                level : '',
+                matricula : '',
+                nomeUsuario : '',
+                pontuacao : ''
+            }
+        ],
+      matricula : '',
+      idTipoPerfil : '',
+      level : '',
+      codigo: '',
+      todasQuestoes: [
+        {
+          idQuestao: '',
+          idTipoConteudo: '',
+          idTipoQuestao: '',
+          questao: '',
+          alternativa1: '',
+          alternativa2: '',
+          alternativa3: '',
+          alternativa4: '',
+          respostaCorretaAlternativa: '',
+          comentarioCorretaMultipla: '',
+          comentarioErrado: '',
+          respostaLacuna: '',
+          respostaAlternativa: '',
+          comentarioCorreta: '',
+          comentarioIncorreta: '',
+          resposta: '',
+          nomeLinguagem: ''
+        }
+      ],
+      totalQuestao: 0,
+      salvaLevel: 0,
+      qtdErros: 0
+      
+    },
+    created :function(){
+        const vm = this;
+        vm.getAllQuestions();
+        vm.getUser();
+
+    },
+    methods : {
+      getUser : function(){
+        const vm = this;
+        var tmp = vm.salvaLevel;
+        axios.get('../rs/user/getUser').then(function(response){
+          vm.salvaLevel = response.data["level"];
+          if(tmp < vm.salvaLevel && vm.tmp>0){
+            $("#levelUp").modal('show');
+          }
+        });
+      },
+      proxima:function(){
+        const vm = this;
+        vm.limpaFeed();
+        if(vm.countQuestao < vm.totalQuestao-1){
+          vm.countQuestao+=1;
+        } else{
+          vm.countQuestao=0;
+        }
+      },
+      anterior: function(){
+        const vm = this;
+        vm.limpaFeed();
+        if(vm.countQuestao > 0){
+          vm.countQuestao-=1;
+        } else{
+          vm.countQuestao=vm.totalQuestao-1;
+        }
+      },
+      getAllQuestions: function(){
+        const vm = this;
+        $('#aguarde').modal('show');
+        axios.get('../rs/user/getUser').then(function(response){
+          vm.dados = response.data
+          axios.get('../rs/questao/todasQuestoes/' + sessionStorage.getItem('nivelQuiz')).then(function(questao){
+            vm.todasQuestoes = questao.data;
+            vm.totalQuestao = vm.todasQuestoes.length;
+            $('#aguarde').modal('hide');
+          });
+        });
+      },
+      verificaVF : function(resposta, posicao){
+        const vm = this;
+
+        if(resposta == vm.todasQuestoes[posicao].resposta){
+          document.getElementById('feedback').innerHTML = 'Resposta correta!';
+          document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
+          vm.atualizaPontuacao();
+        } else {
+          document.getElementById('feedback').innerHTML = 'Resposta incorreta. A resposta correta é: '+vm.todasQuestoes[posicao].resposta;
+          document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
+          vm.controlaAcertos('e');
+        }
+      },
+      verificaMultipla : function(resposta, posicao){
+        const vm = this;
+
+        if(resposta == vm.todasQuestoes[posicao].respostaCorretaAlternativa){
+          document.getElementById('feedback').innerHTML = 'Resposta correta!';
+          document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
+          vm.atualizaPontuacao();
+        } else {
+          document.getElementById('feedback').innerHTML = 'Resposta incorreta. A resposta correta é a alternativa: '+vm.todasQuestoes[posicao].respostaCorretaAlternativa;
+          document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
+          vm.controlaAcertos('e');
+        }
+      },
+      verificaLacuna : function(resposta, posicao){
+        const vm = this;
+        if(vm.todasQuestoes[posicao].respostaLacuna == resposta || vm.todasQuestoes[posicao].respostaAlternativa == resposta ){
+            document.getElementById('feedback').innerHTML = vm.todasQuestoes[posicao].comentarioCorreta;
+            document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
+            vm.atualizaPontuacao();
+        } else {
+            document.getElementById('feedback').innerHTML = vm.todasQuestoes[posicao].comentarioIncorreta;
+            document.getElementById('feedback').style = "background-color: rgba(191, 102, 63, 0.5);"
+            vm.controlaAcertos('e');
+        }
+      },
+        limpaFeed : function(){
+          document.getElementById('feedback').style = "background-color: rgba(255, 255, 255, 0);"
+          document.getElementById('feedback').innerHTML = ""
+
+        },
+        atualizaPontuacao :function (){
+          const vm = this;
+          $("#processando").modal("show");
+          axios.get('../rs/user/getUser/').then(function(response) {
+            vm.dados = response.data;
+            axios.get('../rs/user/atualizaPontuacao/'+(parseInt(response.data["pontuacao"])+parseInt(10))+'/'+vm.dados.matricula+'/'+response.data["level"]).then(function(response) {
+              vm.dados.pontuacao = parseInt(vm.dados.pontuacao)+parseInt(10);
+              $("#processando").modal("hide");
+            });
+          });
+        }
+    }
+});
+
+</script>
+</body>
+</html>

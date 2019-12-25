@@ -20,7 +20,7 @@
 				<div class="imagemLevel" id="levelJogador">
 					<div class="box">
 						<img class="imagem" src="../resources/img/levels/level1.png"
-							alt="">
+							alt="" onclick="iniciaQuiz(1)">
 
 						<div style="text-align: center;">
 							<span> Level 1 </span>
@@ -31,7 +31,7 @@
 						<div v-if="level > '01'" >
 							<img class="imagem"
 								style="position: relative; left: 1px; top: 1px; z-index: 1;"
-								src="../resources/img/levels/level2.png" alt="">
+								src="../resources/img/levels/level2.png" alt="" onclick="iniciaQuiz(2)">
 						</div>
 						<div v-else>
 							<img class="imagem"
@@ -46,7 +46,7 @@
 					<div class="box">
 						<div v-if="level > '02'">
 							<img class="imagem" src="../resources/img/levels/level3.png"
-								alt="">
+								alt="" onclick="iniciaQuiz(3)">
 						</div>
 						<div v-else>
 							<img class="imagem"
@@ -61,7 +61,7 @@
 					<div class="box">
 						<div v-if="level > '03'">
 							<img class="imagem" src="../resources/img/levels/level4.png"
-								alt="">
+								alt="" onclick="iniciaQuiz(4)">
 						</div>
 						<div v-else>
 							<img class="imagem"
@@ -76,7 +76,7 @@
 					<div class="box">
 						<div v-if="level > '04'">
 							<img class="imagem" src="../resources/img/levels/level5.png"
-								alt="">
+								alt="" onclick="iniciaQuiz(5)">
 						</div>
 						<div v-else>
 							<img class="imagem"
@@ -91,7 +91,7 @@
 					<div class="box">
 						<div v-if="level > '05'">
 							<img class="imagem" src="../resources/img/levels/level6.png"
-								alt="">
+								alt="" onclick="iniciaQuiz(6)">
 						</div>
 						<div v-else>
 							<img class="imagem"
@@ -106,7 +106,7 @@
 					<div class="box">
 						<div v-if="level > '06'">
 							<img class="imagem" src="../resources/img/levels/level7.png"
-								alt="">
+								alt="" onclick="iniciaQuiz(7)">
 						</div>
 						<div v-else>
 							<img class="imagem"
@@ -121,7 +121,7 @@
 					<div class="box">
 						<div v-if="level > '07'">
 							<img class="imagem" src="../resources/img/levels/level8.png"
-								alt="">
+								alt="" onclick="iniciaQuiz(8)">
 						</div>
 						<div v-else>
 							<img class="imagem"
@@ -136,7 +136,7 @@
 					<div class="box">
 						<div v-if="level > '08'">
 							<img class="imagem" src="../resources/img/levels/level9.png"
-								alt="">
+								alt="" onclick="iniciaQuiz(9)">
 						</div>
 						<div v-else>
 							<img class="imagem"
@@ -151,7 +151,7 @@
 					<div class="box">
 						<div v-if="level > '09'">
 							<img class="imagem" src="../resources/img/levels/level10.png"
-								alt="">
+								alt="" onclick="iniciaQuiz(10)">
 						</div>
 						<div v-else>
 							<img class="imagem"
@@ -166,7 +166,7 @@
 					<div class="box">
 						<div v-if="level > '10'">
 							<img class="imagem" src="../resources/img/levels/level11.png"
-								alt="">
+								alt="" onclick="iniciaQuiz(11)">
 						</div>
 						<div v-else>
 							<img class="imagem"
@@ -181,7 +181,7 @@
 					<div class="box">
 						<div v-if="level > '11'">
 							<img class="imagem" src="../resources/img/levels/level12.png"
-								alt="">
+								alt="" onclick="iniciaQuiz(12)">
 						</div>
 						<div v-else>
 							<img class="imagem"
@@ -210,6 +210,11 @@
 		$(function() {
 			$("#menu").load("base.html");
 		});
+
+		function iniciaQuiz(level){
+			sessionStorage.setItem('nivelQuiz', level);
+			location.href = 'quizProgressivo.html'
+		}
 	</script>
 
 </body>
