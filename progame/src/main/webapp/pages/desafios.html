@@ -158,7 +158,6 @@
           axios.get('../rs/user/getUser/').then(function(response){
             axios.get('../rs/desafio/desafioProgramado/'+response.data["matricula"]).then(function(response){
               vm.desafios = response.data;
-              console.log(response.data);
             });
           });
         },
@@ -173,12 +172,13 @@
           axios.post('../rs/desafio/salvaRespostaDesafioProgramado',  vm.respostaDesafio).then(function(response){
             if(response.data == true){
               $("#feedbackResposta").modal("show");
+              axios.get('../rs/desafio/desafioProgramado/'+vm.usuario.matricula).then(function(response){
+                  vm.desafios = response.data;
+              });
             }
           });
         }
       }
-
-
     });
 
 

@@ -319,7 +319,7 @@ public class DesafioDAO {
 		ArrayList <DesafioDTO> desafios = new ArrayList<DesafioDTO>();
 		int total = 0;
 
-		pstmt = db.prepareStatement("select count(*) as Total from resposta_desafio_programado rdp where rdp.matricula="+matricula+" and rdp.correcaoAvaliador='Certo' group by rdp.matricula");
+		pstmt = db.prepareStatement("select count(*) as Total from resposta_desafio_programado rdp where rdp.matricula="+matricula+" and rdp.correcaoAvaliador='Errado' group by rdp.matricula");
 		
 		try {
 			result = pstmt.executeQuery();
@@ -333,6 +333,35 @@ public class DesafioDAO {
 		}
 	
 		return total;
+	}
+	
+	public boolean insereDesafio(DesafioDTO desafio) throws Exception {
+		boolean isOk = false;
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		StringBuilder sql = new StringBuilder();	
+
+		sql.append("INSERT INTO desafio_programado ");
+		sql.append(" ( ");
+		sql.append(" desafio, ");		
+		sql.append(" imgDesafio ");
+		sql.append(" ) ");
+		sql.append(" VALUES (?,?);");
+
+		try {
+			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, desafio.getDesafio());
+			pstmt.setString(2, desafio.getImgDesafio());
+			pstmt.executeUpdate();
+			isOk=true;
+
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+		return isOk;
 	}
 }
 

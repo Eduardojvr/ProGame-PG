@@ -163,4 +163,18 @@ public class RESTDesafio {
 		return total;
 	}
 	
+	@POST
+	@Path("/insereDesafio")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public boolean totalDesafioErrado(DesafioDTO desafio) {
+		DesafioDAO dao = new DesafioDAO();
+		boolean total = false;
+		try {
+			total = dao.insereDesafio(desafio);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}				
+		return total;
+	}
+	
 }

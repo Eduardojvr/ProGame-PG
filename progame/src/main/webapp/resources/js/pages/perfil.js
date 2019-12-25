@@ -123,8 +123,8 @@ let t = new Vue({
             const vm = this;
             axios.get('../rs/desafio/totalDesafioCerto/'+vm.usuario.matricula).then(function(response){
                 sessionStorage.setItem('certos', response.data);
-                axios.get('../rs/desafio/totalDesafioErrado/'+vm.usuario.matricula).then(function(response){
-                    sessionStorage.setItem('errado', response.data);
+                axios.get('../rs/desafio/totalDesafioErrado/'+vm.usuario.matricula).then(function(response2){
+                    sessionStorage.setItem('errado', response2.data);
                 });
             });
         },
