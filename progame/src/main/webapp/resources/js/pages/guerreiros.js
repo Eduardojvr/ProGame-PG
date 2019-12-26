@@ -11,14 +11,19 @@ let j = new Vue({
             //
             axios.get('../rs/user/getUser/').then(function(response) {
                 var matricula = response.data["matricula"];
-                axios.get('../rs/personagem/setPersonagem/'+value+'/'+matricula).then(function(response) {
-                    sessionStorage.setItem('idPersonagem', value);   
-                    sessionStorage.setItem('escolheu', 1);   
-                    window.location.href = 'perfil.html';
-                });
+                if(response.data["idPersonagem"] == 7){
+                    axios.get('../rs/personagem/setPersonagem/'+value+'/'+matricula).then(function(response) {
+                        sessionStorage.setItem('idPersonagem', value);   
+                        sessionStorage.setItem('escolheu', 1);   
+                        window.location.assign('perfil.html');
+                    });
+                } else {
+                    $("#persona").modal("show");
+                }
             });
-
-            
+        },
+        redireciona : function(local){
+            window.location.assign(local);
         }
     }
     

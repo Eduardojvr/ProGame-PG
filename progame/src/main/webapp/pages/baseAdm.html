@@ -87,7 +87,6 @@
             methods:{
                 logout: function(){
 					axios.post('../../rs/user/logout').then(function(response) {
-						alert("Logout realizado com sucesso!");
 						sessionStorage.clear();
 						window.location.href = "/progame";
 					}).catch(function (error){
