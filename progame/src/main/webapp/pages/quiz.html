@@ -262,9 +262,10 @@ data-keyboard="false">
 					</div>
 			</div>
 </div>
-		<script src="../resources/js/vue.js"></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+    <script src="../resources/js/axios.min.js" ></script>
+    <script src="../resources/js/vue.js"></script>
+		<!-- <script
+			src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script> -->
 		<script src="../resources/css/quiz.css"></script>
 
 		<script>
@@ -394,7 +395,8 @@ let q = new Vue({
         var tmp = vm.salvaLevel;
         axios.get('../rs/user/getUser').then(function(response){
           vm.salvaLevel = response.data["level"];
-          if(tmp < vm.salvaLevel && vm.tmp>0){
+          if(tmp < vm.salvaLevel && parseInt(tmp)>0){
+            alert();
             $("#levelUp").modal('show');
           }
         });
@@ -422,13 +424,13 @@ let q = new Vue({
       },
       getAllQuestions: function(){
         const vm = this;
-        $('#aguarde').modal('show');
+        //$('#aguarde').modal('show');
         axios.get('../rs/user/getUser').then(function(response){
           vm.dados = response.data
           axios.get('../rs/questao/todasQuestoes/' + response.data["level"]).then(function(questao){
             vm.todasQuestoes = questao.data;
             vm.totalQuestao = vm.todasQuestoes.length;
-            $('#aguarde').modal('hide');
+            //$('#aguarde').modal('hide');
           });
           // vm.totalQuestao.sort();
         });
@@ -442,6 +444,7 @@ let q = new Vue({
           document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
           $("#audioPlayer").attr('src',"../resources/sons/certo.mp3");        
           setTimeout(vm.fundoMusical, 4500);
+          vm.controlaAcertos('a');
           vm.atualizaPontuacao();
         } else {
           document.getElementById('feedback').innerHTML = 'Resposta incorreta. A resposta correta é: '+vm.todasQuestoes[posicao].resposta;
@@ -459,7 +462,8 @@ let q = new Vue({
         if(resposta == vm.todasQuestoes[posicao].respostaCorretaAlternativa){
           document.getElementById('feedback').innerHTML = 'Resposta correta!';
           document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
-          $("#audioPlayer").attr('src',"../resources/sons/certo.mp3");        
+          $("#audioPlayer").attr('src',"../resources/sons/certo.mp3");   
+          vm.controlaAcertos('a');     
           setTimeout(vm.fundoMusical, 4500);
           vm.atualizaPontuacao();
         } else {
@@ -475,7 +479,8 @@ let q = new Vue({
         if(vm.todasQuestoes[posicao].respostaLacuna == resposta || vm.todasQuestoes[posicao].respostaAlternativa == resposta ){
             document.getElementById('feedback').innerHTML = vm.todasQuestoes[posicao].comentarioCorreta;
             document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
-            $("#audioPlayer").attr('src',"../resources/sons/certo.mp3");        
+            $("#audioPlayer").attr('src',"../resources/sons/certo.mp3");    
+            vm.controlaAcertos('a');    
             setTimeout(vm.fundoMusical, 4500);
             vm.atualizaPontuacao();
         } else {
@@ -493,12 +498,12 @@ let q = new Vue({
         },
         atualizaPontuacao :function (){
           const vm = this;
-          $("#processando").modal("show");
+          //$("#processando").modal("show");
           axios.get('../rs/user/getUser/').then(function(response) {
             vm.dados = response.data;
             axios.get('../rs/user/atualizaPontuacao/'+(parseInt(response.data["pontuacao"])+parseInt(10))+'/'+vm.dados.matricula+'/'+response.data["level"]).then(function(response) {
               vm.dados.pontuacao = parseInt(vm.dados.pontuacao)+parseInt(10);
-              $("#processando").modal("hide");
+              //$("#processando").modal("hide");
             });
           });
         }
