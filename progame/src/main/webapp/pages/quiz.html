@@ -396,7 +396,6 @@ let q = new Vue({
         axios.get('../rs/user/getUser').then(function(response){
           vm.salvaLevel = response.data["level"];
           if(tmp < vm.salvaLevel && parseInt(tmp)>0){
-            alert();
             $("#levelUp").modal('show');
           }
         });
@@ -424,13 +423,13 @@ let q = new Vue({
       },
       getAllQuestions: function(){
         const vm = this;
-        //$('#aguarde').modal('show');
+        $('#aguarde').modal('show');
         axios.get('../rs/user/getUser').then(function(response){
           vm.dados = response.data
           axios.get('../rs/questao/todasQuestoes/' + response.data["level"]).then(function(questao){
             vm.todasQuestoes = questao.data;
             vm.totalQuestao = vm.todasQuestoes.length;
-            //$('#aguarde').modal('hide');
+            $('#aguarde').modal('hide');
           });
           // vm.totalQuestao.sort();
         });
@@ -498,12 +497,12 @@ let q = new Vue({
         },
         atualizaPontuacao :function (){
           const vm = this;
-          //$("#processando").modal("show");
+          $("#processando").modal("show");
           axios.get('../rs/user/getUser/').then(function(response) {
             vm.dados = response.data;
             axios.get('../rs/user/atualizaPontuacao/'+(parseInt(response.data["pontuacao"])+parseInt(10))+'/'+vm.dados.matricula+'/'+response.data["level"]).then(function(response) {
               vm.dados.pontuacao = parseInt(vm.dados.pontuacao)+parseInt(10);
-              //$("#processando").modal("hide");
+              $("#processando").modal("hide");
             });
           });
         }

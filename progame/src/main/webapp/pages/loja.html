@@ -69,6 +69,86 @@
 
 <body style="background: rgba(13, 138, 160, 0.774);">
 <div id="loja">
+
+  <div
+  style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+  id="confirma" class="modal fade top" tabindex="-1" role="dialog"
+   aria-hidden="true" data-backdrop='false'
+  data-keyboard="false">
+  <div class="modal-dialog modal-lg modal-frame modal-top"
+    role="document">
+    <div style="background-color: rgba(255, 255, 255, 0.9);"
+      class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div style="text-align: center; font-family: pixel;">
+          <h3>Notificação</h3>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <img height="400" width="280" src="../resources/img/aisha.png" alt="">
+          </div>
+          <div style="padding-left: 140px; padding-top: 9%; font-family: pixel;" class="col-8">
+            <h4>Tem certeza que deseja comprar este item?<br>Isto te custará {{ custo }} pontos</h4>
+            <div style="padding-left: 18%; padding-top: 14%;">
+              <button type="button" @click="confirma()"
+              class="btn btn-info btn-md" style="font-family: pixel;">Confirmar</button> &nbsp;
+              <button type="button"
+              class="btn btn-danger btn-md" data-dismiss="modal"
+              aria-label="Close" style="font-family: pixel;">Cancelar</button>
+              </div>
+          </div>
+                </div>
+                </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+    style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+    id="confirmaEspada" class="modal fade top" tabindex="-1" role="dialog"
+     aria-hidden="true" data-backdrop='false'
+    data-keyboard="false">
+    <div class="modal-dialog modal-lg modal-frame modal-top"
+      role="document">
+      <div style="background-color: rgba(255, 255, 255, 0.9);"
+        class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"
+            aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div style="text-align: center; font-family: pixel;">
+            <h3>Notificação</h3>
+          </div>
+          <div class="row">
+            <div class="col-3">
+              <img height="400" width="280" src="../resources/img/aisha.png" alt="">
+            </div>
+            <div style="padding-left: 140px; padding-top: 9%; font-family: pixel;" class="col-8">
+              <h4>Tem certeza que deseja comprar este item?<br>Isto te custará {{ custo }} pontos.<br>O item passa a valer a partir da confirmação da compra!</h4>
+              <div style="padding-left: 18%; padding-top: 14%;">
+                <button type="button" @click="confirmaEspada()"
+                class="btn btn-info btn-md" style="font-family: pixel;">Confirmar</button> &nbsp;
+                <button type="button"
+                class="btn btn-danger btn-md" data-dismiss="modal"
+                aria-label="Close" style="font-family: pixel;">Cancelar</button>
+                </div>
+            </div>
+                  </div>
+                  </div>
+          </div>
+        </div>
+      </div>
+
+
 	<div class="modal fade" id="processando" tabindex="-1" role="img"
 		style="padding-right: 10%; padding-top: 10%;" data-backdrop="static"
 		data-keyboard="false">
@@ -84,7 +164,160 @@
 			</div>
 		</div>
   </div>
+
+  <div
+  style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+  id="usaItemEspada" class="modal fade top" tabindex="-1" role="dialog"
+   aria-hidden="true" data-backdrop='false'
+  data-keyboard="false">
+  <div class="modal-dialog modal-lg modal-frame modal-top"
+    role="document">
+    <div style="background-color: rgba(255, 255, 255, 0.9);"
+      class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div style="text-align: center; font-family: pixel;">
+          <h3>Notificação</h3>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <img height="400" width="280" src="../resources/img/aisha.png" alt="">
+          </div>
+          <div style="padding-left: 140px; padding-top: 8%; font-family: pixel;" class="col-8">
+            <h4>Você acaba de comprar uma espada da loja!<br><br>A partir de agora, as {{ espada.qtd }} próximas questões do modo narrativa, terão seus ganhos multiplicados por {{ espada.fator }}.</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <div
+  style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+  id="usaItem" class="modal fade top" tabindex="-1" role="dialog"
+   aria-hidden="true" data-backdrop='false'
+  data-keyboard="false">
+  <div class="modal-dialog modal-lg modal-frame modal-top"
+    role="document">
+    <div style="background-color: rgba(255, 255, 255, 0.9);"
+      class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div style="text-align: center; font-family: pixel;">
+          <h3>Notificação</h3>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <img height="400" width="280" src="../resources/img/aisha.png" alt="">
+          </div>
+          <div style="padding-left: 140px; padding-top: 15%; font-family: pixel;" class="col-8">
+            <h4>Boa jogada, você acaba de utilizar um item da loja!<br><br>Todos jogadores perderam {{ pontos }} pontos</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
   
+<div
+style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+id="usaItemIndividual" class="modal fade top" tabindex="-1" role="dialog"
+ aria-hidden="true" data-backdrop='false'
+data-keyboard="false">
+<div class="modal-dialog modal-lg modal-frame modal-top"
+  role="document">
+  <div style="background-color: rgba(255, 255, 255, 0.9);"
+    class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal"
+        aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div style="text-align: center; font-family: pixel;">
+        <h3>Notificação</h3>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <img height="400" width="280" src="../resources/img/aisha.png" alt="">
+        </div>
+        <div style="padding-left: 140px; padding-top: 15%; font-family: pixel;" class="col-8">
+          <h4>Boa jogada, você acaba de utilizar um item da loja!<br><br>O jogador {{ jogadorEscolhido.nomeUsuario}} perdeu {{ pontos }} pontos.</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="modal fade" id="processando" tabindex="-1" role="img"
+style="padding-right: 10%; padding-top: 10%;" data-backdrop="static"
+data-keyboard="false">
+<div class="modal-dialog" role="document" style="width: 0px;">
+  <div class="modal-content"
+    style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
+    <img src="../resources/img/orcDancando.gif" width=200px height=250px
+      style="border-radius: 100px;">
+
+    <div>
+      <!-- <label style="color: seashell; padding-left: 40px;">Processando...</label> -->
+    </div>
+  </div>
+</div>
+</div>
+
+<div
+style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+id="seleciona" class="modal fade top" tabindex="-1" role="dialog"
+aria-hidden="true" data-backdrop='true'
+data-keyboard="false">
+<div class="modal-dialog modal-lg modal-frame modal-top"
+role="document">
+<div style="background-color: rgba(255, 255, 255, 0.9);"
+  class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"
+      aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div style="text-align: center; font-family: pixel;">
+      <h3>Selecione o jogador que deseja atacar!</h3>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <img height="400" width="280" src="../resources/img/aisha.png" alt="">
+      </div>
+      <div style="padding-left: 100px; padding-top: 15%; font-family: pixel;" class="col-8">
+       <select  style="padding: 10px;" v-model="jogadorEscolhido" >
+         <option v-if="usuario.matricula != todos.matricula" v-for="todos in todosUsuarios" v-bind:value="todos">👤Jogador: {{ todos.nomeUsuario }} - 🥇Pontuação: {{ todos.pontuacao }}</option>
+       </select>
+       <div style="padding-left: 18%; padding-top: 14%;">
+        <button type="button"
+        class="btn btn-info btn-md" style="font-family: pixel;" @click="usaPorcaoIndividual()">Confirmar</button> &nbsp;
+        <button type="button"
+        class="btn btn-danger btn-md" data-dismiss="modal"
+        aria-label="Close" style="font-family: pixel;">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
   <audio id="audioPlayer" loop autoplay></audio>
 
 
@@ -128,7 +361,7 @@
               <div class="col-6 col-md-4">
             <div class="card" style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
               <div class="card-body">
-                  <img class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/001-pocao.png" alt="">
+                  <img @click="usaLoja('120', '90')" class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/001-pocao.png" alt="">
                   <div class="card-text" >
                     <br>
                     Todos jogadores perdem 120 pontos.
@@ -140,7 +373,7 @@
               <div class="col-6 col-md-4">
                 <div class="card" style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
                     <div class="card-body">
-                        <img class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/004-balao.png" alt="">
+                        <img @click="usaLoja('200', '150')" class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/004-balao.png" alt="">
                         <div class="card-text">
                             <br>
                             Todos jogadores perdem 200 pontos.
@@ -152,7 +385,7 @@
               <div class="col-md-4 d-md-block d-none">
                 <div class="card" style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
                     <div class="card-body">
-                        <img class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/005-pocao-2.png" alt="">
+                        <img @click="usaLojaUmJogador('100', '70')" class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/005-pocao-2.png" alt="">
                         <div class="card-text">
                             <br>
                     Um unico jogador perde 100 pontos
@@ -168,7 +401,7 @@
               <div class="col-6 col-md-4">
                 <div class="card" style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
                     <div class="card-body">
-                        <img class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/003-pocao-magica.png" alt="">
+                        <img @click="usaLojaUmJogador('170', '130')" class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/003-pocao-magica.png" alt="">
                         <div class="card-text">
                             <br>
                             Um unico jogador perde 170 pontos
@@ -205,11 +438,11 @@
               <div class="col-6 col-md-4">
             <div class="card" style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
               <div class="card-body">
-                  <img class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/006-espada.png" alt="">
+                  <img @click="usaLojaEspada(espadas[0])" class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/006-espada.png" alt="">
                   <div class="card-text" >
                     <br>
-                    Ganhos das 3 proximas respostas do modo narrativa X 3
-                    Valor: 40 pontos
+                    {{ espadas[0].texto }}<br>
+                    Valor: {{ espadas[0].valor }} pontos
                 </div>
               </div>
             </div>
@@ -217,11 +450,11 @@
               <div class="col-6 col-md-4">
                 <div class="card" style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
                     <div class="card-body">
-                        <img class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/007-espada-1.png" alt="">
+                        <img @click="usaLojaEspada(espadas[1])" class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/007-espada-1.png" alt="">
                         <div class="card-text">
                             <br>
-                            Ganhos das 4 proximas respostas do modo narrativa X 3
-                            Valor: 70 pontos
+                            {{ espadas[1].texto }}<br>
+                            Valor: {{ espadas[1].valor }} pontos
                         </div>
               </div>
             </div>
@@ -229,11 +462,11 @@
               <div class="col-md-4 d-md-block d-none">
                 <div class="card" style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
                     <div class="card-body">
-                        <img class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/009-espada-2.png" alt="">
+                        <img @click="usaLojaEspada(espadas[2])" class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/009-espada-2.png" alt="">
                         <div class="card-text">
                             <br>
-                            Ganhos das 7 proximas respostas do modo narrativa X 2
-                            Valor: 90 pontos
+                            {{ espadas[2].texto }}<br>
+                            Valor: {{ espadas[2].valor }} pontos
                 </div>
               </div>
             </div>
@@ -344,8 +577,9 @@
       </div>
 </div>
 </div>
+  <script src="../resources/js/axios.min.js" ></script>
     <script src="../resources/js/vue.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script> -->
 	<script src="../resources/css/quiz.css"></script>
     <script>
 
@@ -353,15 +587,94 @@
             el:"#loja",
             data:{
                 usuario: {},
-                todosUsuarios: {}
+                todosUsuarios: {},
+                custo: 0,
+                pontos: 0,
+                jogadorEscolhido: {},
+                espadas: [],
+                espada: 
+                {
+                  idEspada: '',
+                  matricula: '',
+                  usou: '',
+                  contaUsos: '',
+                  fator: '',
+                  qtd: '',
+                  texto: '',
+      	          valor: ''              
+                }  
             },
             created: function(){
                 const vm = this;
                 vm.getUser();
                 vm.getAllUsers();
+                vm.getEspadas();
                 $("#audioPlayer").attr('src',"../resources/sons/fundoLoja.mp3");        
             },
             methods : {
+                getEspadas : function(){
+                  const vm = this;
+                  axios.get('../rs/item/getEspadas').then(function(response){
+                    vm.espadas = response.data;
+                  });
+                },
+                usaPorcaoIndividual : function(){
+                  const vm = this;
+                  $("#seleciona").modal("hide");                      
+                  axios.get('../rs/user/tiraPonto/'+vm.pontos+'/'+vm.jogadorEscolhido.pontuacao+'/'+vm.jogadorEscolhido.matricula).then(function(){
+                    axios.get('../rs/user/pagaItem/'+vm.custo).then(function(response){
+                      $("#usaItemIndividual").modal("show");   
+                      vm.getUser();                                        
+                    });
+                  });
+                },
+                usaLojaUmJogador : function(pontos, custo){
+                  const vm = this;
+                  vm.custo = custo;
+                  vm.pontos = pontos
+                  $("#seleciona").modal("show");
+                },
+                usaLoja : function(pontos, custo){
+                  const vm =this;
+                  vm.custo = custo;
+                  vm.pontos = pontos
+                  $("#confirma").modal("show");
+                },
+                usaLojaEspada : function(espada){
+                  const vm =this;
+                  vm.custo = espada.valor;
+                  vm.espada.idEspada = espada.idEspada;
+                  vm.espada.matricula = vm.usuario.matricula;
+                  vm.espada.usou = 'n';
+                  vm.espada.contaUsos = '0';
+                  vm.espada.fator = espada.fator;
+                  vm.espada.qtd = espada.qtd;
+                  vm.espada.texto = espada.texto;
+      	          vm.espada.valor = espada.valor;
+                  $("#confirmaEspada").modal("show");
+                },
+                confirma: function(){
+                  const vm =this;
+                  $("#confirma").modal("hide");
+                  axios.get('../rs/user/porcaoMagica/'+vm.pontos).then(function(response){
+                    axios.get('../rs/user/pagaItem/'+vm.custo).then(function(response){
+                      $("#usaItem").modal("show"); 
+                      vm.getUser();                     
+                    });
+                  });
+                },
+                confirmaEspada : function(){
+                  const vm = this;
+                  $("#confirmaEspada").modal("hide");
+                  axios.post('../rs/item/compraEspada', vm.espada).then(function(response){
+                    axios.get('../rs/user/pagaItem/'+vm.espada.valor).then(function(response){
+                      $("#usaItemEspada").modal("show"); 
+                      vm.getUser();                     
+                    });
+                  }).catch(function(error){
+                    alert("Erro!");
+                  });
+                },
                 getUser : function(){
                     const vm = this;
                     axios.get('../rs/user/getUser').then(function(response){
@@ -372,7 +685,6 @@
                     const vm = this;
                     axios.get('../rs/user/todosUsuarios').then(function(response){
                         vm.todosUsuarios = response.data;
-                        console.log(vm.todosUsuarios);
                     });
                 }
             }

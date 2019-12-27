@@ -203,4 +203,51 @@ public class RESTUsuario {
 		return usuarios; 
 	}
 	
+	@GET
+	@Path("/porcaoMagica/{penalidade}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean totalDesafioErrado(@PathParam("penalidade") int penalidade) {
+		UsuarioDAO dao = new UsuarioDAO();
+		boolean isOk = false;
+		Usuario user = null;
+		try {
+			user = dao.getUsuario(request.getSession().getAttribute("matricula").toString());
+			isOk = dao.tiraPonto(penalidade, user);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}				
+		return isOk;
+	}
+	
+	@GET
+	@Path("/pagaItem/{preco}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean pagaItem(@PathParam("preco") int preco) {
+		UsuarioDAO dao = new UsuarioDAO();
+		Usuario user = null;
+
+		boolean isOk = false;
+		try {
+			user = dao.getUsuario(request.getSession().getAttribute("matricula").toString());
+			isOk = dao.pagaItem(preco, user);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}				
+		return isOk;
+	}
+	
+	@GET
+	@Path("/tiraPonto/{penalidade}/{pontuacaoAtual}/{matricula}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean pagaItem(@PathParam("penalidade") int penalidade, @PathParam("pontuacaoAtual") int pontuacaoAtual, @PathParam("matricula") String matricula) {
+		UsuarioDAO dao = new UsuarioDAO();
+
+		boolean isOk = false;
+		try {
+			isOk = dao.tiraPonto(penalidade, pontuacaoAtual, matricula);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}				
+		return isOk;
+	}
 }

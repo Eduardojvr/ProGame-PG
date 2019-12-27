@@ -22,11 +22,11 @@ public class UsuarioDAO {
 		PreparedStatement pstmt = null;
 
 		StringBuilder sql = new StringBuilder();
-		
+
 		String senha = usuario.getSenha();
 		MessageDigest m=MessageDigest.getInstance("MD5");
-	    m.update(senha.getBytes(),0,senha.length());
-	    String criptografia = new BigInteger(1,m.digest()).toString(16);
+		m.update(senha.getBytes(),0,senha.length());
+		String criptografia = new BigInteger(1,m.digest()).toString(16);
 
 		sql.append("INSERT INTO usuario ");
 		sql.append(" ( ");
@@ -71,13 +71,13 @@ public class UsuarioDAO {
 
 		ResultSet result = null;
 
-			
+
 		String senha = user.getSenha();
 		MessageDigest m=MessageDigest.getInstance("MD5");
-	    m.update(senha.getBytes(),0,senha.length());
-	    String criptografia = new BigInteger(1,m.digest()).toString(16);
-		
-		
+		m.update(senha.getBytes(),0,senha.length());
+		String criptografia = new BigInteger(1,m.digest()).toString(16);
+
+
 		pstmt = db.prepareStatement("select nomeUsuario, matricula, senha, idTipoPerfil, idPersonagem, email, pontuacao, level from usuario");
 
 		try {
@@ -106,7 +106,7 @@ public class UsuarioDAO {
 		}
 		return achou;
 	}
-	
+
 	public boolean updatePontuacao(int pontos, String matricula, String levelAtual) throws Exception {
 		Connection db = ConnectionManager.getDBConnection();
 		PreparedStatement pstmt = null;
@@ -117,28 +117,30 @@ public class UsuarioDAO {
 		StringBuilder sql = new StringBuilder();
 
 		sql.append("update USUARIO set pontuacao="+pontos+" where matricula="+matricula);
-		
-		if(pontos >=800 && pontos<1600) {
+
+		if (pontos < 800) {
+			updateLevel(1 , matricula);
+		} else if(pontos >=800 && pontos<1600) {
 			updateLevel(2 , matricula);
-			
+
 		} else if(pontos >=1600 && pontos < 3200) {
 			updateLevel(3 , matricula);
 
 		} else if(pontos >=3200 && pontos < 6400) {
 			updateLevel(4 , matricula);
-			
+
 		} else if(pontos >=6400 && pontos < 12800) {
 			updateLevel(5 , matricula);
-			
+
 		} else if(pontos >=12800 && pontos < 25600) {
 			updateLevel(6 , matricula);
-			
+
 		} else if(pontos >=25600 && pontos < 51200) {
 			updateLevel(7 , matricula);
-			
+
 		} else if(pontos >=51200 && pontos < 102400) {
 			updateLevel(8 , matricula);
-			
+
 		} else if(pontos >=102400 && pontos < 204800) {
 			updateLevel(9 , matricula);
 		} else if(pontos >=204800 && pontos < 409600) {
@@ -146,12 +148,12 @@ public class UsuarioDAO {
 
 		} else if(pontos >=409600 && pontos < 819200) {
 			updateLevel(11 , matricula);
-			
+
 		} else if(pontos >=819200 && pontos < 819200) {
 			updateLevel(12 , matricula);
 		} 
-		
-		
+
+
 		try {
 			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
 			pstmt.executeUpdate();
@@ -165,7 +167,7 @@ public class UsuarioDAO {
 		}
 		return execute;
 	}
-	
+
 
 	public boolean updateLevel(int level, String matricula) throws Exception {
 		Connection db = ConnectionManager.getDBConnection();
@@ -176,12 +178,8 @@ public class UsuarioDAO {
 		Boolean execute = false;
 		StringBuilder sql = new StringBuilder();
 
-						
-//		int novoLevel = Integer.parseInt(level) + 1;
-
-				
 		sql.append("update USUARIO set level="+level+" where matricula="+matricula);
-		
+
 		try {
 			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
 			pstmt.executeUpdate();
@@ -195,8 +193,8 @@ public class UsuarioDAO {
 		}
 		return execute;
 	}
-	
-	
+
+
 	public Usuario getUsuario(String matricula) throws Exception {
 		Usuario achou = null;
 		Connection db = ConnectionManager.getDBConnection();
@@ -223,7 +221,7 @@ public class UsuarioDAO {
 
 				}
 			}
-			
+
 		} catch(Exception e) {
 			throw new Exception(e);
 		} finally {
@@ -233,7 +231,7 @@ public class UsuarioDAO {
 		}
 		return achou;
 	}
-	
+
 	public ArrayList<Usuario> getAllUsuario() throws Exception {
 		Usuario achou = null;
 		Connection db = ConnectionManager.getDBConnection();
@@ -241,25 +239,25 @@ public class UsuarioDAO {
 
 		ResultSet result = null;
 		ArrayList <Usuario> usuario = new ArrayList<Usuario>();
-		
+
 		pstmt = db.prepareStatement("select * from usuario order by pontuacao desc");
-		
+
 		try {
 			result = pstmt.executeQuery();
 			while (result.next()) {
-					achou = new Usuario();
-					achou.setNomeUsuario(result.getString("nomeUsuario"));
-					achou.setMatricula(result.getString("matricula"));
-					//achou.setSenha(result.getString("senha"));
-					achou.setIdTipoPerfil(result.getString("idTipoPerfil"));
-					achou.setIdPersonagem(result.getString("idPersonagem"));
-					achou.setEmail(result.getString("email"));		
-					achou.setPontuacao(result.getString("pontuacao"));				
-					achou.setLevel(result.getString("level"));	
-					usuario.add(achou);
+				achou = new Usuario();
+				achou.setNomeUsuario(result.getString("nomeUsuario"));
+				achou.setMatricula(result.getString("matricula"));
+				//achou.setSenha(result.getString("senha"));
+				achou.setIdTipoPerfil(result.getString("idTipoPerfil"));
+				achou.setIdPersonagem(result.getString("idPersonagem"));
+				achou.setEmail(result.getString("email"));		
+				achou.setPontuacao(result.getString("pontuacao"));				
+				achou.setLevel(result.getString("level"));	
+				usuario.add(achou);
 
 			}
-			
+
 		} catch(Exception e) {
 			throw new Exception(e);
 		} finally {
@@ -268,6 +266,95 @@ public class UsuarioDAO {
 			db.close();
 		}
 		return usuario;
+	}
+
+	public boolean tiraPonto(int penalidade, Usuario user ) throws Exception {
+		boolean isOk = false;
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		ResultSet result = null;
+
+		ArrayList <Usuario> all = null; 
+		all = getAllUsuario();				
+		try {
+			int novo = 0;
+			for(int i = 0; i < all.size();i++) {
+				novo = Integer.parseInt(all.get(i).getPontuacao()) - penalidade;
+				if((!all.get(i).getMatricula().equals(user.getMatricula())) && Integer.parseInt(all.get(i).getPontuacao()) >= penalidade  ) {
+					StringBuilder sql = new StringBuilder();	
+					sql.append("update USUARIO set pontuacao='"+novo+"' where matricula='"+all.get(i).getMatricula()+"';");
+					pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+					pstmt.executeUpdate();
+					updatePontuacao(novo, all.get(i).getMatricula(), all.get(i).getLevel());
+				}
+			}
+			isOk = true;
+		} catch(Exception e) {
+			throw new Exception(e);
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+		return isOk;
+	}
+
+	public boolean pagaItem(int preco, Usuario user) throws Exception {
+		boolean isOk = false;
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		ResultSet result = null;
+
+		StringBuilder sql = new StringBuilder();	
+
+		try {
+			int novo = Integer.parseInt(user.getPontuacao()) - preco;
+			sql.append("update USUARIO set pontuacao='"+novo+"' where matricula='"+user.getMatricula()+"';");
+			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+			pstmt.executeUpdate();
+			updatePontuacao(novo, user.getMatricula(), user.getLevel());
+			isOk = true;
+		} catch(Exception e) {
+			throw new Exception(e);
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+		return isOk;	
+	}
+	
+	// Tira pontos de um determinado usuario
+	public boolean tiraPonto(int penalidade, int pontuacaoAtual, String matricula) throws Exception {
+		boolean isOk = false;
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		ResultSet result = null;
+
+		StringBuilder sql = new StringBuilder();	
+		int novo = pontuacaoAtual - penalidade;
+
+		try {
+			if (novo < 0) { 
+				novo = 0;
+			}
+			
+			sql.append("update USUARIO set pontuacao='"+novo+"' where matricula='"+matricula+"';");
+			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+			pstmt.executeUpdate();
+			updatePontuacao(novo, matricula, "");
+			isOk = true;
+		} catch(Exception e) {
+			throw new Exception(e);
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+		return isOk;
 	}
 	
 }
