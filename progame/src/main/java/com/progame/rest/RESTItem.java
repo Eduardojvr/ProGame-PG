@@ -65,5 +65,51 @@ public class RESTItem {
 		}				
 		return espadas;
 	}
+	
+	@GET
+	@Path("/getMinhasCompras/{matricula}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<ItemEspadaDTO> getMinhasCompras(@PathParam("matricula") String matricula) {
+		ItemDAO dao = new ItemDAO();
+		ArrayList <ItemEspadaDTO> all = null; 
+		
+		try {
+			all = dao.minhasCompras(matricula);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}				
+		return all;
+	}
+	
+	@GET
+	@Path("/getOneEspada/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList <ItemEspadaDTO> getOneEspada(@PathParam("id") int id) {
+		ItemDAO dao = new ItemDAO();
+		ArrayList <ItemEspadaDTO> espada = null; 
+		
+		try {
+			espada = dao.getOneEspada(id);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}				
+		return espada;
+	}
+	
+	@POST
+	@Path("/atualizaMinhasCompras")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Boolean atualizaMinhasCompras(ItemEspadaDTO item) {
+		ItemDAO dao = new ItemDAO();
+		ItemEspadaDTO espada = null; 
+		boolean isOk = false;
+		try {
+			isOk = dao.atualizaMinhasCompras(item);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}				
+		return isOk;
+	}
 }
 

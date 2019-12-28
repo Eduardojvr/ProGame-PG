@@ -1,6 +1,7 @@
 package com.progame.dto;
 
 public class ItemEspadaDTO {
+	private String id;
 	private String idEspada;
 	private String matricula;
 	private String usou;
@@ -57,6 +58,12 @@ public class ItemEspadaDTO {
 	}
 	public void setValor(String valor) {
 		this.valor = valor;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	

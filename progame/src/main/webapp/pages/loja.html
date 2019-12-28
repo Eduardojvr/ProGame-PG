@@ -602,7 +602,8 @@ role="document">
                   qtd: '',
                   texto: '',
       	          valor: ''              
-                }  
+                },
+                compras: []
             },
             created: function(){
                 const vm = this;
@@ -612,6 +613,12 @@ role="document">
                 $("#audioPlayer").attr('src',"../resources/sons/fundoLoja.mp3");        
             },
             methods : {
+                getMinhasCompras : function(){
+                  const vm = this;
+                  axios.get('../rs/item/getMinhasCompras/'+vm.usuario.matricula).then(function(response){
+                    vm.compras = response.data;
+                  });
+                },
                 getEspadas : function(){
                   const vm = this;
                   axios.get('../rs/item/getEspadas').then(function(response){
@@ -679,6 +686,7 @@ role="document">
                     const vm = this;
                     axios.get('../rs/user/getUser').then(function(response){
                         vm.usuario = response.data;
+                        vm.getMinhasCompras();
                     });
                 },
                 getAllUsers : function(){
@@ -688,7 +696,6 @@ role="document">
                     });
                 }
             }
-
         });
  
     </script>

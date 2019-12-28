@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.progame.dto.DesafioDTO;
 import com.progame.dto.DesafiovsDTO;
+import com.progame.dto.ItemEspadaDTO;
 import com.progame.entity.Usuario;
 
 public class DesafioDAO {
@@ -364,5 +365,8 @@ public class DesafioDAO {
 		return isOk;
 	}
 }
+
+
+
 
 

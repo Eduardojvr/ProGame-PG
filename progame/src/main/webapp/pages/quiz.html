@@ -174,7 +174,9 @@ data-keyboard="false">
   <div style="padding-left: 5%; padding-right: 5%;">
 		<div id="quest">
 			<div>
-          <h3 id="pontuacao" style="color: ghostwhite; font-family: pixel;">Pontuação: {{ dados.pontuacao }} pontos</h3>
+          <span id="pontuacao" style="color: ghostwhite; font-family: pixel; font-size: 25px;">Pontuação: {{ dados.pontuacao }} pontos</span>
+          <span v-if="compras.length > 0" style="color: ghostwhite; font-family: pixel; padding-left: 10%; font-size: 25px;">Efeito: Acertos x {{ fator }} </span>
+          <span v-if="compras.length > 0" style="color: ghostwhite; font-family: pixel; padding-left: 10%; font-size: 25px;">Usos disponíveis: {{ disponiveis }}  </span>
       </div>
       <hr>
       <!-- Tipo múltipla escolha -->
@@ -262,6 +264,7 @@ data-keyboard="false">
 					</div>
 			</div>
 </div>
+    <script src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="../resources/js/axios.min.js" ></script>
     <script src="../resources/js/vue.js"></script>
 		<!-- <script
@@ -327,7 +330,7 @@ let q = new Vue({
           assunto: '',
         }
       ],
-      dados : [
+      dados : 
             {
                 email : '',
                 idPersonagem : '',
@@ -336,8 +339,7 @@ let q = new Vue({
                 matricula : '',
                 nomeUsuario : '',
                 pontuacao : ''
-            }
-        ],
+            },
       matricula : '',
       idTipoPerfil : '',
       level : '',
@@ -365,17 +367,45 @@ let q = new Vue({
       ],
       totalQuestao: 0,
       salvaLevel: 0,
-      qtdErros: 0
-      
+      qtdErros: 0,
+      compras:[],
+      espada:{},
+      itemAtual:{
+        id:'',
+        idEspada: '',
+        matricula: '',
+        usou: '',
+        contaUsos: '',
+        fator: '',
+        qtd: '',
+        texto: '',
+      	valor: '' 
+      },
+      qtdEfeito: 0,
+      fator: 0,
+      disponiveis: 0
     },
     created :function(){
         const vm = this;
         vm.getAllQuestions();
         vm.fundoMusical();
         vm.getUser();
-
     },
     methods : {
+      getMinhasCompras : function(){
+        const vm = this;
+        axios.get('../rs/user/getUser/').then(function(u){
+          axios.get('../rs/item/getMinhasCompras/'+u.data["matricula"]).then(function(response){
+            vm.compras = response.data;
+            if(vm.compras.length > 0){
+              vm.qtdEfeito = vm.compras[0].qtd;
+              vm.fator = vm.compras[0].fator;
+              vm.disponiveis = parseInt(vm.compras[0].qtd) - parseInt(vm.compras[0].contaUsos)
+            }
+          });
+        });
+
+      },
       controlaAcertos : function(type){
         const vm = this;
         if(type == 'e' && vm.qtdErros <= 3){
@@ -395,6 +425,7 @@ let q = new Vue({
         var tmp = vm.salvaLevel;
         axios.get('../rs/user/getUser').then(function(response){
           vm.salvaLevel = response.data["level"];
+          vm.getMinhasCompras();
           if(tmp < vm.salvaLevel && parseInt(tmp)>0){
             $("#levelUp").modal('show');
           }
@@ -427,9 +458,9 @@ let q = new Vue({
         axios.get('../rs/user/getUser').then(function(response){
           vm.dados = response.data
           axios.get('../rs/questao/todasQuestoes/' + response.data["level"]).then(function(questao){
+            $('#aguarde').modal('hide');
             vm.todasQuestoes = questao.data;
             vm.totalQuestao = vm.todasQuestoes.length;
-            $('#aguarde').modal('hide');
           });
           // vm.totalQuestao.sort();
         });
@@ -452,6 +483,7 @@ let q = new Vue({
           //vm.getAllQuestions();
           $("#audioPlayer").attr('src',"../resources/sons/errado.mp3");        
           setTimeout(vm.fundoMusical, 4000);
+          vm.atualizaItem();
         }
       },
       verificaMultipla : function(resposta, posicao){
@@ -471,6 +503,7 @@ let q = new Vue({
           vm.controlaAcertos('e');
           $("#audioPlayer").attr('src',"../resources/sons/errado.mp3");        
           setTimeout(vm.fundoMusical, 4000);
+          vm.atualizaItem();
         }
       },
       verificaLacuna : function(resposta, posicao){
@@ -488,6 +521,7 @@ let q = new Vue({
             vm.controlaAcertos('e');
             $("#audioPlayer").attr('src',"../resources/sons/errado.mp3");        
             setTimeout(vm.fundoMusical, 4000);
+            vm.atualizaItem();
         }
       },
         limpaFeed : function(){
@@ -495,16 +529,71 @@ let q = new Vue({
           document.getElementById('feedback').innerHTML = ""
 
         },
-        atualizaPontuacao :function (){
+        atualizaItem : function(){
           const vm = this;
           $("#processando").modal("show");
-          axios.get('../rs/user/getUser/').then(function(response) {
-            vm.dados = response.data;
-            axios.get('../rs/user/atualizaPontuacao/'+(parseInt(response.data["pontuacao"])+parseInt(10))+'/'+vm.dados.matricula+'/'+response.data["level"]).then(function(response) {
-              vm.dados.pontuacao = parseInt(vm.dados.pontuacao)+parseInt(10);
-              $("#processando").modal("hide");
+          if(vm.compras.length > 0){
+            axios.get('../rs/item/getOneEspada/'+vm.compras[0].idEspada).then(function(response) {
+              vm.espada = response.data;
+              if(vm.compras[0].qtd <= vm.espada[0].qtd){
+                pontuacao = pontuacao * parseInt(vm.compras[0].fator);
+                vm.itemAtual.id = vm.compras[0].id;
+                vm.itemAtual.idEspada = vm.compras[0].idEspada;
+                vm.itemAtual.matricula = vm.compras[0].matricula;
+                vm.itemAtual.usou = vm.compras[0].usou;
+                vm.itemAtual.contaUsos = parseInt(vm.compras[0].contaUsos)+1;
+                vm.itemAtual.fator = vm.compras[0].fator;
+                vm.itemAtual.qtd = vm.compras[0].qtd;
+                vm.itemAtual.texto = vm.compras[0].texto;
+                vm.itemAtual.valor = vm.compras[0].valor; 
+
+                axios.post('../rs/item/atualizaMinhasCompras/', vm.itemAtual).then(function(response) {
+                  vm.getMinhasCompras();
+                  $("#processando").modal("hide");
+                });
+              }
             });
-          });
+          }
+        },
+        atualizaPontuacao :function (){ 
+          const vm = this;
+          var pontuacao = 10;
+          $("#processando").modal("show");
+          if(vm.compras.length > 0){
+            axios.get('../rs/item/getOneEspada/'+vm.compras[0].idEspada).then(function(response) {
+              vm.espada = response.data;
+              if(vm.compras[0].qtd <= vm.espada[0].qtd){
+                pontuacao = pontuacao * parseInt(vm.compras[0].fator);
+                vm.itemAtual.id = vm.compras[0].id;
+                vm.itemAtual.idEspada = vm.compras[0].idEspada;
+                vm.itemAtual.matricula = vm.compras[0].matricula;
+                vm.itemAtual.usou = vm.compras[0].usou;
+                vm.itemAtual.contaUsos = parseInt(vm.compras[0].contaUsos)+1;
+                vm.itemAtual.fator = vm.compras[0].fator;
+                vm.itemAtual.qtd = vm.compras[0].qtd;
+                vm.itemAtual.texto = vm.compras[0].texto;
+                vm.itemAtual.valor = vm.compras[0].valor; 
+
+                axios.post('../rs/item/atualizaMinhasCompras/', vm.itemAtual).then(function(response) {
+                  axios.get('../rs/user/atualizaPontuacao/'+(parseInt(vm.dados.pontuacao)+parseInt(pontuacao))+'/'+vm.dados.matricula+'/'+vm.dados.level).then(function(response) {
+                    vm.getMinhasCompras();
+                    vm.dados.pontuacao = parseInt(vm.dados.pontuacao)+parseInt(pontuacao);
+                    $("#processando").modal("hide");
+                  });
+                });
+              }
+            });
+          } else {
+              axios.get('../rs/user/getUser/').then(function(response) {
+                vm.dados = response.data;
+                axios.get('../rs/user/atualizaPontuacao/'+(parseInt(vm.dados.pontuacao)+parseInt(pontuacao))+'/'+vm.dados.matricula+'/'+vm.dados.level).then(function(response) {
+                  $("#processando").modal("hide");
+                  vm.dados.pontuacao = parseInt(vm.dados.pontuacao)+parseInt(pontuacao);
+                  vm.getMinhasCompras();
+              });
+            });
+          }
+
         }
     }
 });
