@@ -664,7 +664,8 @@ role="document">
                   axios.get('../rs/user/tiraPonto/'+vm.pontos+'/'+vm.jogadorEscolhido.pontuacao+'/'+vm.jogadorEscolhido.matricula).then(function(){
                     axios.get('../rs/user/pagaItem/'+vm.custo).then(function(response){
                       $("#usaItemIndividual").modal("show");   
-                      vm.getUser();                                        
+                      vm.getUser(); 
+                      vm.getAllUsers();                                       
                     });
                   });
                 },

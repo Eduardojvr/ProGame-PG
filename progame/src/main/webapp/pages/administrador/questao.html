@@ -67,7 +67,8 @@
                            
                             
                              Questão
-                             <input type="text" v-model="quest.questao" name="nome" size="60"> <br/><br/>
+                             <textarea name="descricao" v-model="quest.questao" rows="2" cols="60"></textarea><br/><br/>
+                             <!-- <input type="text" v-model="quest.questao" name="nome" size="60"> <br/><br/> -->
                              <div v-if="quest.idTipoQuestao === '3'">
                                 Resposta
                                 <select v-model="quest.resposta">

@@ -265,10 +265,10 @@ data-keyboard="false">
 			</div>
 </div>
     <!-- <script src="../resources/vendor/jquery/jquery-3.2.1.min.js"></script> -->
-    <script src="../resources/js/axios.min.js" ></script>
     <script src="../resources/js/vue.js"></script>
-		<!-- <script
-			src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script> -->
+    <!-- <script src="../resources/js/axios.min.js" ></script> -->
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
 		<script src="../resources/css/quiz.css"></script>
 
 		<script>
@@ -458,17 +458,19 @@ let q = new Vue({
         axios.get('../rs/user/getUser').then(function(response){
           vm.dados = response.data
           axios.get('../rs/questao/todasQuestoes/' + response.data["level"]).then(function(questao){
-            $('#aguarde').modal('hide');
             vm.todasQuestoes = questao.data;
             vm.totalQuestao = vm.todasQuestoes.length;
+          }).finally(function(){
+            $("#aguarde").modal("hide");
           });
           // vm.totalQuestao.sort();
-        });
+        }).finally(function(){
+            $("#aguarde").modal("hide");
+          });
       },
       verificaVF : function(resposta, posicao){
         const vm = this;
         // document.getElementById('btVF').style = "visibility: hidden;";
-
         if(resposta == vm.todasQuestoes[posicao].resposta){
           document.getElementById('feedback').innerHTML = 'Resposta correta!';
           document.getElementById('feedback').style = "background-color: rgba(63, 191, 104, 0.5);";
@@ -531,7 +533,7 @@ let q = new Vue({
         },
         atualizaItem : function(){
           const vm = this;
-          $("#processando").modal("show");
+          // $("#processando").modal("show");
           if(vm.compras.length > 0){
             axios.get('../rs/item/getOneEspada/'+vm.compras[0].idEspada).then(function(response) {
               vm.espada = response.data;
@@ -549,10 +551,14 @@ let q = new Vue({
 
                 axios.post('../rs/item/atualizaMinhasCompras/', vm.itemAtual).then(function(response) {
                   vm.getMinhasCompras();
-                  $("#processando").modal("hide");
+                }).finally(function(){
                 });
               }
+            }).finally(function(){
+              // $("#processando").modal("hide");
             });
+          } else {
+            // $("#processando").modal("hide");
           }
         },
         atualizaPontuacao :function (){ 
@@ -578,6 +584,7 @@ let q = new Vue({
                   axios.get('../rs/user/atualizaPontuacao/'+(parseInt(vm.dados.pontuacao)+parseInt(pontuacao))+'/'+vm.dados.matricula+'/'+vm.dados.level).then(function(response) {
                     vm.getMinhasCompras();
                     vm.dados.pontuacao = parseInt(vm.dados.pontuacao)+parseInt(pontuacao);
+                  }).finally(function(){
                     $("#processando").modal("hide");
                   });
                 });
@@ -587,13 +594,15 @@ let q = new Vue({
               axios.get('../rs/user/getUser/').then(function(response) {
                 vm.dados = response.data;
                 axios.get('../rs/user/atualizaPontuacao/'+(parseInt(vm.dados.pontuacao)+parseInt(pontuacao))+'/'+vm.dados.matricula+'/'+vm.dados.level).then(function(response) {
-                  $("#processando").modal("hide");
                   vm.dados.pontuacao = parseInt(vm.dados.pontuacao)+parseInt(pontuacao);
                   vm.getMinhasCompras();
+              }).finally(function(){
+                $("#processando").modal("hide");
               });
+            }).finally(function(){
+              $("#processando").modal("hide");
             });
-          }
-
+          } 
         }
     }
 });
