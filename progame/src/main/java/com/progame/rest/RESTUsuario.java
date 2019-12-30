@@ -111,7 +111,16 @@ public class RESTUsuario {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response logout() {
 		HttpSession session = request.getSession();
-		String firstRedirectUrl = request.getContextPath()+"/sobre.html";
+		String secondRedirectUrl = request.getRequestURI()+"?"+request.getQueryString(); 
+		String serverUrlEncodingPreferablyUTF8 = null;
+		String encodedSecondRedirectUrl = null;
+		try {
+			encodedSecondRedirectUrl = URLEncoder.encode(secondRedirectUrl, serverUrlEncodingPreferablyUTF8);
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		String firstRedirectUrl = request.getContextPath()+"/index.html";
 		try {
 			if (session != null) {
 				request.getSession().setAttribute("logado", false);
