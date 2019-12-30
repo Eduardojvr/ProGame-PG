@@ -32,14 +32,14 @@ let login = new Vue({
                         window.location.href = "pages/perfil.html"; 
                     }
                 } else {
-                    alert("Não foi possível realizar o login. Usuário ou senha incorretos!");
+                    demo.novaMensagem('Não foi possível realizar o login. Usuário ou senha incorretos!', 4);
+                    demo.showNotification();
                 }
                 fechaLoad(modalName);
-            
             }).catch(function (error){
-                alert("Erro ao realizar login :(");
+                demo.novaMensagem('Sistema temporariamente indisponível!', 4);
+                demo.showNotification();
                 fechaLoad(modalName);
-
             });
         },
         logout: function(){
@@ -47,7 +47,9 @@ let login = new Vue({
                 sessionStorage.clear();
                 window.location.href = "../index.html";
             }).catch(function (error){
-                alert("Erro ao realizar logout!");
+                demo.novaMensagem('Erro ao realizar logout! Verifique sua conexão com a internet!', 4);
+                demo.showNotification();
+                // alert("Erro ao realizar logout!");
             });
         }
     }

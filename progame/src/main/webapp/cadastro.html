@@ -61,7 +61,7 @@
 						<div class="wrap-input100 validate-input"
 							data-validate="Enter matrícula">
 							<input class="input100" type="text" name="matricula"
-								placeholder="Matrícula" v-model="matricula"> <span
+								placeholder="Matrícula" v-model="matricula" id="matricula"> <span
 								class="focus-input100" data-placeholder="&#xf000;"></span>
 
 						</div>
@@ -84,6 +84,7 @@
 							<button type="button" class="btn btn-danger"
 								@click="cadastra('loader')">Cadastrar</button>
 						</div>
+						<br>
 					</form>
 				</div>
 			</div>
@@ -92,7 +93,7 @@
 
 
 	<div id="dropDownSelect1"></div>
-
+	<script src="resources/js/jquery.mask.js"></script>
 	<script src="resources/js/axios.min.js"></script>
 	<script src="resources/js/vue.js"></script>
 	<script src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -106,7 +107,8 @@
 	<script src="resources/js/main.js"></script>
 	<script src="resources/js/load.js"></script>
 	<script src="resources/js/pages/cadastroUsuario.js"></script>
-
+	<script src="resources/js/plugins/bootstrap-notify.js"></script>
+	<script src="resources/js/demo.js"></script>
 
 
 </body>

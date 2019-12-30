@@ -10,6 +10,9 @@ $().ready(function() {
 
     fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
 
+    var m = '';
+    var cor = '';
+
     if (window_width > 767 && fixed_plugin_open == 'Dashboard') {
         if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
             $('.fixed-plugin .dropdown').addClass('show');
@@ -499,16 +502,20 @@ demo = {
         // To add the marker to the map, call setMap();
         marker.setMap(map);
     },
-
+    novaMensagem: function(ms, c){
+        m = ms;
+        cor = c;
+    },
     showNotification: function(from, align) {
         color = Math.floor((Math.random() * 4) + 1);
 
         $.notify({
-            message: "Bem vindo ao <b>Pro Game</b>. Vamos jogar?"
+            icon: "nc-icon nc-app",
+            message: m
 
         }, {
-            type: type[color],
-            timer: 8000,
+            type: type[cor],
+            timer: 2000,
             placement: {
                 from: from,
                 align: align
