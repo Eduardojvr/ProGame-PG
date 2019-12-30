@@ -1,6 +1,8 @@
 
 package com.progame.rest;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -109,10 +111,12 @@ public class RESTUsuario {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response logout() {
 		HttpSession session = request.getSession();
+		String firstRedirectUrl = request.getContextPath()+"/sobre.html";
 		try {
 			if (session != null) {
 				request.getSession().setAttribute("logado", false);
 				session.invalidate();
+				response.sendRedirect(firstRedirectUrl);
 				return Response.ok().status(Status.OK).build();
 			} else {
 				return Response.status(Status.FORBIDDEN).build();
