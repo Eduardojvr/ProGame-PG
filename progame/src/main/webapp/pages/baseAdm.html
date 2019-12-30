@@ -83,7 +83,15 @@
 
 	<script>
         new Vue({
-            el:'#login',
+			el:'#login',
+			created: function(){
+				const vm = this;
+				axios.get('../../rs/user/getUser').then(function(response){
+					if(response.data["idTipoPerfil"] != '2'){
+						vm.logout();
+					}
+				});
+			},
             methods:{
                 logout: function(){
 					axios.post('../../rs/user/logout').then(function(response) {
