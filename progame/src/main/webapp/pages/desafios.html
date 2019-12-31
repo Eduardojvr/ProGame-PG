@@ -120,7 +120,11 @@
 
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script> -->
     <script src="../resources/js/core/jquery.3.2.1.min.js"
-		type="text/javascript"></script>
+    type="text/javascript"></script>
+    <script src="../resources/js/plugins/bootstrap-notify.js"></script>
+	<script src="../resources/js/demo.js"></script>
+
+
 
 	<script> 
 
@@ -128,7 +132,7 @@
       el:'#desafio',
       data:{
         desafios: {},
-        respostaDesafio: [
+        respostaDesafio: 
           {
             idDesafio: '',
             desafio: '',
@@ -138,8 +142,9 @@
             resposta:'',
             correcaoAvaliador:''
           }
-        ],
-        usuario: {}
+        ,
+        usuario: {},
+        mensagens:[]
       },
       created: function(){
         const vm = this;
@@ -166,21 +171,45 @@
           vm.respostaDesafio = item;
           $('#responde').modal('show');
         },
+        verificaCampos : function (){
+            const vm = this;
+
+            vm.mensagens = [];
+          
+            var isOk = 1;
+            if(vm.respostaDesafio.resposta.length <= 1){
+              vm.mensagens.push('Digite uma resposta válida. A resposta deve conter no mínimo 1 caracter.');
+            }
+            
+            for(var a = 0; a < vm.mensagens.length; a++){
+              if(vm.mensagens[a] != null){
+                demo.novaMensagem(vm.mensagens[a], 4);
+                demo.showNotification();
+              }
+            }
+
+            if(parseInt(vm.mensagens.length) > 0){
+              isOk = 0;
+            }
+            return isOk;
+		},
         salvar: function(){
           const vm = this;
           vm.respostaDesafio.matricula = vm.usuario.matricula;
-          axios.post('../rs/desafio/salvaRespostaDesafioProgramado',  vm.respostaDesafio).then(function(response){
-            if(response.data == true){
-              axios.get('../rs/user/getUser/').then(function(response2) {
-                axios.get('../rs/user/atualizaPontuacao/'+(parseInt(response2.data["pontuacao"])+parseInt(100))+'/'+response2.data["matricula"]+'/'+response2.data["level"]).then(function(response) {              
-                    $("#feedbackResposta").modal("show");
+          if(vm.verificaCampos() == 1){
+            axios.post('../rs/desafio/salvaRespostaDesafioProgramado',  vm.respostaDesafio).then(function(response){
+              if(response.data == true){
+                axios.get('../rs/user/getUser/').then(function(response2) {
+                  axios.get('../rs/user/atualizaPontuacao/'+(parseInt(response2.data["pontuacao"])+parseInt(100))+'/'+response2.data["matricula"]+'/'+response2.data["level"]).then(function(response) {              
+                      $("#feedbackResposta").modal("show");
+                  });
                 });
-              });
-              axios.get('../rs/desafio/desafioProgramado/'+vm.usuario.matricula).then(function(response){
-                  vm.desafios = response.data;
-              });
-            }
-          });
+                axios.get('../rs/desafio/desafioProgramado/'+vm.usuario.matricula).then(function(response){
+                    vm.desafios = response.data;
+                });
+              }
+            });
+           }
         }
       }
     });
