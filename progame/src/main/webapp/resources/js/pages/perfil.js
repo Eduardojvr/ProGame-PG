@@ -1,7 +1,7 @@
 let tes = new Vue({
     el : '#usuario',
     data : {
-        dados : [
+        dados : 
             {
                 nomeUsuario : '',
                 matricula : '',
@@ -10,115 +10,61 @@ let tes = new Vue({
                 email : '',
                 pontuacao : '',
                 level : '',
-                nomePersonagem : ''
-            }
-        ]
+                nomePersonagem : '',
+                desativado: ''
+            },
+            idPersonagem : '',
+            nomePersonagem : '',
+            imgPersonagem : '',
+            nomeUsuario : '',
+            level : '',
+            progresso: '',
+            usuario: {},
+            totalvs: 0,
+            totalNotificacao: 0,
+            mensagens:[]   
+        
     },
     created : function(){
         const vm = this;
         vm.getUser();
-    },
-    methods : {
-        getUser : function(){
-            const vm = this;
-            axios.get('../rs/user/getUser').then(function(response) {
-                vm.dados[0].nomeUsuario = response.data["nomeUsuario"];
-                vm.dados[0].matricula = response.data["matricula"];
-                vm.dados[0].idTipoPerfil  = response.data["idTipoPerfil"];
-                // vm.dados[0].idPersonagem  = response.data["idPersonagem"];
-                vm.dados[0].email = response.data["email"];
-                vm.dados[0].pontuacao  = response.data["pontuacao"];
-                vm.dados[0].level  = response.data["level"];
-                vm.dados[0].nomePersonagem = sessionStorage.getItem('nomePersonagem');
-                // sessionStorage.setItem('idPersonagem', vm.dados[0].idPersonagem);
-            });
-
-        }
-    }
-    
- });
-
-
-let a = new Vue({
-    el : '#personagem',
-    data : {
-        idPersonagem : '',
-        nomePersonagem : '',
-        imgPersonagem : ''
-    },
-    mounted : function(){
-            const vm = this;
-            vm.idPersonagem = sessionStorage.getItem('idPersonagem');
-            vm.imgPersonagem = sessionStorage.getItem('imgPersonagem');
-            // Apagar
-                // sessionStorage.setItem('nomePersonagem','Aisha');
-                // sessionStorage.setItem('imgPersonagem', sessionStorage.getItem('imgPersonagem'));
-            if(vm.idPersonagem != null){
-                axios.get('../rs/personagem/getPersonagem/'+vm.idPersonagem).then(function(response) {
-                    vm.nomePersonagem = response.data["nomePersonagem"];
-                    vm.imgPersonagem = response.data["imgPersonagem"];
-                    sessionStorage.setItem('nomePersonagem', vm.nomePersonagem);
-                });
-            }
-    }
- });
-
-
-
-
-let t = new Vue({
-    el : '#gerenciapersonagem',
-    data : {
-        nomeUsuario : ''    
-    },
-    created : function(){
-        const vm = this;
-    
         axios.get('../rs/user/getUser').then(function(response) {
+            vm.usuario = response.data;
             vm.nomeUsuario = response.data["nomeUsuario"];
+            vm.calculaProgresso();
+            vm.grafico();
         });
-
+        var count = 0;
+        axios.get('../rs/user/getUser').then(function(response){
+            axios.get('../rs/desafio/todosDesafios/'+response.data["matricula"]).then(function(response){
+                while(response.data[count]){
+                    count+=1;
+                }
+                vm.totalvs = count;
+                vm.totalNotificacao = 1;
+            });
+        });
     },
     methods : {
         redireciona : function(link){
             window.location.href = link;
-        }
-    },
-    mounted : function(){
-            if(sessionStorage.getItem('login') == 1){
-                sessionStorage.setItem('login', 0);
-                $("#modalFeedbackBomJogo").modal("show");
-            }
-            if(sessionStorage.getItem('idPersonagem') == 7){
-                $("#modalRelatedContent").modal("show");
-            }
-            if(sessionStorage.getItem('escolheu') == 1){
-                sessionStorage.setItem('escolheu', 0);
-                $("#modalFeedback").modal("show");
-            }
+        },
+        getUser : function(){
+            const vm = this;
+            axios.get('../rs/user/getUser').then(function(response) {
+                vm.dados.nomeUsuario = response.data["nomeUsuario"];
+                vm.dados.matricula = response.data["matricula"];
+                vm.dados.idTipoPerfil  = response.data["idTipoPerfil"];
+                // vm.dados.idPersonagem  = response.data["idPersonagem"];
+                vm.dados.email = response.data["email"];
+                vm.dados.pontuacao  = response.data["pontuacao"];
+                vm.dados.level  = response.data["level"];
+                vm.dados.desativado  = response.data["desativado"];
+                vm.dados.nomePersonagem = sessionStorage.getItem('nomePersonagem');
+                // sessionStorage.setItem('idPersonagem', vm.dados.idPersonagem);
+            });
 
-    }
-    
- });
-
-
- let progress = new Vue({
-    el : '#progress',
-    data : {
-        level : '',
-        progresso: '',
-        usuario: {}
-    },
-    created : function(){
-        const vm = this;
-        axios.get('../rs/user/getUser').then(function(response) {
-            vm.usuario = response.data;
-            vm.calculaProgresso();
-            vm.grafico();
-        });
-
-    },
-    methods : {
+        },
         grafico : function (){
             const vm = this;
             axios.get('../rs/desafio/totalDesafioCerto/'+vm.usuario.matricula).then(function(response){
@@ -135,11 +81,116 @@ let t = new Vue({
             } else {
                 vm.progresso = (100/12*parseInt(vm.usuario.level)).toFixed(0)+'%';
             }
+        },
+        logout: function(){
+            axios.post('../rs/user/logout').then(function(response) {
+                sessionStorage.clear();
+                window.location.href = "../index.html";
+            }).catch(function (error){
+                demo.novaMensagem('Erro ao realizar logout! Verifique sua conexão com a internet!', 4);
+                demo.showNotification();
+            });
+        },
+        verificaCampos : function (){
+			const vm = this;
+			vm.mensagens = [];
+			var isOk = 1;
+			if(vm.dados.nomeUsuario == ''){
+				vm.mensagens.push('Nome do usuário é obrigatório');
+			}
+			if(vm.dados.email == ''){
+				vm.mensagens.push('Email é obrigatório');
+			} 
+			if(vm.dados.desativado == ''){
+				vm.mensagens.push('É obrigatório indicar o desativamento ou ativamento do perfil!');
+			}
+			
+			for(var a = 0; a < vm.mensagens.length; a++){
+				if(vm.mensagens[a] != null){
+					demo.novaMensagem(vm.mensagens[a], 4);
+					demo.showNotification();
+				}
+			}
+
+			if(parseInt(vm.mensagens.length) > 0){
+				isOk = 0;
+			}
+			return isOk;
+		},
+        salvar(){
+            const vm = this;
+            if(this.verificaCampos() == 1){
+                axios.post('../rs/user/atualizaDados', vm.dados).then(function(response){
+                    if(vm.dados.desativado == 'S'){
+                        $("#desativa").modal("show");
+                    } else {
+                        $("#sucessoAtualizaPerfil").modal("show");
+                    }
+                }).finally(function(){
+                    vm.getUser();
+                });
+            }
+        }
+    },
+    mounted : function(){
+        const vm = this;
+
+        if(sessionStorage.getItem('modalReativacaoPerfil') == 'S'){
+            sessionStorage.removeItem('modalReativacaoPerfil');
+            $("#reativado").modal("show");
+        } else {
+            if(sessionStorage.getItem('login') == 1){
+                sessionStorage.setItem('login', 0);
+                $("#modalFeedbackBomJogo").modal("show");
+            }
+            if(sessionStorage.getItem('idPersonagem') == 7){
+                $("#modalRelatedContent").modal("show");
+            }
+            if(sessionStorage.getItem('escolheu') == 1){
+                sessionStorage.setItem('escolheu', 0);
+                $("#modalFeedback").modal("show");
+            }
+        }
+        
+        vm.idPersonagem = sessionStorage.getItem('idPersonagem');
+        vm.imgPersonagem = sessionStorage.getItem('imgPersonagem');
+        // Apagar
+            // sessionStorage.setItem('nomePersonagem','Aisha');
+            // sessionStorage.setItem('imgPersonagem', sessionStorage.getItem('imgPersonagem'));
+        if(vm.idPersonagem != null){
+            axios.get('../rs/personagem/getPersonagem/'+vm.idPersonagem).then(function(response) {
+                vm.nomePersonagem = response.data["nomePersonagem"];
+                vm.imgPersonagem = response.data["imgPersonagem"];
+                sessionStorage.setItem('nomePersonagem', vm.nomePersonagem);
+            });
         }
     }
-    
  });
 
+
+// let a = new Vue({
+//     el : '#personagem',
+//     data : {
+//         idPersonagem : '',
+//         nomePersonagem : '',
+//         imgPersonagem : ''
+//     },
+//     mounted : function(){
+//             const vm = this;
+//             vm.idPersonagem = sessionStorage.getItem('idPersonagem');
+//             vm.imgPersonagem = sessionStorage.getItem('imgPersonagem');
+//             // Apagar
+//                 // sessionStorage.setItem('nomePersonagem','Aisha');
+//                 // sessionStorage.setItem('imgPersonagem', sessionStorage.getItem('imgPersonagem'));
+//             if(vm.idPersonagem != null){
+//                 axios.get('../rs/personagem/getPersonagem/'+vm.idPersonagem).then(function(response) {
+//                     vm.nomePersonagem = response.data["nomePersonagem"];
+//                     vm.imgPersonagem = response.data["imgPersonagem"];
+//                     sessionStorage.setItem('nomePersonagem', vm.nomePersonagem);
+//                 });
+//             }
+//     }
+//  });
 
  function grafico (){
     var ctx = document.getElementById('myChart');  

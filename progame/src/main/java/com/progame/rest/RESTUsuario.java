@@ -92,7 +92,9 @@ public class RESTUsuario {
 				request.getSession().setAttribute("email", login.getEmail());
 				request.getSession().setAttribute("nomeUsuario", login.getNomeUsuario());
 				request.getSession().setAttribute("idTipoPerfil", login.getIdTipoPerfil());
-				request.getSession().setAttribute("idPersonagem", login.getIdPersonagem());				
+				request.getSession().setAttribute("idPersonagem", login.getIdPersonagem());	
+				request.getSession().setAttribute("desativado", login.getDesativado());				
+
 				return login;
 			}
 		} catch (Exception e) {
@@ -151,6 +153,8 @@ public class RESTUsuario {
 			usuario.setLevel(usuarioTmp.getLevel());
 			usuario.setEmail(usuarioTmp.getEmail());
 			usuario.setIdTipoPerfil(usuarioTmp.getIdTipoPerfil());
+			usuario.setDesativado(usuarioTmp.getDesativado());
+
 			
 			return usuario;
 		} catch (Exception e) {
@@ -249,6 +253,43 @@ public class RESTUsuario {
 		boolean isOk = false;
 		try {
 			isOk = dao.tiraPonto(penalidade, pontuacaoAtual, matricula);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}				
+		return isOk;
+	}
+	
+	@GET
+	@Path("/desativaPerfil/")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public boolean desativaPerfil() {
+		UsuarioDAO dao = new UsuarioDAO();
+		boolean isOk = false;
+		Usuario user = null;
+		try {
+			user = dao.getUsuario(request.getSession().getAttribute("matricula").toString());
+			isOk = dao.desativaPerfil(user.getMatricula());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}				
+		return isOk;
+	}
+	
+	@POST
+	@Path("/atualizaDados/")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public boolean atualizaDados(Usuario usuario) {
+		UsuarioDAO dao = new UsuarioDAO();
+		boolean isOk = false;
+		Usuario user = null;
+		try {
+			user = dao.getUsuario(request.getSession().getAttribute("matricula").toString());
+			user.setDesativado(usuario.getDesativado());
+			user.setEmail(usuario.getEmail());
+			user.setNomeUsuario(usuario.getNomeUsuario());
+			isOk = dao.atualizaDados(user);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}				

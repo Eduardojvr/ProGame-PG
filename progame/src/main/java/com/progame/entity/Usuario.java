@@ -9,6 +9,7 @@ public class Usuario {
 	private String email;
 	private String pontuacao;
 	private String level;
+	private String desativado;
 	
 	public String getNomeUsuario() {
 		return nomeUsuario;
@@ -58,6 +59,12 @@ public class Usuario {
 	}
 	public void setLevel(String level) {
 		this.level = level;
+	}
+	public String getDesativado() {
+		return desativado;
+	}
+	public void setDesativado(String desativado) {
+		this.desativado = desativado;
 	}
 
 	

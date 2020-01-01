@@ -16,6 +16,7 @@ let login = new Vue({
             axios.post('rs/user/login', obj).then(function(response) {
                 if(response.status == 200){
                     sessionStorage.setItem('idPersonagem', response.data["idPersonagem"]);
+                    sessionStorage.setItem('modalReativacaoPerfil', response.data["desativado"]);
 
                     // gambiarra :(
                     sessionStorage.setItem('imgPersonagem', '../resources/img/persona.png');

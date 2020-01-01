@@ -37,9 +37,10 @@ public class UsuarioDAO {
 		sql.append(" idPersonagem, ");
 		sql.append(" email, ");
 		sql.append(" pontuacao, ");
-		sql.append(" level ");
+		sql.append(" level, ");
+		sql.append(" desativado ");
 		sql.append(" ) ");
-		sql.append(" VALUES (?,?,?,?,?,?,?,?);");
+		sql.append(" VALUES (?,?,?,?,?,?,?,?,?);");
 
 		try {
 			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
@@ -51,6 +52,7 @@ public class UsuarioDAO {
 			pstmt.setString(6, usuario.getEmail());
 			pstmt.setString(7, "0");
 			pstmt.setString(8, "1");
+			pstmt.setString(9, "N");
 
 			pstmt.executeUpdate();
 
@@ -78,7 +80,7 @@ public class UsuarioDAO {
 		String criptografia = new BigInteger(1,m.digest()).toString(16);
 
 
-		pstmt = db.prepareStatement("select nomeUsuario, matricula, senha, idTipoPerfil, idPersonagem, email, pontuacao, level from usuario");
+		pstmt = db.prepareStatement("select nomeUsuario, matricula, senha, idTipoPerfil, idPersonagem, email, pontuacao, level, desativado from usuario");
 
 		try {
 			result = pstmt.executeQuery();
@@ -93,8 +95,11 @@ public class UsuarioDAO {
 					achou.setIdPersonagem(result.getString("idPersonagem"));
 					achou.setEmail(result.getString("email"));		
 					achou.setPontuacao(result.getString("pontuacao"));				
-					achou.setLevel(result.getString("level"));				
-
+					achou.setLevel(result.getString("level"));		
+					achou.setDesativado(result.getString("desativado"));
+					if(achou.getDesativado().equals("S")) {
+						reativaPerfil(achou.getMatricula());						
+					}
 				}
 			}
 		} catch (Exception e) {
@@ -106,6 +111,57 @@ public class UsuarioDAO {
 		}
 		return achou;
 	}
+	
+	public boolean reativaPerfil(String matricula) throws Exception {
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		ResultSet result = null;
+
+		Boolean execute = false;
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("update USUARIO set desativado='N' where matricula="+matricula);
+
+		try {
+			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+			pstmt.executeUpdate();
+			execute = true;
+		}catch(Exception e) {
+			throw new Exception(e);
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+		return execute;
+	}
+	
+	public boolean desativaPerfil(String matricula) throws Exception {
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		ResultSet result = null;
+
+		Boolean execute = false;
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("update USUARIO set desativado='S' where matricula="+matricula);
+
+		try {
+			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+			pstmt.executeUpdate();
+			execute = true;
+		}catch(Exception e) {
+			throw new Exception(e);
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+		return execute;
+	}
+
 
 	public boolean updatePontuacao(int pontos, String matricula, String levelAtual) throws Exception {
 		Connection db = ConnectionManager.getDBConnection();
@@ -202,7 +258,7 @@ public class UsuarioDAO {
 
 		ResultSet result = null;
 
-		pstmt = db.prepareStatement("select nomeUsuario, matricula, senha, idTipoPerfil, idPersonagem, email, "
+		pstmt = db.prepareStatement("select nomeUsuario, matricula, senha, idTipoPerfil, idPersonagem, email, desativado, "
 				+ "pontuacao, level from usuario where matricula="+matricula);
 
 		try {
@@ -217,8 +273,8 @@ public class UsuarioDAO {
 					achou.setIdPersonagem(result.getString("idPersonagem"));
 					achou.setEmail(result.getString("email"));		
 					achou.setPontuacao(result.getString("pontuacao"));				
-					achou.setLevel(result.getString("level"));				
-
+					achou.setLevel(result.getString("level"));	
+					achou.setDesativado(result.getString("desativado"));				
 				}
 			}
 
@@ -245,16 +301,19 @@ public class UsuarioDAO {
 		try {
 			result = pstmt.executeQuery();
 			while (result.next()) {
-				achou = new Usuario();
-				achou.setNomeUsuario(result.getString("nomeUsuario"));
-				achou.setMatricula(result.getString("matricula"));
-				//achou.setSenha(result.getString("senha"));
-				achou.setIdTipoPerfil(result.getString("idTipoPerfil"));
-				achou.setIdPersonagem(result.getString("idPersonagem"));
-				achou.setEmail(result.getString("email"));		
-				achou.setPontuacao(result.getString("pontuacao"));				
-				achou.setLevel(result.getString("level"));	
-				usuario.add(achou);
+				if(!result.getString("desativado").equals("S")) {
+					achou = new Usuario();
+					achou.setNomeUsuario(result.getString("nomeUsuario"));
+					achou.setMatricula(result.getString("matricula"));
+					//achou.setSenha(result.getString("senha"));
+					achou.setIdTipoPerfil(result.getString("idTipoPerfil"));
+					achou.setIdPersonagem(result.getString("idPersonagem"));
+					achou.setEmail(result.getString("email"));		
+					achou.setPontuacao(result.getString("pontuacao"));				
+					achou.setLevel(result.getString("level"));	
+					achou.setDesativado(result.getString("desativado"));				
+					usuario.add(achou);
+				}
 
 			}
 
@@ -355,6 +414,31 @@ public class UsuarioDAO {
 			db.close();
 		}
 		return isOk;
+	}
+
+	public boolean atualizaDados(Usuario usuario) throws Exception {
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		ResultSet result = null;
+
+		Boolean execute = false;
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("update USUARIO set email='"+usuario.getEmail()+"', desativado='"+usuario.getDesativado()+"', nomeUsuario='"+usuario.getNomeUsuario()+"' where matricula="+usuario.getMatricula());
+
+		try {
+			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+			pstmt.executeUpdate();
+			execute = true;
+		} catch(Exception e) {
+			throw new Exception(e);
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+		return execute;
 	}
 	
 }

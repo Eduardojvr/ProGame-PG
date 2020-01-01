@@ -1,0 +1,16 @@
+input {
+	border-style: solid;
+	border-top: hidden;	
+	border-left: hidden;
+	border-right: hidden;
+}
+
+#btn-edit:hover {
+	color: rgb(153, 70, 180);
+	cursor: pointer;
+}
+
+#btn-edit{
+	font-family: pixel;
+	color: steelblue;
+}

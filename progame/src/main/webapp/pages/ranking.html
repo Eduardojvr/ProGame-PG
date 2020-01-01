@@ -37,7 +37,14 @@
 
 <link href="../resources/css/demo.css" rel="stylesheet" />
 
-
+<style>
+  @font-face {
+    font-family: 'pixel';
+    /* src: url('../resources/fonts/PixelOperatorHB.ttf'); */
+    src: url('../resources/fonts/PixelOperatorMono.ttf');
+  }
+  
+  </style>
 </head>
 
 <body>
@@ -46,9 +53,9 @@
 		<div id="menu"></div>
 		<div class="main-panel">
 			<div class="container">
-				<div id="app" class="tabela">
-					<h5>Pontos: {{ pontos }}</h5>
-					<h5>Posição: {{ posicaojogador }}</h5>
+				<div id="app" class="tabela" >
+					<h4 style="font-family: pixel;">Pontos: {{ pontos }}</h4>
+					<h4 style="font-family: pixel;">Posição: {{ posicaojogador }}</h4>
 					<h2 style="text-align: center;">Ranking Global</h2>
 					<div>
 						<v-app id="inspire"> <v-card> <v-card-title>
