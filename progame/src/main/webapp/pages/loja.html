@@ -33,480 +33,540 @@
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="../resources/css/util.css">
 <link rel="stylesheet"
-  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <link rel="stylesheet" href="../resources/less/style.less">
-  
-  <style>
-  @font-face {
-    font-family: 'game';
-    src: url('../resources/fonts/game.ttf');
-  }
 
-  @font-face {
-    font-family: 'pixel';
-    /* src: url('../resources/fonts/PixelOperatorHB.ttf'); */
-    src: url('../resources/fonts/PixelOperatorMono.ttf');
-
-  }
-
-.img{
-  width: 25px;
-  height: 25px;
+<style>
+@font-face {
+	font-family: 'game';
+	src: url('../resources/fonts/game.ttf');
 }
 
-.sombra:hover{
-  background-color: rgba(255, 255, 255, 0.753);
-  border-radius: 50px;
-  padding: 10px;
+@font-face {
+	font-family: 'pixel';
+	/* src: url('../resources/fonts/PixelOperatorHB.ttf'); */
+	src: url('../resources/fonts/PixelOperatorMono.ttf');
 }
 
-  </style>
+.img {
+	width: 25px;
+	height: 25px;
+}
+
+.sombra:hover {
+	background-color: rgba(255, 255, 255, 0.753);
+	border-radius: 50px;
+	padding: 10px;
+}
+</style>
 
 </head>
 
 <!-- <body style="background: rgba(7, 39, 58, 0.411);"> -->
 
 <body style="background: rgba(13, 138, 160, 0.774);">
-<div id="loja">
+	<div id="loja">
 
-  <div
-  style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
-  id="confirma" class="modal fade top" tabindex="-1" role="dialog"
-   aria-hidden="true" data-backdrop='false'
-  data-keyboard="false">
-  <div class="modal-dialog modal-lg modal-frame modal-top"
-    role="document">
-    <div style="background-color: rgba(255, 255, 255, 0.9);"
-      class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"
-          aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div style="text-align: center; font-family: pixel;">
-          <h3>Notificação</h3>
-        </div>
-        <div class="row">
-          <div class="col-3">
-            <img height="400" width="280" src="../resources/img/aisha.png" alt="">
-          </div>
-          <div style="padding-left: 140px; padding-top: 9%; font-family: pixel;" class="col-8">
-            <h4>Tem certeza que deseja comprar este item?<br>Isto te custará {{ custo }} pontos</h4>
-            <div style="padding-left: 18%; padding-top: 14%;">
-              <button type="button" @click="confirma()"
-              class="btn btn-info btn-md" style="font-family: pixel;">Confirmar</button> &nbsp;
-              <button type="button"
-              class="btn btn-danger btn-md" data-dismiss="modal"
-              aria-label="Close" style="font-family: pixel;">Cancelar</button>
-              </div>
-          </div>
-                </div>
-                </div>
-        </div>
-      </div>
-    </div>
-
-    <div
-    style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
-    id="confirmaEspada" class="modal fade top" tabindex="-1" role="dialog"
-     aria-hidden="true" data-backdrop='false'
-    data-keyboard="false">
-    <div class="modal-dialog modal-lg modal-frame modal-top"
-      role="document">
-      <div style="background-color: rgba(255, 255, 255, 0.9);"
-        class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"
-            aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div style="text-align: center; font-family: pixel;">
-            <h3>Notificação</h3>
-          </div>
-          <div class="row">
-            <div class="col-3">
-              <img height="400" width="280" src="../resources/img/aisha.png" alt="">
-            </div>
-            <div style="padding-left: 140px; padding-top: 9%; font-family: pixel;" class="col-8">
-              <h4>Tem certeza que deseja comprar este item?<br>Isto te custará {{ custo }} pontos.<br>O item passa a valer a partir da confirmação da compra!</h4>
-              <div style="padding-left: 18%; padding-top: 14%;">
-                <button type="button" @click="confirmaEspada()"
-                class="btn btn-info btn-md" style="font-family: pixel;">Confirmar</button> &nbsp;
-                <button type="button"
-                class="btn btn-danger btn-md" data-dismiss="modal"
-                aria-label="Close" style="font-family: pixel;">Cancelar</button>
-                </div>
-            </div>
-                  </div>
-                  </div>
-          </div>
-        </div>
-      </div>
-
-
-	<div class="modal fade" id="processando" tabindex="-1" role="img"
-		style="padding-right: 10%; padding-top: 10%;" data-backdrop="static"
-		data-keyboard="false">
-		<div class="modal-dialog" role="document" style="width: 0px;">
-			<div class="modal-content"
-				style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
-				<img src="../resources/img/orcDancando.gif" width=200px height=250px
-          style="border-radius: 100px;">
-    
-				<div>
-					<!-- <label style="color: seashell; padding-left: 40px;">Processando...</label> -->
+		<div
+			style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+			id="confirma" class="modal fade top" tabindex="-1" role="dialog"
+			aria-hidden="true" data-backdrop='false' data-keyboard="false">
+			<div class="modal-dialog modal-lg modal-frame modal-top"
+				role="document">
+				<div style="background-color: rgba(255, 255, 255, 0.9);"
+					class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div style="text-align: center; font-family: pixel;">
+							<h3>Notificação</h3>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<img height="400" width="280" src="../resources/img/aisha.png"
+									alt="">
+							</div>
+							<div
+								style="padding-left: 140px; padding-top: 9%; font-family: pixel;"
+								class="col-8">
+								<h4>
+									Tem certeza que deseja comprar este item?<br>Isto te
+									custará {{ custo }} pontos
+								</h4>
+								<div style="padding-left: 18%; padding-top: 14%;">
+									<button type="button" @click="confirma()"
+										class="btn btn-info btn-md" style="font-family: pixel;">Confirmar</button>
+									&nbsp;
+									<button type="button" class="btn btn-danger btn-md"
+										data-dismiss="modal" aria-label="Close"
+										style="font-family: pixel;">Cancelar</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-  </div>
 
-  <div
-  style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
-  id="usaItemEspada" class="modal fade top" tabindex="-1" role="dialog"
-   aria-hidden="true" data-backdrop='false'
-  data-keyboard="false">
-  <div class="modal-dialog modal-lg modal-frame modal-top"
-    role="document">
-    <div style="background-color: rgba(255, 255, 255, 0.9);"
-      class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"
-          aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div style="text-align: center; font-family: pixel;">
-          <h3>Notificação</h3>
-        </div>
-        <div class="row">
-          <div class="col-3">
-            <img height="400" width="280" src="../resources/img/aisha.png" alt="">
-          </div>
-          <div style="padding-left: 140px; padding-top: 8%; font-family: pixel;" class="col-8">
-            <h4>Você acaba de comprar uma espada da loja!<br><br>A partir de agora, as {{ espada.qtd }} próximas questões do modo narrativa, terão seus ganhos multiplicados por {{ espada.fator }}.</h4>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div
-style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
-id="insuficiente" class="modal fade top" tabindex="-1" role="dialog"
- aria-hidden="true" data-backdrop='false'
-data-keyboard="false">
-<div class="modal-dialog modal-lg modal-frame modal-top"
-  role="document">
-  <div style="background-color: rgba(255, 255, 255, 0.9);"
-    class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal"
-        aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div style="text-align: center; font-family: pixel;">
-        <h3>Notificação</h3>
-      </div>
-      <div class="row">
-        <div class="col-3">
-          <img height="400" width="280" src="../resources/img/aisha.png" alt="">
-        </div>
-        <div style="padding-left: 140px; padding-top: 12%; font-family: pixel;" class="col-8">
-          <h4>Você não possui pontuação suficiente para adquirir este item.</h4>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-
-  <div
-  style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
-  id="usaItem" class="modal fade top" tabindex="-1" role="dialog"
-   aria-hidden="true" data-backdrop='false'
-  data-keyboard="false">
-  <div class="modal-dialog modal-lg modal-frame modal-top"
-    role="document">
-    <div style="background-color: rgba(255, 255, 255, 0.9);"
-      class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"
-          aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div style="text-align: center; font-family: pixel;">
-          <h3>Notificação</h3>
-        </div>
-        <div class="row">
-          <div class="col-3">
-            <img height="400" width="280" src="../resources/img/aisha.png" alt="">
-          </div>
-          <div style="padding-left: 140px; padding-top: 15%; font-family: pixel;" class="col-8">
-            <h4>Boa jogada, você acaba de utilizar um item da loja!<br><br>Todos jogadores perderam {{ pontos }} pontos</h4>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-  
-<div
-style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
-id="usaItemIndividual" class="modal fade top" tabindex="-1" role="dialog"
- aria-hidden="true" data-backdrop='false'
-data-keyboard="false">
-<div class="modal-dialog modal-lg modal-frame modal-top"
-  role="document">
-  <div style="background-color: rgba(255, 255, 255, 0.9);"
-    class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal"
-        aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div style="text-align: center; font-family: pixel;">
-        <h3>Notificação</h3>
-      </div>
-      <div class="row">
-        <div class="col-3">
-          <img height="400" width="280" src="../resources/img/aisha.png" alt="">
-        </div>
-        <div style="padding-left: 140px; padding-top: 15%; font-family: pixel;" class="col-8">
-          <h4>Boa jogada, você acaba de utilizar um item da loja!<br><br>O jogador {{ jogadorEscolhido.nomeUsuario}} perdeu {{ pontos }} pontos.</h4>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-<div class="modal fade" id="processando" tabindex="-1" role="img"
-style="padding-right: 10%; padding-top: 10%;" data-backdrop="static"
-data-keyboard="false">
-<div class="modal-dialog" role="document" style="width: 0px;">
-  <div class="modal-content"
-    style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
-    <img src="../resources/img/orcDancando.gif" width=200px height=250px
-      style="border-radius: 100px;">
-
-    <div>
-      <!-- <label style="color: seashell; padding-left: 40px;">Processando...</label> -->
-    </div>
-  </div>
-</div>
-</div>
-
-<div
-style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
-id="seleciona" class="modal fade top" tabindex="-1" role="dialog"
-aria-hidden="true" data-backdrop='true'
-data-keyboard="false">
-<div class="modal-dialog modal-lg modal-frame modal-top"
-role="document">
-<div style="background-color: rgba(255, 255, 255, 0.9);"
-  class="modal-content">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal"
-      aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div style="text-align: center; font-family: pixel;">
-      <h3>Selecione o jogador que deseja atacar!</h3>
-    </div>
-    <div class="row">
-      <div class="col-3">
-        <img height="400" width="280" src="../resources/img/aisha.png" alt="">
-      </div>
-      <div style="padding-left: 100px; padding-top: 15%; font-family: pixel;" class="col-8">
-       <select  style="padding: 10px;" v-model="jogadorEscolhido" >
-         <option v-if="usuario.matricula != todos.matricula" v-for="todos in todosUsuarios" v-bind:value="todos">👤Jogador: {{ todos.nomeUsuario }} - 🥇Pontuação: {{ todos.pontuacao }}</option>
-       </select>
-       <div style="padding-left: 18%; padding-top: 14%;">
-        <button type="button"
-        class="btn btn-info btn-md" style="font-family: pixel;" @click="usaPorcaoIndividual()">Confirmar</button> &nbsp;
-        <button type="button"
-        class="btn btn-danger btn-md" data-dismiss="modal"
-        aria-label="Close" style="font-family: pixel;">Cancelar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-
-  <audio id="audioPlayer" loop autoplay></audio>
-
-
-	<div class="modal fade" id="aguarde" tabindex="-1" role="img"
-		style="padding-right: 10%; padding-top: 10%;" data-backdrop="static"
-		data-keyboard="false">
-		<div class="modal-dialog" role="document" style="width: 0px;">
-			<div class="modal-content"
-				style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
-				<img src="../resources/img/orcDancando3.gif" width=200px height=250px
-          style="border-radius: 100px;">
-          
-				<div>
-					<label style="color: seashell; padding-left: 60px; font-family: pixel; font-size: 30px;">Aguarde</label>
+		<div
+			style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+			id="confirmaEspada" class="modal fade top" tabindex="-1"
+			role="dialog" aria-hidden="true" data-backdrop='false'
+			data-keyboard="false">
+			<div class="modal-dialog modal-lg modal-frame modal-top"
+				role="document">
+				<div style="background-color: rgba(255, 255, 255, 0.9);"
+					class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div style="text-align: center; font-family: pixel;">
+							<h3>Notificação</h3>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<img height="400" width="280" src="../resources/img/aisha.png"
+									alt="">
+							</div>
+							<div
+								style="padding-left: 140px; padding-top: 9%; font-family: pixel;"
+								class="col-8">
+								<h4>
+									Tem certeza que deseja comprar este item?<br>Isto te
+									custará {{ custo }} pontos.<br>O item passa a valer a
+									partir da confirmação da compra!
+								</h4>
+								<div style="padding-left: 18%; padding-top: 14%;">
+									<button type="button" @click="confirmaEspada()"
+										class="btn btn-info btn-md" style="font-family: pixel;">Confirmar</button>
+									&nbsp;
+									<button type="button" class="btn btn-danger btn-md"
+										data-dismiss="modal" aria-label="Close"
+										style="font-family: pixel;">Cancelar</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-    <div style="background-color: rgba(66, 66, 66); text-align: center;">
-    <br>
-        <h3 style="color: seashell; font-family: game;">Loja</h3>
-        <br>
-    </div>
-    <div style="text-align: right; padding-right: 20px;">
-        <label style="color: rgb(224, 83, 83); font-family: pixel; font-size: 30px;" onclick="window.location.assign('perfil.html')">Sair<img src="../resources/img/sair.png" style="width: 30px; height: 30px;" 
-         ></label> 
-       </div>
-       <div style="padding-left: 5%;">
-        <h3 id="pontuacao" style="color: ghostwhite; font-family: pixel;">Pontuação: {{ usuario.pontuacao }} pontos</h3>
-    </div>
-    <hr>
-    <br><br>
-    <div style="padding-left: 5%;">
-        <label style="font-family: pixel; color:gold; font-size: 40px;" >Porções</label>    
-    </div>
-<div style="text-align: right; padding-right: 20px;">
-    <div id="carouselExampleIndicators" class="carousel slide container" data-interval="false"  style="font-family: game; font-size: 13px; color:rgba(255, 255, 255, 0.856);">
-        <div class="carousel-inner" >
-          <div class="carousel-item active row" >
-            <div class="row">
-              <div class="col-6 col-md-4">
-            <div class="card" style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
-              <div class="card-body">
-                  <img @click="usaLoja('120', '90')" class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/001-pocao.png" alt="">
-                  <div class="card-text" >
-                    <br>
-                    Todos jogadores perdem 120 pontos.
-                    Valor: 90 pontos
-                </div>
-              </div>
-            </div>
-              </div>
-              <div class="col-6 col-md-4">
-                <div class="card" style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
-                    <div class="card-body">
-                        <img @click="usaLoja('200', '150')" class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/004-balao.png" alt="">
-                        <div class="card-text">
-                            <br>
-                            Todos jogadores perdem 200 pontos.
-                            Valor: 150 pontos
-                        </div>
-              </div>
-            </div>
-              </div>
-              <div class="col-md-4 d-md-block d-none">
-                <div class="card" style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
-                    <div class="card-body">
-                        <img @click="usaLojaUmJogador('100', '70')" class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/005-pocao-2.png" alt="">
-                        <div class="card-text">
-                            <br>
-                    Um unico jogador perde 100 pontos
-                    Valor: 70 pontos
-                </div>
-              </div>
-            </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row">
-              <div class="col-6 col-md-4">
-                <div class="card" style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
-                    <div class="card-body">
-                        <img @click="usaLojaUmJogador('170', '130')" class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/003-pocao-magica.png" alt="">
-                        <div class="card-text">
-                            <br>
-                            Um unico jogador perde 170 pontos
-                            Valor: 130 pontos
-                        </div>
-              </div>
-            </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span style="background-color: cyan;" class="sr-only">Next</span>
-        </a>
-      </div>
-</div>
-<br>
-<hr>
-<div style="padding-left: 5%;">
-    <label style="font-family: pixel; color:gold; font-size: 40px;" >Espadas</label>    
-</div>
-<br>
 
-<div style="text-align: right; padding-right: 20px;">
-    <div id="espada" class="carousel slide container" data-interval="false"  style="font-family: game; font-size: 13px; color:rgba(255, 255, 255, 0.856);">
-        <div class="carousel-inner" >
-          <div class="carousel-item active row" >
-            <div class="row">
-              <div class="col-6 col-md-4">
-            <div class="card" style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
-              <div class="card-body">
-                  <img @click="usaLojaEspada(espadas[0])" class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/006-espada.png" alt="">
-                  <div class="card-text" >
-                    <br>
-                    {{ espadas[0].texto }}<br>
-                    Valor: {{ espadas[0].valor }} pontos
-                </div>
-              </div>
-            </div>
-              </div>
-              <div class="col-6 col-md-4">
-                <div class="card" style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
-                    <div class="card-body">
-                        <img @click="usaLojaEspada(espadas[1])" class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/007-espada-1.png" alt="">
-                        <div class="card-text">
-                            <br>
-                            {{ espadas[1].texto }}<br>
-                            Valor: {{ espadas[1].valor }} pontos
-                        </div>
-              </div>
-            </div>
-              </div>
-              <div class="col-md-4 d-md-block d-none">
-                <div class="card" style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
-                    <div class="card-body">
-                        <img @click="usaLojaEspada(espadas[2])" class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/009-espada-2.png" alt="">
-                        <div class="card-text">
-                            <br>
-                            {{ espadas[2].texto }}<br>
-                            Valor: {{ espadas[2].valor }} pontos
-                </div>
-              </div>
-            </div>
-              </div>
-            </div>
-          </div>
-          <!-- <div class="carousel-item">
+
+		<div class="modal fade" id="processando" tabindex="-1" role="img"
+			style="padding-right: 10%; padding-top: 10%;" data-backdrop="static"
+			data-keyboard="false">
+			<div class="modal-dialog" role="document" style="width: 0px;">
+				<div class="modal-content"
+					style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
+					<img src="../resources/img/orcDancando.gif" width=200px
+						height=250px style="border-radius: 100px;">
+
+					<div>
+						<!-- <label style="color: seashell; padding-left: 40px;">Processando...</label> -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div
+			style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+			id="usaItemEspada" class="modal fade top" tabindex="-1" role="dialog"
+			aria-hidden="true" data-backdrop='false' data-keyboard="false">
+			<div class="modal-dialog modal-lg modal-frame modal-top"
+				role="document">
+				<div style="background-color: rgba(255, 255, 255, 0.9);"
+					class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div style="text-align: center; font-family: pixel;">
+							<h3>Notificação</h3>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<img height="400" width="280" src="../resources/img/aisha.png"
+									alt="">
+							</div>
+							<div
+								style="padding-left: 140px; padding-top: 8%; font-family: pixel;"
+								class="col-8">
+								<h4>
+									Você acaba de comprar uma espada da loja!<br>
+									<br>A partir de agora, as {{ espada.qtd }} próximas
+									questões do modo narrativa, terão seus ganhos multiplicados por
+									{{ espada.fator }}.
+								</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div
+			style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+			id="insuficiente" class="modal fade top" tabindex="-1" role="dialog"
+			aria-hidden="true" data-backdrop='false' data-keyboard="false">
+			<div class="modal-dialog modal-lg modal-frame modal-top"
+				role="document">
+				<div style="background-color: rgba(255, 255, 255, 0.9);"
+					class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div style="text-align: center; font-family: pixel;">
+							<h3>Notificação</h3>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<img height="400" width="280" src="../resources/img/aisha.png"
+									alt="">
+							</div>
+							<div
+								style="padding-left: 140px; padding-top: 12%; font-family: pixel;"
+								class="col-8">
+								<h4>Você não possui pontuação suficiente para adquirir este
+									item.</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div
+			style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+			id="usaItem" class="modal fade top" tabindex="-1" role="dialog"
+			aria-hidden="true" data-backdrop='false' data-keyboard="false">
+			<div class="modal-dialog modal-lg modal-frame modal-top"
+				role="document">
+				<div style="background-color: rgba(255, 255, 255, 0.9);"
+					class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div style="text-align: center; font-family: pixel;">
+							<h3>Notificação</h3>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<img height="400" width="280" src="../resources/img/aisha.png"
+									alt="">
+							</div>
+							<div
+								style="padding-left: 140px; padding-top: 15%; font-family: pixel;"
+								class="col-8">
+								<h4>
+									Boa jogada, você acaba de utilizar um item da loja!<br>
+									<br>Todos jogadores perderam {{ pontos }} pontos
+								</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div
+			style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+			id="usaItemIndividual" class="modal fade top" tabindex="-1"
+			role="dialog" aria-hidden="true" data-backdrop='false'
+			data-keyboard="false">
+			<div class="modal-dialog modal-lg modal-frame modal-top"
+				role="document">
+				<div style="background-color: rgba(255, 255, 255, 0.9);"
+					class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div style="text-align: center; font-family: pixel;">
+							<h3>Notificação</h3>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<img height="400" width="280" src="../resources/img/aisha.png"
+									alt="">
+							</div>
+							<div
+								style="padding-left: 140px; padding-top: 15%; font-family: pixel;"
+								class="col-8">
+								<h4>
+									Boa jogada, você acaba de utilizar um item da loja!<br>
+									<br>O jogador {{ jogadorEscolhido.nomeUsuario}} perdeu {{
+									pontos }} pontos.
+								</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="processando" tabindex="-1" role="img"
+			style="padding-right: 10%; padding-top: 10%;" data-backdrop="static"
+			data-keyboard="false">
+			<div class="modal-dialog" role="document" style="width: 0px;">
+				<div class="modal-content"
+					style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
+					<img src="../resources/img/orcDancando.gif" width=200px
+						height=250px style="border-radius: 100px;">
+
+					<div>
+						<!-- <label style="color: seashell; padding-left: 40px;">Processando...</label> -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div
+			style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+			id="seleciona" class="modal fade top" tabindex="-1" role="dialog"
+			aria-hidden="true" data-backdrop='true' data-keyboard="false">
+			<div class="modal-dialog modal-lg modal-frame modal-top"
+				role="document">
+				<div style="background-color: rgba(255, 255, 255, 0.9);"
+					class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div style="text-align: center; font-family: pixel;">
+							<h3>Selecione o jogador que deseja atacar!</h3>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<img height="400" width="280" src="../resources/img/aisha.png"
+									alt="">
+							</div>
+							<div
+								style="padding-left: 100px; padding-top: 15%; font-family: pixel;"
+								class="col-8">
+								<select style="padding: 10px;" v-model="jogadorEscolhido">
+									<option v-if="usuario.matricula != todos.matricula"
+										v-for="todos in todosUsuarios" v-bind:value="todos">👤Jogador:
+										{{ todos.nomeUsuario }} - 🥇Pontuação: {{ todos.pontuacao }}</option>
+								</select>
+								<div style="padding-left: 18%; padding-top: 14%;">
+									<button type="button" class="btn btn-info btn-md"
+										style="font-family: pixel;" @click="usaPorcaoIndividual()">Confirmar</button>
+									&nbsp;
+									<button type="button" class="btn btn-danger btn-md"
+										data-dismiss="modal" aria-label="Close"
+										style="font-family: pixel;">Cancelar</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<audio id="audioPlayer" loop autoplay></audio>
+
+
+		<div class="modal fade" id="aguarde" tabindex="-1" role="img"
+			style="padding-right: 10%; padding-top: 10%;" data-backdrop="static"
+			data-keyboard="false">
+			<div class="modal-dialog" role="document" style="width: 0px;">
+				<div class="modal-content"
+					style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
+					<img src="../resources/img/orcDancando3.gif" width=200px
+						height=250px style="border-radius: 100px;">
+
+					<div>
+						<label
+							style="color: seashell; padding-left: 60px; font-family: pixel; font-size: 30px;">Aguarde</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="background-color: rgba(66, 66, 66); text-align: center;">
+			<br>
+			<h3 style="color: seashell; font-family: game;">Loja</h3>
+			<br>
+		</div>
+		<div style="text-align: right; padding-right: 20px;">
+			<label
+				style="color: rgb(224, 83, 83); font-family: pixel; font-size: 30px;"
+				onclick="window.location.assign('perfil.html')">Sair<img
+				src="../resources/img/sair.png" style="width: 30px; height: 30px;"></label>
+		</div>
+		<div style="padding-left: 5%;">
+			<h3 id="pontuacao" style="color: ghostwhite; font-family: pixel;">Pontuação:
+				{{ usuario.pontuacao }} pontos</h3>
+		</div>
+		<hr>
+		<br>
+		<br>
+		<div style="padding-left: 5%;">
+			<label style="font-family: pixel; color: gold; font-size: 40px;">Porções</label>
+		</div>
+		<div style="text-align: right; padding-right: 20px;">
+			<div id="carouselExampleIndicators" class="carousel slide container"
+				data-interval="false"
+				style="font-family: game; font-size: 13px; color: rgba(255, 255, 255, 0.856);">
+				<div class="carousel-inner">
+					<div class="carousel-item active row">
+						<div class="row">
+							<div class="col-6 col-md-4">
+								<div class="card"
+									style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
+									<div class="card-body">
+										<img @click="usaLoja('120', '90')" class="sombra"
+											style="width: 100px; height: 100px;"
+											src="../resources/img/loja/001-pocao.png" alt="">
+										<div class="card-text">
+											<br> Todos jogadores perdem 120 pontos. Valor: 90 pontos
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-6 col-md-4">
+								<div class="card"
+									style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
+									<div class="card-body">
+										<img @click="usaLoja('200', '150')" class="sombra"
+											style="width: 100px; height: 100px;"
+											src="../resources/img/loja/004-balao.png" alt="">
+										<div class="card-text">
+											<br> Todos jogadores perdem 200 pontos. Valor: 150
+											pontos
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4 d-md-block d-none">
+								<div class="card"
+									style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
+									<div class="card-body">
+										<img @click="usaLojaUmJogador('100', '70')" class="sombra"
+											style="width: 100px; height: 100px;"
+											src="../resources/img/loja/005-pocao-2.png" alt="">
+										<div class="card-text">
+											<br> Um unico jogador perde 100 pontos Valor: 70 pontos
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<div class="row">
+							<div class="col-6 col-md-4">
+								<div class="card"
+									style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
+									<div class="card-body">
+										<img @click="usaLojaUmJogador('170', '130')" class="sombra"
+											style="width: 100px; height: 100px;"
+											src="../resources/img/loja/003-pocao-magica.png" alt="">
+										<div class="card-text">
+											<br> Um unico jogador perde 170 pontos Valor: 130 pontos
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<a class="carousel-control-prev" href="#carouselExampleIndicators"
+					role="button" data-slide="prev"> <span
+					class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+					class="sr-only">Previous</span>
+				</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
+					role="button" data-slide="next"> <span
+					class="carousel-control-next-icon" aria-hidden="true"></span> <span
+					style="background-color: cyan;" class="sr-only">Next</span>
+				</a>
+			</div>
+		</div>
+		<br>
+		<hr>
+		<div style="padding-left: 5%;">
+			<label style="font-family: pixel; color: gold; font-size: 40px;">Espadas</label>
+		</div>
+		<br>
+
+		<div style="text-align: right; padding-right: 20px;">
+			<div id="espada" class="carousel slide container"
+				data-interval="false"
+				style="font-family: game; font-size: 13px; color: rgba(255, 255, 255, 0.856);">
+				<div class="carousel-inner">
+					<div class="carousel-item active row">
+						<div class="row">
+							<div class="col-6 col-md-4">
+								<div class="card"
+									style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
+									<div class="card-body">
+										<img @click="usaLojaEspada(espadas[0])" class="sombra"
+											style="width: 100px; height: 100px;"
+											src="../resources/img/loja/006-espada.png" alt="">
+										<div class="card-text">
+											<br> {{ espadas[0].texto }}<br> Valor: {{
+											espadas[0].valor }} pontos
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-6 col-md-4">
+								<div class="card"
+									style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
+									<div class="card-body">
+										<img @click="usaLojaEspada(espadas[1])" class="sombra"
+											style="width: 100px; height: 100px;"
+											src="../resources/img/loja/007-espada-1.png" alt="">
+										<div class="card-text">
+											<br> {{ espadas[1].texto }}<br> Valor: {{
+											espadas[1].valor }} pontos
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4 d-md-block d-none">
+								<div class="card"
+									style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
+									<div class="card-body">
+										<img @click="usaLojaEspada(espadas[2])" class="sombra"
+											style="width: 100px; height: 100px;"
+											src="../resources/img/loja/009-espada-2.png" alt="">
+										<div class="card-text">
+											<br> {{ espadas[2].texto }}<br> Valor: {{
+											espadas[2].valor }} pontos
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- <div class="carousel-item">
             <div class="row">
               <div class="col-6 col-md-4">
                 <div class="card" style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
@@ -522,8 +582,8 @@ role="document">
               </div>
             </div>
           </div> -->
-        </div>
-        <!-- <a class="carousel-control-prev" href="#espada" role="button" data-slide="prev">
+				</div>
+				<!-- <a class="carousel-control-prev" href="#espada" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
         </a>
@@ -531,90 +591,92 @@ role="document">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span style="background-color: cyan;" class="sr-only">Next</span>
         </a> -->
-      </div>
-</div>
-<br>
-<hr>
-<div style="padding-left: 5%;">
-    <label style="font-family: pixel; color:gold; font-size: 40px;" >Armaduras</label>    
-</div>
-<br>
-<div style="text-align: right; padding-right: 20px;">
-    <div id="armadura" class="carousel slide container" data-interval="false" style="font-family: game; font-size: 13px; color:rgba(255, 255, 255, 0.856);">
-        <div class="carousel-inner" >
-          <div class="carousel-item active row" >
-            <div class="row">
-              <div class="col-6 col-md-4">
-            <div class="card" style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
-              <div class="card-body">
-                  <img class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/016-colete-a-prova-de-balas.png" alt="">
-                  <div class="card-text" >
-                    <br>
-                    Armadura<br>
-                    Valor: 40 pontos
-                </div>
-              </div>
-            </div>
-              </div>
-              <div class="col-6 col-md-4">
-                <div class="card" style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
-                    <div class="card-body">
-                        <img class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/015-armaduras.png" alt="">
-                        <div class="card-text">
-                            <br>
-                            Armadura<br>
-                            Valor: 60 pontos
-                        </div>
-              </div>
-            </div>
-              </div>
-              <div class="col-md-4 d-md-block d-none">
-                <div class="card" style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
-                    <div class="card-body">
-                        <img class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/020-armaduras-1.png" alt="">
-                        <div class="card-text">
-                            <br>
-                        Armadura<br>
-                        Valor: 80 pontos
-                </div>
-              </div>
-            </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row">
-              <div class="col-6 col-md-4">
-                <div class="card" style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
-                    <div class="card-body">
-                        <img class="sombra" style="width: 100px; height: 100px;"  src="../resources/img/loja/019-cavaleiro.png" alt="">
-                        <div class="card-text">
-                            <br>
-                            Armadura<br>
-                            Valor: 150 pontos
-                        </div>
-              </div>
-            </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <a class="carousel-control-prev" href="#armadura" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#armadura" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-</div>
-</div>
-  <script src="../resources/js/axios.min.js" ></script>
-    <script src="../resources/js/vue.js"></script>
+			</div>
+		</div>
+		<br>
+		<hr>
+		<div style="padding-left: 5%;">
+			<label style="font-family: pixel; color: gold; font-size: 40px;">Armaduras</label>
+		</div>
+		<br>
+		<div style="text-align: right; padding-right: 20px;">
+			<div id="armadura" class="carousel slide container"
+				data-interval="false"
+				style="font-family: game; font-size: 13px; color: rgba(255, 255, 255, 0.856);">
+				<div class="carousel-inner">
+					<div class="carousel-item active row">
+						<div class="row">
+							<div class="col-6 col-md-4">
+								<div class="card"
+									style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
+									<div class="card-body">
+										<img class="sombra" style="width: 100px; height: 100px;"
+											src="../resources/img/loja/016-colete-a-prova-de-balas.png"
+											alt="">
+										<div class="card-text">
+											<br> Armadura<br> Valor: 40 pontos
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-6 col-md-4">
+								<div class="card"
+									style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
+									<div class="card-body">
+										<img class="sombra" style="width: 100px; height: 100px;"
+											src="../resources/img/loja/015-armaduras.png" alt="">
+										<div class="card-text">
+											<br> Armadura<br> Valor: 60 pontos
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4 d-md-block d-none">
+								<div class="card"
+									style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
+									<div class="card-body">
+										<img class="sombra" style="width: 100px; height: 100px;"
+											src="../resources/img/loja/020-armaduras-1.png" alt="">
+										<div class="card-text">
+											<br> Armadura<br> Valor: 80 pontos
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<div class="row">
+							<div class="col-6 col-md-4">
+								<div class="card"
+									style="text-align: center; background-color: rgba(0, 0, 0, 0); border: none;">
+									<div class="card-body">
+										<img class="sombra" style="width: 100px; height: 100px;"
+											src="../resources/img/loja/019-cavaleiro.png" alt="">
+										<div class="card-text">
+											<br> Armadura<br> Valor: 150 pontos
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<a class="carousel-control-prev" href="#armadura" role="button"
+					data-slide="prev"> <span class="carousel-control-prev-icon"
+					aria-hidden="true"></span> <span class="sr-only">Previous</span>
+				</a> <a class="carousel-control-next" href="#armadura" role="button"
+					data-slide="next"> <span class="carousel-control-next-icon"
+					aria-hidden="true"></span> <span class="sr-only">Next</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<script src="../resources/js/axios.min.js"></script>
+	<script src="../resources/js/vue.js"></script>
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script> -->
 	<script src="../resources/css/quiz.css"></script>
-    <script>
+	<script>
 
         new Vue({
             el:"#loja",

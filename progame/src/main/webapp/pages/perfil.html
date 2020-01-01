@@ -40,17 +40,14 @@
 	href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
 <link type="text/css" rel="stylesheet"
 	href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
-	
-	<style>
-	
-	@font-face {
-    font-family: 'pixel';
-    /* src: url('../resources/fonts/PixelOperatorHB.ttf'); */
-    src: url('../resources/fonts/PixelOperatorMono.ttf');
 
-  }
-	
-	</style>
+<style>
+@font-face {
+	font-family: 'pixel';
+	/* src: url('../resources/fonts/PixelOperatorHB.ttf'); */
+	src: url('../resources/fonts/PixelOperatorMono.ttf');
+}
+</style>
 <head>
 <body>
 	<!--Modal: modalRelatedContent-->
@@ -189,7 +186,7 @@
 					<a href="https://github.com/Eduardojvr/ProGame-PG"
 						class="simple-text"> ProGame </a>
 				</div>
-				<ul  id="notifica" class="nav">
+				<ul id="notifica" class="nav">
 					<li class="nav-item"><a class="nav-link" href="perfil.html">
 							<i class="nc-icon nc-circle-09"></i>
 							<p>Perfil</p>
@@ -202,10 +199,9 @@
 							class="nc-icon nc-chat-round"></i>
 							<p>Modo Narrativa</p>
 					</a></li>
-					<li><a class="nav-link" href="batalha.html"> 
-							<i class="nc-icon nc-controller-modern"></i>
-							<span v-if="totalvs > 0" class="notificacao">{{
-									totalvs }}</span>
+					<li><a class="nav-link" href="batalha.html"> <i
+							class="nc-icon nc-controller-modern"></i> <span
+							v-if="totalvs > 0" class="notificacao">{{ totalvs }}</span>
 							<p>1 VS 1</p>
 					</a></li>
 					<li><a class="nav-link" href="desafios.html"> <i
@@ -216,51 +212,54 @@
 							class="nc-icon nc-spaceship"></i>
 							<p>Modo progressivo</p>
 					</a></li>
-					<li><a class="nav-link" href="loja.html">
-						<i class="nc-icon nc-layers-3"></i> 
-						<p>Loja</p>
+					<li><a class="nav-link" href="loja.html"> <i
+							class="nc-icon nc-layers-3"></i>
+							<p>Loja</p>
 					</a></li>
 					<li><a class="nav-link" href="material.html"> <i
 							class="nc-icon nc-single-copy-04 icon-bold"></i>
 							<p>Material</p>
 					</a></li>
-					<li><a class="nav-link" href="notificacoes.html">
-									<i class="nc-icon nc-bulb-63"></i> 
-									<span v-if="totalNotificacao > 0" class="notificacao">{{
-											totalNotificacao }}</span>
-									<p>Notificações</p>
+					<li><a class="nav-link" href="notificacoes.html"> <i
+							class="nc-icon nc-bulb-63"></i> <span v-if="totalNotificacao > 0"
+							class="notificacao">{{ totalNotificacao }}</span>
+							<p>Notificações</p>
 					</a></li>
 				</ul>
 				<div id="login" style="padding-left: 35%;">
-					<label style="color: rgb(240, 37, 37); font-size: 20px; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;" @click="logout()">Sair</label>
+					<label
+						style="color: rgb(240, 37, 37); font-size: 20px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"
+						@click="logout()">Sair</label>
 				</div>
 			</div>
 		</div>
 
 		<div class="main-panel">
 			<div class="container" id="posicao">
-							<div class="row">
-								<div id="personagem">
-									<img v-bind:src="imgPersonagem"
-										style="height: 290px; width: 280px;" alt=""
-										class="img-rounded img-responsive" />
-									</div>
-									<div id="usuario" style="font-family: pixel; font-size: 20px;">
-									</i></cite></small>
-										<br>
-										<br> <i class="glyphicon glyphicon-envelope"></i>Nome: <a style="font-family: pixel; font-size: 20px;">{{
-											dados[0].nomeUsuario }}</a style="color: darkslateblue;"> <br> <i
-											class="glyphicon glyphicon-envelope"></i>Email: <a style="font-family: pixel; font-size: 20px;">{{
-											dados[0].email }}</a> <br /> <i class="glyphicon glyphicon-gift"></i>Matrícula:
-										<a style="font-family: pixel; font-size: 20px;">{{ dados[0].matricula }}</a> <br /> <i
-											class="glyphicon glyphicon-gift"></i>Pontos: <a style="font-family: pixel; font-size: 20px;">{{
-											dados[0].pontuacao }}</a> <br /> <i
-											class="glyphicon glyphicon-gift"></i>Personagem: <a style="font-family: pixel; font-size: 20px;">{{
-											dados[0].nomePersonagem }}</a> <br /> <i
-											class="glyphicon glyphicon-gift"></i>Level: <a style="font-family: pixel; font-size: 20px;">{{
-											dados[0].level }}</a>
-								</div>
-							</div>
+				<div class="row">
+					<div id="personagem">
+						<img v-bind:src="imgPersonagem"
+							style="height: 290px; width: 280px;" alt=""
+							class="img-rounded img-responsive" />
+					</div>
+					<div id="usuario" style="font-family: pixel; font-size: 20px;">
+						</i></cite></small> <br> <br> <i class="glyphicon glyphicon-envelope"></i>Nome:
+						<a style="font-family: pixel; font-size: 20px;">{{
+							dados[0].nomeUsuario }}</a style="color: darkslateblue;"> <br> <i
+							class="glyphicon glyphicon-envelope"></i>Email: <a
+							style="font-family: pixel; font-size: 20px;">{{
+							dados[0].email }}</a> <br /> <i class="glyphicon glyphicon-gift"></i>Matrícula:
+						<a style="font-family: pixel; font-size: 20px;">{{
+							dados[0].matricula }}</a> <br /> <i class="glyphicon glyphicon-gift"></i>Pontos:
+						<a style="font-family: pixel; font-size: 20px;">{{
+							dados[0].pontuacao }}</a> <br /> <i class="glyphicon glyphicon-gift"></i>Personagem:
+						<a style="font-family: pixel; font-size: 20px;">{{
+							dados[0].nomePersonagem }}</a> <br /> <i
+							class="glyphicon glyphicon-gift"></i>Level: <a
+							style="font-family: pixel; font-size: 20px;">{{
+							dados[0].level }}</a>
+					</div>
+				</div>
 
 			</div>
 			<div id="progress" class="content">
@@ -287,8 +286,7 @@
 										aria-valuemin="0" aria-valuemax="100"
 										v-bind:style="{width:  progresso }">{{ progresso }}</div>
 								</div>
-								<br>
-								<br>
+								<br> <br>
 							</div>
 						</div>
 					</div>

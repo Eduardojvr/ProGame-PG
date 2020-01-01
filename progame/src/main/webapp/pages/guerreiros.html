@@ -35,173 +35,178 @@
 </head>
 <body>
 	<audio loop src="../resources/sons/musicaSuspense.mp3"></audio>
-<div id="jogador">
-	<div
-	style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
-	id="persona" class="modal fade top" tabindex="-1" role="dialog"
-	 aria-hidden="true" data-backdrop='false'
-	data-keyboard="false">
-	<div class="modal-dialog modal-lg modal-frame modal-top"
-	  role="document">
-	  <div style="background-color: rgba(255, 255, 255, 0.9);"
-		class="modal-content">
-		<div class="modal-header">
-		  <button type="button" class="close" data-dismiss="modal"
-			aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		  </button>
+	<div id="jogador">
+		<div
+			style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+			id="persona" class="modal fade top" tabindex="-1" role="dialog"
+			aria-hidden="true" data-backdrop='false' data-keyboard="false">
+			<div class="modal-dialog modal-lg modal-frame modal-top"
+				role="document">
+				<div style="background-color: rgba(255, 255, 255, 0.9);"
+					class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div style="text-align: center;">
+							<h3>Você já possui um personagem!</h3>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<img height="200" width="150"
+									src="../resources/img/viloes/orcMacho.png" alt="">
+							</div>
+							<div style="padding-left: 40px; padding-top: 5%;" class="col-8">
+								<h4>Não é possível modificar o guerreiro após iniciar no
+									jogo.</h4>
+								<br>
+								<br>
+								<div style="padding-left: 25%;">
+									<button type="button" @click="redireciona('perfil.html')"
+										class="btn btn-info btn-md"
+										style="padding-left: 20px; padding-right: 20px;">Voltar</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="modal-body">
-		  <div style="text-align: center;">
-			<h3>Você já possui um personagem!</h3>
-		  </div>
-		  <div class="row">
-			<div class="col-3">
-			  <img height="200" width="150" src="../resources/img/viloes/orcMacho.png" alt="">
-			</div>
-			<div style="padding-left: 40px; padding-top: 5%;" class="col-8">
-			  <h4>Não é possível modificar o guerreiro após iniciar no jogo.</h4><br><br>
-			  <div style="padding-left: 25%;">
-				<button type="button" @click="redireciona('perfil.html')"
-					class="btn btn-info btn-md" style="padding-left: 20px; padding-right: 20px;">Voltar</button>
-			</div>
-			</div>
-		  </div>
-		</div>
-	  </div>
-	</div>
-  </div>
-	<div class="limiter">
+		<div class="limiter">
 
-		<div class="container-login100"
-			style="background-image: url('../resources/img/fundoNarrativa.jpg');">
+			<div class="container-login100"
+				style="background-image: url('../resources/img/fundoNarrativa.jpg');">
 
-			<div class="wrap-login100 p-t-30 p-b-50">
+				<div class="wrap-login100 p-t-30 p-b-50">
 
-				<span class="login100-form-title p-b-41" >
-					<h4>Escolha seu personagem</h4>
-					<div id="carouselExampleIndicators" class="carousel"
-						data-ride="carousel" data-interval="false">
-						<div class="carousel-inner">
-							<div class="carousel-item active posicao">
-								<div class="card" style="width: 18rem;">
-									<img class="card-img-top"
-										src="../resources/img/jogadores/aisha.png"
-										style="height: 300; width: 250;" alt="Imagem de capa do card">
-									<div class="card-body">
-										<h5 class="card-title">Aisha</h5>
-										<p class="card-text">Meu nome é Aisha, meus ancestrais
-											lutaram durante a primeira invasão e muitos deles foram
-											mortos. Hoje luto para honrar suas memórias.</p>
-										<a class="btn btn-primary" @click="selecionaJogador(1)">Selecionar</a>
+					<span class="login100-form-title p-b-41">
+						<h4>Escolha seu personagem</h4>
+						<div id="carouselExampleIndicators" class="carousel"
+							data-ride="carousel" data-interval="false">
+							<div class="carousel-inner">
+								<div class="carousel-item active posicao">
+									<div class="card" style="width: 18rem;">
+										<img class="card-img-top"
+											src="../resources/img/jogadores/aisha.png"
+											style="height: 300; width: 250;" alt="Imagem de capa do card">
+										<div class="card-body">
+											<h5 class="card-title">Aisha</h5>
+											<p class="card-text">Meu nome é Aisha, meus ancestrais
+												lutaram durante a primeira invasão e muitos deles foram
+												mortos. Hoje luto para honrar suas memórias.</p>
+											<a class="btn btn-primary" @click="selecionaJogador(1)">Selecionar</a>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="carousel-item posicao">
-								<div class="card" style="width: 18rem;">
-									<img class="card-img-top"
-										src="../resources/img/jogadores/amazona.png"
-										style="height: 1000; width: 250;" alt="Imagem de capa do card">
-									<div class="card-body">
-										<h5 class="card-title">Amazona</h5>
-										<p class="card-text">Olá, eu sou a guerreira Amazona.
-											Vamos batalhar?</p>
-										<a class="btn btn-primary" @click="selecionaJogador(6)">Selecionar</a>
+								<div class="carousel-item posicao">
+									<div class="card" style="width: 18rem;">
+										<img class="card-img-top"
+											src="../resources/img/jogadores/amazona.png"
+											style="height: 1000; width: 250;"
+											alt="Imagem de capa do card">
+										<div class="card-body">
+											<h5 class="card-title">Amazona</h5>
+											<p class="card-text">Olá, eu sou a guerreira Amazona.
+												Vamos batalhar?</p>
+											<a class="btn btn-primary" @click="selecionaJogador(6)">Selecionar</a>
+										</div>
 									</div>
 								</div>
-							</div>
 
-							<div class="carousel-item posicao">
-								<div class="card" style="width: 18rem;">
-									<img class="card-img-top"
-										src="../resources/img/jogadores/Lince.png"
-										style="height: 300; width: 250;" alt="Imagem de capa do card">
-									<div class="card-body">
-										<h5 class="card-title">Lince</h5>
-										<p class="card-text">Saudações meu companheiros, meu nome
-											é Lince. Vamos à batalha?</p>
-										<a class="btn btn-primary" @click="selecionaJogador(2)">Selecionar</a>
+								<div class="carousel-item posicao">
+									<div class="card" style="width: 18rem;">
+										<img class="card-img-top"
+											src="../resources/img/jogadores/Lince.png"
+											style="height: 300; width: 250;" alt="Imagem de capa do card">
+										<div class="card-body">
+											<h5 class="card-title">Lince</h5>
+											<p class="card-text">Saudações meu companheiros, meu nome
+												é Lince. Vamos à batalha?</p>
+											<a class="btn btn-primary" @click="selecionaJogador(2)">Selecionar</a>
+										</div>
 									</div>
 								</div>
-							</div>
 
-							<div class="carousel-item posicao">
-								<div class="card" style="width: 18rem;">
-									<img class="card-img-top"
-										src="../resources/img/jogadores/Scar.png"
-										style="height: 300; width: 250;" alt="Imagem de capa do card">
-									<div class="card-body">
-										<h5 class="card-title">Scar</h5>
-										<p class="card-text">Meu nome é Scar, derrotarei todos os
-											invasores e vingarei a morte da minha esposa. Vamos à
-											batalha?</p>
-										<a class="btn btn-primary" @click="selecionaJogador(3)">Selecionar</a>
+								<div class="carousel-item posicao">
+									<div class="card" style="width: 18rem;">
+										<img class="card-img-top"
+											src="../resources/img/jogadores/Scar.png"
+											style="height: 300; width: 250;" alt="Imagem de capa do card">
+										<div class="card-body">
+											<h5 class="card-title">Scar</h5>
+											<p class="card-text">Meu nome é Scar, derrotarei todos os
+												invasores e vingarei a morte da minha esposa. Vamos à
+												batalha?</p>
+											<a class="btn btn-primary" @click="selecionaJogador(3)">Selecionar</a>
+										</div>
 									</div>
 								</div>
-							</div>
 
-							<div class="carousel-item posicao">
-								<div class="card" style="width: 18rem;">
-									<img class="card-img-top"
-										src="../resources/img/jogadores/Tymer.png"
-										style="height: 300; width: 250;" alt="Imagem de capa do card">
-									<div class="card-body">
-										<h5 class="card-title">Tymer</h5>
-										<p class="card-text">Meu nome é Tymer, vamos expulsar
-											todos esse malditos?.</p>
-										<a class="btn btn-primary" @click="selecionaJogador(4)">Selecionar</a>
+								<div class="carousel-item posicao">
+									<div class="card" style="width: 18rem;">
+										<img class="card-img-top"
+											src="../resources/img/jogadores/Tymer.png"
+											style="height: 300; width: 250;" alt="Imagem de capa do card">
+										<div class="card-body">
+											<h5 class="card-title">Tymer</h5>
+											<p class="card-text">Meu nome é Tymer, vamos expulsar
+												todos esse malditos?.</p>
+											<a class="btn btn-primary" @click="selecionaJogador(4)">Selecionar</a>
+										</div>
 									</div>
 								</div>
-							</div>
 
-							<div class="carousel-item posicao">
-								<div class="card" style="width: 18rem;">
-									<img class="card-img-top"
-										src="../resources/img/jogadores/Voxter.png"
-										style="height: 300; width: 250;" alt="Imagem de capa do card">
-									<div class="card-body">
-										<h5 class="card-title">Voxter</h5>
-										<p class="card-text">Olá, eu sou o Voxter, preciso da
-											ajuda de vocês para impedir que esses vermes matem meu povo.
-											Vamos à batalha?</p>
-										<a class="btn btn-primary" @click="selecionaJogador(5)">Selecionar</a>
+								<div class="carousel-item posicao">
+									<div class="card" style="width: 18rem;">
+										<img class="card-img-top"
+											src="../resources/img/jogadores/Voxter.png"
+											style="height: 300; width: 250;" alt="Imagem de capa do card">
+										<div class="card-body">
+											<h5 class="card-title">Voxter</h5>
+											<p class="card-text">Olá, eu sou o Voxter, preciso da
+												ajuda de vocês para impedir que esses vermes matem meu povo.
+												Vamos à batalha?</p>
+											<a class="btn btn-primary" @click="selecionaJogador(5)">Selecionar</a>
+										</div>
 									</div>
 								</div>
+
 							</div>
+							<ol class="carousel-indicators">
+								<li data-target="#carouselExampleIndicators" data-slide-to="0"
+									class="active"></li>
+								<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+								<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+								<li data-target="#carouselExampleIndicators" data-slide-to="3"
+									class="active"></li>
+								<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+								<li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+
+							</ol>
+							<a class="carousel-control-prev"
+								href="#carouselExampleIndicators" role="button"
+								data-slide="prev"> <span class="carousel-control-prev-icon"
+								aria-hidden="true"></span> <span class="sr-only">Anterior</span>
+							</a> <a class="carousel-control-next"
+								href="#carouselExampleIndicators" role="button"
+								data-slide="next"> <span class="carousel-control-next-icon"
+								aria-hidden="true"></span> <span class="sr-only">Próximo</span>
+							</a>
 
 						</div>
-						<ol class="carousel-indicators">
-							<li data-target="#carouselExampleIndicators" data-slide-to="0"
-								class="active"></li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="3"
-								class="active"></li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
-
-						</ol>
-						<a class="carousel-control-prev" href="#carouselExampleIndicators"
-							role="button" data-slide="prev"> <span
-							class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-							class="sr-only">Anterior</span>
-						</a> <a class="carousel-control-next"
-							href="#carouselExampleIndicators" role="button" data-slide="next">
-							<span class="carousel-control-next-icon" aria-hidden="true"></span>
-							<span class="sr-only">Próximo</span>
-						</a>
-
-					</div>
 
 
-				</span>
+					</span>
 
+				</div>
 			</div>
-		</div>
 
+		</div>
 	</div>
 	</div>
-</div>
 
 	<div id="dropDownSelect1"></div>
 

@@ -38,7 +38,7 @@
 
         Tip 2: you can also add an image using data-image tag
     -->
-		<div  class="sidebar-wrapper">
+		<div class="sidebar-wrapper">
 			<div class="logo">
 				<a href="https://github.com/Eduardojvr/ProGame-PG"
 					class="simple-text"> ProGame </a>
@@ -49,7 +49,7 @@
 
 				</select> -->
 			</div>
-			<ul  id="notifica" class="nav">
+			<ul id="notifica" class="nav">
 				<li class="nav-item"><a class="nav-link" href="perfil.html">
 						<i class="nc-icon nc-circle-09"></i>
 						<p>Perfil</p>
@@ -62,12 +62,11 @@
 						class="nc-icon nc-chat-round"></i>
 						<p>Modo Narrativa</p>
 				</a></li>
-				<li><a class="nav-link" href="batalha.html"> 
+				<li><a class="nav-link" href="batalha.html">
 						<div id="notifica">
-						<i class="nc-icon nc-controller-modern"></i>
-						<span v-if="totalvs > 0" class="notificacao">{{
-								totalvs }}</span>
-						<p>1 VS 1</p>
+							<i class="nc-icon nc-controller-modern"></i> <span
+								v-if="totalvs > 0" class="notificacao">{{ totalvs }}</span>
+							<p>1 VS 1</p>
 						</div>
 				</a></li>
 				<li><a class="nav-link" href="desafios.html"> <i
@@ -78,23 +77,24 @@
 						class="nc-icon nc-spaceship"></i>
 						<p>Modo progressivo</p>
 				</a></li>
-				<li><a class="nav-link" href="loja.html">
-					<i class="nc-icon nc-layers-3"></i> 
-					<p>Loja</p>
+				<li><a class="nav-link" href="loja.html"> <i
+						class="nc-icon nc-layers-3"></i>
+						<p>Loja</p>
 				</a></li>
 				<li><a class="nav-link" href="material.html"> <i
 						class="nc-icon nc-single-copy-04 icon-bold"></i>
 						<p>Material</p>
 				</a></li>
-				<li><a class="nav-link" href="notificacoes.html">
-					<i class="nc-icon nc-bulb-63"></i> 
-					<span v-if="totalNotificacao > 0" class="notificacao">{{
-							totalNotificacao }}</span>
-					<p>Notificações</p>
-		</a></li>
+				<li><a class="nav-link" href="notificacoes.html"> <i
+						class="nc-icon nc-bulb-63"></i> <span v-if="totalNotificacao > 0"
+						class="notificacao">{{ totalNotificacao }}</span>
+						<p>Notificações</p>
+				</a></li>
 			</ul>
 			<div id="login" style="padding-left: 35%;">
-				<label style="color: rgb(240, 37, 37); font-size: 20px; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;" @click="logout()">Sair</label>
+				<label
+					style="color: rgb(240, 37, 37); font-size: 20px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"
+					@click="logout()">Sair</label>
 			</div>
 		</div>
 	</div>

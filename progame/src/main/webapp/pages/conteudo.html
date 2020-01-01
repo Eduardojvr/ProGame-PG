@@ -26,78 +26,77 @@
 <body>
 
 	<div
-	style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
-	id="contrib" class="modal fade top" tabindex="-1" role="dialog"
-	 aria-hidden="true" data-backdrop='true'
-	>
-	<div class="modal-dialog modal-lg modal-frame modal-top"
-	  role="document">
-	  <div style="background-color: rgba(255, 255, 255, 0.9);"
-		class="modal-content">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal"
-			aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		  </button>
-		</div>
-		<div class="modal-body">
-		  <div style="text-align: center;">
-			<h3>Obrigado!</h3>
-		  </div>
-		  <div class="row">
-			<div class="col-3">
-			  <img height="250" width="210" src="../resources/img/orcDancando.gif" alt="">
+		style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+		id="contrib" class="modal fade top" tabindex="-1" role="dialog"
+		aria-hidden="true" data-backdrop='true'>
+		<div class="modal-dialog modal-lg modal-frame modal-top"
+			role="document">
+			<div style="background-color: rgba(255, 255, 255, 0.9);"
+				class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div style="text-align: center;">
+						<h3>Obrigado!</h3>
+					</div>
+					<div class="row">
+						<div class="col-3">
+							<img height="250" width="210"
+								src="../resources/img/orcDancando.gif" alt="">
+						</div>
+						<div style="padding-left: 90px; padding-top: 5%;" class="col-8">
+							<h4>Com seu feedback, podemos aprimorar constantemente
+								nossos serviços!</h4>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div style="padding-left: 90px; padding-top: 5%;" class="col-8">
-			  <h4>Com seu feedback, podemos aprimorar constantemente nossos serviços!</h4>
+		</div>
+	</div>
+
+	<div
+		style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
+		id="alert" class="modal fade top" tabindex="-1" role="dialog"
+		aria-hidden="true" data-backdrop='true'>
+		<div class="modal-dialog modal-lg modal-frame modal-top"
+			role="document">
+			<div style="background-color: rgba(255, 255, 255, 0.9);"
+				class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div style="text-align: center;">
+						<h3>Contribuição já realizada!</h3>
+					</div>
+					<div class="row">
+						<div class="col-3">
+							<img height="250" width="210"
+								src="../resources/img/orcDancando2.gif" alt="">
+						</div>
+						<div style="padding-left: 90px; padding-top: 5%;" class="col-8">
+							<h4>Você já deu seu feedback neste material!</h4>
+						</div>
+					</div>
+				</div>
 			</div>
-		  </div>
 		</div>
-	  </div>
 	</div>
-  </div>
 
-  <div
-  style="padding-left: 15%; padding-right: 60px; background-color: rgba(0, 0, 0, 0.6);"
-  id="alert" class="modal fade top" tabindex="-1" role="dialog"
-   aria-hidden="true" data-backdrop='true'
-  >
-  <div class="modal-dialog modal-lg modal-frame modal-top"
-	role="document">
-	<div style="background-color: rgba(255, 255, 255, 0.9);"
-	  class="modal-content">
-	  <div class="modal-header">
-		  <button type="button" class="close" data-dismiss="modal"
-		  aria-label="Close">
-		  <span aria-hidden="true">&times;</span>
-		</button>
-	  </div>
-	  <div class="modal-body">
-		<div style="text-align: center;">
-		  <h3>Contribuição já realizada!</h3>
-		</div>
-		<div class="row">
-		  <div class="col-3">
-			<img height="250" width="210" src="../resources/img/orcDancando2.gif" alt="">
-		  </div>
-		  <div style="padding-left: 90px; padding-top: 5%;" class="col-8">
-			<h4>Você já deu seu feedback neste material!</h4>
-		  </div>
-		</div>
-	  </div>
-	</div>
-  </div>
-</div>
 
-  
 	<div class="wrapper">
 		<div id="menu"></div>
 		<div class="main-panel">
 			<div id="material" class="container">
 				<span style="text-align: center;">
-					<h2>{{ assunto }}</h2>
-					<br>
-				<br>
+					<h2>{{ assunto }}</h2> <br> <br>
 				</span>
 				<div class="clearfix"></div>
 				<div class="row video">
@@ -110,10 +109,13 @@
 							<div class="media-body pl-3">
 								<div class="price">{{ material.tituloMaterial }}</div>
 								<div class="stats">
-									<span>Gostaram: {{ material.total }}</span><br> <span>Não gostaram: {{ material.totalDislike }}</span><br>
-									<span> <img @click="likeVideo(material, 'l')" src="../resources/img/like.jpg"
+									<span>Gostaram: {{ material.total }}</span><br> <span>Não
+										gostaram: {{ material.totalDislike }}</span><br> <span> <img
+										@click="likeVideo(material, 'l')"
+										src="../resources/img/like.jpg"
 										style="width: 30px; height: 30px;" alt="">
-									</span>&nbsp; &nbsp; <span> <img @click="likeVideo(material, 'd')"
+									</span>&nbsp; &nbsp; <span> <img
+										@click="likeVideo(material, 'd')"
 										src="../resources/img/deslike.jpg"
 										style="width: 30px; height: 30px;" alt="">
 									</span>
@@ -167,92 +169,115 @@
 
 
 	<script>
-
-$(function(){
-    $('.listing-block').slimScroll({
-		height: '500px'
-	});
-});
-
-$(function(){
-    $("#menu").load("base.html"); 
-});
-
-
-    let mat = new Vue({
-    el : '#material',
-    data : {
-        listaMaterial: [],
-		assunto: '',
-		todosLikes: [],
-		todosDislikes: [],
-		matricula: ''
-    },
-    created : function(){
-        const vm = this;
-		vm.getMaterial();
-		vm.getUser();
-	},
-	methods:{
-		getUser : function(){
-			const vm = this;
-			axios.get('../rs/user/getUser').then(function(response){
-				vm.matricula = response.data["matricula"];
+		$(function() {
+			$('.listing-block').slimScroll({
+				height : '500px'
 			});
-		},
-		getAllLike : function(){
-			const vm = this;
-			axios.get('../rs/material/todosLikes/').then(function(response){
-				vm.todosLikes = response.data;
-					for(var i=0; i < vm.listaMaterial.length; i++){					
-						for(var j = 0; j < vm.todosLikes.length; j++){
-							if(vm.listaMaterial[i].idMaterial == vm.todosLikes[j].idMaterial){
-								vm.listaMaterial[i].total = vm.todosLikes[j].total;
-							}
+		});
+
+		$(function() {
+			$("#menu").load("base.html");
+		});
+
+		let mat = new Vue(
+				{
+					el : '#material',
+					data : {
+						listaMaterial : [],
+						assunto : '',
+						todosLikes : [],
+						todosDislikes : [],
+						matricula : ''
+					},
+					created : function() {
+						const vm = this;
+						vm.getMaterial();
+						vm.getUser();
+					},
+					methods : {
+						getUser : function() {
+							const vm = this;
+							axios
+									.get('../rs/user/getUser')
+									.then(
+											function(response) {
+												vm.matricula = response.data["matricula"];
+											});
+						},
+						getAllLike : function() {
+							const vm = this;
+							axios
+									.get('../rs/material/todosLikes/')
+									.then(
+											function(response) {
+												vm.todosLikes = response.data;
+												for (var i = 0; i < vm.listaMaterial.length; i++) {
+													for (var j = 0; j < vm.todosLikes.length; j++) {
+														if (vm.listaMaterial[i].idMaterial == vm.todosLikes[j].idMaterial) {
+															vm.listaMaterial[i].total = vm.todosLikes[j].total;
+														}
+													}
+												}
+											});
+
+							axios
+									.get('../rs/material/todosDislikes/')
+									.then(
+											function(response) {
+												vm.todosDislikes = response.data;
+												for (var i = 0; i < vm.listaMaterial.length; i++) {
+													for (var j = 0; j < vm.todosDislikes.length; j++) {
+														if (vm.listaMaterial[i].idMaterial == vm.todosDislikes[j].idMaterial) {
+															vm.listaMaterial[i].totalDislike = vm.todosDislikes[j].total;
+														}
+													}
+												}
+											});
+						},
+						getMaterial : function() {
+							const vm = this;
+							var count = 0;
+							axios
+									.get(
+											'../rs/material/getmaterial/'
+													+ sessionStorage
+															.getItem('tipomidia')
+													+ '/'
+													+ sessionStorage
+															.getItem('idConteudo')
+													+ '/' + 1)
+									.then(
+											function(response) {
+												vm.listaMaterial = response.data;
+												vm.assunto = response.data[0].assunto;
+												while (vm.listaMaterial[count]) {
+													vm.listaMaterial[count].urlMaterial = vm.listaMaterial[count].urlMaterial
+															.replace(
+																	"watch?v=",
+																	"embed/");
+													count += 1;
+												}
+												vm.getAllLike();
+											});
+						},
+						likeVideo : function(material, tipo) {
+							const vm = this;
+							axios.get(
+									'../rs/material/likeVideo/'
+											+ material.idMaterial + '/'
+											+ vm.matricula + '/' + tipo).then(
+									function(response) {
+										if (response.data == true) {
+											$("#contrib").modal("show");
+											vm.getMaterial();
+										} else {
+											$("#alert").modal("show");
+										}
+									});
 						}
-					}	
+					}
 				});
-			
-				axios.get('../rs/material/todosDislikes/').then(function(response){
-					vm.todosDislikes = response.data;
-					for(var i=0; i < vm.listaMaterial.length; i++){					
-						for(var j = 0; j < vm.todosDislikes.length; j++){
-							if(vm.listaMaterial[i].idMaterial == vm.todosDislikes[j].idMaterial){
-								vm.listaMaterial[i].totalDislike = vm.todosDislikes[j].total;
-							}
-						}
-					}	
-				});
-			},
-		getMaterial : function(){
-			const vm = this;
-			var count = 0;
-			axios.get('../rs/material/getmaterial/'+sessionStorage.getItem('tipomidia')+'/'+
-                  sessionStorage.getItem('idConteudo')+'/'+1).then(function(response) {
-            vm.listaMaterial = response.data;
-            vm.assunto = response.data[0].assunto;
-            while(vm.listaMaterial[count]){
-                vm.listaMaterial[count].urlMaterial = vm.listaMaterial[count].urlMaterial.replace("watch?v=", "embed/");
-                count+=1;
-			}
-			vm.getAllLike();
-        });
-		},
-		likeVideo : function(material, tipo){
-			const vm = this;
-			axios.get('../rs/material/likeVideo/'+material.idMaterial+'/'+vm.matricula+'/'+tipo).then(function(response){
-				if(response.data == true){
-					$("#contrib").modal("show");
-					vm.getMaterial();
-				} else {
-					$("#alert").modal("show");
-				}
-			});
-		}
-	}
- });
-    
-</script>
+	</script>
 
 </body>
 </html>
