@@ -527,6 +527,28 @@ created : function(){
 			alert("Você já avaliou este desafio!");
 		}
 	},
+	verificaCampos : function (){
+            const vm = this;
+
+            vm.mensagens = [];
+          
+            var isOk = 1;
+            if(vm.respostaDesafio.resposta.length <= 1){
+              vm.mensagens.push('Digite uma resposta válida. A resposta deve conter no mínimo 1 caracter.');
+            }
+            
+            for(var a = 0; a < vm.mensagens.length; a++){
+              if(vm.mensagens[a] != null){
+                demo.novaMensagem(vm.mensagens[a], 4);
+                demo.showNotification();
+              }
+            }
+
+            if(parseInt(vm.mensagens.length) > 0){
+              isOk = 0;
+            }
+            return isOk;
+	},
 	desafiosCorrigir: function(){
 		const vm = this;
 		var count = 0;

@@ -40,6 +40,17 @@
 	href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
 <link type="text/css" rel="stylesheet"
 	href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+	
+	<style>
+	
+	@font-face {
+    font-family: 'pixel';
+    /* src: url('../resources/fonts/PixelOperatorHB.ttf'); */
+    src: url('../resources/fonts/PixelOperatorMono.ttf');
+
+  }
+	
+	</style>
 <head>
 <body>
 	<!--Modal: modalRelatedContent-->
@@ -228,34 +239,29 @@
 
 		<div class="main-panel">
 			<div class="container" id="posicao">
-				<div class="row">
-					<div class="col-xs-12 col-sm-6 col-md-6">
-						<div class="well well-sm">
 							<div class="row">
 								<div id="personagem">
 									<img v-bind:src="imgPersonagem"
 										style="height: 290px; width: 280px;" alt=""
 										class="img-rounded img-responsive" />
 									</div>
-									<div id="usuario" style="padding-left: 25%;">
+									<div id="usuario" style="font-family: pixel; font-size: 20px;">
 									</i></cite></small>
 										<br>
-										<br> <i class="glyphicon glyphicon-envelope"></i>Nome: <a>{{
+										<br> <i class="glyphicon glyphicon-envelope"></i>Nome: <a style="font-family: pixel; font-size: 20px;">{{
 											dados[0].nomeUsuario }}</a style="color: darkslateblue;"> <br> <i
-											class="glyphicon glyphicon-envelope"></i>Email: <a>{{
+											class="glyphicon glyphicon-envelope"></i>Email: <a style="font-family: pixel; font-size: 20px;">{{
 											dados[0].email }}</a> <br /> <i class="glyphicon glyphicon-gift"></i>Matrícula:
-										<a>{{ dados[0].matricula }}</a> <br /> <i
-											class="glyphicon glyphicon-gift"></i>Pontos: <a>{{
+										<a style="font-family: pixel; font-size: 20px;">{{ dados[0].matricula }}</a> <br /> <i
+											class="glyphicon glyphicon-gift"></i>Pontos: <a style="font-family: pixel; font-size: 20px;">{{
 											dados[0].pontuacao }}</a> <br /> <i
-											class="glyphicon glyphicon-gift"></i>Personagem: <a>{{
+											class="glyphicon glyphicon-gift"></i>Personagem: <a style="font-family: pixel; font-size: 20px;">{{
 											dados[0].nomePersonagem }}</a> <br /> <i
-											class="glyphicon glyphicon-gift"></i>Level: <a>{{
+											class="glyphicon glyphicon-gift"></i>Level: <a style="font-family: pixel; font-size: 20px;">{{
 											dados[0].level }}</a>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
+
 			</div>
 			<div id="progress" class="content">
 				<div class="container-fluid"></div>
