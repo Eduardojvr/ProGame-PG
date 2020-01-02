@@ -59,7 +59,7 @@
 						<h3 style="color: steelblue;" class="modal-title"
 							id="myModalLabel">Edição de perfil</h3>
 						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
+							aria-label="Close" onclick="location.reload()">
 							<span aria-hidden="true">×</span>
 						</button>
 					</div>
@@ -79,7 +79,7 @@
 						<input type="radio" v-model="dados.desativado" value="N"> Não
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
+						<button type="button" class="btn btn-secondary" onclick="location.reload()"
 							data-dismiss="modal">Cancelar</button>
 						<button type="button" class="btn btn-primary" data-dismiss="modal" @click="salvar()">Salvar</button>
 					</div>
