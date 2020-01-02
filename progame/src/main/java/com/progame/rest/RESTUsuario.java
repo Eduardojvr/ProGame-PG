@@ -143,18 +143,27 @@ public class RESTUsuario {
 			
 			Usuario usuario = new Usuario();
 //			usuario.setLevel(request.getSession().getAttribute("level").toString());
-			usuario.setMatricula(request.getSession().getAttribute("matricula").toString());
-//			usuario.setPontuacao(request.getSession().getAttribute("pontuacao").toString());
-//			usuario.setEmail(request.getSession().getAttribute("email").toString());
-			usuario.setNomeUsuario(request.getSession().getAttribute("nomeUsuario").toString());
-//			usuario.setIdTipoPerfil(request.getSession().getAttribute("idTipoPerfil").toString());
-			usuario.setIdPersonagem(request.getSession().getAttribute("idPersonagem").toString());
+			usuario.setMatricula(usuarioTmp.getMatricula());
+			usuario.setNomeUsuario(usuarioTmp.getNomeUsuario());
+			usuario.setIdTipoPerfil(usuarioTmp.getIdTipoPerfil());
+			usuario.setIdPersonagem(usuarioTmp.getIdPersonagem());
 			usuario.setPontuacao(usuarioTmp.getPontuacao());			
 			usuario.setLevel(usuarioTmp.getLevel());
 			usuario.setEmail(usuarioTmp.getEmail());
 			usuario.setIdTipoPerfil(usuarioTmp.getIdTipoPerfil());
-			usuario.setDesativado(usuarioTmp.getDesativado());
-
+			usuario.setDesativado(usuarioTmp.getDesativado());	
+			
+//			usuario.setPontuacao(request.getSession().getAttribute("pontuacao").toString());
+//			usuario.setEmail(request.getSession().getAttribute("email").toString());
+//			usuario.setNomeUsuario(request.getSession().getAttribute("nomeUsuario").toString());
+//			usuario.setIdTipoPerfil(request.getSession().getAttribute("idTipoPerfil").toString());
+//			usuario.setIdPersonagem(request.getSession().getAttribute("idPersonagem").toString());
+//			usuario.setPontuacao(usuarioTmp.getPontuacao());			
+//			usuario.setLevel(usuarioTmp.getLevel());
+//			usuario.setEmail(usuarioTmp.getEmail());
+//			usuario.setIdTipoPerfil(usuarioTmp.getIdTipoPerfil());
+//			usuario.setDesativado(usuarioTmp.getDesativado());
+			
 			
 			return usuario;
 		} catch (Exception e) {
