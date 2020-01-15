@@ -296,7 +296,7 @@ public class UsuarioDAO {
 		ResultSet result = null;
 		ArrayList <Usuario> usuario = new ArrayList<Usuario>();
 
-		pstmt = db.prepareStatement("select * from usuario order by pontuacao desc");
+		pstmt = db.prepareStatement("select * from usuario where idTipoPerfil=3 and desativado !='S' order by pontuacao desc;");
 
 		try {
 			result = pstmt.executeQuery();
