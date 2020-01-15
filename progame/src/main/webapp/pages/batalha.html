@@ -358,7 +358,7 @@
 
 
 
-	<script src="../resources/js/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
 	<script src="../resources/js/axios.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
@@ -519,43 +519,28 @@ created : function(){
 	},
 	salvaAvaliacao: function(){
 		const vm = this;
-		if(vm.respostaDesafio.resultado == 'Aguardando sua correção' && vm.respostaDesafio.respostaDesafiado != 'Desafiado ainda não respondeu'){
-			vm.respostaDesafio.avaliacao = vm.correcaoAvalia;
-			vm.respostaDesafio.resultado = vm.correcaoOpcao;
-			axios.post('../rs/desafio/salvaAvaliacao', vm.respostaDesafio).then(function(response){
-				if(response.data == true){
-					$("#feedbackAvalia").modal("show");
-					vm.atualizaPontuacao(100);
-					vm.desafiosCorrigir();
-				}
-			});
-		} else if (vm.respostaDesafio.respostaDesafiado == 'Desafiado ainda não respondeu'){
-			alert("O desafiado ainda não respondeu a este desafio!");
+		var mensagem = "Preencha todos os campos!";
+		if(vm.correcaoOpcao.length > 0 && vm.correcaoAvalia.length > 0){
+			if(vm.respostaDesafio.resultado == 'Aguardando sua correção' && vm.respostaDesafio.respostaDesafiado != 'Desafiado ainda não respondeu'){
+				vm.respostaDesafio.avaliacao = vm.correcaoAvalia;
+				vm.respostaDesafio.resultado = vm.correcaoOpcao;
+				axios.post('../rs/desafio/salvaAvaliacao', vm.respostaDesafio).then(function(response){
+					if(response.data == true){
+						$("#feedbackAvalia").modal("show");
+						vm.atualizaPontuacao(100);
+						vm.desafiosCorrigir();
+					}
+				});
+			} else if (vm.respostaDesafio.respostaDesafiado == 'Desafiado ainda não respondeu'){
+				alert("O desafiado ainda não respondeu a este desafio!");
+			} else {
+				alert("Você já avaliou este desafio!");
+			}
 		} else {
-			alert("Você já avaliou este desafio!");
+			demo.novaMensagem(mensagem, 4);
+            demo.showNotification();
 		}
-	},
-	verificaCampos : function (){
-            const vm = this;
-
-            vm.mensagens = [];
-          
-            var isOk = 1;
-            if(vm.respostaDesafio.resposta.length <= 1){
-              vm.mensagens.push('Digite uma resposta válida. A resposta deve conter no mínimo 1 caracter.');
-            }
-            
-            for(var a = 0; a < vm.mensagens.length; a++){
-              if(vm.mensagens[a] != null){
-                demo.novaMensagem(vm.mensagens[a], 4);
-                demo.showNotification();
-              }
-            }
-
-            if(parseInt(vm.mensagens.length) > 0){
-              isOk = 0;
-            }
-            return isOk;
+	
 	},
 	desafiosCorrigir: function(){
 		const vm = this;
@@ -624,16 +609,22 @@ created : function(){
 	},
 	responde: function(){
 		const vm = this;
-		if(vm.respostaDesafio.respostaDesafiado == 'Sem resposta'){
-			vm.respostaDesafio.respostaDesafiado = vm.minhaResposta;
-			axios.post('../rs/desafio/respondeDesafio/', vm.respostaDesafio).then(function(response) {
-				if(response.data == true){
-					$("#feedbackResposta").modal("show");
-					vm.atualizaPontuacao(100);
-				}
-			});
+		var mensagem = "A resposta deve conter no mínimo 1 caractere.";
+		if(vm.minhaResposta.length >= 1){
+			if(vm.respostaDesafio.respostaDesafiado == 'Sem resposta'){
+				vm.respostaDesafio.respostaDesafiado = vm.minhaResposta;
+				axios.post('../rs/desafio/respondeDesafio/', vm.respostaDesafio).then(function(response) {
+					if(response.data == true){
+						$("#feedbackResposta").modal("show");
+						vm.atualizaPontuacao(100);
+					}
+				});
+			} else {
+				alert("Você já respondeu esse desafio!");
+			}
 		} else {
-			alert("Você já respondeu esse desafio!");
+			demo.novaMensagem(mensagem, 4);
+            demo.showNotification();
 		}
     },
     todosUsuarios : function(){
@@ -694,24 +685,31 @@ created : function(){
       });
       $("#modalBatalha").modal("show"); 
     
-    },
+	},
     salvaDesafio: function(){
-      const vm = this;
-      let obj = {
-        matriculaDesafiante: vm.matricula,
-        matriculaDesafiado: vm.matriculaDesafiado,
-        tituloDesafio: vm.tituloDesafio,
-        desafio: vm.desafio,
-        respostaDesafiado: '',
-        resultado: ''
-      }
-      axios.post('../rs/desafio/novoDesafioX1', obj).then(function(response) {
-        console.log(response.data);
-        vm.atualizaPontuacao(100);
-        $("#pvsp").modal("show");
-        const audio = document.querySelector('audio');
-        audio.play();
-      });  
+		const vm = this;
+
+		var mensagem = "Todos os campos devem ser preenchidos!";
+      	let obj = {
+			matriculaDesafiante: vm.matricula,
+			matriculaDesafiado: vm.matriculaDesafiado,
+			tituloDesafio: vm.tituloDesafio,
+			desafio: vm.desafio,
+			respostaDesafiado: '',
+			resultado: ''
+	  	}
+		if(obj.tituloDesafio.length > 0 && obj.desafio.length > 0){
+			axios.post('../rs/desafio/novoDesafioX1', obj).then(function(response) {
+				console.log(response.data);
+				vm.atualizaPontuacao(100);
+				$("#pvsp").modal("show");
+				const audio = document.querySelector('audio');
+				audio.play();
+			});  
+		} else {
+			demo.novaMensagem(mensagem, 4);
+            demo.showNotification();
+		}
     }
   }
 });
