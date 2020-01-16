@@ -107,7 +107,7 @@
 								webkitallowfullscreen="true" mozallowfullscreen="true">
 							</iframe>
 							<div class="media-body pl-3">
-								<div class="price">{{ material.tituloMaterial }}</div>
+								<div class="price" style="color:#4169E1"><a v-bind:href="material.urlMaterial" target="_blank" >{{ material.tituloMaterial }}</a></div>
 								<div class="stats">
 									<span>Gostaram: {{ material.total }}</span><br> <span>Não
 										gostaram: {{ material.totalDislike }}</span><br> <span> <img
@@ -121,13 +121,9 @@
 									</span>
 								</div>
 							</div>
-
 						</div>
-
 					</div>
 				</div>
-
-
 				<!--                         
                         <div class="video"  v-for="material in listaMaterial">
                                 <h4>{{ material.tituloMaterial }}</h4>
@@ -137,11 +133,8 @@
                         <br>
 
                         </div> -->
-
-
 			</div>
-
-
+			<br><br>
 		</div>
 	</div>
 	<script src="../resources/js/axios.min.js"></script>
@@ -186,12 +179,14 @@
 						assunto : '',
 						todosLikes : [],
 						todosDislikes : [],
-						matricula : ''
+						matricula : '',
+						tipoMidia: ''
 					},
 					created : function() {
 						const vm = this;
 						vm.getMaterial();
 						vm.getUser();
+						vm.tipoMidia = sessionStorage.getItem('tipomidia');
 					},
 					methods : {
 						getUser : function() {
