@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import com.progame.dto.*;
+import java.util.Random;
 
 import com.progame.entity.Usuario;
 
@@ -111,7 +112,7 @@ public class UsuarioDAO {
 		}
 		return achou;
 	}
-	
+
 	public boolean reativaPerfil(String matricula) throws Exception {
 		Connection db = ConnectionManager.getDBConnection();
 		PreparedStatement pstmt = null;
@@ -136,7 +137,7 @@ public class UsuarioDAO {
 		}
 		return execute;
 	}
-	
+
 	public boolean desativaPerfil(String matricula) throws Exception {
 		Connection db = ConnectionManager.getDBConnection();
 		PreparedStatement pstmt = null;
@@ -384,7 +385,7 @@ public class UsuarioDAO {
 		}
 		return isOk;	
 	}
-	
+
 	// Tira pontos de um determinado usuario
 	public boolean tiraPonto(int penalidade, int pontuacaoAtual, String matricula) throws Exception {
 		boolean isOk = false;
@@ -400,7 +401,7 @@ public class UsuarioDAO {
 			if (novo < 0) { 
 				novo = 0;
 			}
-			
+
 			sql.append("update USUARIO set pontuacao='"+novo+"' where matricula='"+matricula+"';");
 			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
 			pstmt.executeUpdate();
@@ -440,5 +441,64 @@ public class UsuarioDAO {
 		}
 		return execute;
 	}
-	
+
+	public String geraSenha() {
+		int[] v = new int[10]; // vetor de 10 posições
+		Random gerador = new Random(); // nosso gerador de números
+		boolean b = false; // um controlador
+
+		for (int i = 0; i < v.length;) {
+			if (i == 0) {
+				v[i] = gerador.nextInt(20) + 1;
+				i++;
+			} else {
+				v[i] = gerador.nextInt(20) + 1;
+				b = false;
+				for (int j = 0; j < i; j++) {
+					if (v[i] == v[j]) {
+						b = false;
+						break;
+					} else {
+						b = true;
+					}
+				}
+				if (b) {
+					i++;
+				}
+			}
+		}
+		System.out.print("======> senhaaa: "+ v.toString()+"\n");
+
+		return v.toString();
+
+	}
+
+	public String novaSenha(String email) throws Exception {
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		ResultSet result = null;
+
+		String senha = geraSenha(); 
+		MessageDigest m=MessageDigest.getInstance("MD5");
+		m.update(senha.getBytes(),0,senha.length());
+		String criptografia = new BigInteger(1,m.digest()).toString(16);
+
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("update USUARIO set senha='"+criptografia+"' where email='"+email+"';");
+
+		try {
+			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			throw new Exception(e);
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+		return senha;
+	}
+
 }

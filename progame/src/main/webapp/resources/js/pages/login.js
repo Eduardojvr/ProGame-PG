@@ -2,9 +2,27 @@ let login = new Vue({
     el : '#login',
     data : {
         matricula : '',
-        senha : '' 
+        senha : '' ,
+        email: ''
     },
     methods : {
+        esqueciSenha :  function(){
+            const vm = this;
+            $("#loader").modal("show");
+            $("#modalEmail").modal("hide");
+
+            axios.get('rs/user/recuperaSenha/'+vm.email).then(function(response){
+                if(response.data == true){
+                    alert("Um email foi enviado para "+vm.email+"!");
+                } else {
+                    alert("Email inválido!");
+                }
+            }).catch(function(erro){
+                alert("Ocorreu um erro ao enviar email! Contate o suporte (progame.suporte@gmail.com)");
+            }).finally(function () {
+                $("#loader").modal("hide");
+            });
+        },
         logar : function(modalName) {
             const vm = this;
             let obj = {

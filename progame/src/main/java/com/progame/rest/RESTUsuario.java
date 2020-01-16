@@ -304,4 +304,19 @@ public class RESTUsuario {
 		}				
 		return isOk;
 	}
+	
+	@GET
+	@Path("/recuperaSenha/{email}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public boolean atualizaDados(@PathParam("email") String email) {
+		RecuperaSenhaDAO dao = new RecuperaSenhaDAO();
+		boolean isOk = false;
+		try {
+			isOk = dao.esqueciSenha(email);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}				
+		return isOk;
+	}
 }

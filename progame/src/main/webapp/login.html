@@ -26,8 +26,53 @@
 <link rel="stylesheet" type="text/css" href="resources/css/main.css">
 <link rel="styleshhet" type="text/css"
 	href="resources/css/carregamento.css">
+
+	<style>
+	.esqueci:hover{
+		color: cadetblue;
+	}
+	
+	</style>
 </head>
 <body>
+  
+<div id="login">
+
+  
+  <!--Modal: modalRelatedContent-->
+  <div class="modal fade right" id="modalEmail" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+	<div class="modal-dialog modal-side modal-bottom-right modal-notify modal-info" role="document">
+	  <!--Content-->
+	  <div class="modal-content">
+		<!--Header-->
+		<div class="modal-header">
+		  <p class="heading">Recuperação de senha</p>
+  
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true" class="white-text">&times;</span>
+		  </button>
+		</div>
+  
+		<!--Body-->
+		<div class="modal-body">
+  
+		  <div class="row">
+  
+			<div class="col-7">
+			  <p><strong>Seu email cadastrado no ProGame:</strong></p>
+				<input type="text" name="" id="" placeholder="exemplo@gmail.com" size="40" v-model="email">
+			  <button type="button" class="btn btn-info btn-md" @click="esqueciSenha();">Solicitar nova senha</button>
+  
+			</div>
+		  </div>
+		</div>
+	  </div>
+	  <!--/.Content-->
+	</div>
+  </div>
+  <!--Modal: modalRelatedContent-->
+
 
 	<div class="modal fade" id="loader" tabindex="-1" role="img"
 		aria-hidden="true" style="padding-right: 10%; padding-top: 10%;">
@@ -51,7 +96,6 @@
 
 			<div class="wrap-login100 p-t-30 p-b-50">
 				<span class="login100-form-title p-b-41"> Login </span>
-				<div id="login">
 					<form class="login100-form validate-form p-b-33 p-t-5">
 						<div class="wrap-input100 validate-input"
 							data-validate="Enter username">
@@ -75,19 +119,18 @@
 						</div>
 						<div class="senha">
 							<br>
-							<a href="#"><u>Esqueceu sua senha?</u></a>
+							<a  onclick="$('#modalEmail').modal('show')" class="esqueci" href="#"><u>Esqueceu sua senha?</u></a>
 						</div>
 					</form>
-				</div>
 			</div>
 		</div>
 	</div>
 
-
+</div>
 	<div id="dropDownSelect1"></div>
 
-	<script src="resources/js/axios.min.js"></script>
 	<script src="resources/js/vue.js"></script>
+	<script src="resources/js/axios.min.js"></script>
 	<script src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script src="resources/vendor/animsition/js/animsition.min.js"></script>
 	<script src="resources/vendor/bootstrap/js/popper.js"></script>
