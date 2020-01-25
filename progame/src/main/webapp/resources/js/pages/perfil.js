@@ -22,8 +22,13 @@ let tes = new Vue({
             usuario: {},
             totalvs: 0,
             totalNotificacao: 0,
-            mensagens:[]   
-        
+            mensagens:[],
+            defineSenha : {
+                matricula: '',
+                senhaAntiga: '',
+                novaSenha: '',
+                senhaTmp: ''
+            }        
     },
     created : function(){
         const vm = this;
@@ -116,7 +121,21 @@ let tes = new Vue({
 				isOk = 0;
 			}
 			return isOk;
-		},
+        },
+        salvaSenha : function(){
+            const vm = this;
+            $("#aguarde").modal("show");
+            vm.defineSenha.matricula = vm.usuario.matricula;
+            if(vm.defineSenha.novaSenha === vm.defineSenha.senhaTmp){
+                axios.post('../rs/user/novaSenha', vm.defineSenha).then(function(response){
+                    alert(response.data);
+                }).finally(function(){
+                    $("#aguarde").modal("hide");
+                });
+            } else {
+                alert("A nova senha e a senha de confirmação devem ser iguais!");
+            }
+        },
         salvar(){
             const vm = this;
             if(this.verificaCampos() == 1){

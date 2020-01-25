@@ -23,7 +23,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import com.progame.entity.Usuario;
 import com.progame.dao.*;
-import com.progame.dto.DesafiovsDTO;;
+import com.progame.dto.DesafiovsDTO;
+import com.progame.dto.SenhaUsuarioDTO;;
 
 @Path("/user")
 public class RESTUsuario {
@@ -318,5 +319,20 @@ public class RESTUsuario {
 			e.printStackTrace();
 		}				
 		return isOk;
+	}
+	
+	@POST
+	@Path("/novaSenha/")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String atualizaDados(SenhaUsuarioDTO user) {
+		UsuarioDAO dao = new UsuarioDAO();
+		String mensagem = "";
+		try {
+			mensagem = dao.defineNovaSenha(user);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}				
+		return mensagem;
 	}
 }

@@ -500,5 +500,70 @@ public class UsuarioDAO {
 		}
 		return senha;
 	}
+	
+	
+	
+	public boolean comparaSenha(String senhaAntiga, String matricula) throws Exception {
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		ResultSet result = null;
+
+		MessageDigest m=MessageDigest.getInstance("MD5");
+		m.update(senhaAntiga.getBytes(),0,senhaAntiga.length());
+		String criptografia = new BigInteger(1,m.digest()).toString(16);
+
+		boolean exists = false;
+
+		pstmt = db.prepareStatement("select * from usuario");
+
+		try {
+			result = pstmt.executeQuery();
+			while (result.next()) {
+				if (criptografia.equals(result.getString("senha")) &&
+						matricula.equals(result.getString("matricula"))) {
+					exists = true;
+				}
+			}
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+		return exists;
+	}
+
+	public String defineNovaSenha(SenhaUsuarioDTO user) throws Exception {
+		Connection db = ConnectionManager.getDBConnection();
+		PreparedStatement pstmt = null;
+
+		ResultSet result = null;
+		
+		if(!comparaSenha(user.getSenhaAntiga(), user.getMatricula())) {
+			return "Senha atual incorreta!";
+		}
+		
+		MessageDigest m=MessageDigest.getInstance("MD5");
+		m.update(user.getNovaSenha().getBytes(),0,user.getNovaSenha().length());
+		String criptografia = new BigInteger(1,m.digest()).toString(16);
+
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("update USUARIO set senha='"+criptografia+"' where matricula='"+user.getMatricula()+"';");
+
+		try {
+			pstmt = db.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			throw new Exception(e);
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			db.close();
+		}
+		return "Nova senha definida com sucesso!";
+	}
 
 }

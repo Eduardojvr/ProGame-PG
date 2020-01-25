@@ -51,6 +51,59 @@
 <head>
 <body>
 <div id="usuario">
+	<div class="modal fade" id="aguarde" tabindex="-1" role="img"
+		style="padding-right: 10%; padding-top: 10%;" data-backdrop="static"
+		data-keyboard="false">
+		<div class="modal-dialog" role="document" style="width: 0px;">
+			<div class="modal-content"
+				style="background-color: rgba(255, 255, 255, 0); border: rgba(255, 255, 255, 0);">
+				<img src="../resources/img/orcDancando3.gif" width=200px
+					height=250px style="border-radius: 100px;">
+
+				<div>
+					<label
+						style="color: seashell; padding-left: 60px; font-family: pixel; font-size: 30px;">Aguarde</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="novaSenha" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div id="usuario" class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 style="color: steelblue;" class="modal-title"
+							id="myModalLabel">Definição de senha</h3>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close" onclick="location.reload()">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<label>Senha atual: </label><br>
+						<input type="password" size="40" 
+							v-model="defineSenha.senhaAntiga">
+						<br>
+						<br>
+						<label>Nova senha: </label><br>
+						<input type="password" size="40" 
+							v-model="defineSenha.novaSenha">
+						<br>
+						<br>
+						<label>Confirmar senha: </label><br>
+						<input type="password" size="40" 
+							v-model="defineSenha.senhaTmp">
+						<br>
+						<br>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" onclick="location.reload()"
+							data-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" @click="salvaSenha()">Salvar</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="modal fade" id="edicao" tabindex="-1" role="dialog"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div id="usuario" class="modal-dialog" role="document">
@@ -381,7 +434,9 @@
 							class="glyphicon glyphicon-gift"></i>Level: <a
 							style="font-family: pixel; font-size: 20px;">{{
 							dados.level }}</a><br><br>
-							<a id="btn-edit" onclick="$('#edicao').modal('show')">Editar perfil</a>
+							<a id="btn-edit" onclick="$('#edicao').modal('show')">Editar perfil</a>&nbsp; &nbsp; &nbsp;
+							<a id="btn-edit" onclick="$('#novaSenha').modal('show')">Alterar Senha</a>
+
 					</div>
 				</div>
 
